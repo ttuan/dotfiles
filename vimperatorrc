@@ -1,0 +1,25 @@
+"3.9 (created: 2015/02/15 15:49:05)
+
+abbreviate fmk foolmaker
+abbreviate vimp vimperator
+highlight Hint font: 13px "Lucida Console", monospace !important; border: 1px solid rgba(0, 0, 0, 1); background: rgba(255, 248, 231, 1); color: black;
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" l :ytseek<Space>+
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" h :ytseek<Space>-
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" s :ytseek<Space>
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" mu :ytmute<Return>
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" p :ytplay<Return>
+nmap J <C-d>
+nmap K <C-u>
+nmap ge <C-
+nmap Y :js<Space>util.copyToClipboard(content.document.title,true)<Return>
+nnoremap = <C-a>
+nnoremap gf <Nop>
+inoremap <C-a> <C-Home><C-S-End>
+imap JJ <Esc>
+set complete=l
+set focuscontent
+set hintchars=asdfghjklqwertyuiop
+set scrollbars
+set gui=addons,bookmarks,menu,navigation,tabs
+highlight Hint -append z-index:2999999999
+
