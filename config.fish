@@ -15,6 +15,8 @@ eval (python -m virtualfish)
 # Turn off fish greeting
 set fish_greeting ""
 
+set --export EDITOR "vim -f"
+
 # Set Alias
 alias lsl "ls -l"
 alias bi "bundle install"
@@ -22,3 +24,8 @@ alias go "gnome-open"
 alias update "sudo apt-get update"
 alias install "sudo apt-get install"
 alias addrp "sudo add-apt-repository"
+alias tmux="tmux -2"
+
+# Config for tmux
+set TERM xterm-256color
+# set -gx TERM screen-256color-bce;
