@@ -1,6 +1,6 @@
 " This space for Vundle :D
 set nocompatible
-filetype off 
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -15,6 +15,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
 Plugin '907th/vim-auto-save'
+Plugin 'junegunn/fzf'
 
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
@@ -45,7 +46,7 @@ Plugin 'tpope/vim-bundler'
 " More operator for vim
 Plugin 'tpope/vim-surround' "s command like surround
 Plugin 'vim-scripts/ReplaceWithRegister' "gr to replace with yanked text
-Plugin 'christoomey/vim-sort-motion' "gs to sort line 
+Plugin 'christoomey/vim-sort-motion' "gs to sort line
 
 " Vim Text object
 Plugin 'vim-scripts/argtextobj.vim' "For function arguments: aa and ia
@@ -56,8 +57,11 @@ Plugin 'kana/vim-textobj-entire' "Entire file: ae and ie
 Plugin 'kana/vim-textobj-line' "Line textobj: al and il
 Plugin 'whatyouhide/vim-textobj-erb' "erb text obj: aE and iE
 
+" Compile
+Plugin 'xuhdev/SingleCompile'
 
-call vundle#end()            
+
+call vundle#end()
 filetype plugin indent on
 
 "\\
@@ -70,14 +74,19 @@ behave mswin
 set number
 set relativenumber
 set cursorline
-set shell=bash
+set shell=zsh
 set autowrite
 au FocusLost * :wa
 set showcmd " Show what I'm typing
 set splitright
 set splitbelow
+set history=10000
 set ignorecase " Search case insensitive
 set smartcase " But not when contain a uppercase char
+autocmd BufWritePre * :%s/\s\+$//e " Delete all trailing space
+nnoremap gf <C-W>f
+vnoremap gf <C-W>f
+set tw=80
 
 "\\ behavior
 set nobackup
@@ -90,19 +99,29 @@ autocmd BufLeave,FocusLost * silent! wall
 
 "\\ encoding
 set encoding=utf-8
+
 set fileencodings=ucs-bom,utf-8,sjis,euc-jp,default
+
+"\\ share clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
 
 "\\ appearance
 set numberwidth=3
 set t_Co=256
-colorscheme railscasts 
+colorscheme railscasts
 set guifont=C@nsolas:h12:w6
-set guifont=inconsolata 
+set guifont=inconsolata
 set guifontwide=FixedSys:h18
 set guioptions=egmrL
 
 "\\ typing setting
 set tabstop=2 shiftwidth=2 expandtab
+
+"\\ ex_mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 "\\ mapping
 set pastetoggle=<F10>
@@ -130,7 +149,7 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-" Map to quickly switch tab 
+" Map to quickly switch tab
 map 1t 1gt
 map 2t 2gt
 map 3t 3gt
@@ -142,8 +161,15 @@ imap 2t <esc>2gt
 imap 3t <esc>3gt
 imap 4t <esc>4gt
 
+" Ignore redraw when using tmux
+if &term =~ '256color'
+  " disable Background Color Erase (BCE)
+  set t_ut=
+endif
+
 "\\ Language setting
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+set rtp+=~/.fzf
 
 "\\ plugin mapping
 
@@ -153,7 +179,16 @@ nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 " CtrlP map
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = 'find %s -type f'   
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.cache$'
+  \ }
+if exists("g:ctrlp_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*\\vendor\\**
+
 
 " Autosave
 let g:auto_save = 1
@@ -173,6 +208,9 @@ map <F5> :NERDTreeToggle<CR>
 " Vim commentary
 nmap cm gc
 
+" You Complete Me
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
 " Ruby txet object
 runtime macros/matchit.vim
 
@@ -188,6 +226,20 @@ let g:ag_working_path_mode="r"
 set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
+" Single Compile
+map <c-e> :SCCompileRun<cr>
+imap <c-e> <c-o>:SCCompileRun<cr>
+map <F6> :SCViewResult<cr>
+nnoremap <F10> :call SingleCompileSplit() \| SCCompileRun<CR>
+ function! SingleCompileSplit()
+    if winwidth(0) > 160
+       let g:SingleCompile_split = "vsplit"
+       let g:SingleCompile_resultsize = winwidth(0)/2
+    else
+       let g:SingleCompile_split = "split"
+       let g:SingleCompile_resultsize = 15
+    endif
+ endfunction
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -206,23 +258,8 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-
-autocmd BufWriteCmd *.html,*.css,*.rb :call Refresh_browser()
+"\\ Some extend functions
+autocmd BufWriteCmd *.html,*.css,*.rb,*.erb :call Refresh_browser()
 function! Refresh_browser()
   if &modified
     write
