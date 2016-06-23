@@ -6,7 +6,7 @@ for app in $apps
 do
   pat="([^\w-]$app)"
   if ps ux | grep -P $pat | grep -vq grep; then
-    file=`lsof -F n -c "$app" | grep -i "^.*\.mp3$" | sed 's/^n//g'`
+    file=`lsof -F n -c "$app" | grep -i "^.*\.mp3$\|^.*\.mp4$" | sed 's/^n//g'`
     # arr=(${file//\// })
     set -- "$file"
     IFS="/"; declare -a Array=($*)
