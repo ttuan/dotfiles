@@ -15,18 +15,16 @@ Plugin 'honza/vim-snippets'
 Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
 Plugin '907th/vim-auto-save'
-Plugin 'junegunn/fzf'
 
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish' " :S/child{,ren}/adult{,s}/g
-Plugin 'thinca/vim-quickrun'
+" Plugin 'tpope/vim-abolish' " :S/child{,ren}/adult{,s}/g
+" Plugin 'thinca/vim-quickrun'
 
 " Vim apperance
-Plugin 'altercation/solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -43,10 +41,14 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-bundler'
 
+" Vim for front-end dev
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'othree/coffee-check.vim'
+
 " More operator for vim
 Plugin 'tpope/vim-surround' "s command like surround
 Plugin 'vim-scripts/ReplaceWithRegister' "gr to replace with yanked text
-Plugin 'christoomey/vim-sort-motion' "gs to sort line
+" Plugin 'christoomey/vim-sort-motion' "gs to sort line
 
 " Vim Text object
 Plugin 'vim-scripts/argtextobj.vim' "For function arguments: aa and ia
@@ -58,11 +60,12 @@ Plugin 'kana/vim-textobj-line' "Line textobj: al and il
 Plugin 'whatyouhide/vim-textobj-erb' "erb text obj: aE and iE
 
 " Compile
-Plugin 'xuhdev/SingleCompile'
+" Plugin 'xuhdev/SingleCompile'
 
 
 call vundle#end()
 filetype plugin indent on
+syntax enable
 
 "\\
 set nocompatible
@@ -135,7 +138,8 @@ map <F2> :bn<CR>
 map <F3> :bp<CR>
 map <Space> :noh<CR>
 map <enter> o<esc>
-imap <C-o> <esc>o
+imap ,o <esc>O
+nmap ,p o<ESC>p
 map <M-t> :tabnew
 
 "\\ Quick swap character, word and paragraph
@@ -247,7 +251,7 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<c-l>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
