@@ -6,7 +6,7 @@ call vundle#begin()
 
 " Vim behavior plugin
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -68,7 +68,6 @@ filetype plugin indent on
 syntax enable
 
 "\\
-set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -102,7 +101,6 @@ autocmd BufLeave,FocusLost * silent! wall
 
 "\\ encoding
 set encoding=utf-8
-
 set fileencodings=ucs-bom,utf-8,sjis,euc-jp,default
 
 "\\ share clipboard
@@ -127,20 +125,42 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 "\\ mapping
+"Set Leader key
+let mapleader=" "
+
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>n :noh<CR>
+nnoremap <leader>w :wa<CR>
+nnoremap <leader>q :wqa<CR>
+nnoremap <leader>p o<ESC>p
+nnoremap <leader>s :so ~/.vimrc<CR>
+
+" Resizing Windows
+nnoremap <leader>k <C-w>+10
+nnoremap <leader>j <C-w>-10
+nnoremap <leader>h <C-w><10
+nnoremap <leader>l <C-w>>10
+nnoremap <leader>= <C-w>=
+
+" Switch between buffer file
+nnoremap <leader>f :bp<CR>
+nnoremap <leader>b :bn<CR>
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
 set pastetoggle=<F10>
+
+" Switch between split panel
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Move faster
 nmap J <C-d>
 nmap K <C-u>
-map <F2> :bn<CR>
-map <F3> :bp<CR>
-map <Space> :noh<CR>
 map <enter> o<esc>
 imap ,o <esc>O
-nmap ,p o<ESC>p
-map <M-t> :tabnew
 
 "\\ Quick swap character, word and paragraph
 nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
@@ -178,18 +198,20 @@ set rtp+=~/.fzf
 "\\ plugin mapping
 
 " Vundle
-" map :PI :so % | :PluginInstall
+" Quickly Install Plugin
+" nnoremap <leader>r <leader>s
+nnoremap <leader>P :so %<CR>:PluginInstall<CR>:q<CR>
 
 " CtrlP map
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.cache$'
-  \ }
+\ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+\ 'file': '\.exe$\|\.so$\|\.dat$\|\.cache$'
+\ }
 if exists("g:ctrlp_user_command")
-  unlet g:ctrlp_user_command
+unlet g:ctrlp_user_command
 endif
 set wildignore+=*\\vendor\\**
 
@@ -235,15 +257,15 @@ map <c-e> :SCCompileRun<cr>
 imap <c-e> <c-o>:SCCompileRun<cr>
 map <F6> :SCViewResult<cr>
 nnoremap <F10> :call SingleCompileSplit() \| SCCompileRun<CR>
- function! SingleCompileSplit()
-    if winwidth(0) > 160
-       let g:SingleCompile_split = "vsplit"
-       let g:SingleCompile_resultsize = winwidth(0)/2
-    else
-       let g:SingleCompile_split = "split"
-       let g:SingleCompile_resultsize = 15
-    endif
- endfunction
+function! SingleCompileSplit()
+  if winwidth(0) > 160
+     let g:SingleCompile_split = "vsplit"
+     let g:SingleCompile_resultsize = winwidth(0)/2
+  else
+     let g:SingleCompile_split = "split"
+     let g:SingleCompile_resultsize = 15
+  endif
+endfunction
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -263,7 +285,7 @@ if !exists('g:airline_symbols')
 endif
 
 "\\ Some extend functions
-autocmd BufWriteCmd *.html,*.css,*.rb,*.erb :call Refresh_browser()
+" autocmd BufWriteCmd *.html,*.css,*.rb,*.erb :call Refresh_browser()
 function! Refresh_browser()
   if &modified
     write
