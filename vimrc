@@ -15,6 +15,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
 Plugin '907th/vim-auto-save'
+Plugin 'terryma/vim-expand-region'
 
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
@@ -161,11 +162,18 @@ nmap J <C-d>
 nmap K <C-u>
 map <enter> o<esc>
 imap ,o <esc>O
+nnoremap <CR> G
+nnoremap <BS> gg
 
 "\\ Quick swap character, word and paragraph
 nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
 nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
 nnoremap g{ {dap}p{
+
+"\\ Quickly select text you just pasted
+
+noremap gV `[v`]
+
 
 " Disable arrow key
 imap <up> <nop>
@@ -174,14 +182,13 @@ imap <left> <nop>
 imap <right> <nop>
 
 " Map to quickly switch tab
-map 1t 1gt
-map 2t 2gt
-map 3t 3gt
-map 4t gt
+nnoremap 1t 1gt
+nnoremap 2t 2gt
+nnoremap 3t 3gt
+nnoremap 4t gt
 
 imap 1t <esc>1gt
 imap 2t <esc>2gt
-
 imap 3t <esc>3gt
 imap 4t <esc>4gt
 
@@ -284,6 +291,10 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+" Vim expand region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 "\\ Some extend functions
 " autocmd BufWriteCmd *.html,*.css,*.rb,*.erb :call Refresh_browser()
 function! Refresh_browser()
@@ -292,3 +303,4 @@ function! Refresh_browser()
     silent !refresh_firefox
   endif
 endfunction
+
