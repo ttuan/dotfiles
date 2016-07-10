@@ -14,7 +14,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
-Plugin '907th/vim-auto-save'
+" Plugin '907th/vim-auto-save'
 Plugin 'terryma/vim-expand-region'
 
 Plugin 'Townk/vim-autoclose'
@@ -25,7 +25,6 @@ Plugin 'tpope/vim-repeat'
 
 " Vim apperance
 Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -37,7 +36,6 @@ Plugin 'benmills/vimux'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'mattn/emmet-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-bundler'
@@ -45,6 +43,7 @@ Plugin 'tpope/vim-bundler'
 " Vim for front-end dev
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'othree/coffee-check.vim'
+Plugin 'mattn/emmet-vim'
 
 " More operator for vim
 Plugin 'tpope/vim-surround' "s command like surround
@@ -79,7 +78,6 @@ set relativenumber
 set cursorline
 set shell=zsh
 set autowrite
-au FocusLost * :wa
 set showcmd " Show what I'm typing
 set splitright
 set splitbelow
@@ -98,7 +96,9 @@ set noswapfile
 set noundofile
 set formatoptions-=cro
 
-autocmd BufLeave,FocusLost * silent! wall
+" Auto save file
+autocmd BufLeave,FocusLost * silent! wall " Some terminal doesn't support FoucusLost
+inoremap <Esc> <Esc>:w<CR>
 
 "\\ encoding
 set encoding=utf-8
@@ -131,8 +131,9 @@ let mapleader=" "
 
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>n :noh<CR>
-nnoremap <leader>w :wa<CR>
+nnoremap <leader>w :wq<CR>
 nnoremap <leader>q :wqa<CR>
+nnoremap <leader>o :e<Space>
 nnoremap <leader>p o<ESC>p
 nnoremap <leader>s :so ~/.vimrc<CR>
 
@@ -185,7 +186,7 @@ imap <right> <nop>
 nnoremap 1t 1gt
 nnoremap 2t 2gt
 nnoremap 3t 3gt
-nnoremap 4t gt
+nnoremap 4t 4gt
 
 imap 1t <esc>1gt
 imap 2t <esc>2gt
@@ -304,3 +305,8 @@ function! Refresh_browser()
   endif
 endfunction
 
+" Change cusor shape in different mode
+" au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+" au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
