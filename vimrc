@@ -6,7 +6,6 @@ call vundle#begin()
 
 " Vim behavior plugin
 Plugin 'VundleVim/Vundle.vim'
-" Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -14,14 +13,11 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
-" Plugin '907th/vim-auto-save'
 Plugin 'terryma/vim-expand-region'
 
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-" Plugin 'tpope/vim-abolish' " :S/child{,ren}/adult{,s}/g
-" Plugin 'thinca/vim-quickrun'
 
 " Vim apperance
 Plugin 'scrooloose/nerdtree'
@@ -31,6 +27,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mkitt/tabline.vim' " Show number of tab for quickly switch [number]gt
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
+
+" Vim motion
+Plugin 'easymotion/vim-easymotion'
+Plugin 'wikitopian/hardmode'
 
 " Vim for ruby dev
 Plugin 'tpope/vim-rails'
@@ -48,7 +48,6 @@ Plugin 'mattn/emmet-vim'
 " More operator for vim
 Plugin 'tpope/vim-surround' "s command like surround
 Plugin 'vim-scripts/ReplaceWithRegister' "gr to replace with yanked text
-" Plugin 'christoomey/vim-sort-motion' "gs to sort line
 
 " Vim Text object
 Plugin 'vim-scripts/argtextobj.vim' "For function arguments: aa and ia
@@ -59,10 +58,16 @@ Plugin 'kana/vim-textobj-entire' "Entire file: ae and ie
 Plugin 'kana/vim-textobj-line' "Line textobj: al and il
 Plugin 'whatyouhide/vim-textobj-erb' "erb text obj: aE and iE
 
-" Compile
-" Plugin 'xuhdev/SingleCompile'
+" For Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
-
+" Other Plugin
+" Plugin 'ervandew/supertab'
+Plugin '907th/vim-auto-save'
+" Plugin 'christoomey/vim-sort-motion' "gs to sort line
+" Plugin 'tpope/vim-abolish' " :S/child{,ren}/adult{,s}/g
+" Plugin 'thinca/vim-quickrun'
 call vundle#end()
 filetype plugin indent on
 syntax enable
@@ -131,26 +136,24 @@ let mapleader=" "
 
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>n :noh<CR>
-nnoremap <leader>w :wq<CR>
-nnoremap <leader>q :wqa<CR>
+" nnoremap <leader>w :wq<CR>
+" nnoremap <leader>q :wqa<CR>
 nnoremap <leader>o :e<Space>
 nnoremap <leader>p o<ESC>p
-nnoremap <leader>s :so ~/.vimrc<CR>
+noremap <leader><leader>s :so ~/.vimrc<CR>
 
 " Resizing Windows
-nnoremap <leader>k <C-w>+10
-nnoremap <leader>j <C-w>-10
-nnoremap <leader>h <C-w><10
-nnoremap <leader>l <C-w>>10
-nnoremap <leader>= <C-w>=
+nnoremap <leader><leader>k <C-w>+10
+nnoremap <leader><leader>j <C-w>-10
+nnoremap <leader><leader>h <C-w><10
+nnoremap <leader><leader>l <C-w>>10
+nnoremap <leader><leader>= <C-w>=
 
 " Switch between buffer file
-nnoremap <leader>f :bp<CR>
-nnoremap <leader>b :bn<CR>
+nnoremap <leader><leader>f :bp<CR>
+nnoremap <leader><leader>b :bn<CR>
 " Switch between the last two files
-nnoremap <leader><leader> <c-^>
-
-set pastetoggle=<F10>
+nnoremap <leader><leader>c <c-^>
 
 " Switch between split panel
 map <C-j> <C-W>j
@@ -163,8 +166,6 @@ nmap J <C-d>
 nmap K <C-u>
 map <enter> o<esc>
 imap ,o <esc>O
-nnoremap <CR> G
-nnoremap <BS> gg
 
 "\\ Quick swap character, word and paragraph
 nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
@@ -207,7 +208,6 @@ set rtp+=~/.fzf
 
 " Vundle
 " Quickly Install Plugin
-" nnoremap <leader>r <leader>s
 nnoremap <leader>P :so %<CR>:PluginInstall<CR>:q<CR>
 
 " CtrlP map
@@ -260,21 +260,6 @@ let g:ag_working_path_mode="r"
 set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
-" Single Compile
-map <c-e> :SCCompileRun<cr>
-imap <c-e> <c-o>:SCCompileRun<cr>
-map <F6> :SCViewResult<cr>
-nnoremap <F10> :call SingleCompileSplit() \| SCCompileRun<CR>
-function! SingleCompileSplit()
-  if winwidth(0) > 160
-     let g:SingleCompile_split = "vsplit"
-     let g:SingleCompile_resultsize = winwidth(0)/2
-  else
-     let g:SingleCompile_split = "split"
-     let g:SingleCompile_resultsize = 15
-  endif
-endfunction
-
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -284,6 +269,9 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<c-l>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Config for hardmode
+nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
 
 " Config for Vim Airline
 let g:airline_powerline_fonts = 1
@@ -306,7 +294,24 @@ function! Refresh_browser()
 endfunction
 
 " Change cusor shape in different mode
-" au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-" au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+" au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+" au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+
+" Easy Motion
+map <Leader> <Plug>(easymotion-prefix)
+map  <Leader>/ <Plug>(easymotion-sn)
+omap <Leader>/ <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>h <Plug>(easymotion-linebackward)
