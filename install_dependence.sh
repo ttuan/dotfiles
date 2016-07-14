@@ -5,6 +5,20 @@ function update {
   sudo apt-get install curl
 }
 
+# Install UI
+function install_theme {
+  sudo add-apt-repository ppa:numix/ppa
+  sudo apt-get update
+  sudo apt-get install numix-gtk-theme numix-icon-theme-circle
+  git clone https://github.com/powerline/fonts.git
+  ~/fonts/.install.sh
+  echo "Powerline fonts was installed. Please change font on terminal setting!!!"
+  sudo apt-get install unity-tweak-tool
+  gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+  gsettings set org.gnome.desktop.interface icon-theme 'Numix-circle'
+  gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+}
+
 # Install zsh and oh-my-zsh
 function install_zsh {
   echo "Installing zsh and oh-my-zsh..."
@@ -13,14 +27,12 @@ function install_zsh {
   sudo chsh -s /usr/bin/zsh
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  git clone https://github.com/powerline/fonts.git
-  ~/fonts/.install.sh
-  echo "Powerline fonts was installed. Please change font on terminal setting!!!"
 }
 
 # Install vim and tmux
 function install_vim_and_tmux {
-  echo "Installing tmux and vim."
+  echo "Installing tmux 2.0 and vim."
+  sudo apt-get install vim
   sudo add-apt-repository ppa:pi-rho/dev
   sudo apt-get update
   sudo apt-get install tmux
@@ -89,9 +101,11 @@ function install_ruby_on_rails {
 
 function programs {
   sudo apt-get install guake
+  sudo apt-get install flashplugin-installer
 }
 
 update
+install_theme
 install_zsh
 config_dotfile
 install_vim_and_tmux
