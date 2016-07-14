@@ -50,6 +50,8 @@ function config_dotfile {
   cp dotfile/zshrc ~/.zshrc
   cp dotfile/vimperatorrc ~/.vimperatorrc
   cp dotfile/tmux.conf ~/.tmux.conf
+  cp dotfile/Xmodmap ~/.Xmodmap
+  xmodmap ~/.Xmodmap
   export EDITOR='vim'
   cp dotfile/project.yml ~/.tmuxinator/
 
