@@ -21,18 +21,21 @@ function install_zsh {
 # Install vim and tmux
 function install_vim_and_tmux {
   echo "Installing tmux and vim."
-  sudo apt-get install vim
+  sudo add-apt-repository ppa:pi-rho/dev
+  sudo apt-get update
   sudo apt-get install tmux
+  sudo apt-get install vim
 }
 
 # Download .dotfile and install
 function config_dotfile {
   echo "Config dotfile "
   git clone https://github.com/ttuan/dotfile.git
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   cp dotfile/vimrc ~/.vimrc
   vim +PluginInstall +qall
   cp dotfile/getSongName.sh ~/getSongName.sh
-  cp dotfile/zsh ~/.zsh
+  cp dotfile/zshrc ~/.zshrc
   cp dotfile/vimperatorrc ~/.vimperatorrc
   cp dotfile/tmux.conf ~/.tmux.conf
   export EDITOR='vim'
