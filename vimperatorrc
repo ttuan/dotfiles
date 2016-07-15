@@ -15,11 +15,11 @@ nmap Y :js<Space>util.copyToClipboard(content.document.title,true)<Return>
 nnoremap = <C-a>
 nnoremap gf <Nop>
 inoremap <C-a> <C-Home><C-S-End>
-imap JJ <Esc>
 set complete=l
 set focuscontent
 set hintchars=asdfghjklqwertyuiop
 set scrollbars
 set gui=addons,bookmarks,menu,navigation,tabs
 highlight Hint -append z-index:2999999999
-
+imap ` <C-t>
+imap JJ <C-[>
