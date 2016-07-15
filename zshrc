@@ -49,11 +49,11 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails zsh-syntax-highlighting zsh-autosuggestions tmuxinator tmux vi-mode)
+plugins=(git rails zsh-autosuggestions tmuxinator tmux vi-mode)
 
 # User configuration
 
-  export PATH="/home/whoami/.rvm/gems/ruby-2.2.3/bin:/home/whoami/.rvm/gems/ruby-2.2.3@global/bin:/home/whoami/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/whoami/.rvm/bin:/home/whoami/.rvm/bin:/home/whoami/.rvm/bin"
+  export PATH="/home/$USER/.rvm/gems/ruby-2.2.3/bin:/home/$USER/.rvm/gems/ruby-2.2.3@global/bin:/home/$USER/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/$USER/.rvm/bin:/home/$USER/.rvm/bin:/home/$USER/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -83,9 +83,11 @@ export TERM="xterm-256color"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gpf="git pull framgia develop"
+alias gpf="git pull framgia master"
 alias go="gnome-open"
 alias bi="bundle install"
+alias tmx="tmuxinator start project $1"
+
 gf() {
   git add .;
   git commit -m $1;
@@ -98,6 +100,11 @@ gff() {
   git commit --amend;
   branch_name=$(git symbolic-ref --short -q HEAD);
   git push origin $branch_name -f;
+}
+
+mkcd() {
+  mkdir "$1"
+  cd "$1"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
