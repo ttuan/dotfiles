@@ -39,6 +39,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-bundler'
+Plugin 'thoughtbot/vim-rspec'
 
 " Vim for front-end dev
 Plugin 'kchmck/vim-coffee-script'
@@ -293,6 +294,14 @@ function! Refresh_browser()
   endif
 endfunction
 
+function! Close_git_message()
+  let l:filename = @%
+  if (filename == ".git/COMMIT_EDITMSG")
+    execute 'quitall'
+  endif
+endfunction
+autocmd VimEnter * :call Close_git_message()
+
 " Change cusor shape in different mode
 au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
@@ -301,8 +310,8 @@ au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-termi
 
 " Easy Motion
 map <Leader> <Plug>(easymotion-prefix)
-map  <Leader>/ <Plug>(easymotion-sn)
-omap <Leader>/ <Plug>(easymotion-tn)
+" map  <Leader>/ <Plug>(easymotion-sn)
+" omap <Leader>/ <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 map  <Leader>f <Plug>(easymotion-bd-f)
@@ -315,3 +324,9 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>h <Plug>(easymotion-linebackward)
+
+" RSpec.vim mappings
+nnoremap <Leader>r :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>a :call RunAllSpecs()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
