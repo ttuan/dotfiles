@@ -63,6 +63,10 @@ Plugin 'whatyouhide/vim-textobj-erb' "erb text obj: aE and iE
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
+" Ctags
+Plugin 'craigemery/vim-autotag'
+
+
 " Other Plugin
 " Plugin 'ervandew/supertab'
 Plugin '907th/vim-auto-save'
@@ -223,6 +227,7 @@ if exists("g:ctrlp_user_command")
 unlet g:ctrlp_user_command
 endif
 set wildignore+=*\\vendor\\**
+nnoremap <leader>. :CtrlPTag<cr>
 
 
 " Autosave
@@ -330,3 +335,6 @@ nnoremap <Leader>r :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>a :call RunAllSpecs()<CR>
 " map <Leader>s :call RunNearestSpec()<CR>
 " map <Leader>l :call RunLastSpec()<CR>
+
+" Ctags
+autocmd BufWritePost * exe ":UpdateTags"
