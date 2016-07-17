@@ -141,10 +141,10 @@ let mapleader=" "
 
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>n :noh<CR>
-" nnoremap <leader>w :wq<CR>
+nnoremap <leader>x :x<CR>
 " nnoremap <leader>q :wqa<CR>
 nnoremap <leader>o :e<Space>
-nnoremap <leader>p o<ESC>p
+nnoremap <leader>p o<ESC>p`[v`]
 noremap <leader><leader>s :so ~/.vimrc<CR>
 
 " Resizing Windows
@@ -153,6 +153,9 @@ nnoremap <leader><leader>j <C-w>-10
 nnoremap <leader><leader>h <C-w><10
 nnoremap <leader><leader>l <C-w>>10
 nnoremap <leader><leader>= <C-w>=
+
+" Quickly open vimrc file
+nmap <leader>v :e ~/.vimrc<CR>
 
 " Switch between buffer file
 nnoremap <leader><leader>f :bp<CR>
@@ -178,12 +181,10 @@ nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
 nnoremap g{ {dap}p{
 
 "\\ Quickly select text you just pasted
-
 noremap gV `[v`]
 
-
 " Disable arrow key
-imap <up> <nop>
+imap <up> <Esc>ji
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
@@ -317,8 +318,8 @@ au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-termi
 map <Leader> <Plug>(easymotion-prefix)
 " map  <Leader>/ <Plug>(easymotion-sn)
 " omap <Leader>/ <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
@@ -337,4 +338,4 @@ nnoremap <Leader>a :call RunAllSpecs()<CR>
 " map <Leader>l :call RunLastSpec()<CR>
 
 " Ctags
-autocmd BufWritePost * exe ":UpdateTags"
+" autocmd BufWritePost *  :UpdateTags
