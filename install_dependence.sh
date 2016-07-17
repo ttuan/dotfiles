@@ -37,6 +37,11 @@ function install_vim_and_tmux {
   sudo apt-get update
   sudo apt-get install tmux
   sudo apt-get install vim
+  sudo apt-get install vim-gnome
+  sudo apt-get install xclip
+  sudo curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
+    -o /usr/local/bin/tmux-vim-select-pane
+  sudo chmod +x /usr/local/bin/tmux-vim-select-pane
 }
 
 # Download .dotfile and install
@@ -105,13 +110,14 @@ function install_ruby_on_rails {
 function programs {
   sudo apt-get install guake
   sudo apt-get install flashplugin-installer
+  sudo apt-get install xpad
 }
 
 update
 install_theme
 install_zsh
 config_dotfile
+install_ruby_on_rails
 install_vim_and_tmux
 install_git
-install_ruby_on_rails
 programs
