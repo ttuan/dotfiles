@@ -104,6 +104,14 @@ gff() {
   git push origin $branch_name -f;
 }
 
+grb() {
+  curr_branch=$(git symbolic-ref --short -q HEAD);
+  git checkout $1;
+  git pull framgia $1;
+  git checkout $curr_branch;
+  git rebase $1;
+}
+
 mkcd() {
   mkdir "$1"
   cd "$1"
