@@ -95,6 +95,8 @@ gf() {
   git commit -m $1;
   branch_name=$(git symbolic-ref --short -q HEAD);
   git push origin $branch_name;
+  repo_url=$(git config --get remote.origin.url)
+  firefox $repo_url;
 }
 
 gff() {
