@@ -59,6 +59,7 @@ function config_dotfile {
   cp dotfile/Xmodmap ~/.Xmodmap
   xmodmap ~/.Xmodmap
   export EDITOR='vim'
+  mkdir ~/.tmuxinator
   cp dotfile/project.yml ~/.tmuxinator/
 
   cd ~/.vim/bundle/YouCompleteMe
@@ -111,13 +112,14 @@ function programs {
   sudo apt-get install guake
   sudo apt-get install flashplugin-installer
   sudo apt-get install xpad
+  sudo apt-get install nautilus-dropbox
 }
 
 update
 install_theme
 install_zsh
-config_dotfile
 install_ruby_on_rails
+config_dotfile
 install_vim_and_tmux
 install_git
 programs
