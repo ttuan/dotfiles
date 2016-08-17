@@ -120,11 +120,12 @@ set nofoldenable                                  " Don't fold by default
 
 " ================ Behavior =====================
 
-"\\ Turn off Swap Files
-set nobackup
-set nowritebackup
-set noswapfile
-set noundofile
+"\\ Centralize backup, swap and undo file
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+	set undodir=~/.vim/undo
+endif
 set formatoptions-=cro
 
 "\\ Auto save files
@@ -281,6 +282,7 @@ map <Leader>et :Efunctionaltest
 "\\ Autosave
 let g:auto_save = 1
 let g:auto_save_silent = 1
+let g:auto_save_in_insert_mode = 0
 
 "------------------------------------------------------
 
