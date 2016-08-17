@@ -236,6 +236,7 @@ nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR> "Quickly install plugins
 
 "\\ CtrlP
 nnoremap <Leader>. :CtrlPTag<cr>
+nnoremap <silent> <c-p> :ClearCtrlPCache<cr>\|:CtrlP<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = 'find %s -type f'
