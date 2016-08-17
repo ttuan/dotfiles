@@ -39,6 +39,7 @@ function install_vim_and_tmux {
   sudo apt-get install vim
   sudo apt-get install vim-gnome
   sudo apt-get install xclip
+  sudo apt-get install exuberant-ctags
   sudo curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
   sudo chmod +x /usr/local/bin/tmux-vim-select-pane
