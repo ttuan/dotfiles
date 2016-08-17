@@ -57,6 +57,8 @@ function config_dotfile {
   cp dotfile/tmux.conf ~/.tmux.conf
   cp dotfile/ctags ~/.ctags
   cp dotfile/Xmodmap ~/.Xmodmap
+  cp gitconfig ~/.gitconfig
+  cp gitignore ~/.gitigrnore
   xmodmap ~/.Xmodmap
   export EDITOR='vim'
   mkdir ~/.tmuxinator
@@ -74,11 +76,6 @@ function install_git {
   git config --global user.name "ttuan"
   git config --global user.email "tuantv.nhnd@gmail.com"
   ssh-keygen -t rsa -b 4096 -C "tuantv.nhnd@gmail.com"
-
-  git config --global alias.co checkout
-  git config --global alias.br branch
-  git config --global alias.ci commit
-  git config --global alias.st status
 }
 
 

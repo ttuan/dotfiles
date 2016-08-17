@@ -1,0 +1,42 @@
+# -------------------------------------VIM---------------------------------------------
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+.DS_Store
+*.swp
+
+# ------------------------------------SASS----------------------------------------------
+.sass-cache
+
+# ------------------------------------WINDOWS-------------------------------------------
+Thumbs.db
+Desktop.ini
+
+# ------------------------------------TAGS----------------------------------------------
+# Ignore tags created by etags, ctags, gtags (GNU global) and cscope
+TAGS
+!TAGS/
+tags
+!tags/
+.tags
+.tags1
+gtags.files
+GTAGS
+GRTAGS
+GPATH
+cscope.files
+cscope.out
+cscope.in.out
+cscope.po.out
+
+# ------------------------------------PYTHON----------------------------------------------
+# Compiled Python files
+*.pyc
+
+# ------------------------------------EXTERNAL DISKS---------------------------------------
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes

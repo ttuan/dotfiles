@@ -89,6 +89,7 @@ alias gd="git diff @~..@"
 alias go="gnome-open"
 alias bi="bundle install"
 alias tmx="tmuxinator start project $1"
+alias grs="git reset HEAD~1"
 
 gf() {
   git add .;
