@@ -108,9 +108,17 @@ set guifont=inconsolata
 set guifontwide=FixedSys:h18
 set guioptions=egmrL
 set tw=80
+set showbreak=...                                 " Display ... as wrap break
+set wrap linebreak nolist                         " Proper wrapping
+
+"\\ Folding settings
+" Use zi, za, zc, zR, zM, zv
+set foldmethod=indent                             " Groups of lines with the same indent form a fold
+set foldnestmax=3                                 " Set deepest folding to 3 levels
+set nofoldenable                                  " Don't fold by default
 
 
-" ================ Behavior ====================
+" ================ Behavior =====================
 
 "\\ Turn off Swap Files
 set nobackup
@@ -123,8 +131,11 @@ set formatoptions-=cro
 autocmd BufLeave, FocusLost * silent! wall         " Some terminal doesn't support FoucusLost
 inoremap <Esc> <Esc>:w<CR>
 
-"\\ typing setting
-set tabstop=2 shiftwidth=2 expandtab
+"\\ Indentation settings
+set tabstop=2 shiftwidth=2 expandtab autoindent
+
+"\\ Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 
 "\\ ex_mode
 cnoremap <C-p> <Up>
@@ -141,11 +152,11 @@ endif
 let mapleader=" " " Set Space for Leader key
 
 "\\ Resizing Windows
-nnoremap <leader><leader>= <C-w>=
-nnoremap <leader><leader>k <C-w>+10
-nnoremap <leader><leader>j <C-w>-10
-nnoremap <leader><leader>h <C-w><10
-nnoremap <leader><leader>l <C-w>>10
+nnoremap <Leader><Leader>= <C-w>=
+nnoremap <Leader><Leader>k <C-w>+10
+nnoremap <Leader><Leader>j <C-w>-10
+nnoremap <Leader><Leader>h <C-w><10
+nnoremap <Leader><Leader>l <C-w>>10
 
 "\\ Switch between panels
 map <C-j> <C-W>j
@@ -154,31 +165,32 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "\\ Operator with a panel
-nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>x :x<CR>
-nnoremap <leader>o :e<Space>
-nnoremap <leader>p o<ESC>p`[v`]
+nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>o :e<Space>
+nnoremap <Leader>p o<ESC>p`[v`]
 
 "\\ Disable arrow key
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+map <Left> :echo "no!"<cr>
+map <Right> :echo "no!"<cr>
+map <Up> :echo "no!"<cr>
+map <Down> :echo "no!"<cr>
+
 
 "\\ Quickly select text you just pasted
 noremap gV `[v`]
 
 "\\ Search
-nnoremap <leader>n :noh<CR>
+nnoremap <Leader>n :noh<CR>
 
 "\\ Vim file
-nmap <leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
-noremap <leader><leader>s :so ~/.vimrc<CR> " Source .vimrc file
+nmap <Leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
+noremap <Leader><Leader>s :so ~/.vimrc<CR> " Source .vimrc file
 
 "\\ Switch between files
-nnoremap <leader><leader>f :bp<CR> " Previous buffer file
-nnoremap <leader><leader>b :bn<CR> " Next buffer file
-nnoremap <leader><leader>c <c-^> " The last two files
+nnoremap <Leader><Leader>f :bp<CR> " Previous buffer file
+nnoremap <Leader><Leader>b :bn<CR> " Next buffer file
+nnoremap <Leader><Leader>c <c-^> " The last two files
 
 "\\ Move a half page
 nmap J <C-d>
@@ -190,7 +202,10 @@ nmap K <C-u>
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 "\\ C
-nnoremap <leader>i :!gcc -o .a.out % && ./.a.out<CR>
+nnoremap <Leader>i :!gcc -o .a.out % && ./.a.out<CR>
+
+"\\ Ruby
+" nmap <Leader>E :!ruby %<cr>
 
 
 "=============== Extends behaviors =========================
@@ -207,16 +222,19 @@ au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-termi
 "\\ Delete all trailing space when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
+"\\ Force save file when I forgot run 'sudo vim file'
+cmap w!! %!sudo tee > /dev/null %
+
 
 " ================ Plugin Config ====================
 
 "\\ Vundle
-nnoremap <leader>P :so %<CR>:PluginInstall<CR>:q<CR> "Quickly install plugins
+nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR> "Quickly install plugins
 
 "------------------------------------------------------
 
 "\\ CtrlP
-nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <Leader>. :CtrlPTag<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = 'find %s -type f'
@@ -231,6 +249,32 @@ set wildignore+=*\\vendor\\**
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("v")': ['<F2>', '<RightMouse>'],
     \ }
+
+"------------------------------------------------------
+
+"\\ Rails.vim
+map <Leader>rg :Rgenerate
+map <Leader>rd :Rdestroy
+
+map <Leader>em :Emodel
+map <Leader>ev :Eview
+map <Leader>ec :Econtroller
+map <Leader>eh :Ehelper
+map <Leader>el :Elib
+map <Leader>er :Emailer
+
+map <Leader>ej :Ejavascript
+map <Leader>es :Estylesheet
+map <Leader>ey :Elayout
+
+map <Leader>ee :Eenvironment
+map <Leader>ei :Einitializer
+map <Leader>ew :Emigration
+map <Leader>ed :Eschema
+
+map <Leader>ef :Efixtures
+map <Leader>eu :Eunittest
+map <Leader>et :Efunctionaltest
 
 "------------------------------------------------------
 
@@ -295,7 +339,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "------------------------------------------------------
 
 "\\ Vim Hardmode
-nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
+nnoremap <Leader>y <Esc>:call ToggleHardMode()<CR>
 
 "------------------------------------------------------
 
@@ -315,6 +359,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "------------------------------------------------------
 
 "\\ Easy Motion
+let g:EasyMotion_do_mapping = 0
 map <Leader> <Plug>(easymotion-prefix)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
@@ -329,16 +374,17 @@ map <Leader>h <Plug>(easymotion-linebackward)
 "------------------------------------------------------
 
 "\\ RSpec.vim
-nnoremap <Leader>r :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>a :call RunAllSpecs()<CR>
-" map <Leader>s :call RunNearestSpec()<CR>
-" map <Leader>l :call RunLastSpec()<CR>
+nnoremap <Leader>rcs :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>ras :call RunAllSpecs()<CR>
+map <Leader>rns :call RunNearestSpec()<CR>
+map <Leader>rls :call RunLastSpec()<CR>
 
 
 "------------------------------------------------------
 
 "\\ Ctags
 " autocmd BufWritePost *  :UpdateTags
+" nnoremap <f5> :!ctags -R --exclude=.git --exclude=log *<cr>
 
 
 " ================ My Extend Functions ====================
