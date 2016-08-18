@@ -1,8 +1,9 @@
 #!/bin/bash
 
-function update {
+function initialize {
   sudo apt-get update
   sudo apt-get install curl
+  sudo apt-get install git
 }
 
 # Install UI
@@ -69,17 +70,6 @@ function config_dotfile {
   ./install.py --clang-completer
 }
 
-# Install git and config
-function install_git {
-  echo "Install git and setup"
-  sudo apt-get install git
-  git config --global color.ui true
-  git config --global user.name "ttuan"
-  git config --global user.email "tuantv.nhnd@gmail.com"
-  ssh-keygen -t rsa -b 4096 -C "tuantv.nhnd@gmail.com"
-}
-
-
 # Install for web dev
 function install_ruby_on_rails {
   echo "Installing ruby and rails"
@@ -113,11 +103,10 @@ function programs {
   sudo apt-get install nautilus-dropbox
 }
 
-update
+initialize
 install_theme
 install_zsh
 install_ruby_on_rails
 config_dotfile
 install_vim_and_tmux
-install_git
 programs

@@ -5,10 +5,9 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 config_dotfile	install_dependence.sh	/^function config_dotfile {$/;"	f
-install_git	install_dependence.sh	/^function install_git {$/;"	f
+initialize	install_dependence.sh	/^function initialize {$/;"	f
 install_ruby_on_rails	install_dependence.sh	/^function install_ruby_on_rails {$/;"	f
 install_theme	install_dependence.sh	/^function install_theme {$/;"	f
 install_vim_and_tmux	install_dependence.sh	/^function install_vim_and_tmux {$/;"	f
 install_zsh	install_dependence.sh	/^function install_zsh {$/;"	f
 programs	install_dependence.sh	/^function programs {$/;"	f
-update	install_dependence.sh	/^function update {$/;"	f
