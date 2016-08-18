@@ -35,7 +35,7 @@ set smartcase                            " But not when contain a uppercase char
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Vim behavior plugin
+"\\ Vim behavior plugin
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
@@ -49,7 +49,7 @@ Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 
-" Vim apperance
+"\\ Vim apperance
 Plugin 'scrooloose/nerdtree'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'vim-airline/vim-airline'
@@ -57,21 +57,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 
-" Vim motion
+"\\ Vim motion
 Plugin 'easymotion/vim-easymotion'
 Plugin 'wikitopian/hardmode'
-
-" Vim for ruby dev
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-bundler'
-Plugin 'thoughtbot/vim-rspec'
-
-" Vim for front-end dev
-Plugin 'mattn/emmet-vim'
 
 " More operator for vim
 Plugin 'tpope/vim-surround'                     "s command like surround
@@ -86,14 +74,26 @@ Plugin 'kana/vim-textobj-entire'                "Entire file: ae and ie
 Plugin 'kana/vim-textobj-line'                  "Line textobj: al and il
 Plugin 'whatyouhide/vim-textobj-erb'            "erb text obj: aE and iE
 
-" Markdown
+"\\ Vim for ruby dev
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-bundler'
+Plugin 'thoughtbot/vim-rspec'
+
+"\\ Vim for front-end dev
+Plugin 'mattn/emmet-vim'
+
+"\\ Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
-" Ctags
+"\\ Ctags
 Plugin 'craigemery/vim-autotag'
 
-" Other Plugin
+"\\ Other Plugin
 Plugin '907th/vim-auto-save'
 call vundle#end()
 
@@ -230,7 +230,7 @@ cmap w!! %!sudo tee > /dev/null %
 " ================ Plugin Config ====================
 
 "\\ Vundle
-nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR> "Quickly install plugins
+nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR>
 
 "------------------------------------------------------
 
