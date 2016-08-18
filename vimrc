@@ -22,6 +22,7 @@ set cursorline
 set shell=zsh
 set splitright
 set splitbelow
+set mouse=a
 
 "\\ search
 set incsearch                            " Find the next match as we type the search
@@ -167,6 +168,7 @@ map <C-l> <C-W>l
 
 "\\ Operator with a panel
 nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>o :e<Space>
 nnoremap <Leader>p o<ESC>p`[v`]
@@ -366,7 +368,7 @@ let g:EasyMotion_do_mapping = 0
 map <Leader> <Plug>(easymotion-prefix)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
-nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-overwin-f2)
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
@@ -377,10 +379,10 @@ map <Leader>h <Plug>(easymotion-linebackward)
 "------------------------------------------------------
 
 "\\ RSpec.vim
-nnoremap <Leader>rcs :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>rs :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>ras :call RunAllSpecs()<CR>
 map <Leader>rns :call RunNearestSpec()<CR>
-map <Leader>rls :call RunLastSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
 
 
 "------------------------------------------------------
