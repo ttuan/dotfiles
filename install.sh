@@ -48,25 +48,24 @@ function install_vim_and_tmux {
 
 # Download .dotfile and install
 function config_dotfile {
+  cd ~/dotfile
   echo "Config dotfile "
-  git clone https://github.com/ttuan/dotfile.git
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   cp dotfile/vimrc ~/.vimrc
   vim +PluginInstall +qall
-  cp dotfile/getSongName.sh ~/getSongName.sh
-  cp dotfile/zshrc ~/.zshrc
-  cp dotfile/vimperatorrc ~/.vimperatorrc
-  cp dotfile/tmux.conf ~/.tmux.conf
-  cp dotfile/ctags ~/.ctags
-  cp dotfile/Xmodmap ~/.Xmodmap
-  cp gitconfig ~/.gitconfig
-  cp gitignore ~/.gitigrnore
+  cp scripts/getSongName.sh ~/getSongName.sh
+  cp zsh/zshrc ~/.zshrc
+  cp vimperator/vimperatorrc ~/.vimperatorrc
+  cp tmux/tmux.conf ~/.tmux.conf
+  cp tags/ctags ~/.ctags
+  cp scripts/Xmodmap ~/.Xmodmap
+  cp git/gitconfig ~/.gitconfig
+  cp git/gitignore ~/.gitigrnore
   xmodmap ~/.Xmodmap
   export EDITOR='vim'
-  mkdir ~/.tmuxinator
-  mkdir ~/.i3/
-  cp dotfile/i3/config ~/.i3/
-  cp dotfile/project.yml ~/.tmuxinator/
+  mkdir ~/.tmuxinator ~/.i3
+  cp i3/config ~/.i3/
+  cp tmuxinator/project.yml ~/.tmuxinator/
 
   cd ~/.vim/bundle/YouCompleteMe
   ./install.py --clang-completer
