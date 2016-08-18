@@ -64,6 +64,8 @@ function config_dotfile {
   xmodmap ~/.Xmodmap
   export EDITOR='vim'
   mkdir ~/.tmuxinator
+  mkdir ~/.i3/
+  cp dotfile/i3/config ~/.i3/
   cp dotfile/project.yml ~/.tmuxinator/
 
   cd ~/.vim/bundle/YouCompleteMe
@@ -97,6 +99,7 @@ function install_ruby_on_rails {
 }
 
 function programs {
+  sudo apt-get install i3
   sudo apt-get install guake
   sudo apt-get install flashplugin-installer
   sudo apt-get install xpad

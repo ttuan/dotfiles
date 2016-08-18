@@ -1,0 +1,192 @@
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# ======================= General Config =====================================
+
+#\\ Set Mod and Super key
+set $mod Mod1
+set $super Mod4
+
+#\\ Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#\\ Start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+
+#\\ Start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec i3-dmenu-desktop
+
+#\\ Reload the configuration file
+bindsym $mod+Shift+c reload
+
+#\\ Restart i3 inplace
+bindsym $mod+Shift+r restart
+
+#\\ Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
+
+#\\ Enter resize mode
+bindsym $mod+r mode "resize"
+
+# =========================== Behavior ========================================
+
+#---------------------------- Windows ---------------------------------------
+#\\ Kill focus window
+bindsym $mod+Shift+q kill
+
+#\\ Change focus window
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+#\\ Move focus window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#\\ Resize
+mode "resize" {
+    # Escape resize mode
+    bindsym Escape mode "default"
+
+    # Use jkl; or cursor keys to resize
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+}
+
+#--------------------------- Containers ------------------------------------------
+#\\ Split container
+bindsym $mod+y split h
+bindsym $mod+v split v
+
+#\\ Full screen mode
+bindsym $mod+f fullscreen
+
+#\\ Container Layout: Stacked, Tabbed, Toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#\\ Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+#\\ Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+#\\ Focus family container
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+#--------------------------- Workspaces ------------------------------------------
+#\\ Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+
+#\\ Quickly switch workspace with $mod + Tab
+bindsym $mod+Tab workspace next
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+
+
+# ============================ Apperance ======================================
+
+#\\ Set color variable
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $darkgreen   #98971a
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+set $background  #000000
+set $transparent #000000FF
+
+#\\ Set font for all windows
+font pango:Consolas, FontAwesome Bold 9
+
+#\\ Change window title color
+#CLASS                   BORDER   BACKGROUND  TEXT     INDICATOR
+client.focused           #4c7899  $blue       #eff1f5  #2e9ef4
+client.unfocused         #333333  #2b303b     #888888  #292d2e
+client.focused_inactive  #333333  $violet     #eff1f5  #484e50
+client.urgent            #2f343a  $red        #eff1f5  #900000
+client.background $black
+
+#\\ Move bar to top
+bar {
+    position top
+    status_command i3status --config ~/Dropbox/Projects/dotfile/i3/i3status.conf
+    tray_output LVDS
+    font pango: sans 9
+    colors{
+        statusline         $white
+        background         $transparent
+        separator          $blue
+
+        #                  BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $blue
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+    }
+}
+
+#\\ Change backgroud image
+exec --no-startup-id feh --bg-fill ~/Dropbox/dotfile/i3/i3_backgroud_imange.png
+
+
+# ===================== Extend Behaviors for other app =======================
+
+#\\ Pulse Audio controls
+bindsym $mod+period exec amixer -D pulse sset Master 5%+                      #Increase sound volume
+bindsym $mod+comma exec amixer -D pulse sset Master 5%-                       #Decrease sound volume
+bindsym $mod+m exec amixer -D pulse sset Master 0%                            #Mute
+bindsym $mod+Shift+m exec amixer -D pulse sset Master 75%                     #Unmute
+
+#\\ Print screen
+bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/User Data/Pictures/screenshots/'
+
+#\\ Swap ESC and Caplock
+#xmodmap -e "clear lock"
+#xmodmap -e "keysym Caps_Lock = Escape"
+
+# turn on or off Touchpad
+bindsym $mod+p exec "synclient TouchpadOff=1"
+bindsym $mod+Shift+p exec "synclient TouchpadOff=0"
+
+#\\ Quickly start app
+bindsym $super+f exec firefox
+bindsym $super+t exec thunderbird
