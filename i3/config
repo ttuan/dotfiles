@@ -26,18 +26,60 @@ bindsym $mod+Shift+r restart
 #\\ Exit i3
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 
-#\\ Enter resize mode
-bindsym $mod+r mode "resize"
-
 #\\ Lock screen
 bindsym $super+l exec i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png
 
-#\\ Suspend computer
-# sudo usermod -g users `whoami`
-# run 'sudo visudo' and add %users ALL = NOPASSWD: /usr/sbin/pm-suspend
-bindsym $super+Shift+s exec --no-startup-id "sudo pm-suspend | i3lock -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png"
 
 # =========================== Behavior ========================================
+
+# --------------------------- Modes -------------------------------------------
+
+#\\ Resize
+#\\ Enter resize mode
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+    # Escape resize mode
+    bindsym Escape mode "default"
+
+    # Use jkl; or cursor keys to resize
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+}
+
+#\\ Setting Audio
+set $audiomenu "change volume [r]eset [d]ecrease [i]ncrease [m]ute"
+bindsym $mod+F1 mode $audiomenu
+
+mode $audiomenu {
+    bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 100%
+    bindsym i             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +5%
+    bindsym d             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -5%
+    bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym Return        mode "default"
+    bindsym Escape        mode "default"
+}
+
+#\\ System mode
+set $sysmenu "system:  [r]eboot  [l]ock  [p]oweroff  [e]xit [s]uspend [h]hibernate"
+bindsym $mod+Delete mode $sysmenu
+
+mode $sysmenu {
+    bindsym l exec --no-startup-id i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 #---------------------------- Windows ---------------------------------------
 #\\ Kill focus window
@@ -62,22 +104,6 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
-#\\ Resize
-mode "resize" {
-    # Escape resize mode
-    bindsym Escape mode "default"
-
-    # Use jkl; or cursor keys to resize
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-}
 
 #--------------------------- Containers ------------------------------------------
 #\\ Split container
@@ -177,12 +203,6 @@ exec --no-startup-id feh --bg-fill ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/
 
 
 # ===================== Extend Behaviors for other app =======================
-
-#\\ Pulse Audio controls
-bindsym $mod+period exec amixer -D pulse sset Master 5%+                      #Increase sound volume
-bindsym $mod+comma exec amixer -D pulse sset Master 5%-                       #Decrease sound volume
-bindsym $mod+m exec amixer -D pulse sset Master 0%                            #Mute
-bindsym $mod+Shift+m exec amixer -D pulse sset Master 75%                     #Unmute
 
 #\\ Print screen
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f /home/$USER/User Data/Pictures/screenshots/'
