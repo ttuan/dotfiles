@@ -179,12 +179,14 @@ map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
-
 "\\ Quickly select text you just pasted
 noremap gV `[v`]
 
 "\\ Search
 nnoremap <Leader>n :noh<CR>
+
+"\\ Insert pasted text at end of lineend
+nnoremap <Leader>eol $p
 
 "\\ Vim file
 nmap <Leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
