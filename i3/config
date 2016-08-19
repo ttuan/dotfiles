@@ -177,13 +177,16 @@ bindsym $mod+m exec amixer -D pulse sset Master 0%                            #M
 bindsym $mod+Shift+m exec amixer -D pulse sset Master 75%                     #Unmute
 
 #\\ Print screen
-bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/User Data/Pictures/screenshots/'
+bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f /home/$USER/User Data/Pictures/screenshots/'
+
+#\\ Synchronize config file
+exec_always ~/Dropbox/Projects/dotfile/sync.sh
 
 #\\ Swap ESC and Caplock
 #xmodmap -e "clear lock"
 #xmodmap -e "keysym Caps_Lock = Escape"
 
-# turn on or off Touchpad
+# Turn on or off Touchpad
 bindsym $mod+p exec "synclient TouchpadOff=1"
 bindsym $mod+Shift+p exec "synclient TouchpadOff=0"
 
