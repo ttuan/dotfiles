@@ -257,28 +257,28 @@ let g:ctrlp_prompt_mappings = {
 "------------------------------------------------------
 
 "\\ Rails.vim
-map <Leader>rg :Rgenerate
-map <Leader>rd :Rdestroy
+map <Leader>rg :Rails generate<space>
+map <Leader>rd :Rails destroy<space>
 
-map <Leader>em :Emodel
-map <Leader>ev :Eview
-map <Leader>ec :Econtroller
-map <Leader>eh :Ehelper
-map <Leader>el :Elib
-map <Leader>er :Emailer
+map <Leader>em :Emodel<space>
+map <Leader>ev :Eview<space>
+map <Leader>ec :Econtroller<space>
+map <Leader>eh :Ehelper<space>
+map <Leader>el :Elib<space>
+map <Leader>er :Emailer<space>
 
-map <Leader>ej :Ejavascript
-map <Leader>es :Estylesheet
-map <Leader>ey :Elayout
+map <Leader>ej :Ejavascript<space>
+map <Leader>es :Estylesheet<space>
+map <Leader>ey :Elayout<space>
 
-map <Leader>ee :Eenvironment
-map <Leader>ei :Einitializer
-map <Leader>ew :Emigration
-map <Leader>ed :Eschema
+map <Leader>ee :Eenvironment<space>
+map <Leader>ei :Einitializer<space>
+map <Leader>ew :Emigration<space>
+map <Leader>ed :Eschema<space>
 
-map <Leader>ef :Efixtures
-map <Leader>eu :Eunittest
-map <Leader>et :Efunctionaltest
+map <Leader>ef :Efixtures<space>
+map <Leader>eu :Eunittest<space>
+map <Leader>et :Efunctionaltest<space>
 
 "------------------------------------------------------
 
