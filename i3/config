@@ -29,6 +29,14 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg e
 #\\ Enter resize mode
 bindsym $mod+r mode "resize"
 
+#\\ Lock screen
+bindsym $super+l exec i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png
+
+#\\ Suspend computer
+# sudo usermod -g users `whoami`
+# run 'sudo visudo' and add %users ALL = NOPASSWD: /usr/sbin/pm-suspend
+bindsym $super+Shift+s exec --no-startup-id "sudo pm-suspend | i3lock -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png"
+
 # =========================== Behavior ========================================
 
 #---------------------------- Windows ---------------------------------------
@@ -165,7 +173,7 @@ bar {
 }
 
 #\\ Change backgroud image
-exec --no-startup-id feh --bg-fill ~/Dropbox/dotfile/i3/i3_backgroud_imange.png
+exec --no-startup-id feh --bg-fill ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png
 
 
 # ===================== Extend Behaviors for other app =======================
