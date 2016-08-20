@@ -18,6 +18,8 @@ function install_theme {
   gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   gsettings set org.gnome.desktop.interface icon-theme 'Numix-circle'
   gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+  # ignore gnome draw desktop in i3
+  gsettings set org.gnome.desktop.background show-desktop-icons false
 }
 
 # Install zsh and oh-my-zsh
@@ -99,6 +101,7 @@ function install_ruby_on_rails {
 
 function programs {
   sudo apt-get install i3
+  sudo apt-get install irssi
   sudo apt-get install guake
   sudo apt-get install flashplugin-installer
   sudo apt-get install xpad

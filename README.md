@@ -8,6 +8,8 @@
 
 ```
 
+> You’re The King Of Your Castle!
+
 # What are in this repo
 
 This repo contains all my dotfile.
@@ -28,13 +30,13 @@ Dotfile
 │   ├── getSongName.sh
 │   ├── refresh_firefox.sh
 │   └── Xmodmap
+├── sync.sh
 ├── tags
 │   └── ctags
 ├── tmux
 │   └── tmux.conf
 ├── tmuxinator
 │   └── project.yml
-├── t.txt
 ├── vim
 │   ├── ackrc
 │   └── vimrc

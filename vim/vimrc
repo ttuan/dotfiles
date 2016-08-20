@@ -122,12 +122,10 @@ set nofoldenable                                  " Don't fold by default
 " ================ Behavior =====================
 
 "\\ Centralize backup, swap and undo file
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
-set formatoptions-=cro
+set noswapfile
+set nobackup
+set nowb
+au FocusLost * :wa
 
 "\\ Auto save files
 autocmd BufLeave, FocusLost * silent! wall         " Some terminal doesn't support FoucusLost
@@ -193,8 +191,8 @@ nmap <Leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
 noremap <Leader><Leader>s :so ~/.vimrc<CR> " Source .vimrc file
 
 "\\ Switch between files
-nnoremap <Leader><Leader>f :bp<CR> " Previous buffer file
-nnoremap <Leader><Leader>b :bn<CR> " Next buffer file
+nnoremap <tab> :bp<CR> " Previous buffer file
+nnoremap <s-tab> :bn<CR> " Next buffer file
 nnoremap <Leader><Leader>c <c-^> " The last two files
 
 "\\ Move a half page

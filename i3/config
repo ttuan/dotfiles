@@ -29,6 +29,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg e
 #\\ Lock screen
 bindsym $super+l exec i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png
 
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
 # =========================== Behavior ========================================
 
@@ -67,18 +69,18 @@ mode $audiomenu {
 }
 
 #\\ System mode
-set $sysmenu "system:  [r]eboot  [l]ock  [p]oweroff  [e]xit [s]uspend [h]hibernate"
-bindsym $mod+Delete mode $sysmenu
+set $sysmenu "system:  [r]estart  [l]ock  [p]oweroff  [e]xit [s]uspend"
+bindsym $mod+F2 mode $sysmenu
 
 mode $sysmenu {
-    bindsym l exec --no-startup-id i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym l         exec --no-startup-id i3lock -d -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png, mode "default"
+    bindsym s exec --no-startup-id "sudo pm-suspend | i3lock -i ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/i3_background_image.png"
+    bindsym r         restart
+    bindsym e         exit
+    bindsym p         exec shutdown -P now
+    bindsym b         exec shutdown -r now
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
 }
 
 #---------------------------- Windows ---------------------------------------
@@ -105,10 +107,14 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+#\\ Show popup in smart way :D
+popup_during_fullscreen smart
+
 #--------------------------- Containers ------------------------------------------
 #\\ Split container
 bindsym $mod+y split h
 bindsym $mod+v split v
+bindsym $mod+t split toggle
 
 #\\ Full screen mode
 bindsym $mod+f fullscreen
@@ -117,6 +123,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+bindsym $mod+x layout toggle all
 
 #\\ Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -129,6 +136,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 #--------------------------- Workspaces ------------------------------------------
+
 #\\ Switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -139,13 +147,19 @@ bindsym $mod+5 workspace 5
 #\\ Quickly switch workspace with $mod + Tab
 bindsym $mod+Tab workspace next
 
-# move focused container to workspace
+#\\ Quickly comeback nearest previous workspace: wsp1 --$mod+2--> wsp2
+#--$mod+2-->wsp1
+workspace_auto_back_and_forth yes
+
+#\\ Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 
+#\\ Assign firefox on first workspace
+exec --no-startup-id i3-msg 'workspace 1; exec firefox'
 
 # ============================ Apperance ======================================
 
@@ -221,3 +235,6 @@ bindsym $mod+Shift+p exec "synclient TouchpadOff=0"
 #\\ Quickly start app
 bindsym $super+f exec firefox
 bindsym $super+t exec thunderbird
+
+#\\ Apps start with i3
+exec --no-startup-id dropbox
