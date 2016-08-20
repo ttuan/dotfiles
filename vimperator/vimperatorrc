@@ -46,7 +46,7 @@ EOM
 map <Space> <Leader>
 
 "\\ Source config file
-noremap <silent> <Leader>s :source ~/.vimperatorrc<CR>;:echo<Space>"source completed."<CR>
+"noremap <silent> <Leader>s :source ~/.vimperatorrc<CR>;:echo<Space>"source completed."<CR>
 
 "\\ Quickly switch tab
 nmap <Leader>1 1b
@@ -59,7 +59,7 @@ nmap <Leader>7 7b
 nmap <Leader>8 8b
 nmap <Leader>9 9b
 nmap gl g$
-nmap gf g0
+nmap gf 2b
 
 "\\ Ctrl A to select all
 inoremap <C-a> <C-Home><C-S-End>
@@ -77,10 +77,10 @@ imap <C-h> <C-t>
 nnoremap <Leader>h :tabmove! -1<CR>
 nnoremap <Leader>l :tabmove! +1<CR>
 
-"\\ Qmarks. Press `go<mark>` to open page on current tab or `gn<mark>` to open
-in new tab
+"\\ Qmarks. Press `go<mark>` to open page on current tab or `gn<mark>` to open in new tab
 silent qmark f http://facebook.com
 silent qmark t http://twitter.com/home/
+silent qmark y https://youtube.com
 silent qmark i https://www.instagram.com/
 silent qmark e https://www.evernote.com/Home.action
 silent qmark g https://github.com/
