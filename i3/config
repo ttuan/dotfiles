@@ -56,13 +56,13 @@ mode "resize" {
 }
 
 #\\ Setting Audio
-set $audiomenu "change volume [r]eset [d]ecrease [i]ncrease [m]ute"
+set $audiomenu "change volume [r]eset [j]decrease [k]increase [m]ute"
 bindsym $mod+F1 mode $audiomenu
 
 mode $audiomenu {
     bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 100%
-    bindsym i             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +5%
-    bindsym d             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -5%
+    bindsym k             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +5%
+    bindsym j             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -5%
     bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym Return        mode "default"
     bindsym Escape        mode "default"
@@ -221,9 +221,6 @@ exec --no-startup-id feh --bg-fill ~/Dropbox/User\ Data/Linh\ tinh\ D/Wallpaper/
 #\\ Print screen
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f /home/$USER/User Data/Pictures/screenshots/'
 
-#\\ Synchronize config file
-exec_always ~/Dropbox/Projects/dotfile/sync.sh
-
 #\\ Swap ESC and Caplock
 #xmodmap -e "clear lock"
 #xmodmap -e "keysym Caps_Lock = Escape"
@@ -237,4 +234,4 @@ bindsym $super+f exec firefox
 bindsym $super+t exec thunderbird
 
 #\\ Apps start with i3
-exec --no-startup-id dropbox
+exec --no-startup-id dropbox start
