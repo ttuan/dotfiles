@@ -106,6 +106,12 @@ function programs {
   sudo apt-get install flashplugin-installer
   sudo apt-get install xpad
   sudo apt-get install nautilus-dropbox
+  pip install git+https://github.com/gleitz/howdoi.git#egg=howdoi
+
+  git clone https://github.com/soimort/translate-shell
+  cd translate-shell/
+  make
+  sudo make install
 }
 
 initialize

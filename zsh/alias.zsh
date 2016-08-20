@@ -78,3 +78,10 @@ weather() {
   local CITY=${1:-Hanoi}
   curl -4 "wttr.in/$CITY"
 }
+
+# Translate with google
+alias t="trans -b :vi"
+
+# How do I ....
+alias how="howdoi"
+
