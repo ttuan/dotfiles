@@ -43,9 +43,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'skwp/greplace.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'terryma/vim-expand-region'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
@@ -67,13 +65,11 @@ Plugin 'tpope/vim-surround'                     "s command like surround
 Plugin 'vim-scripts/ReplaceWithRegister'        "gr to replace with yanked text
 
 " Vim Text object
-Plugin 'vim-scripts/argtextobj.vim'             "For function arguments: aa and ia
 Plugin 'michaeljsmith/vim-indent-object'        "For ident object like python coffescript: ii and ai
 Plugin 'kana/vim-textobj-user'                  "Addition to use vim text obj rubyblock
 Plugin 'nelstrom/vim-textobj-rubyblock'         "Ruby text object: ir and ar
 Plugin 'kana/vim-textobj-entire'                "Entire file: ae and ie
 Plugin 'kana/vim-textobj-line'                  "Line textobj: al and il
-Plugin 'whatyouhide/vim-textobj-erb'            "erb text obj: aE and iE
 
 "\\ Vim for ruby dev
 Plugin 'tpope/vim-rails'
@@ -353,13 +349,6 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
-"------------------------------------------------------
-
-"\\ Vim expand region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
 
 "------------------------------------------------------
 
