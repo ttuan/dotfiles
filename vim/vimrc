@@ -68,7 +68,6 @@ Plugin 'vim-scripts/ReplaceWithRegister'        "gr to replace with yanked text
 Plugin 'michaeljsmith/vim-indent-object'        "For ident object like python coffescript: ii and ai
 Plugin 'kana/vim-textobj-user'                  "Addition to use vim text obj rubyblock
 Plugin 'nelstrom/vim-textobj-rubyblock'         "Ruby text object: ir and ar
-Plugin 'kana/vim-textobj-entire'                "Entire file: ae and ie
 Plugin 'kana/vim-textobj-line'                  "Line textobj: al and il
 
 "\\ Vim for ruby dev
@@ -126,6 +125,13 @@ au FocusLost * :wa
 "\\ Auto save files
 autocmd BufLeave, FocusLost * silent! wall         " Some terminal doesn't support FoucusLost
 inoremap <Esc> <Esc>:w<CR>
+
+"\\ Check file change and reload every 4 seconds
+set autoread
+au CursorHold * checktime
+
+"\\ Y to copy to end of line
+map Y y$
 
 "\\ Indentation settings
 set tabstop=2 shiftwidth=2 expandtab autoindent
@@ -194,6 +200,9 @@ nnoremap <Leader><Leader>c <c-^> " The last two files
 "\\ Move a half page
 nmap J <C-d>
 nmap K <C-u>
+
+"\\ Select all file
+nnoremap <Leader>a ggVG
 
 "---------------  Make Vim like IDE -------------------------
 
@@ -287,6 +296,14 @@ let g:auto_save_in_insert_mode = 0
 
 "\\ Emmet-vim
 imap hh <C-y>,
+
+"------------------------------------------------------
+
+"\\ AutoClose
+" Bring back Up and Down key in Insert Mode
+if !has("gui_running")
+  let g:AutoClosePreservDotReg = 0
+endif
 
 "------------------------------------------------------
 
