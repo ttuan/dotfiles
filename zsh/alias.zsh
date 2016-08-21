@@ -38,7 +38,7 @@ alias bi="bundle install"
 alias tmx="tmuxinator start project $1"
 alias serve="python -m SimpleHTTPServer 8000"
 
-alias !="sudo"
+alias pls="sudo"
 alias rr="rm -rf"
 alias q="exit"
 alias c="clear"
