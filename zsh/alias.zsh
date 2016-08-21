@@ -85,3 +85,8 @@ alias t="trans -b :vi"
 # How do I ....
 alias how="howdoi"
 
+#\\ Share wifi
+alias sspot="sudo ap-hotspot start"
+alias espot="sudo ap-hotspot stop"
+alias cspot="sudo ap-hotspot configure"
+alias rspot="sudo ap-hotspot restart"

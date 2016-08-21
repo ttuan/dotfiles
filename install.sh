@@ -108,10 +108,20 @@ function programs {
   sudo apt-get install nautilus-dropbox
   pip install git+https://github.com/gleitz/howdoi.git#egg=howdoi
 
+  # Install translate tool
   git clone https://github.com/soimort/translate-shell
   cd translate-shell/
   make
   sudo make install
+
+  # Ap-hotspot
+  sudo add-apt-repository ppa:nilarimogard/webupd8
+  sudo apt-get update
+  sudo apt-get install ap-hotspot
+  cd /tmp
+  wget http://old-releases.ubuntu.com/ubuntu/pool/universe/w/wpa/hostapd_1.0-3ubuntu2.1_amd64.deb
+  sudo dpkg -i hostapd*.deb
+  sudo apt-mark hold hostapd
 }
 
 initialize
