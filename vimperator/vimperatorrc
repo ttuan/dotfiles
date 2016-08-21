@@ -86,6 +86,7 @@ silent qmark e https://www.evernote.com/Home.action
 silent qmark g https://github.com/
 silent qmark m https://mail.google.com/mail/
 silent qmark l http://localhost:3000/
+silent qmark c https://chatwork.com
 
 " ==================== Apperance =======================
 
