@@ -54,6 +54,15 @@ alias ll="ls -lah"
 alias la="ls -A"
 alias l="ls"
 
+# Connect wifi
+alias onwifi="nmcli nm wifi on"
+alias offwifi="nmcli nm wifi off"
+alias showwifi="nmcli device wifi list"
+alias rescanwifi="nmcli device wifi rescan"
+cnwifi() {
+  nmcli device wifi connect $1 password $2
+}
+
 # File system tree
 alias .='pwd'
 alias ..='cd ..'
