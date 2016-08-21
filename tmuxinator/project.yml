@@ -1,7 +1,7 @@
 # ~/.tmuxinator/project.yml
 
 name: project
-root: ~/Projects/<%= @args[0] %>
+root: ~/Dropbox/Projects/<%= @args[0] %>
 
 # Optional tmux socket
 # socket_name: foo
