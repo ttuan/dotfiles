@@ -64,6 +64,9 @@ nmap gf 2b
 "\\ Ctrl A to select all
 inoremap <C-a> <C-Home><C-S-End>
 
+"\\ Open private window
+nnoremap <Leader>pw i<c-s-p>
+
 " ==================== Behaviors =======================
 
 "\\ Quickly scroll
@@ -72,6 +75,10 @@ nmap K <C-u>
 
 "\\ Textarea mode
 imap <C-h> <C-t>
+
+"\\ Pin/ unpin tab
+map <Leader>pt :set apptab=true<CR>
+map <Leader>up :set apptab=false<CR>
 
 "\\ Move tabs
 nnoremap <Leader>h :tabmove! -1<CR>
