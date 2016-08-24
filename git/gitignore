@@ -40,3 +40,6 @@ cscope.po.out
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# ------------------------------------RAILS PROJECTS---------------------------------------
+database.yml
