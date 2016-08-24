@@ -43,7 +43,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
@@ -204,6 +204,15 @@ nmap K <C-u>
 "\\ Select all file
 nnoremap <Leader>a ggVG
 
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk]
+nmap <Leader>j mz:m+<cr>`z
+nmap <Leader>k mz:m-2<cr>`z
+vmap <Leader>j :m'>+<cr>`<my`>mzgv`yo`z
+vmap <Leader>k :m'<-2<cr>`>my`<mzgv`yo`z
+
 "---------------  Make Vim like IDE -------------------------
 
 "\\ Python
@@ -279,7 +288,7 @@ map <Leader>ey :Elayout<space>
 map <Leader>ee :Eenvironment<space>
 map <Leader>ei :Einitializer<space>
 map <Leader>ew :Emigration<space>
-map <Leader>ed :Eschema<space>
+map <Leader>ed :Eschema
 
 map <Leader>ef :Efixtures<space>
 map <Leader>eu :Eunittest<space>
@@ -309,8 +318,8 @@ endif
 
 "\\ NERDTree
 map <F5> :NERDTreeToggle<CR>
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * NERDTree
+" autocmd VimEnter * wincmd p
 
 "------------------------------------------------------
 
@@ -339,6 +348,7 @@ let g:syntastic_check_on_wq = 0
 "------------------------------------------------------
 
 "\\ Ack
+map <Leader>g :Ag<Space>
 let g:ag_working_path_mode="r"
 set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading'
@@ -390,6 +400,10 @@ nnoremap <Leader>ras :call RunAllSpecs()<CR>
 map <Leader>rns :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
 
+"------------------------------------------------------
+
+"\\ Vim Fugitve
+nnoremap <Leader>bl :Gblame<CR>
 
 "------------------------------------------------------
 
