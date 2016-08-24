@@ -31,6 +31,17 @@ grb() {
   git rebase $1;
 }
 
+grc() {
+  git add .;
+  git rebase --continue;
+  branch_name=$(git symbolic-ref --short -q HEAD);
+  git push origin $branch_name -f;
+}
+
+gcc() {
+  git checkout master;
+  git checkout -b $1;
+}
 
 #\\ System
 alias go="gnome-open"
