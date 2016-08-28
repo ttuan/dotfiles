@@ -25,3 +25,10 @@ export EDITOR="vim"
 # Alias
 source $DOTFILE/zsh/alias.zsh
 
+# FZF functions
+source $DOTFILE/zsh/fzf.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+bindkey '^I' fzf-file-widget
+bindkey '^O' fzf-history-widget

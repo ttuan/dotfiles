@@ -30,6 +30,10 @@ function install_zsh {
   sudo chsh -s /usr/bin/zsh
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+  # install FZF
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
 }
 
 # Install vim and tmux
@@ -59,7 +63,7 @@ function config_dotfile {
   cp zsh/zshrc ~/.zshrc
   cp vimperator/vimperatorrc ~/.vimperatorrc
   cp tmux/tmux.conf ~/.tmux.conf
-  cp tags/ctags ~/.ctags
+  cp ctags/ctags ~/.ctags
   cp scripts/Xmodmap ~/.Xmodmap
   cp git/gitconfig ~/.gitconfig
   cp git/gitignore ~/.gitigrnore
@@ -122,6 +126,7 @@ function programs {
   wget http://old-releases.ubuntu.com/ubuntu/pool/universe/w/wpa/hostapd_1.0-3ubuntu2.1_amd64.deb
   sudo dpkg -i hostapd*.deb
   sudo apt-mark hold hostapd
+  sudo apt-get install xbacklight
 }
 
 initialize

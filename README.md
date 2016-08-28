@@ -16,6 +16,8 @@ This repo contains all my dotfile.
 
 ```sh
 Dotfile
+├── ctags
+│   └── ctags
 ├── fish
 │   └── config.fish
 ├── git
@@ -28,11 +30,10 @@ Dotfile
 ├── README.md
 ├── scripts
 │   ├── getSongName.sh
+│   ├── install-adblock-host
 │   ├── refresh_firefox.sh
 │   └── Xmodmap
 ├── sync.sh
-├── tags
-│   └── ctags
 ├── tmux
 │   └── tmux.conf
 ├── tmuxinator
@@ -41,8 +42,12 @@ Dotfile
 │   ├── ackrc
 │   └── vimrc
 ├── vimperator
+│   ├── plugin
+│   │   └── YoutubePlayer - Copy.js
 │   └── vimperatorrc
 └── zsh
+    ├── alias.zsh
+    ├── fzf.zsh
     └── zshrc
 ```
 

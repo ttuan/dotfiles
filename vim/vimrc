@@ -30,16 +30,27 @@ set hlsearch                             " Highlight searches by default
 set ignorecase                           " Search case insensitive
 set smartcase                            " But not when contain a uppercase char
 
+"\\ Turn on wild menu
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+"\\ Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
 
 "================ Vundle =====================
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim,~/.fzf
 call vundle#begin()
 
 "\\ Vim behavior plugin
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -47,6 +58,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
+Plugin 'junegunn/fzf.vim'
 
 "\\ Vim apperance
 Plugin 'scrooloose/nerdtree'
@@ -105,6 +117,7 @@ set guifontwide=FixedSys:h18
 set guioptions=egmrL
 set tw=80
 set showbreak=...                                 " Display ... as wrap break
+set showmatch
 set wrap linebreak nolist                         " Proper wrapping
 
 "\\ Folding settings
@@ -205,7 +218,11 @@ nmap K <C-u>
 nnoremap <Leader>a ggVG
 
 " Remap VIM 0 to first non-blank character
-map 0 ^
+map B ^
+map E $
+
+" Use ; instead of :
+nmap ; :
 
 " Move a line of text using ALT+[jk]
 nmap <Leader>j mz:m+<cr>`z
@@ -242,31 +259,13 @@ autocmd BufWritePre * :%s/\s\+$//e
 "\\ Force save file when I forgot run 'sudo vim file'
 cmap w!! %!sudo tee > /dev/null %
 
+"\\ Create folder
+map <Leader>cf :!mkdir -p<Space>
 
 " ================ Plugin Config ====================
 
 "\\ Vundle
 nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR>
-
-"------------------------------------------------------
-
-"\\ CtrlP
-nnoremap <Leader>. :CtrlPTag<cr>
-nnoremap <silent> <c-p> :ClearCtrlPCache<cr>\|:CtrlP<cr>
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = 'find %s -type f'
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-    \ 'file': '\.exe$\|\.so$\|\.dat$\|\.cache$'
-\ }
-if exists("g:ctrlp_user_command")
-unlet g:ctrlp_user_command
-endif
-set wildignore+=*\\vendor\\**
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("v")': ['<F2>', '<RightMouse>'],
-    \ }
 
 "------------------------------------------------------
 
@@ -382,8 +381,6 @@ endif
 "\\ Easy Motion
 let g:EasyMotion_do_mapping = 0
 map <Leader> <Plug>(easymotion-prefix)
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
 " nmap s <Plug>(easymotion-overwin-f2)
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
@@ -404,6 +401,18 @@ map <Leader>rl :call RunLastSpec()<CR>
 
 "\\ Vim Fugitve
 nnoremap <Leader>bl :Gblame<CR>
+
+"------------------------------------------------------
+
+"\\ FZF
+nnoremap <Leader><Leader>f :Files<CR>
+imap <c-x><c-l> <plug>(fzf-complete-line)
+nnoremap <Leader>fc :Commits<CR>
+nnoremap <Leader>fC :BCommits<CR>
+nnoremap <Leader>fl :Lines<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fh :History:<CR>
+nnoremap <Leader>fH :History/<CR>
 
 "------------------------------------------------------
 
