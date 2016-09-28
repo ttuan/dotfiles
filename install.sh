@@ -99,6 +99,7 @@ function install_ruby_on_rails {
 
   gem install nokogiri
   gem install tmuxinator
+  gem install interactive_editor
   sudo apt-get install nodejs
   "Done! Rails 5 is not installed."
 }

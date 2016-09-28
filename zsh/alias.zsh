@@ -11,6 +11,11 @@ gf() {
   git add .;
   git commit -m $1;
   branch_name=$(git symbolic-ref --short -q HEAD);
+  if gd | grep "binding.pry"
+  then
+    echo "Binding pry detected!"
+    return 0
+  fi
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
   firefox $repo_url;
@@ -20,6 +25,11 @@ gff() {
   git add .;
   git commit --amend;
   branch_name=$(git symbolic-ref --short -q HEAD);
+  if gd | grep "binding.pry"
+  then
+    echo "Binding pry detected!"
+    return 0
+  fi
   git push origin $branch_name -f;
 }
 
@@ -44,7 +54,8 @@ gcc() {
 }
 
 #\\ System
-alias go="gnome-open"
+alias sdown="sudo shutdown -h now"
+alias gno="gnome-open"
 alias bi="bundle install"
 alias tmx="tmuxinator start project $1"
 alias serve="python -m SimpleHTTPServer 8000"

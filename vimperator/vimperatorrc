@@ -70,8 +70,8 @@ nnoremap <Leader>pw i<c-s-p>
 " ==================== Behaviors =======================
 
 "\\ Quickly scroll
-nmap J <C-d>
-nmap K <C-u>
+" nmap J <C-d>
+" nmap K <C-u>
 
 "\\ Textarea mode
 imap <C-h> <C-t>

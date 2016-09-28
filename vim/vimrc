@@ -58,7 +58,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-Plugin 'junegunn/fzf.vim'
+" Plugin 'junegunn/fzf.vim'
+Plugin 'kien/ctrlp.vim'
 
 "\\ Vim apperance
 Plugin 'scrooloose/nerdtree'
@@ -70,7 +71,7 @@ Plugin 'benmills/vimux'
 
 "\\ Vim motion
 Plugin 'easymotion/vim-easymotion'
-Plugin 'wikitopian/hardmode'
+Plugin 'takac/vim-hardtime'
 
 " More operator for vim
 Plugin 'tpope/vim-surround'                     "s command like surround
@@ -81,6 +82,8 @@ Plugin 'michaeljsmith/vim-indent-object'        "For ident object like python co
 Plugin 'kana/vim-textobj-user'                  "Addition to use vim text obj rubyblock
 Plugin 'nelstrom/vim-textobj-rubyblock'         "Ruby text object: ir and ar
 Plugin 'kana/vim-textobj-line'                  "Line textobj: al and il
+Plugin 'whatyouhide/vim-textobj-erb'            "erb text object: aE and iE
+Plugin 'machakann/vim-textobj-delimited'        "Delimited text object: ad and id
 
 "\\ Vim for ruby dev
 Plugin 'tpope/vim-rails'
@@ -207,12 +210,8 @@ noremap <Leader><Leader>s :so ~/.vimrc<CR> " Source .vimrc file
 
 "\\ Switch between files
 nnoremap <tab> :bp<CR> " Previous buffer file
-nnoremap <s-tab> :bn<CR> " Next buffer file
+nnoremap <S-tab> :bn<CR> " Next buffer file
 nnoremap <Leader><Leader>c <c-^> " The last two files
-
-"\\ Move a half page
-nmap J <C-d>
-nmap K <C-u>
 
 "\\ Select all file
 nnoremap <Leader>a ggVG
@@ -221,8 +220,9 @@ nnoremap <Leader>a ggVG
 map B ^
 map E $
 
+nnoremap c<space> ct<space>
 " Use ; instead of :
-nmap ; :
+" nmap ; :
 
 " Move a line of text using ALT+[jk]
 nmap <Leader>j mz:m+<cr>`z
@@ -231,6 +231,7 @@ vmap <Leader>j :m'>+<cr>`<my`>mzgv`yo`z
 vmap <Leader>k :m'<-2<cr>`>my`<mzgv`yo`z
 
 "---------------  Make Vim like IDE -------------------------
+"---------------  Run, Forrest, Run -------------------------
 
 "\\ Python
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
@@ -239,7 +240,7 @@ nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 nnoremap <Leader>i :!gcc -o .a.out % && ./.a.out<CR>
 
 "\\ Ruby
-" nmap <Leader>E :!ruby %<cr>
+nmap <Leader>E :!ruby %<cr>
 
 
 "=============== Extends behaviors =========================
@@ -251,12 +252,13 @@ nnoremap g{ {dap}p{
 
 " Change cusor shape in different mode
 au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+" au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
 
 "\\ Delete all trailing space when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
 "\\ Force save file when I forgot run 'sudo vim file'
+"\\ With Great Power Comes Great Responsibility
 cmap w!! %!sudo tee > /dev/null %
 
 "\\ Create folder
@@ -329,6 +331,7 @@ nmap cm gc
 
 "\\ You Complete Me
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+set shortmess+=c
 
 "------------------------------------------------------
 
@@ -367,6 +370,8 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "\\ Vim Hardmode
 nnoremap <Leader>y <Esc>:call ToggleHardMode()<CR>
+" let g:hardtime_default_on = 1
+" let g:hardtime_maxcount = 3
 
 "------------------------------------------------------
 
@@ -385,7 +390,7 @@ map <Leader> <Plug>(easymotion-prefix)
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+nmap <Leader>W <Plug>(easymotion-overwin-w)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>h <Plug>(easymotion-linebackward)
 
@@ -404,15 +409,15 @@ nnoremap <Leader>bl :Gblame<CR>
 
 "------------------------------------------------------
 
-"\\ FZF
-nnoremap <Leader><Leader>f :Files<CR>
-imap <c-x><c-l> <plug>(fzf-complete-line)
-nnoremap <Leader>fc :Commits<CR>
-nnoremap <Leader>fC :BCommits<CR>
-nnoremap <Leader>fl :Lines<CR>
-nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fh :History:<CR>
-nnoremap <Leader>fH :History/<CR>
+" "\\ FZF
+" nnoremap <C-p> :Files<CR>
+" imap <c-x><c-l> <plug>(fzf-complete-line)
+" nnoremap <Leader>fc :Commits<CR>
+" nnoremap <Leader>fC :BCommits<CR>
+" nnoremap <Leader>fl :Lines<CR>
+" nnoremap <Leader>ft :Tags<CR>
+" nnoremap <Leader>fh :History:<CR>
+" nnoremap <Leader>fH :History/<CR>
 
 "------------------------------------------------------
 
