@@ -5,10 +5,10 @@ alias gpf="git pull framgia master"
 alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 alias gst="git status -s"
-alias gsta="git add .; git stash"
+alias gsta="git add -A; git stash"
 
 gf() {
-  git add .;
+  git add -A;
   git commit -m $1;
   branch_name=$(git symbolic-ref --short -q HEAD);
   if gd | grep "binding.pry"
@@ -22,7 +22,7 @@ gf() {
 }
 
 gff() {
-  git add .;
+  git add -A;
   git commit --amend;
   branch_name=$(git symbolic-ref --short -q HEAD);
   if gd | grep "binding.pry"

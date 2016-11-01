@@ -99,7 +99,7 @@ silent qmark c https://chatwork.com
 
 highlight Hint font: 13px "Lucida Console", monospace !important; border: 1px solid rgba(0, 0, 0, 1); background: rgba(255, 248, 231, 1); color: black;
 set focuscontent
-set hintchars=asdfghjklqwertyuiop
+" set hintchars=asdfghjklqwertyuiop
 set scrollbars
 set gui=addons,bookmarks,menu,navigation,tabs
 highlight Hint -append z-index:2999999999
