@@ -167,6 +167,10 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+"\\ Open file in same directory
+nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR>
+nnoremap ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap ,s :split <C-R>=expand("%:p:h") . "/" <CR>
 
 " ================ Mappings ====================
 
@@ -189,7 +193,6 @@ map <C-l> <C-W>l
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
-nnoremap <Leader>o :e<Space>
 nnoremap <Leader>p o<ESC>p`[v`]
 
 "\\ Disable arrow key
