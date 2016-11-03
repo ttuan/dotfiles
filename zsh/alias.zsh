@@ -1,11 +1,24 @@
 DOTFILE=~/Dropbox/Projects/dotfile
 
 # Alias for Git
-alias gpf="git pull framgia master"
 alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 alias gst="git status -s"
 alias gsta="git add -A; git stash"
+
+
+run_migrate() {
+  if rake db:migrate:status | grep down
+  then
+    rake db:migrate
+    return 0;
+  fi
+}
+
+gpf() {
+  git pull framgia master;
+  run_migrate;
+}
 
 gf() {
   git add -A;
