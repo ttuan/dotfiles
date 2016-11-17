@@ -102,12 +102,14 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
 "\\ Ctags
-Plugin 'craigemery/vim-autotag'
+" Plugin 'craigemery/vim-autotag'
 
 "\\ Other Plugin
 Plugin '907th/vim-auto-save'
 call vundle#end()
 
+"\\ Nodejs
+Plugin 'moll/vim-node'
 
 " ================ Apperance ====================
 

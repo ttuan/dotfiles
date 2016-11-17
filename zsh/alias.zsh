@@ -15,8 +15,14 @@ run_migrate() {
   fi
 }
 
+d.() {
+  curr_branch=$(git symbolic-ref --short -q HEAD);
+  git checkout develop;
+  git br -D $curr_branch;
+}
+
 gpf() {
-  git pull framgia master;
+  git pull framgia develop;
   run_migrate;
 }
 
