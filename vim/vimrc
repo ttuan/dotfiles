@@ -477,3 +477,4 @@ function! Close_git_message()
   endif
 endfunction
 autocmd VimEnter * :call Close_git_message()
+Plugin 'wakatime/vim-wakatime'

@@ -37,4 +37,4 @@ windows:
         - bundle exec rails s
   - railsc: bundle exec rails c
   - console:
-  - log: tail -f log/development.log
+  - vultr: ssh natuss

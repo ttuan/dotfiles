@@ -2,19 +2,19 @@
 
 function initialize {
   sudo apt-get update
-  sudo apt-get install curl
-  sudo apt-get install git
+  sudo apt-get install -y curl
+  sudo apt-get install -y git
 }
 
 # Install UI
 function install_theme {
   sudo add-apt-repository ppa:numix/ppa
   sudo apt-get update
-  sudo apt-get install numix-gtk-theme numix-icon-theme-circle
+  sudo apt-get install -y numix-gtk-theme numix-icon-theme-circle
   git clone https://github.com/powerline/fonts.git
   ~/fonts/.install.sh
   echo "Powerline fonts was installed. Please change font on terminal setting!!!"
-  sudo apt-get install unity-tweak-tool
+  sudo apt-get install -y unity-tweak-tool
   gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   gsettings set org.gnome.desktop.interface icon-theme 'Numix-circle'
   gsettings set org.gnome.desktop.wm.preferences theme "Numix"
@@ -25,7 +25,7 @@ function install_theme {
 # Install zsh and oh-my-zsh
 function install_zsh {
   echo "Installing zsh and oh-my-zsh..."
-  sudo apt-get install zsh
+  sudo apt-get install -y zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   sudo chsh -s /usr/bin/zsh
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
@@ -39,14 +39,14 @@ function install_zsh {
 # Install vim and tmux
 function install_vim_and_tmux {
   echo "Installing tmux 2.0 and vim."
-  sudo apt-get install vim
+  sudo apt-get install -y vim
   sudo add-apt-repository ppa:pi-rho/dev
   sudo apt-get update
-  sudo apt-get install tmux
-  sudo apt-get install vim
-  sudo apt-get install vim-gnome
-  sudo apt-get install xclip
-  sudo apt-get install exuberant-ctags
+  sudo apt-get install -y tmux
+  sudo apt-get install -y vim
+  sudo apt-get install -y vim-gnome
+  sudo apt-get install -y xclip
+  sudo apt-get install -y exuberant-ctags
   sudo curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
   sudo chmod +x /usr/local/bin/tmux-vim-select-pane
@@ -81,9 +81,9 @@ function config_dotfile {
 function install_ruby_on_rails {
   echo "Installing ruby and rails"
   sudo apt-get update
-  sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+  sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
 
-  sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+  sudo apt-get install -y libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   curl -sSL https://get.rvm.io -ip4 | bash -s stable
   source ~/.rvm/scripts/rvm
@@ -100,17 +100,17 @@ function install_ruby_on_rails {
   gem install nokogiri
   gem install tmuxinator
   gem install interactive_editor
-  sudo apt-get install nodejs
+  sudo apt-get install -y nodejs
   "Done! Rails 5 is not installed."
 }
 
 function programs {
-  sudo apt-get install i3
-  sudo apt-get install irssi
-  sudo apt-get install guake
-  sudo apt-get install flashplugin-installer
-  sudo apt-get install xpad
-  sudo apt-get install nautilus-dropbox
+  sudo apt-get install -y i3
+  sudo apt-get install -y irssi
+  sudo apt-get install -y guake
+  sudo apt-get install -y flashplugin-installer
+  sudo apt-get install -y xpad
+  sudo apt-get install -y nautilus-dropbox
   pip install git+https://github.com/gleitz/howdoi.git#egg=howdoi
 
   # Install translate tool
@@ -122,18 +122,18 @@ function programs {
   # Ap-hotspot
   sudo add-apt-repository ppa:nilarimogard/webupd8
   sudo apt-get update
-  sudo apt-get install ap-hotspot
+  sudo apt-get install -y ap-hotspot
   cd /tmp
   wget http://old-releases.ubuntu.com/ubuntu/pool/universe/w/wpa/hostapd_1.0-3ubuntu2.1_amd64.deb
   sudo dpkg -i hostapd*.deb
   sudo apt-mark hold hostapd
-  sudo apt-get install xbacklight
+  sudo apt-get install -y xbacklight
 }
 
 initialize
 install_theme
-install_zsh
 install_ruby_on_rails
 config_dotfile
 install_vim_and_tmux
 programs
+install_zsh
