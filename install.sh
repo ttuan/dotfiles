@@ -105,6 +105,7 @@ function install_ruby_on_rails {
 }
 
 function programs {
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/adtac/climate/master/install)"
   sudo apt-get install -y i3
   sudo apt-get install -y irssi
   sudo apt-get install -y guake
