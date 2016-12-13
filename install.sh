@@ -56,9 +56,10 @@ function install_vim_and_tmux {
 function config_dotfile {
   cd ~/dotfile
   echo "Config dotfile "
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   cp dotfile/vimrc ~/.vimrc
-  vim +PluginInstall +qall
+  vim +PlugInstall +qall
   cp scripts/getSongName.sh ~/getSongName.sh
   cp zsh/zshrc ~/.zshrc
   cp vimperator/vimperatorrc ~/.vimperatorrc
@@ -72,9 +73,6 @@ function config_dotfile {
   mkdir ~/.tmuxinator ~/.i3
   cp i3/config ~/.i3/
   cp tmuxinator/project.yml ~/.tmuxinator/
-
-  cd ~/.vim/bundle/YouCompleteMe
-  ./install.py --clang-completer
 }
 
 # Install for web dev

@@ -43,73 +43,87 @@ endif
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-"================ Vundle =====================
+"================ Vim Plug =====================
+"curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-set rtp+=~/.vim/bundle/Vundle.vim,~/.fzf
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+
+"\\ Preinstall function to build plugin
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
+  endif
+endfunction
 
 "\\ Vim behavior plugin
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rking/ag.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-" Plugin 'scrooloose/syntastic'
-Plugin 'Townk/vim-autoclose'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
+Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'rust']}
+Plug 'rking/ag.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Plug 'scrooloose/syntastic'
+Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 " Plugin 'junegunn/fzf.vim'
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 "\\ Vim apperance
-Plugin 'scrooloose/nerdtree'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
+Plug 'scrooloose/nerdtree'
+Plug 'jpo/vim-railscasts-theme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
 
 "\\ Vim motion
-Plugin 'easymotion/vim-easymotion'
-Plugin 'takac/vim-hardtime'
+Plug 'easymotion/vim-easymotion'
+Plug 'takac/vim-hardtime'
 
 " More operator for vim
-Plugin 'tpope/vim-surround'                     "s command like surround
-Plugin 'vim-scripts/ReplaceWithRegister'        "gr to replace with yanked text
+Plug 'tpope/vim-surround'                     "s command like surround
+Plug 'vim-scripts/ReplaceWithRegister'        "gr to replace with yanked text
 
 " Vim Text object
-Plugin 'michaeljsmith/vim-indent-object'        "For ident object like python coffescript: ii and ai
-Plugin 'kana/vim-textobj-user'                  "Addition to use vim text obj rubyblock
-Plugin 'nelstrom/vim-textobj-rubyblock'         "Ruby text object: ir and ar
-Plugin 'kana/vim-textobj-line'                  "Line textobj: al and il
-Plugin 'whatyouhide/vim-textobj-erb'            "erb text object: aE and iE
-Plugin 'machakann/vim-textobj-delimited'        "Delimited text object: ad and id
+Plug 'michaeljsmith/vim-indent-object'        "For ident object like python coffescript: ii and ai
+Plug 'kana/vim-textobj-user'                  "Addition to use vim text obj rubyblock
+Plug 'nelstrom/vim-textobj-rubyblock'         "Ruby text object: ir and ar
+Plug 'kana/vim-textobj-line'                  "Line textobj: al and il
+Plug 'whatyouhide/vim-textobj-erb'            "erb text object: aE and iE
+Plug 'machakann/vim-textobj-delimited'        "Delimited text object: ad and id
 
 "\\ Vim for ruby dev
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-bundler'
-Plugin 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-bundler'
+Plug 'thoughtbot/vim-rspec'
 
 "\\ Vim for front-end dev
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 "\\ Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 "\\ Ctags
 " Plugin 'craigemery/vim-autotag'
 
 "\\ Other Plugin
-Plugin '907th/vim-auto-save'
-call vundle#end()
+Plug '907th/vim-auto-save'
 
 "\\ Nodejs
-Plugin 'moll/vim-node'
+Plug 'moll/vim-node'
+
+Plug 'wakatime/vim-wakatime'
+
+call plug#end()
 
 " ================ Apperance ====================
 
@@ -278,7 +292,7 @@ map <Leader>cf :!mkdir -p<Space>
 " ================ Plugin Config ====================
 
 "\\ Vundle
-nnoremap <Leader>P :so %<CR>:PluginInstall<CR>:q<CR>
+nnoremap <Leader>P :so %<CR>:PlugInstall<CR>:q<CR>
 
 "------------------------------------------------------
 
@@ -489,5 +503,3 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>rnf :call RenameFile()<cr>
-
-Plugin 'wakatime/vim-wakatime'
