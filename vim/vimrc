@@ -73,9 +73,9 @@ Plug 'honza/vim-snippets'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim'
-" Plug 'kien/ctrlp.vim'
+" Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+" Plug 'junegunn/fzf.vim'
+Plug 'kien/ctrlp.vim'
 
 "\\ Vim apperance
 Plug 'scrooloose/nerdtree'
@@ -466,21 +466,19 @@ let g:gitgutter_sign_modified = '⚡'
 let g:gitgutter_sign_removed = '✖'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_max_signs = 200
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
 
 "------------------------------------------------------
 
-"\\ FZF
-nnoremap <C-p> :Files<CR>
-imap <c-x><c-l> <plug>(fzf-complete-line)
-nnoremap <Leader>fc :Commits<CR>
-nnoremap <Leader>fC :BCommits<CR>
-nnoremap <Leader>fl :Lines<CR>
-nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fh :History:<CR>
-nnoremap <Leader>fH :History/<CR>
-nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+" "\\ FZF
+" nnoremap <C-p> :Files<CR>
+" imap <c-x><c-l> <plug>(fzf-complete-line)
+" nnoremap <Leader>fc :Commits<CR>
+" nnoremap <Leader>fC :BCommits<CR>
+" nnoremap <Leader>fl :Lines<CR>
+" nnoremap <Leader>ft :Tags<CR>
+" nnoremap <Leader>fh :History:<CR>
+" nnoremap <Leader>fH :History/<CR>
+" nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 
 "------------------------------------------------------
 

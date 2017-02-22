@@ -36,5 +36,5 @@ windows:
         - vim Gemfile
         - bundle exec rails s
   - railsc: bundle exec rails c
-  - console:
+  - console: weather
   - vultr: ssh natuss
