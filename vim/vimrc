@@ -65,7 +65,7 @@ function! BuildYCM(info)
 endfunction
 
 "\\ Vim behavior plugin
-Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'rust']}
+Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
 Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
