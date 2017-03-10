@@ -28,6 +28,7 @@ function themes {
 function dev_tools {
   brew install git
   brew install vim --override-system-vim
+  brew install the_silver_searcher
   brew install tmux
   curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
@@ -59,6 +60,7 @@ function programs {
   brew cask install firefox
   brew cask install dropbox
   brew cask install vlc
+  brew cask install seil
 
 }
 
