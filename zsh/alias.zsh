@@ -37,7 +37,13 @@ gf() {
   fi
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
-  firefox $repo_url;
+  if [ "$(uname)" == "Darwin" ]; then
+    open -a /Applications/Firefox.app -g $repo_url
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    firefox $repo_url;
+  elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+      # Do something under Windows NT platform
+  fi
 }
 
 gff() {
