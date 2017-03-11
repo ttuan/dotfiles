@@ -57,7 +57,8 @@ function programs {
   dropbox \
   vlc \
   seil \
-  macdown
+  macdown \
+  spectacle
 }
 
 # install_brew
