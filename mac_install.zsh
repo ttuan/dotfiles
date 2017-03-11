@@ -5,10 +5,8 @@ function install_brew {
 
 function terminal_install {
   brew install zsh
-  # sudo -s
-  # echo $(which zsh) >> /etc/shells
-  # exit
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  export ZSH_CUSTOM=~/.oh-my-zsh
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
@@ -26,10 +24,8 @@ function themes {
 }
 
 function dev_tools {
-  brew install git
+  brew install git the_silver_searcher tmux
   brew install vim --override-system-vim
-  brew install the_silver_searcher
-  brew install tmux
   curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
   chmod +x /usr/local/bin/tmux-vim-select-pane
@@ -56,12 +52,12 @@ function web_dev {
 }
 
 function programs {
-  brew cask install google-chrome
-  brew cask install firefox
-  brew cask install dropbox
-  brew cask install vlc
-  brew cask install seil
-
+  brew cask install google-chrome \
+  firefox \
+  dropbox \
+  vlc \
+  seil \
+  macdown
 }
 
 # install_brew
