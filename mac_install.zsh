@@ -17,10 +17,12 @@ function terminal_install {
   brew cask install iterm2
 }
 
-function themes {
+function custom {
   git clone https://github.com/powerline/fonts.git
   ./fonts/.install.sh
   echo "Power line install done!"
+  # Turn off startup sound
+  sudo nvram SystemAudioVolume=%80
 }
 
 function dev_tools {
@@ -63,6 +65,6 @@ function programs {
 
 # install_brew
 terminal_install
-themes
+custom
 dev_tools
 web_dev
