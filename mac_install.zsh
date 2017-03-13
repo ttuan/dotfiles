@@ -52,13 +52,15 @@ function web_dev {
 }
 
 function programs {
-  brew cask install google-chrome \
+  brew cask install --appdir="/Applications" google-chrome \
   firefox \
   dropbox \
   vlc \
   seil \
   macdown \
-  spectacle
+  spectacle \
+  alfred \
+  evernote
 }
 
 # install_brew
