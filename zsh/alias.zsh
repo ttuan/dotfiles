@@ -92,7 +92,7 @@ alias c="clear"
 alias s="source ~/.zshrc"
 
 alias h="history | grep"
-alias ps="ps auxf | grep"
+alias ps="ps aux | grep"
 
 alias kill="sudo killall -9"
 
