@@ -146,3 +146,8 @@ alias sspot="sudo ap-hotspot start"
 alias espot="sudo ap-hotspot stop"
 alias cspot="sudo ap-hotspot configure"
 alias rspot="sudo ap-hotspot restart"
+
+
+# only for Mac
+alias stopsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias startsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
