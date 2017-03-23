@@ -62,7 +62,9 @@ function programs {
   macdown \
   spectacle \
   alfred \
-  evernote
+  evernote \
+  google-drive \
+  bettertouchtool
 }
 
 # install_brew
