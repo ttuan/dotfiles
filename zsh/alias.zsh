@@ -92,7 +92,7 @@ alias c="clear"
 alias s="source ~/.zshrc"
 
 alias h="history | grep"
-alias ps="ps auxf | grep"
+alias ps="ps aux | grep"
 
 alias kill="sudo killall -9"
 
@@ -146,3 +146,8 @@ alias sspot="sudo ap-hotspot start"
 alias espot="sudo ap-hotspot stop"
 alias cspot="sudo ap-hotspot configure"
 alias rspot="sudo ap-hotspot restart"
+
+
+# only for Mac
+alias stopsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias startsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
