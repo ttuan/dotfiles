@@ -65,7 +65,8 @@ function! BuildYCM(info)
 endfunction
 
 "\\ Vim behavior plugin
-Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
+" Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
+" Plug 'Valloric/YouCompleteMe'
 Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -79,6 +80,7 @@ Plug 'kien/ctrlp.vim'
 
 "\\ Vim apperance
 Plug 'scrooloose/nerdtree'
+" Plug 'YorickPeterse/happy_hacking.vim'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -125,6 +127,9 @@ Plug '907th/vim-auto-save'
 
 "\\ Nodejs
 Plug 'moll/vim-node'
+
+"\\ Angular2
+Plug 'leafgarland/typescript-vim'
 
 Plug 'wakatime/vim-wakatime'
 
@@ -257,6 +262,12 @@ nmap <Leader>k mz:m-2<cr>`z
 vmap <Leader>j :m'>+<cr>`<my`>mzgv`yo`z
 vmap <Leader>k :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Dropbox mappings
+map <Leader>dt :e ~/Dropbox/App/todo/todo.txt<cr>
+
+" Search in project with word in clipboard
+nmap <Leader><Leader>d :Ag <c-r>"<CR>
+
 "---------------  Make Vim like IDE -------------------------
 "---------------  Run, Forrest, Run -------------------------
 
@@ -284,7 +295,7 @@ au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-termi
 "\\ Delete all trailing space when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
-"\\ Force save file when I forgot run 'sudo vim file'
+"\\ Force save file when I forgot running 'sudo vim file'
 "\\ With Great Power Comes Great Responsibility
 cmap w!! %!sudo tee > /dev/null %
 
@@ -360,7 +371,7 @@ nmap cm gc
 "------------------------------------------------------
 
 "\\ You Complete Me
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 set shortmess+=c
 
 "------------------------------------------------------
@@ -446,7 +457,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+    \ 'dir':  'node_modules\|.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
     \ 'file': '\.exe$\|\.so$\|\.dat$\|\.cache$'
 \ }
 if exists("g:ctrlp_user_command")
@@ -468,7 +479,13 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_max_signs = 200
 
 "------------------------------------------------------
+" \\ TypeScript Vim
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
+"------------------------------------------------------
 " "\\ FZF
 " nnoremap <C-p> :Files<CR>
 " imap <c-x><c-l> <plug>(fzf-complete-line)
@@ -519,3 +536,19 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>rnf :call RenameFile()<cr>
+
+function! ViewHtmlText(url)
+  if !empty(a:url)
+    new
+    setlocal buftype=nofile bufhidden=hide noswapfile
+    execute 'r !elinks ' . a:url . ' -dump -dump-width ' . winwidth(0)
+    1d
+  endif
+endfunction
+" Save and view text for current html file.
+nnoremap <Leader>vhtml :update<Bar>call ViewHtmlText(expand('%:p'))<CR>
+" View text for visually selected url.
+vnoremap <Leader>vhfs y:call ViewHtmlText(@@)<CR>
+" View text for URL from clipboard.
+" On Linux, use @* for current selection or @+ for text in clipboard.
+nnoremap <Leader>vhfu :call ViewHtmlText(@+)<CR>

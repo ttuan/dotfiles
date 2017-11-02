@@ -1,0 +1,5 @@
+# .railsrc
+
+-T #Skip Test-Unit
+--skip-turbolinks # Skip Turbolinks
+-B # Skip bundle
