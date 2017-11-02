@@ -1,4 +1,5 @@
 DOTFILE=~/Dropbox/Projects/dotfile
+export TODO_DIR=~/Dropbox/App/todo
 
 # Alias for Git
 alias gd="git diff @~..@"
@@ -6,6 +7,11 @@ alias grs="git reset HEAD~1"
 alias gst="git status -s"
 alias gsta="git add -A; git stash"
 
+# Alias for todo.txt
+alias t='todo.sh'
+
+# Sort output by priority and number
+export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 
 run_migrate() {
   if rake db:migrate:status | grep down
@@ -40,7 +46,7 @@ gf() {
   if [ "$(uname)" == "Darwin" ]; then
     open -a /Applications/Firefox.app -g $repo_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    firefox $repo_url;
+    firefox ($repo_url | tr ":" "/");
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
       # Do something under Windows NT platform
   fi
@@ -89,7 +95,7 @@ alias pls="sudo"
 alias rr="rm -rf"
 alias q="exit"
 alias c="clear"
-alias s="source ~/.zshrc"
+alias ss="source ~/.zshrc; echo 'Source zshrc complete';"
 
 alias h="history | grep"
 alias ps="ps aux | grep"
@@ -136,7 +142,7 @@ weather() {
 }
 
 # Translate with google
-alias t="trans -b :vi"
+# alias t="trans -b :vi"
 
 # How do I ....
 alias how="howdoi"

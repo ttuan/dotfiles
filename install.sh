@@ -110,6 +110,10 @@ function programs {
   sudo apt-get install -y flashplugin-installer
   sudo apt-get install -y xpad
   sudo apt-get install -y nautilus-dropbox
+  sudo apt-get install -y ncdu
+  # Alfred like for Ubuntu
+  sudo add-apt-repository ppa:nilarimogard/webupd8
+  sudo apt-get install -y albert
   pip install git+https://github.com/gleitz/howdoi.git#egg=howdoi
 
   # Install translate tool
