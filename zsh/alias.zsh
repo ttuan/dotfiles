@@ -84,6 +84,13 @@ gcc() {
   git checkout -b $1;
 }
 
+gcm() {
+  git add .;
+  git commit -m $1;
+  branch_name=$(git symbolic-ref --short -q HEAD);
+  git push origin $branch_name;
+}
+
 #\\ System
 alias sdown="sudo shutdown -h now"
 alias gno="gnome-open"
