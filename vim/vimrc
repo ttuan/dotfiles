@@ -70,6 +70,7 @@ endfunction
 Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'ttuan/my-vim-snippets'
 " Plug 'scrooloose/syntastic'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
@@ -234,7 +235,7 @@ noremap gV `[v`]
 nnoremap <Leader>n :noh<CR>
 
 "\\ Insert pasted text at end of lineend
-nnoremap <Leader>eol $p
+nnoremap <Leader><Leader>eol $p
 
 "\\ Vim file
 nmap <Leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
