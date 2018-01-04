@@ -6,6 +6,7 @@ alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 alias gst="git status -s"
 alias gsta="git add -A; git stash"
+alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
 
 # Alias for todo.txt
 alias t='todo.sh'
