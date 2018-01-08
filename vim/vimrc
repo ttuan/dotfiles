@@ -81,6 +81,7 @@ Plug 'kien/ctrlp.vim'
 
 "\\ Vim apperance
 Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
 " Plug 'YorickPeterse/happy_hacking.vim'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'vim-airline/vim-airline'
@@ -365,6 +366,7 @@ map <F5> :NERDTreeToggle<CR>
 " autocmd VimEnter * wincmd p
 
 "------------------------------------------------------
+nmap <F8> :TagbarToggle<CR>
 
 "\\ Vim Commentary
 nmap cm gc
