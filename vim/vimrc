@@ -250,6 +250,9 @@ nnoremap <Leader><Leader>c <c-^> " The last two files
 "\\ Select all file
 nnoremap <Leader>a ggVG
 
+"\\ Move to end of line in insert mode
+inoremap <C-m> <Esc>A
+
 " Remap VIM 0 to first non-blank character
 map B ^
 map E $
