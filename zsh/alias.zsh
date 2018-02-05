@@ -168,3 +168,8 @@ alias rspot="sudo ap-hotspot restart"
 # only for Mac
 alias stopsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
 alias startsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+
+# GRV - git project viewer
+gv() {
+  ~/grv -repoFilePath ~/Dropbox/Projects/$1
+}
