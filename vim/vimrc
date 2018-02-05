@@ -116,6 +116,7 @@ Plug 'thoughtbot/vim-rspec'
 
 "\\ Vim for front-end dev
 Plug 'mattn/emmet-vim'
+Plug 'slim-template/vim-slim'
 
 "\\ Markdown
 Plug 'godlygeek/tabular'
@@ -150,6 +151,7 @@ set tw=80
 set showbreak=...                                 " Display ... as wrap break
 set showmatch
 set wrap linebreak nolist                         " Proper wrapping
+set cursorline cursorcolumn                       " Slim checker
 
 "\\ Folding settings
 " Use zi, za, zc, zR, zM, zv
