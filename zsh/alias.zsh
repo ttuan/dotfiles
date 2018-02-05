@@ -8,6 +8,9 @@ alias gst="git status -s"
 alias gsta="git add -A; git stash"
 alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
 
+# Alias for Docker
+alias dc="docker-compose"
+
 # Alias for todo.txt
 alias t='todo.sh'
 
