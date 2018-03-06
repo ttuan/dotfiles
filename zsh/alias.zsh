@@ -48,6 +48,7 @@ gf() {
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
   repo_name=(${repo_url//:/ })
+  google-chrome "https://github.com/${repo_name[1]}"
   if [ "$(uname)" == "Darwin" ]; then
     open -a /Applications/Firefox.app -g $repo_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
