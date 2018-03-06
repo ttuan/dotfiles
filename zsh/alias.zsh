@@ -6,7 +6,7 @@ alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 alias gst="git status -s"
 alias gsta="git add -A; git stash"
-alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
+# alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
 
 # Alias for Docker
 alias dc="docker-compose"
@@ -47,10 +47,11 @@ gf() {
   fi
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
+  repo_name=(${repo_url//:/ })
   if [ "$(uname)" == "Darwin" ]; then
     open -a /Applications/Firefox.app -g $repo_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    firefox ($repo_url | tr ":" "/");
+    google-chrome "https://github.com/${repo_name[1]}"
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
       # Do something under Windows NT platform
   fi
