@@ -42,7 +42,7 @@ cscope.po.out
 .Trashes
 
 # ------------------------------------RAILS PROJECTS---------------------------------------
-database.yml
+# database.yml
 
 # From https://github.com/wearehive/project-guidelines/blob/master/.gitignore
 ### Node ###
@@ -67,8 +67,8 @@ yarn-error.log*
 .eslintcache
 
 # dotenv environment variables file(s)
-.env
-.env.*
+# .env
+# .env.*
 
 #Build generated
 dist/
