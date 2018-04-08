@@ -1,5 +1,5 @@
 DOTFILE=~/Dropbox/Projects/dotfile
-export TODO_DIR=~/Dropbox/App/todo
+export ALFRED_MY_MIND=~/Dropbox/Projects/alfred-my-mind/workflow/
 
 # Alias for Git
 alias gd="git diff @~..@"
@@ -11,11 +11,11 @@ alias gsta="git add -A; git stash"
 # Alias for Docker
 alias dc="docker-compose"
 
-# Alias for todo.txt
-alias t='todo.sh'
-
-# Sort output by priority and number
-export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+# Alias for AlfredMyMind - Only for MacOs
+refresh() {
+  cd $ALFRED_MY_MIND
+  ./update.sh
+}
 
 run_migrate() {
   if rake db:migrate:status | grep down

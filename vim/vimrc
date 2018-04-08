@@ -269,11 +269,11 @@ nmap <Leader>k mz:m-2<cr>`z
 vmap <Leader>j :m'>+<cr>`<my`>mzgv`yo`z
 vmap <Leader>k :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Dropbox mappings
-map <Leader>dt :e ~/Dropbox/App/todo/todo.txt<cr>
-
 " Search in project with word in clipboard
 nmap <Leader><Leader>d :Ag <c-r>"<CR>
+
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 "---------------  Make Vim like IDE -------------------------
 "---------------  Run, Forrest, Run -------------------------
