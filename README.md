@@ -1,3 +1,7 @@
+# Dotfiles
+
+![](https://i.imgur.com/hqazHhc.png)
+
 ```
       _       _    __ _ _
      | |     | |  / _(_) |
@@ -15,7 +19,9 @@
 This repo contains all my dotfile.
 
 ```sh
-Dotfile
+.
+├── README.md
+├── _site
 ├── ctags
 │   └── ctags
 ├── fish
@@ -27,14 +33,21 @@ Dotfile
 │   ├── config
 │   └── i3status.conf
 ├── install.sh
-├── README.md
+├── irb
+├── mac_install.zsh
+├── rails
+│   ├── gemrc
+│   ├── irbrc
+│   └── railsrc
 ├── scripts
+│   ├── Xmodmap
 │   ├── getSongName.sh
 │   ├── install-adblock-host
-│   ├── refresh_firefox.sh
-│   └── Xmodmap
+│   └── refresh_firefox.sh
+├── server_install_script.sh
 ├── sync.sh
 ├── tmux
+│   ├── safekill.sh
 │   └── tmux.conf
 ├── tmuxinator
 │   └── project.yml
@@ -43,12 +56,20 @@ Dotfile
 │   └── vimrc
 ├── vimperator
 │   ├── plugin
-│   │   └── YoutubePlayer - Copy.js
+│   │   └── YoutubePlayer\ -\ Copy.js
 │   └── vimperatorrc
 └── zsh
     ├── alias.zsh
     ├── fzf.zsh
     └── zshrc
+```
+
+# Requirements
+
+Set zsh as a login shell:
+
+```sh
+chsh -s $(which zsh)
 ```
 
 # Installation
