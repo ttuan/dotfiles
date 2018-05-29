@@ -327,19 +327,22 @@ map <Leader>em :Emodel<space>
 map <Leader>ev :Eview<space>
 map <Leader>ec :Econtroller<space>
 map <Leader>eh :Ehelper<space>
-map <Leader>el :Elib<space>
+map <Leader>el :Elocale<space>
 map <Leader>er :Emailer<space>
+map <Leader>ed :Edecorator<space>
+map <Leader>es :Esupport<space>
+map <Leader>eo :Eservice<space>
+map <Leader>ep :Espec<space>
 
 map <Leader>ej :Ejavascript<space>
-map <Leader>es :Estylesheet<space>
+map <Leader>et :Estylesheet<space>
 map <Leader>ey :Elayout<space>
 
 map <Leader>ee :Eenvironment<space>
 map <Leader>ei :Einitializer<space>
 map <Leader>ew :Emigration<space>
-map <Leader>ed :Eschema
 
-map <Leader>ef :Efixtures<space>
+map <Leader>ef :Efactory<space>
 map <Leader>eu :Eunittest<space>
 map <Leader>et :Efunctionaltest<space>
 
