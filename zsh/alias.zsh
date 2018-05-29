@@ -31,8 +31,9 @@ d.() {
   git br -D $curr_branch;
 }
 
-gpf() {
-  git pull framgia develop;
+gpu() {
+  curr_branch=$(git symbolic-ref --short -q HEAD);
+  git pull upstream $curr_branch;
   run_migrate;
 }
 
@@ -47,8 +48,8 @@ gf() {
   fi
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
-  repo_name=(${repo_url//:/ })
-  google-chrome "https://github.com/${repo_name[1]}"
+  repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
+  google-chrome "https://github.com/${repo_name[2]}"
   if [ "$(uname)" == "Darwin" ]; then
     open -a /Applications/Firefox.app -g $repo_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
@@ -73,7 +74,7 @@ gff() {
 grb() {
   curr_branch=$(git symbolic-ref --short -q HEAD);
   git checkout $1;
-  git pull framgia $1;
+  git pull upstream $1;
   git checkout $curr_branch;
   git rebase $1;
 }
