@@ -176,3 +176,17 @@ alias startsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.p
 gv() {
   ~/grv -repoFilePath ~/Dropbox/Projects/$1
 }
+
+# Recheck before upload code to github
+recheck() {
+  echo "Run Rubocop"
+  echo "=========================================================================================="
+  bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --rails app/
+  echo "=========================================================================================="
+  echo "Run Rspec test"
+  echo "=========================================================================================="
+  rspec spec/
+  echo "=========================================================================================="
+  echo "Run Brakeman"
+  bundle exec brakeman
+}
