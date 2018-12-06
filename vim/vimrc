@@ -275,6 +275,8 @@ nmap <Leader><Leader>d :Ag <c-r>"<CR>
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
+" :call delete(expand('%')) | bdelete!
+
 "---------------  Make Vim like IDE -------------------------
 "---------------  Run, Forrest, Run -------------------------
 
@@ -547,6 +549,18 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>rnf :call RenameFile()<cr>
+
+command! -nargs=1 Silent
+\   execute 'silent !' . <q-args>
+\ | execute 'redraw!'
+
+" Go to current line in github
+function! GoGithubLine()
+  let current_file = @%
+  let current_line = line('.')
+  execute ':Silent goGithubLine' current_file current_line
+endfunction
+nnoremap <Leader><Leader>c :call GoGithubLine()<cr>
 
 function! ViewHtmlText(url)
   if !empty(a:url)
