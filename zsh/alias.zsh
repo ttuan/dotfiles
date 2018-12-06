@@ -6,6 +6,9 @@ alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 alias gst="git status -s"
 alias gsta="git add -A; git stash"
+gcp() {
+  "git checkout pullrequest/pr/$1"
+}
 # alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
 
 # Alias for Docker
@@ -49,7 +52,8 @@ gf() {
   git push origin $branch_name;
   repo_url=$(git config --get remote.origin.url)
   repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
-  google-chrome "https://github.com/${repo_name[2]}"
+  rn=(${=repo_name[2]//./ })
+  google-chrome "https://github.com/${rn[1]}/pull/new/$branch_name"
   if [ "$(uname)" == "Darwin" ]; then
     open -a /Applications/Firefox.app -g $repo_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
@@ -96,6 +100,26 @@ gcm() {
   git commit -m $1;
   branch_name=$(git symbolic-ref --short -q HEAD);
   git push origin $branch_name;
+}
+
+# Come to a line in github code
+goGithubLine() {
+  file_name=$1
+  line=$2
+  repo_url=$(git config --get remote.upstream.url)
+  repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
+  rn=(${=repo_name[2]//./ })
+  google-chrome "https://github.com/${rn[1]}/blob/phase-2/${file_name}#L${line}"
+}
+
+# Recheck before upload code to github
+recheck() {
+  bundle audit
+  bundle exec rubocop --require rubocop/formatter/checkstyle_formatter  --rails app/ lib/
+  bundle exec rspec --exclude-pattern "spec/{integration}/**/*_spec.rb"
+  bundle exec brakeman
+  bundle exec rails_best_practices .
+  bundle exec reek app/ lib/
 }
 
 #\\ System
@@ -177,16 +201,3 @@ gv() {
   ~/grv -repoFilePath ~/Dropbox/Projects/$1
 }
 
-# Recheck before upload code to github
-recheck() {
-  echo "Run Rubocop"
-  echo "=========================================================================================="
-  bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --rails app/
-  echo "=========================================================================================="
-  echo "Run Rspec test"
-  echo "=========================================================================================="
-  rspec spec/
-  echo "=========================================================================================="
-  echo "Run Brakeman"
-  bundle exec brakeman
-}

@@ -1,0 +1,11 @@
+# Non interactive app will load source in this file. So I move this function
+# here to Vim can using it
+
+goGithubLine() {
+  file_name=$1
+  line=$2
+  repo_url=$(git config --get remote.upstream.url)
+  repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
+  rn=(${=repo_name[2]//./ })
+  google-chrome "https://github.com/${rn[1]}/blob/phase-2/${file_name}#L${line}"
+}
