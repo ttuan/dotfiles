@@ -123,7 +123,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 "\\ Ctags
-" Plugin 'craigemery/vim-autotag'
+" Plug 'craigemery/vim-autotag'
 
 "\\ Other Plugin
 Plug '907th/vim-auto-save'
@@ -558,9 +558,9 @@ command! -nargs=1 Silent
 function! GoGithubLine()
   let current_file = @%
   let current_line = line('.')
-  execute ':Silent goGithubLine' current_file current_line
+  execute 'Silent goGithubLine' current_file current_line
 endfunction
-nnoremap <Leader><Leader>c :call GoGithubLine()<cr>
+nnoremap <Leader><Leader>ggh :call GoGithubLine()<cr>
 
 function! ViewHtmlText(url)
   if !empty(a:url)
