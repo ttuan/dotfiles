@@ -43,7 +43,6 @@ function install_vim_and_tmux {
   sudo add-apt-repository ppa:pi-rho/dev
   sudo apt-get update
   sudo apt-get install -y tmux
-  sudo apt-get install -y vim
   sudo apt-get install -y vim-gnome
   sudo apt-get install -y xclip
   sudo apt-get install -y exuberant-ctags
