@@ -1,0 +1,12 @@
+Pry.commands.alias_command 'c', 'continue' rescue nil
+Pry.commands.alias_command 's', 'step' rescue nil
+Pry.commands.alias_command 'n', 'next' rescue nil
+Pry.commands.alias_command 'f', 'finish' rescue nil
+Pry.commands.alias_command 'r!', 'reload!' rescue nil
+
+def cp arg
+  out = arg.is_a?(String) ? arg : arg.inspect
+  IO.popen('xclip -selection clipboard', 'w') { |io| io.puts out }
+  puts out
+  true
+end
