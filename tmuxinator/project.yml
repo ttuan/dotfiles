@@ -37,4 +37,4 @@ windows:
         - bundle exec rails s
   - railsc: bundle exec rails c
   - console: weather
-  - vultr: ssh natuss
+  - vultr: ssh vultr
