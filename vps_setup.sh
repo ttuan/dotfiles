@@ -14,12 +14,12 @@ git clone git://github.com/zsh-users/zsh-autosuggestions /home/$USER/.oh-my-zsh/
 echo "Config dotfile "
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-cp vim/vimrc ~/.vimrc
+ln vim/vimrc ~/.vimrc
 vim +PlugInstall +qall
-cp zsh/zshrc ~/.zshrc
-cp tmux/tmux.conf ~/.tmux.conf
-cp git/gitconfig ~/.gitconfig
-cp git/gitignore ~/.gitigrnore
+ln zsh/zshrc ~/.zshrc
+ln tmux/tmux.conf ~/.tmux.conf
+ln git/gitconfig ~/.gitconfig
+ln git/gitignore ~/.gitigrnore
 
 echo "Install docker and docker-compose"
 wget -qO- https://get.docker.com/ | sh
