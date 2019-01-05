@@ -65,7 +65,7 @@ function! BuildYCM(info)
 endfunction
 
 "\\ Vim behavior plugin
-" Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
+Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
 " Plug 'Valloric/YouCompleteMe'
 Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
@@ -412,8 +412,8 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 "------------------------------------------------------
 
 "\\ UltiSnips
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<c-l>"
