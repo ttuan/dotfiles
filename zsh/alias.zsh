@@ -160,6 +160,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias dot="cd $DOTFILE"
+alias des="cd ~/Desktop"
 
 mkcd() {
   mkdir "$1"
