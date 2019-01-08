@@ -122,6 +122,13 @@ recheck() {
   bundle exec reek app/ lib/
 }
 
+# Run Ruby code from clipboard content
+rcc() {
+  file_name=`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32`
+  clippaste > "/tmp/$file_name.rb"
+  ruby "/tmp/$file_name.rb"
+}
+
 #\\ System
 alias sdown="sudo shutdown -h now"
 alias gno="gnome-open"
