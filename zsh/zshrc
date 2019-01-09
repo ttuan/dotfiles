@@ -2,7 +2,7 @@
 export ZSH=/home/$USER/.oh-my-zsh
 
 # Dotfiles folder
-export DOTFILE=~/Dropbox/Projects/dotfile
+export DOTFILES=~/Dropbox/Projects/dotfiles
 
 # Ack like vim
 bindkey -v
@@ -23,10 +23,10 @@ export TERM="xterm-256color"
 export EDITOR="vim"
 
 # Alias
-source $DOTFILE/zsh/alias.zsh
+source $DOTFILES/zsh/alias.zsh
 
 # FZF functions
-source $DOTFILE/zsh/fzf.zsh
+source $DOTFILES/zsh/fzf.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -51,13 +51,13 @@ function install_vim_and_tmux {
   sudo chmod +x /usr/local/bin/tmux-vim-select-pane
 }
 
-# Download .dotfile and install
-function config_dotfile {
-  cd ~/dotfile
-  echo "Config dotfile "
+# Download .dotfiles and install
+function config_dotfiles {
+  cd ~/dotfiles
+  echo "Config dotfiles "
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  cp dotfile/vimrc ~/.vimrc
+  cp dotfiles/vimrc ~/.vimrc
   vim +PlugInstall +qall
   cp scripts/getSongName.sh ~/getSongName.sh
   cp zsh/zshrc ~/.zshrc
@@ -140,7 +140,7 @@ function programs {
 initialize
 install_theme
 install_ruby_on_rails
-config_dotfile
+config_dotfiles
 install_vim_and_tmux
 programs
 install_zsh

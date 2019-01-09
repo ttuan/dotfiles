@@ -1,4 +1,4 @@
-DOTFILE=~/Dropbox/Projects/dotfile
+DOTFILES=~/Dropbox/Projects/dotfiles
 export ALFRED_MY_MIND=~/Dropbox/Projects/alfred-my-mind/workflow/
 
 # Alias for Git
@@ -166,7 +166,7 @@ alias .='pwd'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias dot="cd $DOTFILE"
+alias dot="cd $DOTFILES"
 alias des="cd ~/Desktop"
 
 mkcd() {
