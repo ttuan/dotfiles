@@ -16,12 +16,10 @@
 
 # What are in this repo
 
-This repo contains all my dotfile.
+This repo contains all my dotfiles.
 
 ```sh
 .
-├── README.md
-├── _site
 ├── ctags
 │   └── ctags
 ├── fish
@@ -33,18 +31,18 @@ This repo contains all my dotfile.
 │   ├── config
 │   └── i3status.conf
 ├── install.sh
-├── irb
 ├── mac_install.zsh
 ├── rails
 │   ├── gemrc
 │   ├── irbrc
+│   ├── pryrc
 │   └── railsrc
+├── README.md
 ├── scripts
-│   ├── Xmodmap
 │   ├── getSongName.sh
 │   ├── install-adblock-host
-│   └── refresh_firefox.sh
-├── server_install_script.sh
+│   ├── refresh_firefox.sh
+│   └── Xmodmap
 ├── sync.sh
 ├── tmux
 │   ├── safekill.sh
@@ -56,11 +54,13 @@ This repo contains all my dotfile.
 │   └── vimrc
 ├── vimperator
 │   ├── plugin
-│   │   └── YoutubePlayer\ -\ Copy.js
+│   │   └── YoutubePlayer - Copy.js
 │   └── vimperatorrc
+├── vps_setup.sh
 └── zsh
     ├── alias.zsh
     ├── fzf.zsh
+    ├── zshenv
     └── zshrc
 ```
 
@@ -75,8 +75,8 @@ chsh -s $(which zsh)
 # Installation
 
 ```
-git clone https://github.com/ttuan/dotfile.git ~/dotfile
-cd dotfile
+git clone https://github.com/ttuan/dotfiles.git ~/dotfiles
+cd dotfiles
 chmod +x install.sh
 ./install.sh
 ```
