@@ -9,3 +9,11 @@ goGithubLine() {
   rn=(${=repo_name[2]//./ })
   google-chrome "https://github.com/${rn[1]}/blob/develop/${file_name}#L${line}"
 }
+
+goGithubCommit() {
+  commit_hash=$1
+  repo_url=$(git config --get remote.upstream.url)
+  repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
+  rn=(${=repo_name[2]//./ })
+  google-chrome "https://github.com/${rn[1]}/commit/${commit_hash}"
+}

@@ -560,7 +560,14 @@ function! GoGithubLine()
   let current_line = line('.')
   execute 'Silent goGithubLine' current_file current_line
 endfunction
-nnoremap <Leader><Leader>ggh :call GoGithubLine()<cr>
+nnoremap <Leader><Leader>ggl :call GoGithubLine()<cr>
+
+" Go to Github with commit hash
+function! GoGithubCommit()
+  let commit_hash = expand("<cword>")
+  execute 'Silent goGithubCommit' commit_hash
+endfunction
+nnoremap <Leader><Leader>ggc :call GoGithubCommit()<cr>
 
 function! ViewHtmlText(url)
   if !empty(a:url)
