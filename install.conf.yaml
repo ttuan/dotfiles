@@ -1,0 +1,39 @@
+# Settings
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true # Swap original file
+
+# TODO: Clean dead symlinks
+- clean: ["~", "~/.config"]
+
+# Run shell commands
+- shell:
+    # Install submodules
+    - [git submodule update --init --recursive, Installing submodules]
+
+# Symlink files
+- link:
+    # Zsh
+    ~/.zshrc: zsh/zshrc.zsh
+    ~/.zshenv: zsh/zshenv.zsh
+    # Git
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore: git/gitignore
+    # Vim
+    ~/.vimrc: vim/vimrc
+    ~/.ackrc: vim/ackrc
+    # Tmux
+    ~/.tmux.conf: tmux/tmux.conf
+    # Tmuxinator
+    ~/.tmuxinator/project.yml:
+      create: true
+      path: tmuxinator/project.yml
+    # Ruby & Rails
+    ~/.gemrc: rails/gemrc
+    ~/.irbrc: rails/irbrc
+    ~/.pryrc: rails/pryrc
+    ~/.railsrc: rails/railsrc
+    # Ctag
+    ~/.ctags: ctags/ctags

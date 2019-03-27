@@ -12,9 +12,7 @@
 
 > You’re The King Of Your Castle!
 
-# What are in this repo
-
-This repo contains all my dotfiles.
+These are the various configuration files I use on Ubuntu and macOS.
 
 ```sh
 .
@@ -28,8 +26,8 @@ This repo contains all my dotfiles.
 ├── i3
 │   ├── config
 │   └── i3status.conf
-├── install.sh
-├── mac_install.zsh
+├── install
+├── install.conf.yaml
 ├── rails
 │   ├── gemrc
 │   ├── irbrc
@@ -39,9 +37,12 @@ This repo contains all my dotfiles.
 ├── scripts
 │   ├── getSongName.sh
 │   ├── install-adblock-host
+│   ├── mac_install.zsh
 │   ├── refresh_firefox.sh
+│   ├── sync.sh
+│   ├── ubuntu_install.sh
+│   ├── vps_setup.sh
 │   └── Xmodmap
-├── sync.sh
 ├── tmux
 │   ├── safekill.sh
 │   └── tmux.conf
@@ -54,7 +55,6 @@ This repo contains all my dotfiles.
 │   ├── plugin
 │   │   └── YoutubePlayer - Copy.js
 │   └── vimperatorrc
-├── vps_setup.sh
 └── zsh
     ├── alias.zsh
     ├── fzf.zsh
@@ -62,19 +62,12 @@ This repo contains all my dotfiles.
     └── zshrc
 ```
 
-# Requirements
-
-Set zsh as a login shell:
-
-```sh
-chsh -s $(which zsh)
-```
-
-# Installation
+# Install
 
 ```
 git clone https://github.com/ttuan/dotfiles.git ~/dotfiles
 cd dotfiles
-chmod +x install.sh
-./install.sh
 ```
+
+* For fresh install: `script/install.sh`
+* For sync dotfiles only: `./install` (Thank for [dotbot](https://github.com/anishathalye/dotbot))
