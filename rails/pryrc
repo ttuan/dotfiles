@@ -6,7 +6,7 @@ Pry.commands.alias_command 'r!', 'reload!' rescue nil
 
 def cp arg
   out = arg.is_a?(String) ? arg : arg.inspect
-  IO.popen('xclip -selection clipboard', 'w') { |io| io.puts out }
+  IO.popen('xclip -selection clipboard', 'w') {|io| io.print out}
   puts out
   true
 end
