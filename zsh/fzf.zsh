@@ -1,4 +1,8 @@
 FZF_TMUX_HEIGHT=20
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+bindkey '^O' fzf-history-widget
 
 # Open file with Vim
 v() {
