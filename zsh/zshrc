@@ -15,7 +15,7 @@ export UPDATE_ZSH_DAYS=7
 plugins=(zsh-autosuggestions tmuxinator tmux vi-mode)
 
 # User configuration
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$HOME/.rvm/bin:$PATH"
 export EDITOR="vim"
 
 source $ZSH/oh-my-zsh.sh
