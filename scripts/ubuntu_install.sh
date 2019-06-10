@@ -29,7 +29,7 @@ function install_zsh {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   sudo chsh -s /usr/bin/zsh
   git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
   # install FZF
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -74,6 +74,15 @@ function install_ruby_on_rails {
 function programs {
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/adtac/climate/master/install)"
   sudo apt-get install -y i3 irssi guake flashplugin-installer xpad nautilus-dropbox ncdu
+
+  # Docker
+  echo "Install docker and docker-compose"
+  wget -qO- https://get.docker.com/ | sh
+  COMPOSE_VERSION=`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP "[0-9]+\.[0-9][0-9]+\.[0-9]+$" | tail -n 1`
+  sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+  sudo chmod +x /usr/local/bin/docker-compose
+  sudo sh -c "curl -L https://raw.githubusercontent.com/docker/compose/${COMPOSE_VERSION}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"
+  sudo usermod -aG docker $USER
 
   # GRV for viewing git project
   wget -O grv https://github.com/rgburke/grv/releases/download/v0.1.1/grv_v0.1.1_linux64
