@@ -26,6 +26,9 @@
     ~/.ackrc: vim/ackrc
     # Tmux
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux/plugins/tmux-safekill/scripts/safekill.sh:
+      force: true
+      path: tmux/safekill.sh
     # Tmuxinator
     ~/.tmuxinator/project.yml:
       create: true

@@ -46,6 +46,9 @@ function install_vim_and_tmux {
   sudo curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
   sudo chmod +x /usr/local/bin/tmux-vim-select-pane
+
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 }
 
 
