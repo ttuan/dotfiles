@@ -16,6 +16,7 @@ plugins=(zsh-autosuggestions tmuxinator tmux vi-mode)
 
 # User configuration
 export PATH="$PATH:$HOME/.rvm/bin"
+export EDITOR="vim"
 
 source $ZSH/oh-my-zsh.sh
 

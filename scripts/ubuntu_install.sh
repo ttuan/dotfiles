@@ -2,8 +2,7 @@
 
 function initialize {
   sudo apt-get update
-  sudo apt-get install -y curl
-  sudo apt-get install -y git
+  sudo apt-get install -y curl git
 }
 
 # Install UI
@@ -11,8 +10,9 @@ function install_theme {
   sudo add-apt-repository ppa:numix/ppa
   sudo apt-get update
   sudo apt-get install -y numix-gtk-theme numix-icon-theme-circle
-  git clone https://github.com/powerline/fonts.git
+  git clone https://github.com/powerline/fonts.git ~/fonts
   ~/fonts/.install.sh
+  rm -rf ~/fonts/
   echo "Powerline fonts was installed. Please change font on terminal setting!!!"
   sudo apt-get install -y unity-tweak-tool
   gsettings set org.gnome.desktop.interface gtk-theme "Numix"
@@ -28,7 +28,7 @@ function install_zsh {
   sudo apt-get install -y zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   sudo chsh -s /usr/bin/zsh
-  git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
   # install FZF
@@ -39,77 +39,41 @@ function install_zsh {
 # Install vim and tmux
 function install_vim_and_tmux {
   echo "Installing tmux 2.0 and vim."
-  sudo apt-get install -y vim
   sudo add-apt-repository ppa:pi-rho/dev
   sudo apt-get update
-  sudo apt-get install -y tmux
-  sudo apt-get install -y vim-gnome
-  sudo apt-get install -y xclip
-  sudo apt-get install -y exuberant-ctags
+  sudo apt-get install -y vim tmux vim-gnome xclip exuberant-ctags
+
   sudo curl -fsSL https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane \
     -o /usr/local/bin/tmux-vim-select-pane
   sudo chmod +x /usr/local/bin/tmux-vim-select-pane
 }
 
-# Download .dotfiles and install
-function config_dotfiles {
-  cd ~/dotfiles
-  echo "Config dotfiles "
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  cp dotfiles/vimrc ~/.vimrc
-  vim +PlugInstall +qall
-  cp scripts/getSongName.sh ~/getSongName.sh
-  cp zsh/zshrc ~/.zshrc
-  cp vimperator/vimperatorrc ~/.vimperatorrc
-  cp tmux/tmux.conf ~/.tmux.conf
-  cp ctags/ctags ~/.ctags
-  cp scripts/Xmodmap ~/.Xmodmap
-  cp git/gitconfig ~/.gitconfig
-  cp git/gitignore ~/.gitigrnore
-  xmodmap ~/.Xmodmap
-  export EDITOR='vim'
-  mkdir ~/.tmuxinator ~/.i3
-  cp i3/config ~/.i3/
-  cp tmuxinator/project.yml ~/.tmuxinator/
-}
 
 # Install for web dev
 function install_ruby_on_rails {
   echo "Installing ruby and rails"
   sudo apt-get update
-  sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+  sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev \
+    libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
+    python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison nodejs \
+    mysql-server mysql-client libmysqlclient-dev
 
-  sudo apt-get install -y libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
   curl -sSL https://get.rvm.io | bash -s stable
   source ~/.rvm/scripts/rvm
-  rvm install 2.3.1
-  rvm use 2.3.1 --default
+  rvm install 2.6.3
+  rvm use 2.6.3 --default
   ruby -v
   gem update --system
-  echo "gem: --no-document" >> ~/.gemrc
   gem install bundler
 
-  echo "Install mysql"
-  sudo apt-get install mysql-server mysql-client libmysqlclient-dev
-
-  gem install nokogiri
-  gem install tmuxinator
-  gem install interactive_editor
-  sudo apt-get install -y nodejs
+  gem install tmuxinator interactive_editor
   "Done! Rails 5 is not installed."
 }
 
 function programs {
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/adtac/climate/master/install)"
-  sudo apt-get install -y i3
-  sudo apt-get install -y irssi
-  sudo apt-get install -y guake
-  sudo apt-get install -y flashplugin-installer
-  sudo apt-get install -y xpad
-  sudo apt-get install -y nautilus-dropbox
-  sudo apt-get install -y ncdu
+  sudo apt-get install -y i3 irssi guake flashplugin-installer xpad nautilus-dropbox ncdu
 
   # GRV for viewing git project
   wget -O grv https://github.com/rgburke/grv/releases/download/v0.1.1/grv_v0.1.1_linux64
@@ -140,7 +104,7 @@ function programs {
 initialize
 install_theme
 install_ruby_on_rails
-config_dotfiles
 install_vim_and_tmux
 programs
 install_zsh
+./install
