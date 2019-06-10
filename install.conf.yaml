@@ -16,8 +16,8 @@
 # Symlink files
 - link:
     # Zsh
-    ~/.zshrc: zsh/zshrc.zsh
-    ~/.zshenv: zsh/zshenv.zsh
+    ~/.zshrc: zsh/zshrc
+    ~/.zshenv: zsh/zshenv
     # Git
     ~/.gitconfig: git/gitconfig
     ~/.gitignore: git/gitignore

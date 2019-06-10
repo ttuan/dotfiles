@@ -113,6 +113,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'thoughtbot/vim-rspec'
+Plug 'sunaku/vim-ruby-minitest'
 
 "\\ Vim for front-end dev
 Plug 'mattn/emmet-vim'
@@ -131,8 +132,13 @@ Plug '907th/vim-auto-save'
 "\\ Nodejs
 Plug 'moll/vim-node'
 
+"\\ AngularJS
+Plug 'pangloss/vim-javascript'
+Plug 'burnettk/vim-angular'
+
 "\\ Angular2
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
+
 
 Plug 'wakatime/vim-wakatime'
 
@@ -440,13 +446,21 @@ endif
 "\\ Easy Motion
 let g:EasyMotion_do_mapping = 0
 map <Leader> <Plug>(easymotion-prefix)
-" nmap s <Plug>(easymotion-overwin-f2)
+
+map <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-overwin-w)
+map <Leader>e <Plug>(easymotion-bd-e)
+
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>W <Plug>(easymotion-overwin-w)
+
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>h <Plug>(easymotion-linebackward)
+
+" map / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+
+nmap <Leader>s <Plug>(easymotion-s2)
 
 "------------------------------------------------------
 
@@ -517,6 +531,10 @@ autocmd QuickFixCmdPost    l* nested lwindow
 " autocmd BufWritePost *  :UpdateTags
 " nnoremap <f5> :!ctags -R --exclude=.git --exclude=log *<cr>
 
+"------------------------------------------------------
+"\\ Vim Ruby Minitest
+
+set completefunc=syntaxcomplete#Complete
 
 " ================ My Extend Functions ====================
 

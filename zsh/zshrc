@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/$USER/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Dotfiles folder
 export DOTFILES=~/Dropbox/Projects/dotfiles
@@ -12,7 +12,7 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(rails zsh-autosuggestions tmuxinator tmux vi-mode)
+plugins=(zsh-autosuggestions tmuxinator tmux vi-mode)
 
 # User configuration
 export PATH="$PATH:$HOME/.rvm/bin"

@@ -17,3 +17,6 @@ goGithubCommit() {
   rn=(${=repo_name[2]//./ })
   google-chrome "https://github.com/${rn[1]}/commit/${commit_hash}"
 }
+
+
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
