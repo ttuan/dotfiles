@@ -76,7 +76,7 @@ function install_ruby_on_rails {
 
 function programs {
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/adtac/climate/master/install)"
-  sudo apt-get install -y i3 irssi guake flashplugin-installer xpad nautilus-dropbox ncdu
+  sudo apt-get install -y i3 irssi guake flashplugin-installer xpad nautilus-dropbox ncdu silversearcher-ag
 
   # Docker
   echo "Install docker and docker-compose"

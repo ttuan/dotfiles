@@ -69,5 +69,5 @@ git clone https://github.com/ttuan/dotfiles.git ~/dotfiles
 cd dotfiles
 ```
 
-* For fresh install: `script/install.sh`
+* For fresh install: `script/ubuntu_install.sh`
 * For sync dotfiles only: `./install` (Thank for [dotbot](https://github.com/anishathalye/dotbot))

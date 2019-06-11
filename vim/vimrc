@@ -139,6 +139,9 @@ Plug 'burnettk/vim-angular'
 "\\ Angular2
 " Plug 'leafgarland/typescript-vim'
 
+"\\ Python and Django
+Plug 'tweekmonster/django-plus.vim'
+
 
 Plug 'wakatime/vim-wakatime'
 
