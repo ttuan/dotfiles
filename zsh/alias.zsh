@@ -134,6 +134,7 @@ alias sdown="sudo shutdown -h now"
 alias gno="gnome-open"
 alias bi="bundle install"
 alias tmx="tmuxinator start project $1"
+alias tsd="tmuxinator start django $1"
 alias serve="python -m SimpleHTTPServer 8000"
 
 alias pls="sudo"

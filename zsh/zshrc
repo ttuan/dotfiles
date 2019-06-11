@@ -31,5 +31,6 @@ source $DOTFILES/zsh/fzf.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-bindkey '^I' fzf-file-widget
-bindkey '^O' fzf-history-widget
+bindkey '^ ' autosuggest-execute
+
+eval "$(pyenv init -)"

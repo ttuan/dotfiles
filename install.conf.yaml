@@ -33,6 +33,9 @@
     ~/.tmuxinator/project.yml:
       create: true
       path: tmuxinator/project.yml
+    ~/.tmuxinator/django.yml:
+      create: true
+      path: tmuxinator/django.yml
     # Ruby & Rails
     ~/.gemrc: rails/gemrc
     ~/.irbrc: rails/irbrc

@@ -1,5 +1,5 @@
 FZF_TMUX_HEIGHT=20
-export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER='~'
 bindkey '^T' fzf-completion
 bindkey '^O' fzf-history-widget
 
