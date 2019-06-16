@@ -4,9 +4,7 @@ set nocompatible                         " Use Vim settings, rather than Vi sett
 filetype plugin indent on                " Load ftplugins and indent files
 syntax on                                " Enable syntax highlighting
 
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus      " Share clipboard between Vim and OS
-endif
+set clipboard^=unnamed,unnamedplus       " Share clipboard between Vim and OS
 
 set number                               " Line number are good
 set relativenumber                       " Relative number to quickly run command
@@ -140,8 +138,8 @@ Plug 'burnettk/vim-angular'
 " Plug 'leafgarland/typescript-vim'
 
 "\\ Python and Django
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'tweekmonster/django-plus.vim'
-
 
 Plug 'wakatime/vim-wakatime'
 
@@ -508,6 +506,14 @@ let g:gitgutter_sign_modified = '⚡'
 let g:gitgutter_sign_removed = '✖'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_max_signs = 200
+
+"------------------------------------------------------
+" \\ Python-Mode
+
+au CompleteDone * pclose
+let g:pymode_python = 'python3'
+let g:pymode_doc = 0
+let g:pymode_options_max_line_length=120
 
 "------------------------------------------------------
 " \\ TypeScript Vim
