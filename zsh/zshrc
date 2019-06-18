@@ -25,6 +25,7 @@ export EDITOR="vim"
 
 # Alias
 source $DOTFILES/zsh/alias.zsh
+source $DOTFILES/zsh/functions.zsh
 
 # FZF functions
 source $DOTFILES/zsh/fzf.zsh
