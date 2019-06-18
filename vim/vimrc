@@ -122,7 +122,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 "\\ Ctags
-" Plug 'craigemery/vim-autotag'
+Plug 'craigemery/vim-autotag'
 
 "\\ Other Plugin
 Plug '907th/vim-auto-save'
