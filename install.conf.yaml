@@ -43,3 +43,7 @@
     ~/.railsrc: rails/railsrc
     # Ctag
     ~/.ctags: ctags/ctags
+    # Python
+    ~/.config/pudb/pudb.cfg:
+      force: true
+      path: python/pudb/pudb.cfg
