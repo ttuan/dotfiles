@@ -10,7 +10,8 @@ refresh() {
 # ============ Git ===============
 # Checkout a pullrequest
 gcp() {
-  "git checkout pullrequest/pr/$1"
+  git fetch upstream pull/$1/head:pullrequest/$1
+  git checkout pullrequest/$1
 }
 
 # Delete current branch, local and remote.
