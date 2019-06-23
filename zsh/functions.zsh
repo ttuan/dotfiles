@@ -44,7 +44,7 @@ gf() {
   repo_url=$(git config --get remote.origin.url)
   repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
   rn=(${=repo_name[2]//./ })
-  github_url = "https://github.com/${rn[1]}/pull/new/$branch_name"
+  github_url = $("https://github.com/${rn[1]}/pull/new/$branch_name")
   if [ "$(uname)" == "Darwin" ]; then
     open -a "Google Chrome" $github_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
