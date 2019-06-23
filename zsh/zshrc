@@ -12,7 +12,7 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(zsh-autosuggestions tmuxinator tmux vi-mode)
+plugins=(zsh-autosuggestions tmuxinator tmux vi-mode autojump)
 
 # User configuration
 export PATH="$HOME/.rvm/bin:$PATH"
@@ -35,3 +35,4 @@ source $DOTFILES/zsh/fzf.zsh
 bindkey '^ ' autosuggest-execute
 
 eval "$(pyenv init -)"
+eval $(thefuck --alias)
