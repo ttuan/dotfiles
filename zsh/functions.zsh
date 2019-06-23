@@ -44,11 +44,11 @@ gf() {
   repo_url=$(git config --get remote.origin.url)
   repo_name=(${=repo_url//:/ })    # Zsh split string to arr T.T
   rn=(${=repo_name[2]//./ })
-  google-chrome "https://github.com/${rn[1]}/pull/new/$branch_name"
+  github_url = "https://github.com/${rn[1]}/pull/new/$branch_name"
   if [ "$(uname)" == "Darwin" ]; then
-    open -a /Applications/Firefox.app -g $repo_url
+    open -a "Google Chrome" $github_url
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    google-chrome "https://github.com/${repo_name[1]}"
+    google-chrome $github_url
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
       # Do something under Windows NT platform
   fi
@@ -147,6 +147,15 @@ mkcd() {
 }
 
 search() { find . -iname "*$@*" | less; }
+
+# Copy file content to clipboard
+ctc() {
+  if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+    pbcopy < $1
+  else
+    cat $1 | xclip -i
+  fi
+}
 
 # Weather
 weather() {
