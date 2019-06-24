@@ -7,7 +7,7 @@ function initialize {
 
 # Install UI
 function install_theme {
-  sudo add-apt-repository ppa:numix/ppa
+  sudo add-apt-repository -y ppa:numix/ppa
   sudo apt-get update
   sudo apt-get install -y numix-gtk-theme numix-icon-theme-circle
   git clone https://github.com/powerline/fonts.git ~/fonts
@@ -23,7 +23,7 @@ function install_theme {
 }
 
 # Install zsh and oh-my-zsh
-function install_zsh {
+function install_terminal_tools {
   echo "Installing zsh and oh-my-zsh..."
   sudo apt-get install -y zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -34,6 +34,28 @@ function install_zsh {
   # install FZF
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
+
+  # install thefuck
+  sudo apt-get install python3-dev python3-pip python3-setuptools
+  sudo pip3 install thefuck
+
+  # install fd
+  curl -LO https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-musl_7.3.0_amd64.deb
+  sudo dpkg -i fd-musl_7.3.0_amd64.deb
+
+  # install ripgrep
+  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.1/ripgrep_11.0.1_amd64.deb
+  sudo dpkg -i ripgrep_11.0.1_amd64.deb
+
+  # install up
+  curl -LO https://up.apex.sh/install
+  chmod +x ./install
+  sudo ./install
+
+  # install yarn
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  sudo apt-get update && sudo apt-get install yarn
 }
 
 # Install vim and tmux
@@ -76,7 +98,8 @@ function install_ruby_on_rails {
 
 function programs {
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/adtac/climate/master/install)"
-  sudo apt-get install -y i3 irssi guake flashplugin-installer xpad nautilus-dropbox ncdu silversearcher-ag
+  sudo apt-get install -y i3 irssi guake flashplugin-installer xpad \
+    nautilus-dropbox ncdu silversearcher-ag autojump
 
   # Docker
   echo "Install docker and docker-compose"
@@ -118,5 +141,5 @@ install_theme
 install_ruby_on_rails
 install_vim_and_tmux
 programs
-install_zsh
+install_terminal_tools
 ./install
