@@ -1,7 +1,7 @@
 # ~/.tmuxinator/project.yml
 
 name: project
-root: ~/Dropbox/Projects/framgia_projects/<%= @args[0] %>
+root: ~/Dropbox/Projects/Work/<%= @args[0] %>
 
 # Optional tmux socket
 # socket_name: foo
