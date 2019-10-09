@@ -1,8 +1,9 @@
 # ============ Git ===============
 alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
-alias gst="git status -s"
+# alias gst="git status -s"
 alias gsta="git add -A; git stash"
+alias gfp="git fetch pullrequest"
 # alias gcl="git clone $(xclip -selection c -o)"    # Xclip required
 
 # ============ Devevelopment ===============

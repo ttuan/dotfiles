@@ -11,7 +11,7 @@ function install_theme {
   sudo apt-get update
   sudo apt-get install -y numix-gtk-theme numix-icon-theme-circle
   git clone https://github.com/powerline/fonts.git ~/fonts
-  ~/fonts/.install.sh
+  ~/fonts/install.sh
   rm -rf ~/fonts/
   echo "Powerline fonts was installed. Please change font on terminal setting!!!"
   sudo apt-get install -y unity-tweak-tool
@@ -20,6 +20,11 @@ function install_theme {
   gsettings set org.gnome.desktop.wm.preferences theme "Numix"
   # ignore gnome draw desktop in i3
   gsettings set org.gnome.desktop.background show-desktop-icons false
+
+  # Setup Wallpaper
+  wget "https://bit.ly/30YP2OX" -O wallpaper.jpg
+  gsettings set org.gnome.desktop.background picture-uri "file:`pwd`/wallpaper.jpg"
+  rm -f wallpaper.jpg
 }
 
 # Install zsh and oh-my-zsh
