@@ -10,8 +10,13 @@ refresh() {
 # ============ Git ===============
 # Checkout a pullrequest
 gcp() {
-  git fetch upstream pull/$1/head:pullrequest/$1
+  git fetch upstream pull/$1/head:pullrequest/$1 --force
   git checkout pullrequest/$1
+}
+
+# Delete multiple branch with parttern
+gdb() {
+  git branch | grep $1 | xargs git branch -D
 }
 
 # Delete current branch, local and remote.
@@ -20,14 +25,14 @@ d.() {
   curr_branch=$(git symbolic-ref --short -q HEAD);
   git checkout develop;
   git br -D $curr_branch;
-  git push origin --delete $curr_branch
+  # git push origin --delete $curr_branch
 }
 
 # Pull code from upstream and run migrate if new migration files is detected.
 gpu() {
   curr_branch=$(git symbolic-ref --short -q HEAD);
   git pull upstream $curr_branch;
-  run_migrate;
+  # run_migrate;
 }
 
 # Commit all changes, push to remote and open new tab in Google Chrome.
