@@ -600,6 +600,14 @@ function! GoGithubCommit()
 endfunction
 nnoremap <Leader><Leader>ggc :call GoGithubCommit()<cr>
 
+" Open current file on google chrome
+function! OpenCurrentFile()
+  let current_file = @%
+  execute 'Silent google-chrome' current_file
+endfunction
+nnoremap <Leader><Leader>of :call OpenCurrentFile()<cr>
+
+
 function! ViewHtmlText(url)
   if !empty(a:url)
     new
