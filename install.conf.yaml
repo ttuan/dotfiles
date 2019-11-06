@@ -21,6 +21,7 @@
     # Git
     ~/.gitconfig: git/gitconfig
     ~/.gitignore: git/gitignore
+    ~/.gitconfig_sun: git/gitconfig_sun
     # Vim
     ~/.vimrc: vim/vimrc
     ~/.ackrc: vim/ackrc
