@@ -14,7 +14,7 @@ function install_theme {
   ~/fonts/install.sh
   rm -rf ~/fonts/
   echo "Powerline fonts was installed. Please change font on terminal setting!!!"
-  sudo apt-get install -y unity-tweak-tool
+  sudo apt-get install -y unity-tweak-tool gnome-tweak-tool
   gsettings set org.gnome.desktop.interface gtk-theme "Numix"
   gsettings set org.gnome.desktop.interface icon-theme 'Numix-circle'
   gsettings set org.gnome.desktop.wm.preferences theme "Numix"
@@ -52,10 +52,14 @@ function install_terminal_tools {
   curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.1/ripgrep_11.0.1_amd64.deb
   sudo dpkg -i ripgrep_11.0.1_amd64.deb
 
+  # install pyenv and virtualenv
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+  git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+
   # install up
-  curl -LO https://up.apex.sh/install
-  chmod +x ./install
-  sudo ./install
+  curl -LO https://up.apex.sh/install ~/Desktop/install
+  chmod +x ~/Desktop/install
+  sudo ~/Desktop/install
 
   # install yarn
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -122,6 +126,7 @@ function programs {
   # Alfred like for Ubuntu
   sudo add-apt-repository ppa:nilarimogard/webupd8
   sudo apt-get install -y albert
+
   pip install git+https://github.com/gleitz/howdoi.git#egg=howdoi
 
   # Install translate tool
