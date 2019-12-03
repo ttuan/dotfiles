@@ -2,6 +2,9 @@
   email = tuantv.nhnd@gmail.com
   name = ttuan
 
+[includeIf "gitdir/i:~/Dropbox/Projects/Work/"]
+  path = ~/.gitconfig_sun
+
 [color]
 	ui = true
 
