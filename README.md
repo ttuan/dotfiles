@@ -22,12 +22,17 @@ These are the various configuration files I use on Ubuntu and macOS.
 │   └── config.fish
 ├── git
 │   ├── gitconfig
-│   └── gitignore
+│   ├── gitconfig_sun
+│   ├── gitignore
+│   └── hgignore
 ├── i3
 │   ├── config
 │   └── i3status.conf
 ├── install
 ├── install.conf.yaml
+├── python
+│   └── pudb
+│       └── pudb.cfg
 ├── rails
 │   ├── gemrc
 │   ├── irbrc
@@ -47,6 +52,7 @@ These are the various configuration files I use on Ubuntu and macOS.
 │   ├── safekill.sh
 │   └── tmux.conf
 ├── tmuxinator
+│   ├── django.yml
 │   └── project.yml
 ├── vim
 │   ├── ackrc
@@ -57,6 +63,7 @@ These are the various configuration files I use on Ubuntu and macOS.
 │   └── vimperatorrc
 └── zsh
     ├── alias.zsh
+    ├── functions.zsh
     ├── fzf.zsh
     ├── zshenv
     └── zshrc
