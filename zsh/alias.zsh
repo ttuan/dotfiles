@@ -29,8 +29,6 @@ alias kill="sudo killall -9"
 alias .='pwd'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias dot="cd $DOTFILES" # It can be done with `autojump` tool :D
-alias des="cd ~/Desktop"
 
 # ls
 alias ll="ls -lah"
