@@ -146,6 +146,9 @@ Plug 'tweekmonster/django-plus.vim'
 
 Plug 'wakatime/vim-wakatime'
 
+"\\ Highlight for .toml file
+Plug 'cespare/vim-toml'
+
 call plug#end()
 
 " ================ Apperance ====================
@@ -389,7 +392,7 @@ map <F5> :NERDTreeToggle<CR>
 " autocmd VimEnter * wincmd p
 
 "------------------------------------------------------
-nmap <F8> :TagbarToggle<CR>
+nmap <F12> :TagbarToggle<CR>
 
 "\\ Vim Commentary
 nmap cm gc
@@ -486,7 +489,7 @@ nnoremap <Leader>bl :Gblame<CR>
 "-----------------------------------------------------
 
 "CtrlP
-nnoremap <Leader>. :CtrlPTag<cr>
+nnoremap <Leader>t :CtrlPTag<cr>
 nnoremap <silent> <c-p> :ClearCtrlPCache<cr>\|:CtrlP<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
