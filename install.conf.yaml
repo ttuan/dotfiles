@@ -22,6 +22,8 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitignore: git/gitignore
     ~/.gitconfig_sun: git/gitconfig_sun
+    # Git template
+    ~/.git_template: git_template
     # Vim
     ~/.vimrc: vim/vimrc
     ~/.ackrc: vim/ackrc
