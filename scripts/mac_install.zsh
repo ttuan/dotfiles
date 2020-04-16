@@ -54,6 +54,7 @@ function web_dev {
 }
 
 function programs {
+  brew install ctags
   brew cask install --appdir="/Applications" google-chrome \
   firefox \
   dropbox \
