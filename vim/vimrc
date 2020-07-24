@@ -69,6 +69,7 @@ Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ttuan/my-vim-snippets'
+Plug 'terryma/vim-expand-region'
 " Plug 'scrooloose/syntastic'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
@@ -543,6 +544,11 @@ nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fh :History:<CR>
 nnoremap <Leader>fH :History/<CR>
 nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+
+"------------------------------------------------------
+"\\ Vim Expand Region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 "------------------------------------------------------
 
