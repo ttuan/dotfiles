@@ -50,3 +50,8 @@
     ~/.config/pudb/pudb.cfg:
       force: true
       path: python/pudb/pudb.cfg
+    # Karabiner
+    ~/.config/karabiner.edn:
+      force: true
+      path: karabiner/karabiner.edn
+
