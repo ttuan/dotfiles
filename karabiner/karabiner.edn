@@ -17,6 +17,7 @@
     :s-mode {:key :s}
     :r-mode {:key :r}
     :o-mode {:key :o}
+    :v-mode {:key :v}
   }
 
   :main [
@@ -50,22 +51,22 @@
              [:r :!TOr]
              [:s :!TOs]
              [:t [:alfred "search tabs" "com.clintonstrong.SearchTabs"]]
--            [:u :!TOu]
--            [:v :!TOv]
--            [:w :!TOw]
--            [:x :!TOx]
--            [:y :!TOy]
--            [:z :!TOz]
--            [:1 :!TO1]
--            [:2 :!TO2]
--            [:3 :!TO3]
--            [:4 :!TO4]
--            [:5 :!TO5]
--            [:6 :!TO6]
--            [:7 :!TO7]
--            [:8 :!TO8]
--            [:9 :!TO9]
--            [:0 :!TO0]
+             [:u :!TOu]
+             [:w :!TOw]
+             [:v :!TOv]
+             [:x :!TOx]
+             [:y :!TOy]
+             [:z :!TOz]
+             [:1 :!TO1]
+             [:2 :!TO2]
+             [:3 :!TO3]
+             [:4 :!TO4]
+             [:5 :!TO5]
+             [:6 :!TO6]
+             [:7 :!TO7]
+             [:8 :!TO8]
+             [:9 :!TO9]
+             [:0 :!TO0]
       ]
     }
     {
@@ -114,5 +115,12 @@
              [:k [:alfred "kill_process" "com.ngreenstein.alfred-process-killer"]]
       ]
     }
-  ]
+    {
+      :des "vkey"
+      :rules [:v-mode
+             [:u [:km "volume: up"]]
+             [:d [:km "volume: down"]]
+      ]
+    }
+
 }
