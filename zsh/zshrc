@@ -12,16 +12,14 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(zsh-autosuggestions tmuxinator tmux vi-mode autojump)
+plugins=(zsh-autosuggestions vi-mode autojump)
 
 # User configuration
-export PATH="$HOME/.rvm/bin:$HOME/go/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.rvm/bin:$HOME/go/bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:$PATH"
 export EDITOR="vim"
+export TERM="xterm-256color"
 
 source $ZSH/oh-my-zsh.sh
-
-export TERM="xterm-256color"
-export EDITOR="vim"
 
 # Alias
 source $DOTFILES/zsh/alias.zsh
@@ -35,13 +33,4 @@ source $DOTFILES/zsh/fzf.zsh
 bindkey '^ ' autosuggest-execute
 
 eval "$(pyenv init -)"
-eval $(thefuck --alias)
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/Users/ttuan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ttuan/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-# if [ -f '/Users/ttuan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ttuan/google-cloud-sdk/completion.zsh.inc'; fi
+# eval $(thefuck --alias)
