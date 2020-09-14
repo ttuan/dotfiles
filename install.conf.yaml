@@ -54,4 +54,8 @@
     ~/.config/karabiner.edn:
       force: true
       path: karabiner/karabiner.edn
+    # Lepton
+    ~/.leptonrc:
+      force: true
+      path: lepton/leptonrc
 
