@@ -123,7 +123,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 "\\ Ctags
-Plug 'craigemery/vim-autotag'
+" Plug 'craigemery/vim-autotag'
 
 "\\ Other Plugin
 Plug '907th/vim-auto-save'
@@ -222,6 +222,7 @@ let mapleader=" " " Set Space for Leader key
 
 "\\ Resizing Windows
 nnoremap <Leader><Leader>= <C-w>=
+nnoremap <Leader><Leader>- <C-w>_
 nnoremap <Leader><Leader>k <C-w>+10
 nnoremap <Leader><Leader>j <C-w>-10
 nnoremap <Leader><Leader>h <C-w><10
@@ -537,13 +538,18 @@ autocmd QuickFixCmdPost    l* nested lwindow
 " "\\ FZF
 nnoremap <C-p> :GFiles<CR>
 imap <c-x><c-l> <plug>(fzf-complete-line)
+nnoremap <Leader>fg :GFiles?<CR>
+nnoremap <Leader>fn :Buffers<CR>
 nnoremap <Leader>fc :Commits<CR>
+nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>fC :BCommits<CR>
 nnoremap <Leader>fl :Lines<CR>
-nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader><Leader>f :Tags<CR>
 nnoremap <Leader>fh :History:<CR>
 nnoremap <Leader>fH :History/<CR>
 nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+
+let g:fzf_layout = { 'down': '40%' }
 
 "------------------------------------------------------
 "\\ Vim Expand Region
@@ -555,6 +561,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "\\ Ctags
 " autocmd BufWritePost *  :UpdateTags
 " nnoremap <f5> :!ctags -R --exclude=.git --exclude=log *<cr>
+let g:autotagStartMethod='fork'
 
 "------------------------------------------------------
 "\\ Vim Ruby Minitest
