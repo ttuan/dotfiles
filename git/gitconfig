@@ -85,7 +85,7 @@
 
 	# Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
+	attributesfile = /Users/ttuan/.gitattributes
 
   autoctrlf = false
   editor = vim
@@ -96,3 +96,6 @@
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
   algorithm = patience
+[pull]
+	rebase = false
+	ff = only

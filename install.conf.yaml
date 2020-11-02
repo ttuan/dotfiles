@@ -22,6 +22,7 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitignore: git/gitignore
     ~/.gitconfig_sun: git/gitconfig_sun
+    ~/.gitattributes: git/gitattributes
     # Git template
     ~/.git_template: git_template
     # Vim
