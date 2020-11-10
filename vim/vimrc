@@ -150,6 +150,9 @@ Plug 'wakatime/vim-wakatime'
 "\\ Highlight for .toml file
 Plug 'cespare/vim-toml'
 
+"\\ Vim terraform
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 " ================ Apperance ====================
@@ -567,6 +570,11 @@ let g:autotagStartMethod='fork'
 "\\ Vim Ruby Minitest
 
 set completefunc=syntaxcomplete#Complete
+
+"------------------------------------------------------
+"\\ Vim Terraform
+
+let g:terraform_align=1
 
 " ================ My Extend Functions ====================
 
