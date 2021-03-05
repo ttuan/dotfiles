@@ -1,4 +1,5 @@
 FZF_TMUX_HEIGHT=20
+export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
 export FZF_COMPLETION_TRIGGER='~'
 bindkey '^T' fzf-completion
 bindkey '^O' fzf-history-widget
