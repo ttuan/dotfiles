@@ -2,6 +2,7 @@
 
 set nocompatible                         " Use Vim settings, rather than Vi settings.
 filetype plugin indent on                " Load ftplugins and indent files
+set omnifunc=syntaxcomplete#Complete
 syntax on                                " Enable syntax highlighting
 
 set clipboard^=unnamed,unnamedplus       " Share clipboard between Vim and OS
@@ -543,6 +544,7 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 "------------------------------------------------------
 " "\\ FZF
+nnoremap <silent> <C-f> :Files<CR>
 nnoremap <C-p> :GFiles<CR>
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nnoremap <Leader>fg :GFiles?<CR>
@@ -635,7 +637,7 @@ nnoremap <Leader><Leader>ggc :call GoGithubCommit()<cr>
 " Open current file on google chrome
 function! OpenCurrentFile()
   let current_file = @%
-  execute 'Silent google-chrome' current_file
+  execute 'Silent open -a "Google Chrome"' current_file
 endfunction
 nnoremap <Leader><Leader>of :call OpenCurrentFile()<cr>
 
