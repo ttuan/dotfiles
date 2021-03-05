@@ -17,13 +17,13 @@ function safe_end_procs {
         elif [[ "$pane_proc" == "bash" ]] || [[ "$pane_proc" == "zsh" ]] || [[ "$pane_proc" == "fish" ]]; then
             cmd='C-c C-u "exit" Enter'
         elif [[ "$pane_proc" == "ssh" ]]; then
-            cmd='C-c C-d'
+            cmd='C-d C-d C-d'
         elif [[ "$pane_proc" == "psql" ]]; then
             cmd='Enter "\q"'
         elif [[ "$pane_proc" == "puma" ]]; then
             cmd='C-c C-d Enter'
         elif [[ "$window_name" == "railsc" || "$window_name" == "editor" ]]; then
-            cmd='C-d Enter'
+            cmd='C-c C-d Enter'
         fi
         echo $cmd | xargs tmux send-keys -t "$pane_id"
     done
