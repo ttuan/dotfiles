@@ -85,6 +85,7 @@
              [:a [:km "open: Alfred preferences"]]
              [:t [:km "open: TunnelBlick"]]
              [:v [:km "open: VS Code"]]
+             [:n [:km "open: Messenger"]]
       ]
     }
     {
