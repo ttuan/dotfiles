@@ -2,10 +2,10 @@
   :profiles {
     :goku {
       :default true
-      :sim     50
-      :delay   80
-      :alone   100
-      :held    70
+      :alone   80 ; hold for .. ms to register single tap
+      :sim     30 ; keys need to be pressed within this threshold to be considered simultaneous
+      :delay   0 ; time after which the key press is delayed
+      :held    50
     }
   }
   :templates {
@@ -37,7 +37,7 @@
              [:slash :!TOslash]
              [:a :!TOa]
              [:b :!TOb]
-             [:c :!TOc]
+             [:c "'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile 'Default'"]
              [:d :!TOd]
              [:e [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
              [:f :!TOf]
@@ -78,14 +78,16 @@
       :rules [:w-mode
              [:c [:km "open: Chrome"]]
              [:i [:km "open: iTerm"]]
+             [:s [:km "open: Spotify"]]
+             [:n [:km "open: Messenger"]]
+             [:e [:km "open: Evernote"]]
+             [:k [:km "open: Calendar"]]
              [:m [:km "open: Macdown"]]
              [:b [:km "open: Boostnote"]]
-             [:s [:km "open: Spotify"]]
-             [:k [:km "open: Calendar"]]
              [:a [:km "open: Alfred preferences"]]
              [:t [:km "open: TunnelBlick"]]
              [:v [:km "open: VS Code"]]
-             [:n [:km "open: Messenger"]]
+             [:l [:km "open: VLC"]]
       ]
     }
     {
