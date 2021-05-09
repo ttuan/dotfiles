@@ -99,3 +99,5 @@
 [pull]
 	rebase = false
 	ff = only
+[fetch]
+	prune = true
