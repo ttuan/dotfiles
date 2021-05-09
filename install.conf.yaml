@@ -58,8 +58,3 @@
     ~/.config/karabiner/karabiner.json:
       force: true
       path: karabiner/karabiner.json
-    # Lepton
-    ~/.leptonrc:
-      force: true
-      path: lepton/leptonrc
-
