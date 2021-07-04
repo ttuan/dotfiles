@@ -50,7 +50,7 @@
              [:m :!TOm]
              [:n :!TOn]
              [:o :!TOo]
-             [:p :!TOp] ; Alfred binding for snippets search
+             [:p [:km "Chrome: Pause or Play Youtube Videos"]]
              [:q :!TOq]
              [:r :!TOr]
              [:s :!TOs]
