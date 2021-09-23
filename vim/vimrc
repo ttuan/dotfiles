@@ -226,7 +226,11 @@ let mapleader=" " " Set Space for Leader key
 
 "\\ Resizing Windows
 nnoremap <Leader><Leader>= <C-w>=
-nnoremap <Leader><Leader>- <C-w>_
+nnoremap <Leader><Leader><UP> <C-W>_
+nnoremap <Leader><Leader><DOWN> <C-W>=
+nnoremap <Leader><Leader><LEFT> <C-W>\|
+nnoremap <Leader><Leader><RIGHT> <C-W>\|
+
 nnoremap <Leader><Leader>k <C-w>+10
 nnoremap <Leader><Leader>j <C-w>-10
 nnoremap <Leader><Leader>h <C-w><10
