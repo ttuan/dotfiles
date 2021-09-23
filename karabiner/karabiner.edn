@@ -111,7 +111,7 @@
              [:p [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
              [:h [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
              [:l [:alfred "next" "com.vdesabou.spotify.mini.player"]]
-             [:r [:alfred "song_radio" "com.vdesabou.spotify.mini.player"]]
+             [:f [:alfred "song_radio" "com.vdesabou.spotify.mini.player"]]
       ]
     }
     {
