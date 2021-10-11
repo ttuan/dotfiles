@@ -53,15 +53,15 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "\\ Preinstall function to build plugin -- copied from Mr.Tux dotfiles
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
-  endif
-endfunction
+" function! BuildYCM(info)
+"   " info is a dictionary with 3 fields
+"   " - name:   name of the plugin
+"   " - status: 'installed', 'updated', or 'unchanged'
+"   " - force:  set on PlugInstall! or PlugUpdate!
+"   if a:info.status == 'installed' || a:info.force
+"     !./install.py --clang-completer --gocode-completer --tern-completer --racer-completer
+"   endif
+" endfunction
 
 "\\ Vim behavior plugin
 " Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM'), 'for': ['cpp', 'python', 'javascript', 'go', 'ruby']}
@@ -70,7 +70,7 @@ Plug 'rking/ag.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ttuan/my-vim-snippets'
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region'
 " Plug 'scrooloose/syntastic'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
@@ -81,9 +81,10 @@ Plug 'junegunn/fzf.vim'
 
 "\\ Vim apperance
 Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 " Plug 'YorickPeterse/happy_hacking.vim'
-Plug 'jpo/vim-railscasts-theme'
+" Plug 'jpo/vim-railscasts-theme'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
@@ -91,7 +92,7 @@ Plug 'benmills/vimux'
 
 "\\ Vim motion
 Plug 'easymotion/vim-easymotion'
-Plug 'takac/vim-hardtime'
+" Plug 'takac/vim-hardtime'
 
 " More operator for vim
 Plug 'tpope/vim-surround'                     "s command like surround
@@ -111,9 +112,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-bundler'
-Plug 'thoughtbot/vim-rspec'
-Plug 'sunaku/vim-ruby-minitest'
+" Plug 'tpope/vim-bundler'
+" Plug 'thoughtbot/vim-rspec'
+" Plug 'sunaku/vim-ruby-minitest'
 
 "\\ Vim for front-end dev
 Plug 'mattn/emmet-vim'
@@ -130,29 +131,29 @@ Plug 'plasticboy/vim-markdown'
 Plug '907th/vim-auto-save'
 
 "\\ Nodejs
-Plug 'moll/vim-node'
+" Plug 'moll/vim-node'
 
 "\\ AngularJS
-Plug 'pangloss/vim-javascript'
-Plug 'burnettk/vim-angular'
+" Plug 'pangloss/vim-javascript'
+" Plug 'burnettk/vim-angular'
 
 "\\ VueJS
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 
 "\\ Angular2
 " Plug 'leafgarland/typescript-vim'
 
 "\\ Python and Django
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'tweekmonster/django-plus.vim'
+" Plug 'tweekmonster/django-plus.vim'
 
 Plug 'wakatime/vim-wakatime'
 
 "\\ Highlight for .toml file
-Plug 'cespare/vim-toml'
+" Plug 'cespare/vim-toml'
 
 "\\ Vim terraform
-Plug 'hashivim/vim-terraform'
+" Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -160,7 +161,8 @@ call plug#end()
 
 set numberwidth=3
 set t_Co=256
-colorscheme railscasts
+" colorscheme railscasts
+colorscheme gruvbox
 set guifont=C@nsolas:h12:w6
 set guifont=inconsolata
 set guifontwide=FixedSys:h18
@@ -339,7 +341,7 @@ let @w = "I* j"
 
 " ================ Plugin Config ====================
 
-"\\ Vundle
+"\\ Vim Plug
 nnoremap <Leader>P :so %<CR>:PlugInstall<CR>:q<CR>
 
 "------------------------------------------------------
@@ -389,7 +391,7 @@ map <Leader>et :Efunctionaltest<space>
 "\\ Autosave
 let g:auto_save = 1
 let g:auto_save_silent = 1
-let g:auto_save_in_insert_mode = 0
+let g:auto_save_in_insert_mode = 1
 
 "------------------------------------------------------
 
@@ -431,11 +433,11 @@ runtime macros/matchit.vim
 "------------------------------------------------------
 
 "\\ Syntastic
-set statusline+=%#warningmsg#
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 "------------------------------------------------------
 
@@ -467,7 +469,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "------------------------------------------------------
 
 "\\ Vim Hardmode
-nnoremap <Leader>y <Esc>:call ToggleHardMode()<CR>
+" nnoremap <Leader>y <Esc>:call ToggleHardMode()<CR>
 " let g:hardtime_default_on = 1
 " let g:hardtime_maxcount = 3
 
@@ -503,10 +505,10 @@ nmap <Leader>s <Plug>(easymotion-s2)
 "------------------------------------------------------
 
 "\\ RSpec.vim
-nnoremap <Leader>rs :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>ras :call RunAllSpecs()<CR>
-map <Leader>rns :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
+" nnoremap <Leader>rs :call RunCurrentSpecFile()<CR>
+" nnoremap <Leader>ras :call RunAllSpecs()<CR>
+" map <Leader>rns :call RunNearestSpec()<CR>
+" map <Leader>rl :call RunLastSpec()<CR>
 
 "------------------------------------------------------
 
@@ -554,10 +556,10 @@ let g:pymode_options_max_line_length=120
 
 "------------------------------------------------------
 " \\ TypeScript Vim
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
+" let g:typescript_compiler_binary = 'tsc'
+" let g:typescript_compiler_options = ''
+" autocmd QuickFixCmdPost [^l]* nested cwindow
+" autocmd QuickFixCmdPost    l* nested lwindow
 
 "------------------------------------------------------
 " "\\ FZF
@@ -579,20 +581,20 @@ let g:fzf_layout = { 'down': '40%' }
 
 "------------------------------------------------------
 "\\ Vim Expand Region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+" vmap v <Plug>(expand_region_expand)
+" vmap <C-v> <Plug>(expand_region_shrink)
 
 "------------------------------------------------------
 
 "\\ Ctags
 " autocmd BufWritePost *  :UpdateTags
 " nnoremap <f5> :!ctags -R --exclude=.git --exclude=log *<cr>
-let g:autotagStartMethod='fork'
+" let g:autotagStartMethod='fork'
 
 "------------------------------------------------------
 "\\ Vim Ruby Minitest
 
-set completefunc=syntaxcomplete#Complete
+" set completefunc=syntaxcomplete#Complete
 
 "------------------------------------------------------
 "\\ Vim Terraform
