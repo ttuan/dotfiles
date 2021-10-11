@@ -268,8 +268,8 @@ nmap <Leader>v :e ~/.vimrc<CR> " Quickly edit .vimrc file
 noremap <Leader><Leader>s :so ~/.vimrc<CR> " Source .vimrc file
 
 "\\ Switch between files
-nnoremap <tab> :bp<CR> " Previous buffer file
-nnoremap <S-tab> :bn<CR> " Next buffer file
+" nnoremap <tab> :bp<CR> " Previous buffer file
+" nnoremap <S-tab> :bn<CR> " Next buffer file
 nnoremap <Leader><Leader>c <c-^> " The last two files
 
 "\\ Select all file
@@ -332,7 +332,7 @@ cmap w!! %!sudo tee > /dev/null %
 map <Leader>cf :!mkdir -p<Space>
 
 "\\ Delete current file
-" map <Leader><Leader>D :call delete(expand('%')) | bdelete!
+" map <Leader><Leader>D! :call delete(expand('%')) | bdelete!
 
 "\\ Saved Macros
 let @w = "I* j"
@@ -345,6 +345,19 @@ nnoremap <Leader>P :so %<CR>:PlugInstall<CR>:q<CR>
 "------------------------------------------------------
 
 "\\ Rails.vim
+let g:rails_projections = {
+      \ "app/controllers/*_controller.rb": {
+      \   "test": [
+      \     "spec/controllers/{}_controller_spec.rb",
+      \     "spec/requests/{}_spec.rb"
+      \   ],
+      \ },
+      \ "spec/requests/*_spec.rb": {
+      \   "alternate": [
+      \     "app/controllers/{}_controller.rb",
+      \   ],
+      \ }}
+
 map <Leader>rg :Rails generate<space>
 map <Leader>rd :Rails destroy<space>
 
@@ -498,7 +511,7 @@ map <Leader>rl :call RunLastSpec()<CR>
 "------------------------------------------------------
 
 "\\ Vim Fugitve
-nnoremap <Leader>bl :Gblame<CR>
+nnoremap <Leader>bl :Git blame<CR>
 
 "-----------------------------------------------------
 
@@ -645,6 +658,8 @@ function! OpenCurrentFile()
 endfunction
 nnoremap <Leader><Leader>of :call OpenCurrentFile()<cr>
 
+" Edit a temporary file
+nnoremap <Leader><Leader>tp :exec "e " . tempname()<cr>
 
 function! ViewHtmlText(url)
   if !empty(a:url)
