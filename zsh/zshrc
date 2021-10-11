@@ -15,7 +15,7 @@ export UPDATE_ZSH_DAYS=7
 plugins=(zsh-autosuggestions vi-mode autojump)
 
 # User configuration
-export PATH="$HOME/.rvm/bin:$HOME/go/bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:$PATH"
+export PATH="$HOME/.rvm/bin:/usr/local/opt/node@12/bin:$HOME/go/bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/Cellar/postgresql@9.6/9.6.19/bin:$PATH"
 export EDITOR="vim"
 export TERM="xterm-256color"
 
@@ -28,9 +28,19 @@ source $DOTFILES/zsh/functions.zsh
 # FZF functions
 source $DOTFILES/zsh/fzf.zsh
 
+# Allow [ or ] whereever you want
+unsetopt nomatch
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 bindkey '^ ' autosuggest-execute
 
 eval "$(pyenv init -)"
 # eval $(thefuck --alias)
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+eval "$(direnv hook zsh)"
+eval "$(nodenv init -)"
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
