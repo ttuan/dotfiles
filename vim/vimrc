@@ -90,7 +90,7 @@ Plug 'vim-scripts/ReplaceWithRegister' "  gr to replace with yanked text
 "\\ Text objects
 Plug 'michaeljsmith/vim-indent-object' "  For ident object like python coffescript: ii and ai
 Plug 'kana/vim-textobj-user'           "  Addition to use vim text obj rubyblock
-Plug 'nelstrom/vim-textobj-rubyblock'  "  Ruby text object: ir and ar
+" Plug 'nelstrom/vim-textobj-rubyblock'  "  Ruby text object: ir and ar
 Plug 'kana/vim-textobj-line'           "  Line textobj: al and il
 Plug 'whatyouhide/vim-textobj-erb'     "  erb text object: aE and iE
 Plug 'machakann/vim-textobj-delimited' "  Delimited text object: ad and id
@@ -120,6 +120,7 @@ call plug#end()
 set numberwidth=3
 set t_Co=256
 colorscheme gruvbox
+set background=dark
 
 set guifont=C@nsolas:h12:w6
 set guifont=inconsolata
@@ -362,6 +363,22 @@ nnoremap <silent> <Leader>vz :call VimuxZoomRunner()<CR>
 nnoremap <silent> <Leader>v<C-l> :VimuxClearTerminalScreen<CR>
 
 nnoremap <silent> <Leader>rb :call VimuxRunCommand("clear; ruby " . bufname("%"))<CR>
+
+"------------------------------------------------------
+"\\ Tabular
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+"------------------------------------------------------
+"\\ Vim fugitive
+nmap <Leader>gs :G<CR>
+
+nmap <Leader>gf :diffget //2<CR>
+nmap <Leader>gj :diffget //3<CR>
 
 " ================ Custom Functions ===================
 "\\ Edit a temporary file
