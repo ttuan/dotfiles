@@ -1,5 +1,12 @@
 export ALFRED_MY_MIND=~/Dropbox/Projects/alfred-my-mind/workflow/
 
+# Speed up zsh startup - https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+
 # ============ Mac Only ===============
 # Refresh AlfredMyMind - MacOS only
 refresh() {
