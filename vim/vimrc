@@ -313,7 +313,7 @@ map <Leader>h <Plug>(easymotion-linebackward)
 nmap <Leader>s <Plug>(easymotion-s2)
 
 "------------------------------------------------------
-"\\ Vim Fugitve
+"\\ Vim Fugitive
 nmap <Leader>gs :G<CR>
 nnoremap <Leader>bl :Git blame<CR>
 
