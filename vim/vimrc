@@ -8,7 +8,7 @@ syntax on                                           " Enable syntax highlighting
 set shell=zsh
 set mouse=a                                         " Enable mouse reporting
 set clipboard^=unnamed,unnamedplus                  " Share clipboard between Vim and OS
-set history=1000                                    " Set command line history limit
+set history=10000                                   " Set command line history limit
 set backspace=eol,start,indent                      " Configure backspace so it acts as it should actvv
 set whichwrap+=<,>,h,l,[,]                          " Press keys to move the pre/next line after reaching first/last char in the line
 set omnifunc=syntaxcomplete#Complete
@@ -201,6 +201,10 @@ nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>p o<ESC>p`[v`]
 
+"\\ Use C-p and C-n for calling command in history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 "\\ Disable arrow key
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
@@ -309,7 +313,11 @@ nmap <Leader>s <Plug>(easymotion-s2)
 
 "------------------------------------------------------
 "\\ Vim Fugitve
+nmap <Leader>gs :G<CR>
 nnoremap <Leader>bl :Git blame<CR>
+
+nmap <Leader>gf :diffget //2<CR>
+nmap <Leader>gj :diffget //3<CR>
 
 "------------------------------------------------------
 "\\ Gitgutter
@@ -337,8 +345,7 @@ nnoremap <Leader>fn :Buffers<CR>
 nnoremap <Leader>fc :Commits<CR>
 nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>fC :BCommits<CR>      " Git commits for current buffer
-
-nnoremap <Leader><Leader>f :Tags<CR>
+nnoremap <Leader>ft :Tags<CR>
 
 let g:fzf_layout = { 'down': '40%' }
 
@@ -372,13 +379,6 @@ if exists(":Tabularize")
   nmap <Leader>a: :Tabularize /:\zs<CR>
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
-
-"------------------------------------------------------
-"\\ Vim fugitive
-nmap <Leader>gs :G<CR>
-
-nmap <Leader>gf :diffget //2<CR>
-nmap <Leader>gj :diffget //3<CR>
 
 " ================ Custom Functions ===================
 "\\ Edit a temporary file
