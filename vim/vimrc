@@ -177,6 +177,7 @@ nnoremap c<space> ct<space>
 nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR>
 nnoremap ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap ,s :split <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap ,v :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 
 "\\ Resizing Windows
 nnoremap <Leader><Leader>= <C-w>=
