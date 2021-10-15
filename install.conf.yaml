@@ -58,3 +58,7 @@
     ~/.config/karabiner/karabiner.json:
       force: true
       path: karabiner/karabiner.json
+    # MTMR
+    ~/Library/Application Support/MTMR/items.json:
+      force: true
+      path: mtmr/items.json

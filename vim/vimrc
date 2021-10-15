@@ -115,7 +115,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'wakatime/vim-wakatime'
 call plug#end()
 
-" ================ Apperance ====================
+" ================ Appearance ====================
 
 set numberwidth=3
 set t_Co=256
