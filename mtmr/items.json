@@ -1,0 +1,72 @@
+[
+  { "type": "exitTouchbar", "width": 44, "align": "left" },
+  { "type": "brightnessDown", "width": 44, "align": "left" },
+  {
+    "type": "brightness",
+    "width": 60,
+    "align": "left",
+    "image": {
+      "base64":
+        "iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAQMAAAD58POIAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURffLOPfLNyaSVzUAAAACdFJOU/kBxOqnWgAAAbJJREFUSMfVljtyhDAQBVulQCFH4CgcDR1NR9ERFBKoeA5GfGddtkNvwFINFKP5tED22+Zxwviv6QVKfIEc/iNoF5gkpLIeYI8SUp4PsAUJiekADQntF6isQjvxCTrhAJlFqMMBeIH9BMsD7DAb2BhvYbIyNAOCZIWqYKGTpDZJFQu9EKVd44RxQRq3IrULWD62C8wSssWUZEsR0k6wcDOrJZmoBpMKI+s5qkBQCQOUJADVOECdOsDS0gDbsgHMfT4rVwHSrZQFIN5ABka8BgDgAeZ+BztBgvUEnSgVlhNsTFJjvoF5HAZorBpdYKAiSRbqNyBIUr6AjZMdPwO72R40MElS+wZUWA+wQ6LAYkFvdIhkmA+wQSDDdIAGAZ6A34H0x0fca11gBZZsIHSIfnE/5+NjCn/OuiuUB+/aunZwDeNayjXdTpDN0wlY+r1PfWu75nfj8RogN2JuCN2Y5qgMwTI0wGPUnQw6Qarx0sVNKA5Mn6VUL22lIbZoYitDbPmlvocc9Umfl2D7adz1reC3pF8av4m+DCenp/ndZuG3E7fhuC3pH2+vnz8V3MfE+bnxBTXuuIMTrLWHAAAAAElFTkSuQmCC"
+    }
+  },
+  { "type": "brightnessUp", "width": 44, "align": "left" },
+  {
+    "type": "appleScriptTitledButton",
+    "source": {
+      "inline":
+        "if application \"Spotify\" is running then\rtell application \"Spotify\"\rif player state is playing then\rreturn (get artist of current track) & \" – \" & (get name of current track)\relse\rreturn \"\"\rend if\rend tell\rend if\rreturn \"\"\r"
+    },
+    "action": "appleScript",
+    "actionAppleScript": {
+      "inline":
+        "if application \"Spotify\" is running then\rtell application \"Spotify\"\rif player state is playing then\rnext track\rend if\rend tell\rend if\r"
+    },
+    "refreshInterval": 1,
+    "image": {
+      "base64":
+        "iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAYUExURUdwTB3WXx3UXh3VXx7XYBkXFRpVLRyURmIaeAQAAAAEdFJOUwDDO3fSqUUkAAABbklEQVRIx61VbW6DMAztoAeYNA7ApB6gkzhAWS24wIAL0HABaK6/pHFNEhy8TXu/kPzkPD/8cTj8K7KPAqB+K5NhQPCUrABCXe7HOUYYZxgVRLiG8RfY4DUgFFtC7cffAfZTFBwBdhWEKfgEq4ocEjgj4ZQifO6/QG9kkETp1dDeVWfRKx3XYSW0LoqY5kCElXDrQkyeCCuh6WL0M4nIWQIyzqixdfKU1koFDKvyCA8NJMzU4xiD+b4kfHRpsIyKc6hBwjVptFHVY51EMAINNDFGJITKDNQcdpX74Hz0CQ3rY5qwMp4EIxrlafzrsYZ2Veb0DkRgfNCUok4Y1fqEijfyi2b8RE9beWqa48Y/uvCNMcH9btfUi+/CGLR1vhL6Zz9N/vBlaCU+7lwY/cmJ67Ryen/2tj23PLqJBodZH8vgj544vOL4pxfI5acrSFxi8hrkU9TSKr78ZpnL50A8KPJJEo+afBblwyqf5j/iGys5j6ScrST2AAAAAElFTkSuQmCC"
+    }
+  },
+  { "type": "weather", "icon_type": "text", "units": "metric", "refreshInterval": 600, "api_key": "405de8b4bdfa8b1c8b35f4c6d7627e6e" },
+  { "type": "sleep", "width": 44 },
+  { "type": "mute", "width": 40, "align": "right" },
+  { "type": "volumeDown", "width": 34, "align": "right" },
+  { "type": "volumeUp", "width": 34, "align": "right" },
+  { "type": "battery", "refreshInterval": 60, "align": "right", "bordered": false, "remainingtime": "yes" },
+  { "type": "pomodoro", "align": "right", "bordered": false },
+  {
+    "type": "upnext",
+    "from": 0,
+    "to": 12,
+    "maxToShow": 3,
+    "autoResize": false
+  },
+  { "type": "previous", "width": 44 },
+  { "type": "play", "width": 44 },
+  { "type": "next", "width": 44 },
+  {
+    "type": "group",
+    "align": "right",
+    "width": 40,
+    "bordered": false,
+    "title": "💹",
+    "items": [
+      {
+        "type": "shellScriptTitledButton",
+        "width": 500,
+        "refreshInterval": 9,
+        "source": {
+          "inline": "~/Dropbox/Projects/dotfiles/mtmr/stock.sh"
+        },
+        "align": "right",
+        "bordered": true
+      },
+      {
+        "type": "close",
+        "align": "right",
+        "bordered": true
+      }
+    ]
+  }
+]

@@ -40,3 +40,9 @@ eval "$(direnv hook zsh)"
 eval "$(nodenv init -)"
 # eval $(thefuck --alias)
 # export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+if pgrep -xq -- "MTMR"; then
+else
+    echo "Starting MTMR"
+    nohup /Applications/MTMR.app/Contents/MacOS/MTMR &
+fi
