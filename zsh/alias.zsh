@@ -1,4 +1,5 @@
 # ============ Git ===============
+alias g="git"
 alias gd="git diff @~..@"
 alias grs="git reset HEAD~1"
 # alias gst="git status -s"
