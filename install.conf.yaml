@@ -62,3 +62,7 @@
     ~/Library/Application Support/MTMR/items.json:
       force: true
       path: mtmr/items.json
+    # Neovim
+    ~/.config/nvim:
+      force: true
+      path: nvim
