@@ -57,6 +57,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
+Plug 'pbogut/fzf-mru.vim'
 
 "\\ AutoComplete
 Plug 'Valloric/YouCompleteMe'
@@ -219,6 +220,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 "\\ With Great Power Comes Great Responsibility
 cmap w!! %!sudo tee > /dev/null %
 
+"\\ Go to next/prev project search result
+nnoremap <Leader>> :cnext<CR>
+nnoremap <Leader>< :cprev<CR>
+
 " ================ Plugins Config ====================
 
 "\\ Vim Plug
@@ -317,6 +322,8 @@ nmap <Leader>s <Plug>(easymotion-s2)
 nmap <Leader>gs :G<CR>
 nnoremap <Leader>bl :Git blame<CR>
 
+nmap <Leader>gc :G commit<CR>
+
 nmap <Leader>gf :diffget //2<CR>
 nmap <Leader>gj :diffget //3<CR>
 
@@ -351,6 +358,10 @@ nnoremap <Leader>ft :Tags<CR>
 let g:fzf_layout = { 'down': '40%' }
 
 "------------------------------------------------------
+"\\ FZFMRU
+nnoremap <Leader>mr :FZFMru<CR>
+
+"------------------------------------------------------
 "\\ Vmux - Run, Forrest, Run
 " Run last command executed by VimuxRunCommand
 nnoremap <silent> <Leader>vl :VimuxRunLastCommand<CR>
@@ -360,6 +371,8 @@ nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; rspec " .  bufname("%
 nnoremap <silent> <Leader>rt :call VimuxRunCommand("clear; rspec " .  bufname("%") . ":" .  line("."))<CR>
 " Run bundle install
 nnoremap <silent> <Leader>bi :call VimuxRunCommand("clear; bundle install")<CR>
+" Run rubocop
+nnoremap <silent> <Leader>rr :call VimuxRunCommand("clear; bundle exec rubocop app/ lib/ db/migrate/ config/")<CR>
 
 " Send command to panel
 nnoremap <silent> <Leader>vp :VimuxPromptCommand<CR>
