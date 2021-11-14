@@ -110,6 +110,12 @@ gcm() {
   git push origin $branch_name;
 }
 
+# Git fetch upstream branch
+gfetch() {
+  git fetch upstream $1:$1
+  git checkout $1
+}
+
 # ============ Development ===============
 # Detect new migration files and run migrate
 run_migrate() {
