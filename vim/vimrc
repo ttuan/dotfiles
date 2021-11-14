@@ -281,7 +281,7 @@ runtime macros/matchit.vim
 "------------------------------------------------------
 "\\ Ag
 "\\ To ignore search with folder, use option --ignore-dir={dir1,dir2}
-map <Leader>g :Ag<Space>
+map <Leader>/ :Ag<Space>
 
 "\\ Search in project with word in clipboard
 nmap <Leader><Leader>d :Ag <c-r>"<CR>
@@ -311,7 +311,7 @@ map <Leader> <Plug>(easymotion-prefix)
 
 map <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>W <Plug>(easymotion-overwin-w)
-map <Leader>e <Plug>(easymotion-bd-e)
+map <Leader>ee <Plug>(easymotion-bd-e)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>h <Plug>(easymotion-linebackward)
 
@@ -364,7 +364,7 @@ nnoremap <Leader>mr :FZFMru<CR>
 "------------------------------------------------------
 "\\ Vmux - Run, Forrest, Run
 " Run last command executed by VimuxRunCommand
-nnoremap <silent> <Leader>vl :VimuxRunLastCommand<CR>
+nnoremap <silent> <Leader>rl :VimuxRunLastCommand<CR>
 " Run rspec file
 nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; rspec " .  bufname("%"))<CR>
 " Run rspec test case
