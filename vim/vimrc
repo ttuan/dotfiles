@@ -328,6 +328,7 @@ nmap <Leader>gs :G<CR>
 nnoremap <Leader>bl :Git blame<CR>
 
 nmap <Leader>gc :G commit<CR>
+nmap <Leader>gp :G push
 
 nmap <Leader>gf :diffget //2<CR>
 nmap <Leader>gj :diffget //3<CR>
