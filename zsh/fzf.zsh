@@ -42,6 +42,15 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //")
 }
 
+# fbd - delete git branch (including remote branches)
+# https://peterp.me/cli-tips-interactive-branch-delete/
+fbd() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" | fzf --multi ) &&
+  git branch -D $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
 # Checkout a commit
 fco() {
   local commits commit
