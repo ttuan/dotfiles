@@ -31,7 +31,6 @@
   { "type": "weather", "icon_type": "text", "units": "metric", "refreshInterval": 600, "api_key": "405de8b4bdfa8b1c8b35f4c6d7627e6e" },
   { "type": "sleep", "width": 44 },
   { "type": "mute", "width": 40, "align": "right" },
-  { "type": "currency", "refreshInterval": 600, "from": "BTC", "to": "USD", "full": true },
   { "type": "volumeDown", "width": 34, "align": "right" },
   { "type": "volumeUp", "width": 34, "align": "right" },
   { "type": "battery", "refreshInterval": 60, "align": "right", "bordered": false, "remainingtime": "yes" },
@@ -53,9 +52,20 @@
     "bordered": false,
     "title": "💹",
     "items": [
+      { "type": "currency", "refreshInterval": 600, "from": "BTC", "to": "USD", "full": true, "align": "right" },
       {
         "type": "shellScriptTitledButton",
-        "width": 500,
+        "width": 350,
+        "refreshInterval": 10,
+        "source": {
+          "inline": "~/Dropbox/Projects/dotfiles/mtmr/coin.sh"
+        },
+        "align": "right",
+        "bordered": true
+      },
+      {
+        "type": "shellScriptTitledButton",
+        "width": 470,
         "refreshInterval": 3,
         "source": {
           "inline": "~/Dropbox/Projects/dotfiles/mtmr/stock.sh"
