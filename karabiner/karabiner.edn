@@ -78,6 +78,7 @@
       :rules [:w-mode
              [:c [:km "open: Chrome"]]
              [:i [:km "open: iTerm"]]
+             [:j [:km "open: Slack"]]
              [:s [:km "open: Spotify"]]
              [:m [:km "open: Messenger"]]
              [:n [:km "open: Notion"]]
