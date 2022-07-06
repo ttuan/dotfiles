@@ -12,7 +12,7 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(zsh-autosuggestions vi-mode autojump)
+plugins=(zsh-autosuggestions vi-mode z)
 
 # User configuration
 export PATH="$HOME/.rvm/bin:/usr/local/opt/node@12/bin:$HOME/go/bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/Cellar/postgresql@9.6/9.6.19/bin:/usr/local/opt/python@3.8/bin:$PATH"
@@ -46,3 +46,13 @@ else
     echo "Starting MTMR"
     nohup /Applications/MTMR.app/Contents/MacOS/MTMR &
 fi
+
+# Set typewritten ZSH as a prompt
+# autoload -U promptinit; promptinit
+# prompt typewritten
+#
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -32,6 +32,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias .='pwd'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias j='z'
 
 # ls
 alias ll="ls -lah"
@@ -55,6 +56,8 @@ alias rspot="sudo ap-hotspot restart"
 # Mac only
 alias stopsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
 alias startsql="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias off_indexing="sudo mdutil -a -i off"
+alias on_indexing="sudo mdutil -a -i on"
 
 # Connect wifi
 alias onwifi="nmcli nm wifi on"
