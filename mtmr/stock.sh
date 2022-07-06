@@ -86,7 +86,7 @@ class Stock
   end
 
   def prices
-    start_time = (Time.now - 10 * 24 * 60 * 60).to_i
+    start_time = (Time.now - 15 * 24 * 60 * 60).to_i
     end_time = Time.now.to_i
 
     url = "https://dchart-api.vndirect.com.vn/dchart/history?resolution=D&symbol=#{symbol}&from=#{start_time}&to=#{end_time}"
