@@ -121,7 +121,7 @@ call plug#end()
 
 set numberwidth=3
 set t_Co=256
-colorscheme gruvbox
+colorscheme railscasts
 set background=dark
 
 set guifont=C@nsolas:h12:w6
@@ -389,9 +389,9 @@ nnoremap <Leader>mr :FZFMru<CR>
 " Run last command executed by VimuxRunCommand
 nnoremap <silent> <Leader>rl :VimuxRunLastCommand<CR>
 " Run rspec file
-nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; rspec " .  bufname("%"))<CR>
+nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%"))<CR>
 " Run rspec test case
-nnoremap <silent> <Leader>rt :call VimuxRunCommand("clear; rspec " .  bufname("%") . ":" .  line("."))<CR>
+nnoremap <silent> <Leader>rt :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%") . ":" .  line("."))<CR>
 " Run bundle install
 nnoremap <silent> <Leader>bi :call VimuxRunCommand("clear; bundle install")<CR>
 " Run rubocop
