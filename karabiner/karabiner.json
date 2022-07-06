@@ -14,13 +14,17 @@
         "mouse_motion_to_scroll.speed" : 100
       },
       "rules" : [ {
-        "description" : "Press left-shift+caps_lock to enable default profile",
+        "description" : "Press caps_lock+a to enable default profile",
         "manipulators" : [ {
           "from" : {
-            "key_code" : "caps_lock",
-            "modifiers" : {
-              "mandatory" : [ "left_shift" ]
-            }
+            "simultaneous": [
+                {
+                    "key_code": "caps_lock"
+                },
+                {
+                    "key_code": "a"
+                }
+            ]
           },
           "to" : [ {
             "shell_command" : "'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile 'goku'"
