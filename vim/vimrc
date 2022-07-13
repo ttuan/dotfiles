@@ -110,6 +110,7 @@ Plug 'slim-template/vim-slim'
 
 "\\ Markdown
 " Plug 'plasticboy/vim-markdown'
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 "\\ Nodejs
 " Plug 'moll/vim-node'
@@ -416,6 +417,27 @@ if exists(":Tabularize")
   nmap <Leader>a: :Tabularize /:\zs<CR>
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
+
+"------------------------------------------------------
+"\\ Instant Markdown
+
+filetype plugin on
+au FileType markdown setl shell=bash\ -i
+
+nnoremap <silent> <Leader>mpv :InstantMarkdownPreview<CR>
+
+"Uncomment to override defaults:
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_mermaid = 1
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+"let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_autoscroll = 0
+"let g:instant_markdown_port = 8888
+"let g:instant_markdown_python = 1
 
 " ================ Custom Functions ===================
 "\\ Edit a temporary file
