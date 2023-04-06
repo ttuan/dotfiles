@@ -114,6 +114,7 @@ Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn in
 
 "\\ Nodejs
 " Plug 'moll/vim-node'
+Plug 'puremourning/vimspector'
 
 Plug 'wakatime/vim-wakatime'
 call plug#end()
@@ -181,6 +182,15 @@ map E $
 map Y y$
 nnoremap c<space> ct<space>
 
+"\\ Copy current file path
+" Just relative path
+nmap <Leader>cp :let @+ = expand("%")<cr>
+" Full path
+nmap <Leader>cf :let @+ = expand("%:p")<cr>
+" Just filename
+nmap <Leader>cf :let @+ = expand("%:t")<cr>
+
+
 "\\ Open file in same directory
 nnoremap ,e :e <C-R>=expand('%:p:h') . '/'<CR>
 nnoremap ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
@@ -233,6 +243,8 @@ nnoremap <Leader>< :cprev<CR>
 
 " ================ Plugins Config ====================
 
+let g:vimspector_enable_mappings = 'HUMAN'
+
 "\\ Vim Plug
 nnoremap <Leader>P :so %<CR>:PlugInstall<CR>:q<CR>
 
@@ -272,6 +284,9 @@ map - :NERDTreeToggle<CR>
 " autocmd VimEnter * NERDTreeFind
 map ] :NERDTreeFind<CR>
 
+" Fix bug can not hide menu in Vim 9
+let g:NERDTreeMinimalMenu=1
+
 "------------------------------------------------------
 "\\ Vim Commentary
 nmap cm gc
@@ -289,6 +304,8 @@ runtime macros/matchit.vim
 "\\ Ag
 "\\ To ignore search with folder, use option --ignore-dir={dir1,dir2}
 map <Leader>/ :Ag<Space>
+" Search all files, unrestricted: https://github.com/ggreer/the_silver_searcher/issues/1189#issuecomment-354655155
+map <Leader>? :Ag -u<Space>
 
 "\\ Search in project with word in clipboard
 nmap <Leader><Leader>d :Ag <c-r>"<CR>
@@ -307,6 +324,10 @@ let g:UltiSnipsExpandTrigger = "<C-l>"
 "------------------------------------------------------
 "\\ Vim Airline
 let g:airline_powerline_fonts = 1
+
+" let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=0
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -345,10 +366,10 @@ let g:gitgutter_max_signs = 200
 
 "------------------------------------------------------
 "\\ Python-Mode
-" au CompleteDone * pclose
-" let g:pymode_python = 'python3'
-" let g:pymode_doc = 0
-" let g:pymode_options_max_line_length=120
+au CompleteDone * pclose
+let g:pymode_python = 'python3'
+let g:pymode_doc = 0
+let g:pymode_options_max_line_length=120
 
 "------------------------------------------------------
 "\\ FZF
@@ -408,6 +429,7 @@ nnoremap <silent> <Leader>vz :call VimuxZoomRunner()<CR>
 nnoremap <silent> <Leader>v<C-l> :VimuxClearTerminalScreen<CR>
 
 nnoremap <silent> <Leader>rb :call VimuxRunCommand("clear; ruby " . bufname("%"))<CR>
+nnoremap <silent> <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
 
 "------------------------------------------------------
 "\\ Tabular
@@ -476,6 +498,20 @@ endfunction
 command! -nargs=1 Silent
 \   execute 'silent !' . <q-args>
 \ | execute 'redraw!'
+
+"\\ Print settings
+function! PrintSettings()
+  let setting_key = expand('<c-r>"')
+  execute 'Silent echo' setting_key
+endfunction
+nnoremap <Leader><Leader>cs :call PrintSettings()<cr>
+
+"\\ Delete to end of line
+function! GlobalDeleteToEndOfLine(arg)
+  " Use the global command to execute the delete command on all matching lines
+  execute "g/" . a:arg . "/norm nD"
+endfunction
+nnoremap <Leader><Leader>D :call GlobalDeleteToEndOfLine("
 
 "\\ Go to current line in github
 function! GoGithubLine()
