@@ -23,7 +23,7 @@ Desktop.ini
 # Ignore tags created by etags, ctags, gtags (GNU global) and cscope
 TAGS
 !TAGS/
-# tags
+tags
 !tags/
 .tags
 .tags1
@@ -136,3 +136,6 @@ $RECYCLE.BIN/
 
 # MTMR
 nohup.out
+
+# vim-projectionist
+.projections.json
