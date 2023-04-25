@@ -79,6 +79,7 @@
              [:c [:km "open: Chrome"]]
              [:i [:km "open: iTerm"]]
              [:j [:km "open: Slack"]]
+             [:o [:km "open: Obsidian"]]
              [:s [:km "open: Spotify"]]
              [:m [:km "open: Messenger"]]
              [:n [:km "open: Notion"]]
