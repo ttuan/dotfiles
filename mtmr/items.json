@@ -30,6 +30,16 @@
   },
   { "type": "weather", "icon_type": "text", "units": "metric", "refreshInterval": 600, "api_key": "405de8b4bdfa8b1c8b35f4c6d7627e6e" },
   { "type": "sleep", "width": 44 },
+  {
+    "type": "shellScriptTitledButton",
+    "width": 300,
+    "refreshInterval": 3,
+    "source": {
+      "inline": "~/Dropbox/Projects/dotfiles/mtmr/quote.sh"
+    },
+    "align": "right",
+    "bordered": true
+  },
   { "type": "mute", "width": 40, "align": "right" },
   { "type": "volumeDown", "width": 34, "align": "right" },
   { "type": "volumeUp", "width": 34, "align": "right" },
