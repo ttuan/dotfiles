@@ -79,20 +79,45 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ReplaceWithRegister = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/ReplaceWithRegister",
+    url = "https://github.com/vim-scripts/ReplaceWithRegister"
+  },
+  ["ag.vim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/ag.vim",
+    url = "https://github.com/rking/ag.vim"
+  },
+  ["auto-save.nvim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
+    url = "https://github.com/Pocco81/auto-save.nvim"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["gruvbox.nvim"] = {
+  ["emmet-vim"] = {
     loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    url = "https://github.com/mattn/emmet-vim"
+  },
+  gruvbox = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/gruvbox",
+    url = "https://github.com/morhetz/gruvbox"
   },
   harpoon = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["hop.nvim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/hop.nvim",
+    url = "https://github.com/phaazon/hop.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -109,6 +134,16 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["my-vim-snippets"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/my-vim-snippets",
+    url = "https://github.com/ttuan/my-vim-snippets"
+  },
+  nerdtree = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nerdtree",
+    url = "https://github.com/scrooloose/nerdtree"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -118,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-tmux-navigation"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-tmux-navigation",
+    url = "https://github.com/alexghergh/nvim-tmux-navigation"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -134,20 +174,90 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["python-mode"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/python-mode",
+    url = "https://github.com/python-mode/python-mode"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  undotree = {
+  ultisnips = {
     loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/mbbill/undotree"
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/ultisnips",
+    url = "https://github.com/SirVer/ultisnips"
+  },
+  ["vim-airline"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-airline",
+    url = "https://github.com/vim-airline/vim-airline"
+  },
+  ["vim-airline-themes"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-airline-themes",
+    url = "https://github.com/vim-airline/vim-airline-themes"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
+    url = "https://github.com/airblade/vim-gitgutter"
+  },
+  ["vim-indent-object"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-indent-object",
+    url = "https://github.com/michaeljsmith/vim-indent-object"
+  },
+  ["vim-jinja"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-jinja",
+    url = "https://github.com/lepture/vim-jinja"
+  },
+  ["vim-projectionist"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-projectionist",
+    url = "https://github.com/tpope/vim-projectionist"
+  },
+  ["vim-repeat"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-repeat",
+    url = "https://github.com/tpope/vim-repeat"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/vim-test/vim-test"
+  },
+  ["vim-textobj-delimited"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-textobj-delimited",
+    url = "https://github.com/machakann/vim-textobj-delimited"
+  },
+  vimux = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vimux",
+    url = "https://github.com/benmills/vimux"
   }
 }
 

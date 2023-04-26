@@ -7,27 +7,54 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Find, Filter, Preview, Pick
+  -- Apperance
+  use('scrooloose/nerdtree')
+  use('morhetz/gruvbox')
+  use('vim-airline/vim-airline')
+  use('vim-airline/vim-airline-themes')
+  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
+
+  -- Searching & Navigating
+  use('rking/ag.vim')
+  use('ThePrimeagen/harpoon')
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- Colorscheme
-  use { "ellisonleao/gruvbox.nvim" }
+  -- Action
+  use('phaazon/hop.nvim')
+  use('tpope/vim-commentary')
+  use("Pocco81/auto-save.nvim")
 
-  -- Syntax highlight
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  -- Operator
+  use('vim-scripts/ReplaceWithRegister')
+  use('tpope/vim-surround')
+  use('tpope/vim-repeat')
 
-  -- Navigating files set and terminal
-  use('ThePrimeagen/harpoon')
+  -- Text Object
+  use('michaeljsmith/vim-indent-object')
+  use('machakann/vim-textobj-delimited')
 
-  -- Undotree
-  use('mbbill/undotree')
+  -- Snippets
+  use('SirVer/ultisnips')
+  use('honza/vim-snippets')
+  use('ttuan/my-vim-snippets')
 
+
+  -- Git
   use('tpope/vim-fugitive')
+  use('airblade/vim-gitgutter')
 
+
+  -- Tmux
+  use('alexghergh/nvim-tmux-navigation')
+  use('benmills/vimux')
+
+
+  -- Coding
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v2.x',
@@ -48,4 +75,9 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},     -- Required
           }
   }
+  use('python-mode/python-mode')
+  use('lepture/vim-jinja')
+  use('tpope/vim-projectionist')
+  use('mattn/emmet-vim')
+  use('vim-test/vim-test')
 end)
