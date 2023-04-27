@@ -1,23 +1,25 @@
 -- Open current file on google chrome
 function OpenCurrentFile()
   local current_file = vim.fn.expand("%")
-  vim.fn.execute("Silent !open -a 'Google Chrome' " .. current_file)
+  os.execute("open -a 'Google Chrome' " .. current_file)
 end
-map("n", "<Leader><Leader>of", ":lua OpenCurrentFile()<CR>", {noremap = true})
+map("n", "<Leader><Leader>of", ":silent! lua OpenCurrentFile()<CR>", {noremap = true})
 
 
 -- Go to current line in Github
 function goGithubLine()
-  local current_file = vim.fn.expand("%")
-  local current_line = vim.fn.line(".")
-  os.execute("Silent goGithubLine " .. current_file .. " " .. current_line)
+  local current_file = vim.fn.bufname('%')
+  local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  vim.cmd("silent terminal goGithubLine " .. current_file .. " " .. current_line)
+  vim.cmd("startinsert")
 end
 map("n", "<leader><leader>ggl", ":lua goGithubLine()<CR>", {noremap = true, silent = true})
 
 -- Go to Github with commit hash
 function goGithubCommit()
   local commit_hash = vim.fn.expand("<cword>")
-  os.execute("Silent goGithubCommit " .. commit_hash)
+  vim.cmd("silent terminal goGithubCommit " .. commit_hash)
+  vim.cmd("startinsert")
 end
 map("n", "<leader><leader>ggc", ":lua goGithubCommit()<CR>", {noremap = true, silent = true})
 

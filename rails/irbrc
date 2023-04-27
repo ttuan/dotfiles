@@ -1,2 +1,4 @@
 require 'rubygems'
-require 'interactive_editor'
+# require 'interactive_editor'
+
+IRB.conf[:USE_AUTOCOMPLETE] = false

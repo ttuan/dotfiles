@@ -1,6 +1,9 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local status, packer = pcall(require, "packer")
+if (not status) then
+  print("Packer is not installed")
+  return
+end
 
--- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -38,46 +41,35 @@ return require('packer').startup(function(use)
   use('michaeljsmith/vim-indent-object')
   use('machakann/vim-textobj-delimited')
 
-  -- Snippets
-  use('SirVer/ultisnips')
-  use('honza/vim-snippets')
-  use('ttuan/my-vim-snippets')
-
-
   -- Git
   use('tpope/vim-fugitive')
   use('airblade/vim-gitgutter')
 
-
   -- Tmux
-  use('alexghergh/nvim-tmux-navigation')
+  use('christoomey/vim-tmux-navigator')
   use('benmills/vimux')
 
-
   -- Coding
-  use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
-		  {                                      -- Optional
-		  'williamboman/mason.nvim',
-		  run = function()
-			  pcall(vim.cmd, 'MasonUpdate')
-		  end,
-		  },
-		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+  use 'neovim/nvim-lspconfig' -- LSP
+  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
+  use 'hrsh7th/nvim-cmp' -- Completion
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},     -- Required
-		  {'hrsh7th/cmp-nvim-lsp'}, -- Required
-		  {'L3MON4D3/LuaSnip'},     -- Required
-          }
-  }
-  use('python-mode/python-mode')
-  use('lepture/vim-jinja')
+  -- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+  -- use 'glepnir/lspsaga.nvim' -- LSP UIs
+  -- use 'L3MON4D3/LuaSnip'
+
+  -- use('python-mode/python-mode')
+  -- use('mattn/emmet-vim')
+  use('Glench/Vim-Jinja2-Syntax')
   use('tpope/vim-projectionist')
-  use('mattn/emmet-vim')
   use('vim-test/vim-test')
+
+  -- Snippets
+  use('SirVer/ultisnips')
+  use('quangnguyen30192/cmp-nvim-ultisnips')
+  use('honza/vim-snippets')
+  -- use('ttuan/my-vim-snippets')
 end)
