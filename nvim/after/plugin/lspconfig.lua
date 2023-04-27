@@ -1,0 +1,65 @@
+local status, nvim_lsp = pcall(require, "lspconfig")
+if (not status) then return end
+
+local protocol = require('vim.lsp.protocol')
+
+local cmp = require('cmp')
+
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        end,
+    },
+
+    mapping = cmp.mapping.preset.insert({
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ["<C-Space>"] = cmp.mapping.complete(),
+    }),
+
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'ultisnips' },
+    }, {
+        { name = 'buffer' },
+    }),
+
+})
+
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+  -- Mappings.
+  local opts = { noremap = true, silent = true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gD', '<Cmd>vsplit | lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+end
+
+-- Set up completion using nvim_cmp with LSP source
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+nvim_lsp.jedi_language_server.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+nvim_lsp.ruby_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
