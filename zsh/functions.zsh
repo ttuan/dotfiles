@@ -106,8 +106,8 @@ gcc() {
 gcm() {
   git add .;
   git commit -m $1;
-  branch_name=$(git symbolic-ref --short -q HEAD);
-  git push origin $branch_name;
+  # branch_name=$(git symbolic-ref --short -q HEAD);
+  # git push origin $branch_name;
 }
 
 # Git fetch upstream branch

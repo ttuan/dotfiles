@@ -2,7 +2,7 @@ local set = vim.opt
 
 set.guicursor = ""
 
-set.shell = "/bin/zsh"
+set.shell = "zsh"
 set.mouse = "a"
 set.clipboard:append("unnamed", "unnamedplus")
 set.history = 10000

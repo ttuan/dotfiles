@@ -139,3 +139,5 @@ nohup.out
 
 # vim-projectionist
 .projections.json
+
+pyrightconfig.json

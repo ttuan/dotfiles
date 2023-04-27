@@ -38,10 +38,10 @@ local ui = require("harpoon.ui")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<leader>e", ui.toggle_quick_menu)
 
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-2>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-3>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-4>", function() ui.nav_file(4) end)
 
 
 -- ========================================================================
@@ -57,45 +57,45 @@ map('n', '<leader>h', ':HopWordCurrentLineBC<CR>', { noremap=true })
 -- ========================================================================
 -- LSP
 -- ========================================================================
-local lsp = require('lsp-zero').preset({})
+-- local lsp = require('lsp-zero').preset({})
 
-lsp.preset('recommended')
+-- lsp.preset('recommended')
 
-lsp.ensure_installed({
-})
+-- lsp.ensure_installed({
+-- })
 
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-y>'] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
-})
+-- local cmp = require('cmp')
+-- local cmp_select = {behavior = cmp.SelectBehavior.Select}
+-- local cmp_mappings = lsp.defaults.cmp_mappings({
+-- 	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+-- 	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+-- 	['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+-- 	["<C-Space>"] = cmp.mapping.complete(),
+-- })
 
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- -- cmp_mappings['<Tab>'] = nil
+-- -- cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings
-})
+-- lsp.setup_nvim_cmp({
+-- 	mapping = cmp_mappings
+-- })
 
-lsp.on_attach(function(client, bufnr)
-	local opts = {buffer = bufnr, remap = false}
+-- lsp.on_attach(function(client, bufnr)
+-- 	local opts = {buffer = bufnr, remap = false}
 
-	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	-- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	-- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-	-- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-	-- vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	-- vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	-- vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	-- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end)
+-- 	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+-- 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+-- 	-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+-- 	-- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+-- 	-- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+-- 	-- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+-- 	-- vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+-- 	-- vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+-- 	-- vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+-- 	-- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+-- end)
 
-lsp.setup()
+-- lsp.setup()
 
 
 -- ========================================================================
@@ -105,6 +105,7 @@ local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-f>', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ft', builtin.tags, {})
 
 vim.keymap.set('n', '<leader>ps', function()
   builtin.grep_string({ search = vim.fn.input("Grep > ") });
@@ -131,17 +132,17 @@ require'nvim-treesitter.configs'.setup {
 -- ========================================================================
 -- Nvim-Tmux-Navigation
 -- ========================================================================
-require'nvim-tmux-navigation'.setup {
-    disable_when_zoomed = true, -- defaults to false
-    keybindings = {
-        left = "<C-h>",
-        down = "<C-j>",
-        up = "<C-k>",
-        right = "<C-l>",
-        last_active = "<C-\\>",
-        next = "<C-Space>",
-    }
-}
+-- require'nvim-tmux-navigation'.setup {
+--     disable_when_zoomed = true, -- defaults to false
+--     keybindings = {
+--         left = "<C-h>",
+--         down = "<C-j>",
+--         up = "<C-k>",
+--         right = "<C-l>",
+--         last_active = "<C-\\>",
+--         next = "<C-Space>",
+--     }
+-- }
 
 -- ========================================================================
 -- NERDTree
@@ -151,7 +152,7 @@ map('n', '-', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
 map('n', ']', ':NERDTreeFind<CR>', { noremap = true, silent = true })
 
 vim.g.NERDTreeMinimalMenu = 1
--- vim.g.NERDTreeIgnore = { '\.pyc$', '\~$', '^__pycache__$' }
+vim.g.NERDTreeIgnore = { '\\.pyc$', '\\~$', '^__pycache__$' }
 
 -- ========================================================================
 -- Emmet
@@ -178,24 +179,39 @@ vim.g.gitgutter_max_signs = 200
 -- ========================================================================
 -- Python-mode
 -- ========================================================================
-vim.api.nvim_command('autocmd CompleteDone * pclose')
-vim.g.pymode_python = 'python3'
-vim.g.pymode_doc = 0
-vim.g.pymode_options_max_line_length = 120
+-- vim.api.nvim_command('autocmd CompleteDone * pclose')
+-- vim.g.pymode_python = 'python3'
+-- vim.g.pymode_doc = 0
+-- vim.g.pymode_options_max_line_length = 120
 
 
 -- ========================================================================
 -- Vim-test
 -- ========================================================================
-map('n', '<leader>rt', ':TestNearest<CR>', { silent = true })
-map('n', '<leader>rs', ':TestFile<CR>', { silent = true })
-map('n', '<leader>rl', ':TestLast<CR>', { silent = true })
+map('n', '<leader>rt', ':TestNearest APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
+map('n', '<leader>rs', ':TestFile APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
+map('n', '<leader>rl', ':TestLast APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>a', ':TestSuite<CR>', { silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>g', ':TestVisit<CR>', { silent = true })
 
-vim.g.test_strategy = "vimux"
-vim.g.test_python_runner = 'pytest'
+local g = vim.g
+local v = vim.v
 
--- ========================================================================
--- Vimux
--- ========================================================================
+g.VimuxOrientation = "h"
+g.VimuxHeight = "30"
+
+g["test#preserve_screen"] = false
+g.neomake_open_list = true
+g['test#strategy'] = {
+  nearest = 'vimux',
+  file = 'vimux',
+  suite = 'vimux'
+}
+g['test#python#pytest#options'] = "--disable-warnings -s"
+g['test#neovim#term_position'] = 'vert'
+g.neomake_warning_sign = {
+  text = '∙'
+}
+g.neomake_error_sign = {
+  text = '∙'
+}
