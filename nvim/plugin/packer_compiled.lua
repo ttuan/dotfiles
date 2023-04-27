@@ -74,15 +74,15 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  LuaSnip = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/LuaSnip",
-    url = "https://github.com/L3MON4D3/LuaSnip"
-  },
   ReplaceWithRegister = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/ReplaceWithRegister",
     url = "https://github.com/vim-scripts/ReplaceWithRegister"
+  },
+  ["Vim-Jinja2-Syntax"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/Vim-Jinja2-Syntax",
+    url = "https://github.com/Glench/Vim-Jinja2-Syntax"
   },
   ["ag.vim"] = {
     loaded = true,
@@ -94,15 +94,20 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
     url = "https://github.com/Pocco81/auto-save.nvim"
   },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["emmet-vim"] = {
+  ["cmp-nvim-ultisnips"] = {
     loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/emmet-vim",
-    url = "https://github.com/mattn/emmet-vim"
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips",
+    url = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips"
   },
   gruvbox = {
     loaded = true,
@@ -119,11 +124,6 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/hop.nvim",
     url = "https://github.com/phaazon/hop.nvim"
   },
-  ["lsp-zero.nvim"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
-    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -133,11 +133,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["my-vim-snippets"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/my-vim-snippets",
-    url = "https://github.com/ttuan/my-vim-snippets"
   },
   nerdtree = {
     loaded = true,
@@ -154,11 +149,6 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-tmux-navigation"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-tmux-navigation",
-    url = "https://github.com/alexghergh/nvim-tmux-navigation"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -173,11 +163,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
-  },
-  ["python-mode"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/python-mode",
-    url = "https://github.com/python-mode/python-mode"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -219,11 +204,6 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-indent-object",
     url = "https://github.com/michaeljsmith/vim-indent-object"
   },
-  ["vim-jinja"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-jinja",
-    url = "https://github.com/lepture/vim-jinja"
-  },
   ["vim-projectionist"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-projectionist",
@@ -253,6 +233,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-textobj-delimited",
     url = "https://github.com/machakann/vim-textobj-delimited"
+  },
+  ["vim-tmux-navigator"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
   },
   vimux = {
     loaded = true,
