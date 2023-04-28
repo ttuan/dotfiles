@@ -54,12 +54,12 @@ nvim_lsp.jedi_language_server.setup {
   capabilities = capabilities
 }
 
-nvim_lsp.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+-- nvim_lsp.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
 
-nvim_lsp.ruby_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+-- nvim_lsp.ruby_ls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }

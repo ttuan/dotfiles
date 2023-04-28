@@ -13,8 +13,9 @@ return require('packer').startup(function(use)
   -- Apperance
   use('scrooloose/nerdtree')
   use('morhetz/gruvbox')
-  use('vim-airline/vim-airline')
-  use('vim-airline/vim-airline-themes')
+  use('nvim-lualine/lualine.nvim')
+  use('onsails/lspkind-nvim')
+  use('norcalli/nvim-colorizer.lua')
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
 
@@ -30,46 +31,48 @@ return require('packer').startup(function(use)
   -- Action
   use('phaazon/hop.nvim')
   use('tpope/vim-commentary')
-  use("Pocco81/auto-save.nvim")
+  use({
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {}
+    end,
+  })
+  use('windwp/nvim-autopairs')
 
-  -- Operator
+  -- -- Operator
   use('vim-scripts/ReplaceWithRegister')
   use('tpope/vim-surround')
   use('tpope/vim-repeat')
 
-  -- Text Object
+  -- -- Text Object
   use('michaeljsmith/vim-indent-object')
   use('machakann/vim-textobj-delimited')
 
-  -- Git
+  -- -- Git
   use('tpope/vim-fugitive')
   use('airblade/vim-gitgutter')
 
-  -- Tmux
+  -- -- Tmux
   use('christoomey/vim-tmux-navigator')
   use('benmills/vimux')
 
   -- Coding
+  use('folke/zen-mode.nvim')
+
+  use('tpope/vim-projectionist')
+
   use 'neovim/nvim-lspconfig' -- LSP
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/nvim-cmp' -- Completion
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-
-  -- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-  -- use 'glepnir/lspsaga.nvim' -- LSP UIs
-  -- use 'L3MON4D3/LuaSnip'
-
-  -- use('python-mode/python-mode')
-  -- use('mattn/emmet-vim')
-  use('Glench/Vim-Jinja2-Syntax')
-  use('tpope/vim-projectionist')
-  use('vim-test/vim-test')
-
-  -- Snippets
   use('SirVer/ultisnips')
   use('quangnguyen30192/cmp-nvim-ultisnips')
-  use('honza/vim-snippets')
-  -- use('ttuan/my-vim-snippets')
+
+  use('vim-test/vim-test')
+  use('mattn/emmet-vim')
+  use('Glench/Vim-Jinja2-Syntax')
+  use('puremourning/vimspector')
+  -- -- use('python-mode/python-mode')
 end)
