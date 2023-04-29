@@ -5,7 +5,7 @@ local protocol = require('vim.lsp.protocol')
 
 local cmp = require('cmp')
 
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_insert = { behavior = cmp.ConfirmBehavior.Insert }
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -14,8 +14,8 @@ cmp.setup({
     },
 
     mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_insert),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_insert),
         ['<C-l>'] = cmp.mapping.confirm({ select = true }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -54,12 +54,14 @@ nvim_lsp.jedi_language_server.setup {
   capabilities = capabilities
 }
 
--- nvim_lsp.pyright.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
--- nvim_lsp.ruby_ls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
+
+nvim_lsp.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+

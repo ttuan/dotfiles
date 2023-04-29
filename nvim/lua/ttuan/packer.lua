@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
   -- Apperance
   use('scrooloose/nerdtree')
   use('morhetz/gruvbox')
+  use('nvim-tree/nvim-web-devicons')
   use('nvim-lualine/lualine.nvim')
   use('onsails/lspkind-nvim')
   use('norcalli/nvim-colorizer.lua')
@@ -39,20 +40,20 @@ return require('packer').startup(function(use)
   })
   use('windwp/nvim-autopairs')
 
-  -- -- Operator
+  -- Operator
   use('vim-scripts/ReplaceWithRegister')
   use('tpope/vim-surround')
   use('tpope/vim-repeat')
 
-  -- -- Text Object
+  -- Text Object
   use('michaeljsmith/vim-indent-object')
   use('machakann/vim-textobj-delimited')
 
-  -- -- Git
+  -- Git
   use('tpope/vim-fugitive')
   use('airblade/vim-gitgutter')
 
-  -- -- Tmux
+  -- Tmux
   use('christoomey/vim-tmux-navigator')
   use('benmills/vimux')
 
@@ -68,11 +69,12 @@ return require('packer').startup(function(use)
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
   use('SirVer/ultisnips')
+  use('honza/vim-snippets')
   use('quangnguyen30192/cmp-nvim-ultisnips')
 
   use('vim-test/vim-test')
   use('mattn/emmet-vim')
   use('Glench/Vim-Jinja2-Syntax')
   use('puremourning/vimspector')
-  -- -- use('python-mode/python-mode')
+  -- use('python-mode/python-mode')
 end)

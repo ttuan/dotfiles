@@ -180,6 +180,11 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -229,6 +234,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
   },
   ["vim-surround"] = {
     loaded = true,
