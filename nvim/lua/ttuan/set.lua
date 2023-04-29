@@ -1,5 +1,9 @@
 local set = vim.opt
 
+vim.scriptencoding = 'utf-8'
+set.encoding = 'utf-8'
+set.fileencoding = 'utf-8'
+
 set.guicursor = ""
 
 set.shell = "zsh"
