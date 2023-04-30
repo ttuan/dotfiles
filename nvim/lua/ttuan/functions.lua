@@ -5,7 +5,6 @@ function OpenCurrentFile()
 end
 map("n", "<Leader><Leader>of", ":silent! lua OpenCurrentFile()<CR>", {noremap = true})
 
-
 -- Go to current line in Github
 function goGithubLine()
   local current_file = vim.fn.bufname('%')

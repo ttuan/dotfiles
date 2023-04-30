@@ -80,3 +80,6 @@ map('n', '<leader>cp', ':let @+ = expand("%")<CR>', {noremap = true})
 map('n', '<leader>cfp', ':let @+ = expand("%:p")<CR>', {noremap = true})
 -- Just filename
 map('n', '<leader>cf', ':let @+ = expand("%:t")<CR>', {noremap = true})
+
+-- Quick open nvim file
+map('n', '<leader><leader>v', ':e ~/.config/nvim/init.lua<CR>', {noremap = true})
