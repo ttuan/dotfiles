@@ -34,7 +34,7 @@ function dev_tools {
 }
 
 function web_dev {
-  brew install rbenv ruby-build
+  brew install rbenv ruby-build commitizen peco
 
   # Add rbenv to bash so that it loads every time you open a terminal
   echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.zshrc
