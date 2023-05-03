@@ -67,3 +67,5 @@ alias rescanwifi="nmcli device wifi rescan"
 cnwifi() {
   nmcli device wifi connect $1 password $2
 }
+
+alias vim=nvim
