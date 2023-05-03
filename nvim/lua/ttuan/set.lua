@@ -25,7 +25,7 @@ set.relativenumber = true
 set.showcmd = true
 set.showmode = true
 
-set.wrap = false
+set.wrap = true
 set.swapfile = false
 set.backup = false
 set.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -42,3 +42,5 @@ set.tabstop = 2
 set.softtabstop = 2
 set.shiftwidth = 2
 set.expandtab = true
+
+set.spelllang = en_us

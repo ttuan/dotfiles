@@ -82,4 +82,10 @@ return require('packer').startup(function(use)
   -- use('puremourning/vimspector')
 
   use('wakatime/vim-wakatime')
+
+  -- Markdown
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 end)
