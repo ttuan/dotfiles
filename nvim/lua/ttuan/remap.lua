@@ -53,6 +53,8 @@ map('v', '<Leader>k', ':m\'<-2<CR>`>my`<mzgv`yo`z', { noremap = true })
 
 -- Operator with a panel
 map('n', '<Leader>t', ':tabnew<CR>', { noremap = true })
+map('n', 'H', ':tabprevious<CR>', { noremap = true})
+map('n', 'L', ':tabnext<CR>', { noremap = true})
 
 -- Use C-p and C-n for calling command in history
 map('c', '<C-p>', '<Up>', { noremap = true })
