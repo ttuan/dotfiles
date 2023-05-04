@@ -15,10 +15,12 @@ export UPDATE_ZSH_DAYS=7
 plugins=(zsh-autosuggestions vi-mode z)
 
 # User configuration
-export PATH="$HOME/.rvm/bin:/usr/local/opt/node@12/bin:$HOME/go/bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/Cellar/postgresql@9.6/9.6.19/bin:/usr/local/opt/python@3.8/bin:$PATH"
-export EDITOR="vim"
+export PATH="$HOME/.rvm/bin:$HOME/go/bin:/usr/local/bin:/usr/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/Cellar/postgresql@9.6/9.6.19/bin:/usr/local/opt/python@3.8/bin:$HOME/google-cloud-sdk/bin:$PATH"
+
+export EDITOR="nvim"
 export TERM="xterm-256color"
 
+zstyle ':omz:update' mode disabled
 source $ZSH/oh-my-zsh.sh
 
 # Alias
@@ -35,11 +37,7 @@ unsetopt nomatch
 
 bindkey '^ ' autosuggest-execute
 
-eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
-eval "$(nodenv init -)"
-# eval $(thefuck --alias)
-# export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 if pgrep -xq -- "MTMR"; then
 else
@@ -47,12 +45,12 @@ else
     nohup /Applications/MTMR.app/Contents/MacOS/MTMR &
 fi
 
-# Set typewritten ZSH as a prompt
-# autoload -U promptinit; promptinit
-# prompt typewritten
-#
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export CLOUD_SDK_HOME=~/google-cloud-sdk
