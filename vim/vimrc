@@ -52,12 +52,12 @@ Plug 'morhetz/gruvbox'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'sheerun/vim-polyglot'
 
 "\\ Searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
-Plug 'pbogut/fzf-mru.vim'
 
 "\\ AutoComplete
 Plug 'Valloric/YouCompleteMe'
@@ -65,7 +65,7 @@ Plug 'Valloric/YouCompleteMe'
 "\\ Actions
 Plug 'easymotion/vim-easymotion'      " Moving around
 Plug 'tpope/vim-commentary'           " Comment
-Plug 'godlygeek/tabular'              " Text filtering and alignment
+" Plug 'godlygeek/tabular'              " Text filtering and alignment
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug '907th/vim-auto-save'
@@ -99,9 +99,12 @@ Plug 'machakann/vim-textobj-delimited' "  Delimited text object: ad and id
 "\\ Ruby on Rails
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vim-test/vim-test'
 
 "\\ Python
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'lepture/vim-jinja'
+Plug 'tpope/vim-projectionist'
 
 "\\ Frontend
 Plug 'mattn/emmet-vim'
@@ -123,7 +126,7 @@ call plug#end()
 
 set numberwidth=3
 set t_Co=256
-colorscheme railscasts
+colorscheme gruvbox
 set background=dark
 
 set guifont=C@nsolas:h12:w6
@@ -241,12 +244,40 @@ cmap w!! %!sudo tee > /dev/null %
 nnoremap <Leader>> :cnext<CR>
 nnoremap <Leader>< :cprev<CR>
 
-" ================ Plugins Config ====================
+"\\ Config Python PEP8
+" au BufNewFile,BufRead *.py
+"     \ set expandtab
+"     \ set autoindent
+"     \ set tabstop=4
+"     \ set softtabstop=4
+"     \ set shiftwidth=4
+"     \ set textwidth=79
 
-let g:vimspector_enable_mappings = 'HUMAN'
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+
+" ================ Plugins Config ====================
 
 "\\ Vim Plug
 nnoremap <Leader>P :so %<CR>:PlugInstall<CR>:q<CR>
+
+"\\ VimSpector
+let g:vimspector_enable_mappings = 'HUMAN'
+
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>dx :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>de :call vimspectorEval
+nnoremap <Leader>dw :call vimspectorWatch
+nnoremap <Leader>do :call vimspectorShowOutput
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
 
 "------------------------------------------------------
 "\\ Rails.vim
@@ -287,13 +318,18 @@ map ] :NERDTreeFind<CR>
 " Fix bug can not hide menu in Vim 9
 let g:NERDTreeMinimalMenu=1
 
+" Hide .pyc files
+let NERDTreeIgnore=['\.pyc$', '\~$', '^__pycache__$']
+
 "------------------------------------------------------
 "\\ Vim Commentary
 nmap cm gc
 
 "------------------------------------------------------
-"\\ You Complete Me
+"\\ YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+nnoremap <Leader><Leader>g :tab split \| YcmCompleter GoToDefinitionElseDeclaration<CR>
 set shortmess+=c
 
 "------------------------------------------------------
@@ -311,7 +347,7 @@ map <Leader>? :Ag -u<Space>
 nmap <Leader><Leader>d :Ag <c-r>"<CR>
 
 "\\ Search with specific file type
-nmap <Leader><Leader>v :Ag --ruby<Space>
+" nmap <Leader><Leader>v :Ag --py<Space>
 
 let g:ag_working_path_mode="r"
 set grepprg=ag
@@ -403,17 +439,25 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 "------------------------------------------------------
-"\\ FZFMRU
-nnoremap <Leader>mr :FZFMru<CR>
+"\\ vim-test
+nmap <silent> <Leader>rt :TestNearest<CR>
+nmap <silent> <Leader>rs :TestFile<CR>
+nmap <silent> <Leader>rl :TestLast<CR>
+" nmap <silent> <Leader>a :TestSuite<CR>
+" nmap <silent> <Leader>g :TestVisit<CR>
+
+let test#strategy = "vimux"
+let test#python#runner = 'pytest'
 
 "------------------------------------------------------
 "\\ Vmux - Run, Forrest, Run
+" We can use VimuxSendKeys to send Enter key before run those commands
 " Run last command executed by VimuxRunCommand
-nnoremap <silent> <Leader>rl :VimuxRunLastCommand<CR>
+" nnoremap <silent> <Leader>rl :VimuxRunLastCommand<CR>
 " Run rspec file
-nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%"))<CR>
+" nnoremap <silent> <Leader>rs :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%"))<CR>
 " Run rspec test case
-nnoremap <silent> <Leader>rt :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%") . ":" .  line("."))<CR>
+" nnoremap <silent> <Leader>rt :call VimuxRunCommand("clear; bundle exec rspec " .  bufname("%") . ":" .  line("."))<CR>
 " Run bundle install
 nnoremap <silent> <Leader>bi :call VimuxRunCommand("clear; bundle install")<CR>
 " Run rubocop
