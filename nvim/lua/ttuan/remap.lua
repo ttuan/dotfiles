@@ -48,8 +48,8 @@ map('n', '<Leader><Leader>l', '<C-w>>10', { noremap = true })
 -- Move a line of text using Leader+[jk]
 map('n', '<Leader>j', ':<C-u>normal! mz:m+<CR>`z<CR>', { noremap = true })
 map('n', '<Leader>k', ':<C-u>normal! mz:m-2<CR>`z<CR>', { noremap = true })
-map('v', '<Leader>j', ':m\'>+<CR>`<my`>mzgv`yo`z', { noremap = true })
-map('v', '<Leader>k', ':m\'<-2<CR>`>my`<mzgv`yo`z', { noremap = true })
+map('v', '<Leader>k', ":m '<-2<CR>gv=gv")
+map('v', '<Leader>j', ":m '>+1<CR>gv=gv")
 
 -- Operator with a panel
 map('n', '<Leader>t', ':tabnew<CR>', { noremap = true })
@@ -85,3 +85,9 @@ map('n', '<leader>cf', ':let @+ = expand("%:t")<CR>', {noremap = true})
 
 -- Quick open nvim file
 map('n', '<leader><leader>v', ':e ~/.config/nvim/init.lua<CR>', {noremap = true})
+
+-- Keep cursor at the middle of file when moving
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
