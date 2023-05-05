@@ -1,0 +1,13 @@
+# ~/.tmuxinator/flask.yml
+
+name: Special configuration for current Project
+root: ~/Work/<%= @args[0] %>
+
+windows:
+  - editor:
+      layout: b7a8,239x61,0,0[239x47,0,0,0,239x13,0,48,4]
+      panes:
+        - vim .
+        - ruby local_dev.rb
+  - shell: CLOUDSDK_PYTHON=python gcloud beta emulators datastore start --host-port=0.0.0.0:9081 --no-store-on-disk --verbosity=debug --project ssdev
+  - console: weather
