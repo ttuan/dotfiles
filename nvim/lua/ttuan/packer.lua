@@ -8,7 +8,7 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use('wbthomason/packer.nvim')
 
   -- Apperance
   use('scrooloose/nerdtree')
@@ -32,12 +32,7 @@ return require('packer').startup(function(use)
   -- Action
   use('phaazon/hop.nvim')
   use('tpope/vim-commentary')
-  use({
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup {}
-    end,
-  })
+  use('907th/vim-auto-save')
   use('windwp/nvim-autopairs')
 
   -- Operator
@@ -59,15 +54,14 @@ return require('packer').startup(function(use)
 
   -- Coding
   use('folke/zen-mode.nvim')
-
   use('tpope/vim-projectionist')
 
-  use 'neovim/nvim-lspconfig' -- LSP
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+  use('neovim/nvim-lspconfig') -- LSP
+  use('hrsh7th/cmp-nvim-lsp') -- nvim-cmp source for neovim's built-in LSP
+  use('hrsh7th/cmp-buffer') -- nvim-cmp source for buffer words
+  use('hrsh7th/nvim-cmp') -- Completion
+  use('williamboman/mason.nvim')
+  use('williamboman/mason-lspconfig.nvim')
   use('SirVer/ultisnips')
   use('honza/vim-snippets')
   use('quangnguyen30192/cmp-nvim-ultisnips')
@@ -75,9 +69,9 @@ return require('packer').startup(function(use)
   use('vim-test/vim-test')
   use('mattn/emmet-vim')
   use('Glench/Vim-Jinja2-Syntax')
-  use('mfussenegger/nvim-dap')
-  use('mfussenegger/nvim-dap-python')
+  use('mfussenegger/nvim-dap') -- Debug Adapter
   use('rcarriga/nvim-dap-ui')
+  use('mfussenegger/nvim-dap-python')
   -- use('python-mode/python-mode')
   -- use('puremourning/vimspector')
 

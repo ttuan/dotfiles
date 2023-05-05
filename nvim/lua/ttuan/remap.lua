@@ -13,8 +13,6 @@ map("n", "<leader>pv", ":Ex<CR>")
 map("n", "<leader>n", ":noh<CR>")
 map("n", "<leader>q", ":q<CR>")
 
--- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
-
 -- Swap between the last two files
 map('n', '<leader><leader>c', '<c-^>', {})
 -- Quickly select text you just pasted
@@ -25,13 +23,11 @@ map('n', 'E', '$', {})
 -- Y to copy to end of line
 map('n', 'Y', 'y$', {})
 
-
 -- Open file in same directory
 map('n', ',e', ':e <C-R>=expand("%:p:h") . "/"<CR>', {noremap = true})
 map('n', ',t', ':tabe <C-R>=expand("%:p:h") . "/"<CR>', {noremap = true})
 map('n', ',s', ':split <C-R>=expand("%:p:h") . "/"<CR>', {noremap = true})
 map('n', ',v', ':vsplit <C-R>=expand("%:p:h") . "/"<CR>', {noremap = true})
-
 
 -- Resizing Windows
 map('n', '<leader><leader>=', '<C-w>=', {noremap = true})
@@ -74,7 +70,6 @@ vim.api.nvim_command('autocmd BufWritePre * :%s/\\s\\+$//e')
 -- Force save file when I forgot running 'sudo vim file'
 vim.api.nvim_command('cmap w!! %!sudo tee > /dev/null %')
 
-
 -- Copy current file path
 -- Just relative path
 map('n', '<leader>cp', ':let @+ = expand("%")<CR>', {noremap = true})
@@ -82,12 +77,14 @@ map('n', '<leader>cp', ':let @+ = expand("%")<CR>', {noremap = true})
 map('n', '<leader>cfp', ':let @+ = expand("%:p")<CR>', {noremap = true})
 -- Just filename
 map('n', '<leader>cf', ':let @+ = expand("%:t")<CR>', {noremap = true})
+-- Quick directory change
+map('n', '<leader>cd', ':cd %:p:h<CR>', {noremap = true})
 
 -- Quick open nvim file
 map('n', '<leader><leader>v', ':e ~/.config/nvim/init.lua<CR>', {noremap = true})
 
 -- Keep cursor at the middle of file when moving
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
