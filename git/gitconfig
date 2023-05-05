@@ -26,6 +26,7 @@
 
 [init]
   templatedir = ~/.git_template
+  defaultBranch = "main"
 
 [alias]
   a = "!git status --short | peco | awk '{print $2}' | xargs git add"
@@ -34,6 +35,8 @@
   co = checkout
   br = branch
   pf = push --force-with-lease
+  ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+  pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
   parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
 
   # reset
