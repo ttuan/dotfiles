@@ -104,6 +104,16 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips",
     url = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips"
   },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["emmet-vim"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/emmet-vim",
@@ -148,6 +158,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["my-vim-snippets"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/my-vim-snippets",
+    url = "https://github.com/ttuan/my-vim-snippets"
   },
   nerdtree = {
     loaded = true,
