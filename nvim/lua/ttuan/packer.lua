@@ -59,11 +59,13 @@ return require('packer').startup(function(use)
   use('neovim/nvim-lspconfig') -- LSP
   use('hrsh7th/cmp-nvim-lsp') -- nvim-cmp source for neovim's built-in LSP
   use('hrsh7th/cmp-buffer') -- nvim-cmp source for buffer words
+  use('hrsh7th/cmp-path')
   use('hrsh7th/nvim-cmp') -- Completion
   use('williamboman/mason.nvim')
   use('williamboman/mason-lspconfig.nvim')
   use('SirVer/ultisnips')
   use('honza/vim-snippets')
+  use('ttuan/my-vim-snippets')
   use('quangnguyen30192/cmp-nvim-ultisnips')
 
   use('vim-test/vim-test')
@@ -75,6 +77,7 @@ return require('packer').startup(function(use)
   -- use('python-mode/python-mode')
   -- use('puremourning/vimspector')
 
+  use('github/copilot.vim')
   use('wakatime/vim-wakatime')
 
   -- Markdown

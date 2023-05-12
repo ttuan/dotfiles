@@ -1,6 +1,6 @@
-map('n', '<leader>rt', ':TestNearest APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
-map('n', '<leader>rs', ':TestFile APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
-map('n', '<leader>rl', ':TestLast APPLICATION_ID=test SERVER_SOFTWARE=Test<CR>', { silent = true })
+map('n', '<leader>rt', ':TestNearest<CR>', { silent = true })
+map('n', '<leader>rs', ':TestFile<CR>', { silent = true })
+map('n', '<leader>rl', ':TestLast<CR>', { silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>a', ':TestSuite<CR>', { silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>g', ':TestVisit<CR>', { silent = true })
 

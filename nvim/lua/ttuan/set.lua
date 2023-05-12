@@ -43,4 +43,8 @@ set.softtabstop = 2
 set.shiftwidth = 2
 set.expandtab = true
 
+-- Use za, zA, zc, zo, zC, zO, zR, zM, zr, zv
+set.foldmethod = "indent"
+set.foldlevel = 99
+
 set.spelllang = en_us
