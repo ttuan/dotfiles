@@ -37,20 +37,10 @@ unsetopt nomatch
 
 bindkey '^ ' autosuggest-execute
 
-eval "$(direnv hook zsh)"
+source ~/.zshrc.private
 
-if pgrep -xq -- "MTMR"; then
-else
-    echo "Starting MTMR"
-    nohup /Applications/MTMR.app/Contents/MacOS/MTMR &
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-export CLOUD_SDK_HOME=~/google-cloud-sdk
+prompt_dir() {
+  shorten_path=$(echo $PWD | perl -pe "s/(\w)[^\/]+\//\1\//g")
+  prompt_segment blue $CURRENT_FG $shorten_path
+  # prompt_segment blue $CURRENT_FG ' %20<...<%~%<< '
+}
