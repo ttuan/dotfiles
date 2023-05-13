@@ -23,11 +23,9 @@ return require('packer').startup(function(use)
   -- Searching & Navigating
   use('rking/ag.vim')
   use('ThePrimeagen/harpoon')
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  use('nvim-lua/plenary.nvim')
+  use('nvim-telescope/telescope.nvim')
+  use('nvim-telescope/telescope-file-browser.nvim')
 
   -- Action
   use('phaazon/hop.nvim')
