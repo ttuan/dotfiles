@@ -224,6 +224,11 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["python-mode"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/python-mode",
+    url = "https://github.com/python-mode/python-mode"
+  },
   ["telescope-file-browser.nvim"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
@@ -233,6 +238,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["true-zen.nvim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/true-zen.nvim",
+    url = "https://github.com/Pocco81/true-zen.nvim"
   },
   ultisnips = {
     loaded = true,
@@ -269,15 +279,35 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-projectionist",
     url = "https://github.com/tpope/vim-projectionist"
   },
+  ["vim-rails"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-rails",
+    url = "https://github.com/tpope/vim-rails"
+  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
   },
+  ["vim-ruby"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-ruby",
+    url = "https://github.com/vim-ruby/vim-ruby"
+  },
+  ["vim-slim"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-slim",
+    url = "https://github.com/slim-template/vim-slim"
+  },
   ["vim-snippets"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-snippets",
     url = "https://github.com/honza/vim-snippets"
+  },
+  ["vim-startuptime"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-startuptime",
+    url = "https://github.com/dstein64/vim-startuptime"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -299,6 +329,11 @@ _G.packer_plugins = {
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
   },
+  ["vim-translator"] = {
+    loaded = true,
+    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-translator",
+    url = "https://github.com/voldikss/vim-translator"
+  },
   ["vim-wakatime"] = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vim-wakatime",
@@ -308,11 +343,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/vimux",
     url = "https://github.com/benmills/vimux"
-  },
-  ["zen-mode.nvim"] = {
-    loaded = true,
-    path = "/Users/ttuan/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
-    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 

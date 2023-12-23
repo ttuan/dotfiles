@@ -19,7 +19,6 @@ return require('packer').startup(function(use)
   use('norcalli/nvim-colorizer.lua')
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
-
   -- Searching & Navigating
   use('rking/ag.vim')
   use('ThePrimeagen/harpoon')
@@ -51,7 +50,8 @@ return require('packer').startup(function(use)
   use('benmills/vimux')
 
   -- Coding
-  use('folke/zen-mode.nvim')
+  -- use('folke/zen-mode.nvim')
+  use('Pocco81/true-zen.nvim')
   use('tpope/vim-projectionist')
 
   use('neovim/nvim-lspconfig') -- LSP
@@ -72,8 +72,12 @@ return require('packer').startup(function(use)
   use('mfussenegger/nvim-dap') -- Debug Adapter
   use('rcarriga/nvim-dap-ui')
   use('mfussenegger/nvim-dap-python')
-  -- use('python-mode/python-mode')
+  use('python-mode/python-mode')
   -- use('puremourning/vimspector')
+
+  use('tpope/vim-rails')
+  use('vim-ruby/vim-ruby')
+  use('slim-template/vim-slim')
 
   use('github/copilot.vim')
   use('wakatime/vim-wakatime')
@@ -83,4 +87,8 @@ return require('packer').startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
+
+  -- Translate
+  use('voldikss/vim-translator')
+  use('dstein64/vim-startuptime')
 end)

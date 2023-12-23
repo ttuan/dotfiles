@@ -81,7 +81,7 @@ map('n', '<leader>cf', ':let @+ = expand("%:t")<CR>', {noremap = true})
 map('n', '<leader>cd', ':cd %:p:h<CR>', {noremap = true})
 
 -- Quick open nvim file
-map('n', '<leader><leader>v', ':e ~/.config/nvim/init.lua<CR>', {noremap = true})
+map('n', '<leader><leader>v', ':e ~/.config/nvim/lua/ttuan/packer.lua<CR>', {noremap = true})
 
 -- Keep cursor at the middle of file when moving
 map("n", "<C-d>", "<C-d>zz")
