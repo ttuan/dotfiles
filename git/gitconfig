@@ -96,7 +96,7 @@
 	attributesfile = /Users/ttuan/.gitattributes
 
   autoctrlf = false
-  editor = vim
+  editor = nvim
   whitespace = warn
 
 [diff]

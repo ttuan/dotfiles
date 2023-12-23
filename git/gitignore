@@ -139,8 +139,12 @@ nohup.out
 
 # vim-projectionist
 .projections.json
+.cz.json
 
 pyrightconfig.json
 
 # Ube-custom
 local_dev.rb
+# .python-version
+default_venv
+.solargraph.yml
