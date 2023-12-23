@@ -38,7 +38,7 @@ function Close_git_message()
     vim.cmd('quitall')
   end
 end
-vim.cmd('autocmd VimEnter * lua Close_git_message()')
+-- vim.cmd('autocmd VimEnter * lua Close_git_message()')
 
 
 -- Rename current file
