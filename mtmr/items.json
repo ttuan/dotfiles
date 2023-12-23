@@ -62,20 +62,9 @@
     "bordered": false,
     "title": "💹",
     "items": [
-      { "type": "currency", "refreshInterval": 600, "from": "BTC", "to": "USD", "full": true, "align": "right" },
       {
         "type": "shellScriptTitledButton",
-        "width": 350,
-        "refreshInterval": 10,
-        "source": {
-          "inline": "~/Dropbox/Projects/dotfiles/mtmr/coin.sh"
-        },
-        "align": "right",
-        "bordered": true
-      },
-      {
-        "type": "shellScriptTitledButton",
-        "width": 470,
+        "width": 800,
         "refreshInterval": 3,
         "source": {
           "inline": "~/Dropbox/Projects/dotfiles/mtmr/stock.sh"
