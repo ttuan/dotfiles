@@ -86,7 +86,7 @@
              [:e [:km "open: Evernote"]]
              [:k [:km "open: Calendar"]]
              [:t [:km "open: Todoist"]]
-             [:l [:km "open: VLC"]]
+             [:l [:km "open: VS Code"]]
              [:z [:km "open: Zalo"]]
       ]
     }
