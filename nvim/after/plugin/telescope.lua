@@ -47,6 +47,7 @@ telescope.load_extension("file_browser")
 
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-f>', builtin.git_files, {})
+vim.keymap.set('n', '<C-b>', builtin.buffers, {})
 vim.keymap.set('n', '<leader>ft', builtin.tags, {})
 
 vim.keymap.set('n', '<leader>ps', function()

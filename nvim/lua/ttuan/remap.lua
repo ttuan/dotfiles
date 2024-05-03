@@ -41,6 +41,10 @@ map('n', '<Leader><Leader>j', '<C-w>-10', { noremap = true })
 map('n', '<Leader><Leader>h', '<C-w><10', { noremap = true })
 map('n', '<Leader><Leader>l', '<C-w>>10', { noremap = true })
 
+-- Split window
+map("n", "ss", ":split<return>")
+map("n", "sv", ":vsplit<Return>")
+
 -- Move a line of text using Leader+[jk]
 map('n', '<Leader>j', ':<C-u>normal! mz:m+<CR>`z<CR>', { noremap = true })
 map('n', '<Leader>k', ':<C-u>normal! mz:m-2<CR>`z<CR>', { noremap = true })
@@ -81,7 +85,7 @@ map('n', '<leader>cf', ':let @+ = expand("%:t")<CR>', {noremap = true})
 map('n', '<leader>cd', ':cd %:p:h<CR>', {noremap = true})
 
 -- Quick open nvim file
-map('n', '<leader><leader>v', ':e ~/.config/nvim/lua/ttuan/packer.lua<CR>', {noremap = true})
+map('n', '<leader><leader>v', ':e ~/.config/nvim/ttuan/packer.lua<CR>', {noremap = true})
 
 -- Keep cursor at the middle of file when moving
 map("n", "<C-d>", "<C-d>zz")

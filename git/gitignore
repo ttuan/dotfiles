@@ -148,3 +148,6 @@ local_dev.rb
 # .python-version
 default_venv
 .solargraph.yml
+
+# Apollo
+.technical-stacks.yml
