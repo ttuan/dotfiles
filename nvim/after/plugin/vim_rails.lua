@@ -18,3 +18,8 @@ map('n', '<Leader>ev', ':Eview ', { noremap = true, silent = true })
 map('n', '<Leader>ec', ':Econtroller ', { noremap = true, silent = true })
 map('n', '<Leader>eh', ':Ehelper ', { noremap = true, silent = true })
 
+-- Set filetype for erb files to yaml, for using treesitter yaml parser
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "eruby.yaml",
+  command = "set filetype=yaml",
+})
