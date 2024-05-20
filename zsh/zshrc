@@ -12,10 +12,10 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(zsh-autosuggestions vi-mode z)
+plugins=(zsh-autosuggestions vi-mode z asdf)
 
 # User configuration
-export PATH="$HOME/.rvm/bin:$HOME/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/mysql@5.7/bin:/usr/local/Cellar/postgresql@9.6/9.6.19/bin:/usr/local/opt/python@3.8/bin:$HOME/google-cloud-sdk/bin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin:$PATH"
 
 export EDITOR="nvim"
 export TERM="xterm-256color"
@@ -40,7 +40,7 @@ bindkey '^ ' autosuggest-execute
 source ~/.zshrc.private
 
 # export POWERLINE_COMMAND=~/.pyenv/versions/2.7.13/bin/powerline
-source ~/.rvm/scripts/rvm
+# source ~/.rvm/scripts/rvm
 
 prompt_dir() {
   shorten_path=$(echo $PWD | perl -pe "s/(\w)[^\/]+\//\1\//g")

@@ -14,67 +14,14 @@
 
 These are the various configuration files I use on Ubuntu and macOS.
 
-```sh
-.
-├── ctags
-│   └── ctags
-├── fish
-│   └── config.fish
-├── git
-│   ├── gitconfig
-│   ├── gitconfig_sun
-│   ├── gitignore
-│   └── hgignore
-├── i3
-│   ├── config
-│   └── i3status.conf
-├── install
-├── install.conf.yaml
-├── python
-│   └── pudb
-│       └── pudb.cfg
-├── rails
-│   ├── gemrc
-│   ├── irbrc
-│   ├── pryrc
-│   └── railsrc
-├── README.md
-├── scripts
-│   ├── getSongName.sh
-│   ├── install-adblock-host
-│   ├── mac_install.zsh
-│   ├── refresh_firefox.sh
-│   ├── sync.sh
-│   ├── ubuntu_install.sh
-│   ├── vps_setup.sh
-│   └── Xmodmap
-├── tmux
-│   ├── safekill.sh
-│   └── tmux.conf
-├── tmuxinator
-│   ├── django.yml
-│   └── project.yml
-├── vim
-│   ├── ackrc
-│   └── vimrc
-├── vimperator
-│   ├── plugin
-│   │   └── YoutubePlayer - Copy.js
-│   └── vimperatorrc
-└── zsh
-    ├── alias.zsh
-    ├── functions.zsh
-    ├── fzf.zsh
-    ├── zshenv
-    └── zshrc
-```
-
 # Install
 
 ```
 git clone https://github.com/ttuan/dotfiles.git ~/dotfiles
-cd dotfiles
+
+cd ~/dotfiles
+pip install dotbot
+dotbot -c install.conf.yaml
 ```
 
-* For fresh install: `script/ubuntu_install.sh`
 * For sync dotfiles only: `./install` (Thank for [dotbot](https://github.com/anishathalye/dotbot))
