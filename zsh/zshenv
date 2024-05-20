@@ -17,9 +17,3 @@ goGithubCommit() {
   rn=(${=repo_name[2]//./ })
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "https://github.com/${rn[1]}/commit/${commit_hash}"
 }
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:/usr/local/bin:$PATH"
-
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-eval "$(pyenv virtualenv-init -)"

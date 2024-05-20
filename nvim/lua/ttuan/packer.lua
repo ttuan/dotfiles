@@ -70,7 +70,7 @@ return require('packer').startup(function(use)
   use('mattn/emmet-vim')
   use('Glench/Vim-Jinja2-Syntax')
   use('mfussenegger/nvim-dap') -- Debug Adapter
-  use('rcarriga/nvim-dap-ui')
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
   use('mfussenegger/nvim-dap-python')
   use('python-mode/python-mode')
   -- use('puremourning/vimspector')

@@ -151,3 +151,6 @@ default_venv
 
 # Apollo
 .technical-stacks.yml
+
+# asdf
+.tool-versions

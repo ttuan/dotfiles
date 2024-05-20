@@ -33,13 +33,13 @@
     ~/.tmux/plugins/tmux-safekill/scripts/safekill.sh:
       force: true
       path: tmux/safekill.sh
-    # Tmuxinator
-    ~/.tmuxinator/project.yml:
-      create: true
-      path: tmuxinator/project.yml
-    ~/.tmuxinator/flask.yml:
-      create: true
-      path: tmuxinator/flask.yml
+    # # Tmuxinator
+    # ~/.tmuxinator/project.yml:
+    #   create: true
+    #   path: tmuxinator/project.yml
+    # ~/.tmuxinator/flask.yml:
+    #   create: true
+    #   path: tmuxinator/flask.yml
     # Ruby & Rails
     ~/.gemrc: rails/gemrc
     ~/.irbrc: rails/irbrc
@@ -47,10 +47,10 @@
     ~/.railsrc: rails/railsrc
     # Ctag
     ~/.ctags: ctags/ctags
-    # Python
-    ~/.config/pudb/pudb.cfg:
-      force: true
-      path: python/pudb/pudb.cfg
+    # # Python
+    # ~/.config/pudb/pudb.cfg:
+    #   force: true
+    #   path: python/pudb/pudb.cfg
     # Karabiner
     ~/.config/karabiner.edn:
       force: true
@@ -58,11 +58,15 @@
     ~/.config/karabiner/karabiner.json:
       force: true
       path: karabiner/karabiner.json
-    # MTMR
-    ~/Library/Application Support/MTMR/items.json:
-      force: true
-      path: mtmr/items.json
+    # # MTMR
+    # ~/Library/Application Support/MTMR/items.json:
+    #   force: true
+    #   path: mtmr/items.json
     # Neovim
     ~/.config/nvim:
       force: true
       path: nvim
+    # Skhd
+    ~/.skhdrc: skhd/skhdrc
+    # Yabai
+    ~/.yabairc: yabai/yabairc
