@@ -70,3 +70,7 @@
     ~/.skhdrc: skhd/skhdrc
     # Yabai
     ~/.yabairc: yabai/yabairc
+    ~/.config/yabai:
+      create: true
+      force: true
+      path: yabai
