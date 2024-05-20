@@ -1,28 +1,28 @@
 # Opens app
 # Switch to or open Slack
-alt - s : osascript "${DOTFILES}"/yabai/scripts/toggle_app.scpt "Slack"
+alt - s : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Slack"
 
 # Switch to or open Google Chrome
-alt - c : osascript "${DOTFILES}"/yabai/scripts/toggle_app.scpt "Google Chrome"
+alt - c : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Google Chrome"
 
 # Switch to or open Spotify
-alt - p : osascript "${DOTFILES}"/yabai/scripts/toggle_app.scpt "Spotify"
+alt - p : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Spotify"
 
 # Switch to or open Obsidian
-alt - o : osascript "${DOTFILES}"/yabai/scripts/toggle_app.scpt "Obsidian"
+alt - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
 
 # Switch to or open iTerm2
-alt - i : osascript "${DOTFILES}"/yabai/scripts/toggle_app.scpt "iTerm"
+alt - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "iTerm"
 
 # opens iTerm2
-alt - return : "${DOTFILES}"/yabai/scripts/open_iterm2.sh
+alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
 
 # Show system statistics
-fn + lalt - 1 : "${DOTFILES}"/yabai/scripts/show_cpu.sh
-fn + lalt - 2 : "${DOTFILES}"/yabai/scripts/show_mem.sh
-fn + lalt - 3 : "${DOTFILES}"/yabai/scripts/show_bat.sh
-fn + lalt - 4 : "${DOTFILES}"/yabai/scripts/show_disk.sh
-fn + lalt - 5 : "${DOTFILES}"/yabai/scripts/show_song.sh
+fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
+fn + lalt - 2 : "${HOME}"/.config/yabai/scripts/show_mem.sh
+fn + lalt - 3 : "${HOME}"/.config/yabai/scripts/show_bat.sh
+fn + lalt - 4 : "${HOME}"/.config/yabai/scripts/show_disk.sh
+fn + lalt - 5 : "${HOME}"/.config/yabai/scripts/show_song.sh
 
 # Navigation
 alt - h : yabai -m window --focus west
