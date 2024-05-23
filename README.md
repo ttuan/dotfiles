@@ -23,5 +23,3 @@ cd ~/dotfiles
 pip install dotbot
 dotbot -c install.conf.yaml
 ```
-
-* For sync dotfiles only: `./install` (Thank for [dotbot](https://github.com/anishathalye/dotbot))
