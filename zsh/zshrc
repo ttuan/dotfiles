@@ -12,15 +12,17 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
-plugins=(zsh-autosuggestions vi-mode z asdf)
+plugins=(zsh-autosuggestions vi-mode z asdf nvm rvm)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin:$PATH"
+export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin:$PATH"
 
 export EDITOR="nvim"
 export TERM="xterm-256color"
 
 zstyle ':omz:update' mode disabled
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:rvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
 # Alias
@@ -38,9 +40,6 @@ unsetopt nomatch
 bindkey '^ ' autosuggest-execute
 
 source ~/.zshrc.private
-
-# export POWERLINE_COMMAND=~/.pyenv/versions/2.7.13/bin/powerline
-# source ~/.rvm/scripts/rvm
 
 prompt_dir() {
   shorten_path=$(echo $PWD | perl -pe "s/(\w)[^\/]+\//\1\//g")
