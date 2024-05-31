@@ -21,10 +21,10 @@ return require('packer').startup(function(use)
 
   -- Searching & Navigating
   use('rking/ag.vim')
-  use('ThePrimeagen/harpoon')
   use('nvim-lua/plenary.nvim')
   use('nvim-telescope/telescope.nvim')
   use('nvim-telescope/telescope-file-browser.nvim')
+  use('ThePrimeagen/harpoon')
 
   -- Action
   use('phaazon/hop.nvim')
@@ -68,11 +68,11 @@ return require('packer').startup(function(use)
 
   use('vim-test/vim-test')
   use('mattn/emmet-vim')
-  use('Glench/Vim-Jinja2-Syntax')
+  use('python-mode/python-mode')
+  -- use('Glench/Vim-Jinja2-Syntax')
   use('mfussenegger/nvim-dap') -- Debug Adapter
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
   use('mfussenegger/nvim-dap-python')
-  use('python-mode/python-mode')
   -- use('puremourning/vimspector')
 
   use('tpope/vim-rails')
@@ -83,10 +83,10 @@ return require('packer').startup(function(use)
   use('wakatime/vim-wakatime')
 
   -- Markdown
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-  })
+  -- use({
+  --   "iamcco/markdown-preview.nvim",
+  --   run = function() vim.fn["mkdp#util#install"]() end,
+  -- })
 
   -- Translate
   use('voldikss/vim-translator')

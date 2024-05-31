@@ -17,6 +17,22 @@ telescope.setup {
       },
     },
   },
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+      previewer = false,
+      sort_lastused = true
+    },
+    live_grep = {
+      theme = "dropdown",
+      previewer = false
+    },
+    buffers = {
+      theme = "dropdown",
+      sort_lastused = true,
+      previewer = false
+    }
+  },
   extensions = {
     file_browser = {
       theme = "dropdown",
@@ -46,8 +62,8 @@ telescope.setup {
 telescope.load_extension("file_browser")
 
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<C-f>', builtin.git_files, {})
-vim.keymap.set('n', '<C-b>', builtin.buffers, {})
+vim.keymap.set('n', '<C-f>', builtin.buffers, {})
+vim.keymap.set('n', '<C-g>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ft', builtin.tags, {})
 
 vim.keymap.set('n', '<leader>ps', function()

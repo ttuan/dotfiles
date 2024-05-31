@@ -48,3 +48,5 @@ set.foldmethod = "manual"
 set.foldlevel = 99
 
 set.spelllang = "en_us"
+
+vim.g.python3_host_prog = vim.fn.expand('~/.asdf/shims/python3')
