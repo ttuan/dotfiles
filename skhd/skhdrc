@@ -1,18 +1,11 @@
 # Opens app
-# Switch to or open Slack
-alt - s : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Slack"
-
-# Switch to or open Google Chrome
-alt - c : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Google Chrome"
-
-# Switch to or open Spotify
-alt - p : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Spotify"
-
-# Switch to or open Obsidian
-alt - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
-
-# Switch to or open iTerm2
-alt - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "iTerm"
+# Switch to or open app
+lctrl + shift - j : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Google Chrome"
+lctrl + shift - k : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Slack"
+lctrl + shift - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "iTerm"
+lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
+lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
+lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
 
 # opens iTerm2
 alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
