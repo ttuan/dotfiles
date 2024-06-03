@@ -13,7 +13,8 @@ telescope.setup {
   defaults = {
     mappings = {
       n = {
-        ["q"] = actions.close
+        ["q"] = actions.close,
+        ["<C-d>"] = actions.delete_buffer
       },
     },
   },

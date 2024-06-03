@@ -88,15 +88,15 @@ end
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-nvim_lsp.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+-- nvim_lsp.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
 
-nvim_lsp.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+-- nvim_lsp.html.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
 
 -- nvim_lsp.solargraph.setup {
 --   on_attach = on_attach,
