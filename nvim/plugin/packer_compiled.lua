@@ -119,11 +119,6 @@ _G.packer_plugins = {
     path = "/Users/tran.van.tuan/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/morhetz/gruvbox"
   },
-  harpoon = {
-    loaded = true,
-    path = "/Users/tran.van.tuan/.local/share/nvim/site/pack/packer/start/harpoon",
-    url = "https://github.com/ThePrimeagen/harpoon"
-  },
   ["hop.nvim"] = {
     loaded = true,
     path = "/Users/tran.van.tuan/.local/share/nvim/site/pack/packer/start/hop.nvim",
