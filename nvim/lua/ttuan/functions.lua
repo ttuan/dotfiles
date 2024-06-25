@@ -81,6 +81,27 @@ function M.global_delete_to_end_of_line(arg)
   vim.cmd("g/" .. vim.fn.escape(arg, "/") .. [[/s/\(.*\)\zs]] .. arg .. [[.*$//]])
 end
 
+-- Telescope livegrep with specific folder and file type
+function M.custom_live_grep(relative_folder_path, file_type)
+  local cwd = vim.fn.getcwd() -- Get the current working directory
+
+  -- Use current directory if no folder_path is provided
+  local folder_path = relative_folder_path and (cwd .. "/" .. relative_folder_path) or cwd
+
+  -- Set file type argument to include all files if not specified
+  local file_type_arg = ""
+  if file_type and file_type ~= "" then
+    file_type_arg = "--glob=*." .. file_type
+  end
+
+  require("telescope.builtin").live_grep({
+    cwd = folder_path,
+    additional_args = function()
+      return file_type_arg ~= "" and { file_type_arg } or {}
+    end,
+  })
+end
+
 -- -- Auto close windows when COMMIT_EDITMSG git file --> Quickly push + rebase with git
 -- function Close_git_message()
 --   local filename = vim.fn.expand("%")
@@ -102,24 +123,4 @@ end
 -- end
 -- map("n", "<Leader>rnf", ":lua RenameFile()<CR>", { noremap = true, silent = true })
 
--- Livegrep with telescope
-function M.custom_live_grep(relative_folder_path, file_type)
-  local cwd = vim.fn.getcwd() -- Get the current working directory
-
-  -- Use current directory if no folder_path is provided
-  local folder_path = relative_folder_path and (cwd .. "/" .. relative_folder_path) or cwd
-
-  -- Set file type argument to include all files if not specified
-  local file_type_arg = ""
-  if file_type and file_type ~= "" then
-    file_type_arg = "--glob=*." .. file_type
-  end
-
-  require("telescope.builtin").live_grep({
-    cwd = folder_path,
-    additional_args = function()
-      return file_type_arg ~= "" and { file_type_arg } or {}
-    end,
-  })
-end
 return M
