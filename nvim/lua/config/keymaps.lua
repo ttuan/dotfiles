@@ -1,11 +1,45 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
+
 local discipline = require("ttuan.discipline")
 discipline.cowboy()
 
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
+-- Mapping Custom functions
+local functions = require("ttuan.functions")
+keymap.set(
+  "n",
+  "<Leader>of",
+  functions.open_current_file,
+  vim.tbl_extend("force", opts, { desc = "Open current file in Chrome" })
+)
+keymap.set(
+  "n",
+  "<Leader>ogl",
+  functions.go_github_line,
+  vim.tbl_extend("force", opts, { desc = "Go to current line in Github" })
+)
+keymap.set(
+  "n",
+  "<Leader>ogc",
+  functions.go_github_commit,
+  vim.tbl_extend("force", opts, { desc = "Go to Github with commit hash" })
+)
+keymap.set("n", "<Leader>D", function()
+  local pattern = vim.fn.input("Enter pattern: ")
+  functions.global_delete_to_end_of_line(pattern)
+end, vim.tbl_extend("force", opts, { desc = "Delete to end of line" }))
+keymap.set("n", "<Leader>fN", function()
+  vim.cmd('exe "e " .. tempname()')
+end, vim.tbl_extend("force", opts, { desc = "Edit a temporary file" }))
+vim.api.nvim_set_keymap(
+  "n",
+  "<Leader>fG",
+  ":lua require('ttuan.functions').custom_live_grep(vim.fn.input('Grep in folder: ', '', 'dir'), vim.fn.input('File type (e.g., txt, lua): '))<CR>",
+  vim.tbl_extend("force", opts, { desc = "Live grep in specified folder and file type" })
+)
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
@@ -64,6 +98,9 @@ keymap.set("n", "N", "Nzzzv")
 -- Use C-p and C-n for calling command in history
 keymap.set("c", "<C-p>", "<Up>", opts)
 keymap.set("c", "<C-n>", "<Down>", opts)
+
+-- Quite file
+keymap.set("n", "<Leader>q", ":wq<CR>", opts)
 
 -- Copy current file path
 -- Just relative path
