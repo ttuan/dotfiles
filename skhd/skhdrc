@@ -7,9 +7,6 @@ lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "O
 lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
 
-# opens iTerm2
-alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
-
 # Show system statistics
 fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
 fn + lalt - 2 : "${HOME}"/.config/yabai/scripts/show_mem.sh
