@@ -99,7 +99,7 @@ keymap.set("n", "N", "Nzzzv")
 keymap.set("c", "<C-p>", "<Up>", opts)
 keymap.set("c", "<C-n>", "<Down>", opts)
 
--- Quite file
+-- Quit file
 keymap.set("n", "<Leader>q", ":wq<CR>", opts)
 
 -- Copy current file path
