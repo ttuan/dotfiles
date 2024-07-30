@@ -82,6 +82,14 @@ return {
         end,
         desc = "Go to word",
       },
+      {
+        "<leader>l",
+        function()
+          local directions = require("hop.hint").HintDirection
+          require("hop").hint_words({ direction = directions.AFTER_CURSOR, current_line_only = true })
+        end,
+        desc = "Go char current line",
+      },
     },
   },
 
@@ -117,30 +125,29 @@ return {
   -- Override nvim-cmp keymaps
   {
     "nvim-cmp",
-    keys = {
-      -- disable the keymaps default
-      { "<Tab>", false },
-      { "<S-Tab>", false },
-      -- Reconfig it to new keymaps
+    dependencies = {
       {
-        "<C-n>",
-        function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
+        "zbirenbaum/copilot-cmp",
+        dependencies = "copilot.lua",
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          -- attach cmp source whenever copilot attaches
+          -- fixes lazy-loading issues with the copilot cmp source
+          LazyVim.lsp.on_attach(function(client)
+            copilot_cmp._on_insert_enter({})
+          end, "copilot")
         end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<C-p>",
-        function()
-          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
       },
     },
+    opts = function(_, opts)
+      table.insert(opts.sources, 1, {
+        name = "copilot",
+        group_index = 1,
+        priority = 100,
+      })
+    end,
   },
 
   -- Telescope
