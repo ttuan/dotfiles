@@ -31,6 +31,10 @@ keymap.set("n", "<Leader>D", function()
   local pattern = vim.fn.input("Enter pattern: ")
   functions.global_delete_to_end_of_line(pattern)
 end, vim.tbl_extend("force", opts, { desc = "Delete to end of line" }))
+keymap.set("n", "<Leader>B", function()
+  local pattern = vim.fn.input("Enter pattern: ")
+  functions.global_delete_to_first_occurrence(pattern)
+end, vim.tbl_extend("force", opts, { desc = "Delete to first occurrence" }))
 keymap.set("n", "<Leader>fN", function()
   vim.cmd('exe "e " .. tempname()')
 end, vim.tbl_extend("force", opts, { desc = "Edit a temporary file" }))
@@ -40,6 +44,9 @@ vim.api.nvim_set_keymap(
   ":lua require('ttuan.functions').custom_live_grep(vim.fn.input('Grep in folder: ', '', 'dir'), vim.fn.input('File type (e.g., txt, lua): '))<CR>",
   vim.tbl_extend("force", opts, { desc = "Live grep in specified folder and file type" })
 )
+
+-- Remap Lazy to Leader+L
+vim.api.nvim_set_keymap("n", "<leader>L", ":Lazy<CR>", { noremap = true, silent = true })
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
@@ -77,10 +84,10 @@ keymap.set("n", "gV", "`[v`]")
 keymap.set("n", "<Leader>n", "<c-^>", {})
 
 -- Open file in same directory
-keymap.set("n", ",e", ':e <C-R>=expand("%:p:h") . "/"<CR>', opts)
-keymap.set("n", ",t", ':tabe <C-R>=expand("%:p:h") . "/"<CR>', opts)
-keymap.set("n", ",s", ':split <C-R>=expand("%:p:h") . "/"<CR>', opts)
-keymap.set("n", ",v", ':vsplit <C-R>=expand("%:p:h") . "/"<CR>', opts)
+keymap.set("n", ",e", ':e <C-R>=expand("%:p:h") . "/"<CR>', { noremap = true, silent = false })
+keymap.set("n", ",t", ':tabe <C-R>=expand("%:p:h") . "/"<CR>', { noremap = true, silent = false })
+keymap.set("n", ",s", ':split <C-R>=expand("%:p:h") . "/"<CR>', { noremap = true, silent = false })
+keymap.set("n", ",v", ':vsplit <C-R>=expand("%:p:h") . "/"<CR>', { noremap = true, silent = false })
 
 -- Go to next/prev project search result
 keymap.set("n", "<Leader>>", ":cnext<CR>", opts)

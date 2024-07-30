@@ -72,6 +72,15 @@ function M.go_github_commit()
   })
 end
 
+-- Delete from start of line to the first occurrence of a character
+function M.global_delete_to_first_occurrence(arg)
+  if not arg or arg == "" then
+    vim.notify("Argument cannot be empty", vim.log.levels.ERROR)
+    return
+  end
+  vim.cmd("g/" .. vim.fn.escape(arg, "/") .. [[/s/^.*]] .. arg .. [[//]])
+end
+
 -- Delete to end of line
 function M.global_delete_to_end_of_line(arg)
   if not arg or arg == "" then
