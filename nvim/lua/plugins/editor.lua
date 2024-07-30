@@ -11,9 +11,6 @@ return {
     },
   },
 
-  -- Custom text object
-  { { "machakann/vim-textobj-delimited", event = "VeryLazy" } },
-
   -- Others
   {
     enabled = false,
