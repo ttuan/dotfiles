@@ -6,6 +6,7 @@ lctrl + shift - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "i
 lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
 lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
+lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Preview"
 
 # Show system statistics
 fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
