@@ -5,7 +5,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 local discipline = require("ttuan.discipline")
-discipline.cowboy()
+-- discipline.cowboy()
 
 -- Mapping Custom functions
 local functions = require("ttuan.functions")

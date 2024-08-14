@@ -1,17 +1,22 @@
--- local lspconfig = require("lspconfig")
-
 return {
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "stylua",
+        "lua-language-server",
+      })
+    end,
+  },
+
   {
     "neovim/nvim-lspconfig",
     opts = {
-      -- servers = {
-      --   ruby_lsp = {
-      --     cmd = { "ruby-lsp" },
-      --     init_options = {
-      --       formatter = "auto",
-      --     },
-      --   },
-      -- },
+      servers = {
+        jsonls = {
+          mason = false,
+        },
+      },
     },
   },
 }
