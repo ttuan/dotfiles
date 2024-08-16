@@ -11,12 +11,10 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        jsonls = {
-          mason = false,
-        },
-      },
-    },
+    opts = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+
+      keys[#keys + 1] = { "gr", false }
+    end,
   },
 }

@@ -35,8 +35,8 @@
   co = checkout
   br = branch
   pf = push --force-with-lease
-  ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
-  pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+  ps = "!git push upstream $(git rev-parse --abbrev-ref HEAD)"
+  pl = "!git pull upstream $(git rev-parse --abbrev-ref HEAD)"
   parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
 
   # reset
