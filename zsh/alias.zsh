@@ -13,6 +13,7 @@ alias bi="bundle install"
 alias tmx="tmuxinator start project $1"
 alias tsd="tmuxinator start django $1"
 alias serve="python -m SimpleHTTPServer 8000"
+alias pn="pnpm"
 
 # ============ System ===============
 alias ss="source ~/.zshrc; echo 'Source zshrc complete';"
@@ -58,7 +59,7 @@ tx=37:\
 su=37:\
 sf=37:\
 xa=37"
-alias ll="exa -l -g --icons --sort=.name  --group-directories-first"
+alias ll="eza -l -g --icons --sort=.name  --group-directories-first"
 alias lla="ll -a"
 alias la="ls -A"
 alias l="ls"
