@@ -12,10 +12,12 @@ ZSH_THEME="agnoster"
 export UPDATE_ZSH_DAYS=7
 
 # Plugin
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:rvm' lazy yes
 plugins=(zsh-autosuggestions vi-mode z asdf nvm rvm)
 
 # User configuration
-export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin:$PATH"
+export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$HOME/Library/Python/3.9/bin:$PATH"
 
 export EDITOR="nvim"
 export TERM="xterm-256color"
