@@ -13,8 +13,7 @@ export UPDATE_ZSH_DAYS=7
 
 # Plugin
 zstyle ':omz:plugins:nvm' lazy yes
-zstyle ':omz:plugins:rvm' lazy yes
-plugins=(zsh-autosuggestions vi-mode z asdf nvm rvm)
+plugins=(zsh-autosuggestions vi-mode z asdf nvm)
 
 # User configuration
 export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$HOME/Library/Python/3.9/bin:$PATH"
@@ -24,7 +23,6 @@ export TERM="xterm-256color"
 
 zstyle ':omz:update' mode disabled
 zstyle ':omz:plugins:nvm' lazy yes
-zstyle ':omz:plugins:rvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
 # Alias
