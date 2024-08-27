@@ -1,3 +1,6 @@
+# Switch profile
+⌘ + ⇧ + M
+
 # Vimium open link
 f
 
@@ -7,5 +10,26 @@ F
 # Vimium copy link
 yf
 
-# Switch profile
-⌘ + ⇧ + M
+# Vimium switch between left tabs
+J
+
+# Vimium switch between right tabs
+K
+
+# Vimium switch to first tab
+gf
+
+# Vimium switch to last tab 
+gl
+
+# Vimium switch to previous url
+H
+
+# Vimium switch to next url
+L
+
+# Vimium go to next page
+]]
+
+# Vimium go to previous page
+]]
