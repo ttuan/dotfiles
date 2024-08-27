@@ -14,6 +14,8 @@ alias tmx="tmuxinator start project $1"
 alias tsd="tmuxinator start django $1"
 alias serve="python -m SimpleHTTPServer 8000"
 alias pn="pnpm"
+alias cc="git add . && cz commit"
+alias cat=bat
 
 # ============ System ===============
 alias ss="source ~/.zshrc; echo 'Source zshrc complete';"
