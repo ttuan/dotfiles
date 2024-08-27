@@ -1,0 +1,11 @@
+# Vimium open link
+f
+
+# Vimium open link in a new tab
+F
+
+# Vimium copy link
+yf
+
+# Switch profile
+⌘ + ⇧ + M
