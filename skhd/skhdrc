@@ -8,6 +8,9 @@ lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "M
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
 lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Preview"
 
+# Open specific website in Chrome
+lctrl + shift - space : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "chatgpt.com"
+
 # Show system statistics
 fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
 fn + lalt - 2 : "${HOME}"/.config/yabai/scripts/show_mem.sh
