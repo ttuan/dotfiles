@@ -25,6 +25,7 @@ return {
   -- Rails
   {
     "tpope/vim-rails",
+    lazy = false,
     config = function()
       -- Custom autocommand to set YAML filetype correctly
       vim.cmd([[
