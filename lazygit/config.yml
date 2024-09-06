@@ -114,6 +114,6 @@ customCommands:
             value: ":construction:"
       - type: "confirm"
         title: "Commit"
-        body: "Commit with the message '{{.Form.Type}}{{.Form.Scope}}: {{.Form.Message}}{{.Form.Emoji}}'. Is this okay?"
-    command: 'bash -c ''type="{{.Form.Type}}"; scope="{{.Form.Scope}}"; message="{{.Form.Message}}"; emoji="{{.Form.Emoji}}"; commit_message="$type${scope:+($scope)}: $message $emoji"; git commit -m "$commit_message"'''
+        body: "Commit with the message '{{.Form.Emoji}} {{.Form.Type}}{{.Form.Scope}}: {{.Form.Message}}'. Is this okay?"
+    command: 'bash -c ''type="{{.Form.Type}}"; scope="{{.Form.Scope}}"; message="{{.Form.Message}}"; emoji="{{.Form.Emoji}}"; commit_message="$emoji $type${scope:+($scope)}: $message"; git commit -m "$commit_message"'''
     loadingText: "Committing..."
