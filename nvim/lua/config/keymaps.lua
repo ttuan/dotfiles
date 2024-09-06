@@ -111,7 +111,7 @@ keymap.set("n", "<Leader>q", ":wq<CR>", opts)
 
 -- Copy current file path
 -- Just relative path
-keymap.set("n", "<leader>cp", ':let @+ = expand("%")<CR>', opts)
+keymap.set("n", "<leader>cp", ':let @+ = expand("%:~:.")<CR>', opts)
 -- Full path
 -- keymap.set("n", "<leader>cfp", ':let @+ = expand("%:p")<CR>', opts)
 -- Just filename
