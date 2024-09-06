@@ -74,3 +74,8 @@
       create: true
       force: true
       path: yabai
+    # Lazygit
+    ~/.config/lazygit:
+      create: true
+      force: true
+      path: lazygit
