@@ -1,0 +1,25 @@
+return {
+  -- "mfussenegger/nvim-dap",
+  -- config = function()
+  --   local dap = require("dap")
+  --
+  --   dap.adapters.python = {
+  --     type = "executable",
+  --     command = "python",
+  --     args = { "-m", "debugpy.adapter" },
+  --   }
+  --
+  --   dap.configurations.python = {
+  --     {
+  --       type = "python",
+  --       request = "launch",
+  --       name = "Launch file",
+  --       program = "${file}",
+  --       pythonPath = function()
+  --         local pyenv_python = vim.fn.system("pyenv which python")
+  --         return vim.fn.trim(pyenv_python)
+  --       end,
+  --     },
+  --   }
+  -- end,
+}
