@@ -8,7 +8,7 @@ os:
   editPreset: "nvim"
 
 customCommands:
-  - key: "<c-e>"
+  - key: "c"
     context: "files"
     description: "commit files with format"
     prompts:
