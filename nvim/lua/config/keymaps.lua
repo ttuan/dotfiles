@@ -17,6 +17,12 @@ keymap.set(
 )
 keymap.set(
   "n",
+  "<Leader>oc",
+  functions.open_current_file_on_http_server,
+  vim.tbl_extend("force", opts, { desc = "Open current file with http server" })
+)
+keymap.set(
+  "n",
   "<Leader>ogl",
   functions.go_github_line,
   vim.tbl_extend("force", opts, { desc = "Go to current line in Github" })
@@ -44,12 +50,13 @@ vim.api.nvim_set_keymap(
   ":lua require('ttuan.functions').custom_live_grep(vim.fn.input('Grep in folder: ', '', 'dir'), vim.fn.input('File type (e.g., txt, lua): '))<CR>",
   vim.tbl_extend("force", opts, { desc = "Live grep in specified folder and file type" })
 )
+keymap.set("n", "<Leader>on", functions.open_today_note, vim.tbl_extend("force", opts, { desc = "Open today note" }))
 
 -- Remap Lazy to Leader+L
 vim.api.nvim_set_keymap("n", "<leader>L", ":Lazy<CR>", { noremap = true, silent = true })
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+-- keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Split window
 keymap.set("n", "ss", ":split<return>", opts)

@@ -111,6 +111,46 @@ function M.custom_live_grep(relative_folder_path, file_type)
   })
 end
 
+-- Open today notes
+function M.open_today_note()
+  local vault_path = os.getenv("OBSIDIAN_VAULT_PATH")
+  if vault_path == nil or vault_path == "" then
+    print("Error: OBSIDIAN_VAULT_PATH is not set.")
+    return
+  end
+
+  local today = os.date("%Y-%m-%d")
+  local note_path = vault_path .. "/10 Journals/11 Daily/" .. today .. ".md"
+
+  local file_exists = vim.fn.filereadable(note_path) == 1
+
+  if not file_exists then
+    vim.fn.mkdir(vim.fn.fnamemodify(note_path, ":h"), "p")
+    local file = io.open(note_path, "w")
+    if file then
+      file:close()
+    end
+    print("Created new daily note for today: " .. note_path)
+  end
+
+  vim.cmd("vsplit " .. note_path)
+
+  -- Resize the window to 30% of the total width
+  local total_width = vim.o.columns
+  local new_width = math.floor(total_width * 0.3)
+  vim.cmd("vertical resize " .. new_width)
+end
+
+function M.open_current_file_on_http_server()
+  local file_path = vim.fn.expand("%:~:.")
+  local url_path = file_path:gsub(vim.fn.getcwd() .. "/", "")
+  local url = "http://localhost:3000/" .. url_path
+
+  local chrome_command = string.format("open -a 'Google Chrome' '%s'", url)
+
+  vim.fn.jobstart(chrome_command)
+end
+
 -- -- Auto close windows when COMMIT_EDITMSG git file --> Quickly push + rebase with git
 -- function Close_git_message()
 --   local filename = vim.fn.expand("%")
