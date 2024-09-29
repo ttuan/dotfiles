@@ -47,6 +47,28 @@ return {
   },
   {
     "benmills/vimux",
+    lazy = false,
+    config = function()
+      vim.g.VimuxUseNearestPane = 1
+    end,
+    keys = {
+      {
+        "<Leader>rr",
+        function()
+          vim.fn.VimuxRunCommand("clear; ruby " .. vim.fn.bufname("%"))
+        end,
+        desc = "Run Ruby file in Vimux",
+        silent = true,
+      },
+      {
+        "<Leader>rp",
+        function()
+          vim.fn.VimuxRunCommand("clear; python " .. vim.fn.bufname("%"))
+        end,
+        desc = "Run Python file in Vimux",
+        silent = true,
+      },
+    },
   },
   {
     "christoomey/vim-tmux-navigator",
