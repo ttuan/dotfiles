@@ -1,4 +1,4 @@
-# Opens app
+# Prefix: lctrl + shift - App operations
 # Switch to or open app
 lctrl + shift - j : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Google Chrome"
 lctrl + shift - k : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Slack"
@@ -7,17 +7,11 @@ lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "O
 lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
 lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Preview"
+lctrl + shift - y : pgrep yabai && yabai --stop-service || yabai --start-service
 
 # Open specific website in Chrome
 lctrl + shift - space : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "chatgpt.com/?temporary-chat=true"
 lctrl + shift - d : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "devdocs.io"
-
-# Show system statistics
-fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
-fn + lalt - 2 : "${HOME}"/.config/yabai/scripts/show_mem.sh
-fn + lalt - 3 : "${HOME}"/.config/yabai/scripts/show_bat.sh
-fn + lalt - 4 : "${HOME}"/.config/yabai/scripts/show_disk.sh
-fn + lalt - 5 : "${HOME}"/.config/yabai/scripts/show_song.sh
 
 # Navigation
 alt - h : yabai -m window --focus west
@@ -25,6 +19,7 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
+# Prefix: alt + shift - Window operations
 # Moving windows
 shift + alt - h : yabai -m window --warp west
 shift + alt - j : yabai -m window --warp south
@@ -84,3 +79,10 @@ shift + lctrl + alt - r : \
 # Make window native fullscreen
 alt - f         : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
+
+# # Show system statistics
+# # fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
+# # fn + lalt - 2 : "${HOME}"/.config/yabai/scripts/show_mem.sh
+# # fn + lalt - 3 : "${HOME}"/.config/yabai/scripts/show_bat.sh
+# # fn + lalt - 4 : "${HOME}"/.config/yabai/scripts/show_disk.sh
+# # fn + lalt - 5 : "${HOME}"/.config/yabai/scripts/show_song.sh
