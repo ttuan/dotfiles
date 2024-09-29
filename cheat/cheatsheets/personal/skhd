@@ -18,3 +18,12 @@
 
 # Open/Switch DevDocs
 ⌃ + ⇧ + D
+
+# Moving Windows
+Shift + Alt - h/j/k/l
+
+# Move focus container to workspace
+Shift + Alt - m/p/n/1/2/3/4
+
+# Resize Windows
+Ctrl + Alt - h/j/k/l
