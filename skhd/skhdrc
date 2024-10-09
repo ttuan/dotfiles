@@ -13,8 +13,13 @@ lctrl + shift - y : pgrep yabai && yabai --stop-service || yabai --start-service
 lctrl + shift - space : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "chatgpt.com/?temporary-chat=true"
 lctrl + shift - d : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "devdocs.io"
 
-# Toggle Youtube video
-lctrl + cmd - l : osascript "${HOME}"/.config/yabai/scripts/toggle_youtube_video.scpt
+# App Control
+# Toggle Youtube video play/pause on Chrome
+lctrl + cmd - space : osascript "${HOME}"/.config/yabai/scripts/toggle_youtube_video.scpt
+# Change iTerm2 transparency
+lctrl + cmd - i : osascript "${HOME}"/.config/yabai/scripts/change_iterm2_transparency.scpt
+# Unminimize windows of the current application
+lctrl + cmd - m : osascript "${HOME}"/.config/yabai/scripts/unminimize.scpt
 
 # Navigation
 alt - h : yabai -m window --focus west
