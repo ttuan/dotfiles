@@ -7,9 +7,7 @@ export DOTFILES=~/Dropbox/Projects/dotfiles
 # Ack like vim
 bindkey -v
 
-ZSH_THEME="agnoster"
-
-export UPDATE_ZSH_DAYS=7
+ZSH_THEME="af-magic"
 
 # Plugin
 zstyle ':omz:plugins:nvm' lazy yes
@@ -20,10 +18,14 @@ export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/ho
 
 export EDITOR="nvim"
 export TERM="xterm-256color"
+export UPDATE_ZSH_DAYS=7
 
 zstyle ':omz:update' mode disabled
 zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
+
+# Load theme
+source $DOTFILES/zsh/theme.zsh
 
 # Alias
 source $DOTFILES/zsh/alias.zsh
@@ -40,9 +42,3 @@ unsetopt nomatch
 bindkey '^ ' autosuggest-execute
 
 source ~/.zshrc.private
-
-prompt_dir() {
-  shorten_path=$(echo $PWD | perl -pe "s/(\w)[^\/]+\//\1\//g")
-  prompt_segment blue $CURRENT_FG $shorten_path
-  # prompt_segment blue $CURRENT_FG ' %20<...<%~%<< '
-}
