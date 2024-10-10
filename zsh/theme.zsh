@@ -72,7 +72,7 @@ prompt_git() {
     vcs_info
 
     # Output the ref, branch, and mode information
-    echo -n " ${${ref:gs/%/%%}/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}%f"
+    echo -n " (${${ref:gs/%/%%}/refs\/heads\/})${vcs_info_msg_0_%% }${mode}%f"
   fi
 }
 
