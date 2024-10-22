@@ -35,6 +35,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias .='pwd'
 alias ..='cd ..'
 alias ...='cd ../..'
+eval "$(zoxide init zsh)"
 alias j='z'
 
 # ls
