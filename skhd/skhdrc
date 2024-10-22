@@ -4,9 +4,10 @@ lctrl + shift - j : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "G
 lctrl + shift - k : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Slack"
 lctrl + shift - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "iTerm"
 lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
-lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
+lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Messenger"
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Visual Studio Code"
 lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Preview"
+lctrl + shift - b : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
 lctrl + shift - y : pgrep yabai && yabai --stop-service || yabai --start-service
 
 # Open specific website in Chrome
