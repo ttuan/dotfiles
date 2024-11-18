@@ -17,11 +17,25 @@ return {
     "folke/flash.nvim",
   },
   {
-    "907th/vim-auto-save",
+    "Pocco81/auto-save.nvim",
     config = function()
-      vim.g.auto_save = 1
-      vim.g.auto_save_silent = 1
-      vim.g.auto_save_in_insert_mode = 1
+      require("auto-save").setup({
+        execution_message = {
+          message = function()
+            return ""
+          end,
+        },
+        -- https://github.com/ThePrimeagen/harpoon/issues/434
+        condition = function(buf)
+          local fn = vim.fn
+          local utils = require("auto-save.utils.data")
+
+          if fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), { "harpoon" }) then
+            return true
+          end
+          return false
+        end,
+      })
     end,
   },
   {
