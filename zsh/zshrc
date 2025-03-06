@@ -11,7 +11,7 @@ ZSH_THEME="af-magic"
 
 # Plugin
 zstyle ':omz:plugins:nvm' lazy yes
-plugins=(zsh-autosuggestions vi-mode asdf nvm)
+plugins=(fzf zsh-autosuggestions vi-mode asdf nvm)
 
 # User configuration
 export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$HOME/Library/Python/3.9/bin:$PATH"
