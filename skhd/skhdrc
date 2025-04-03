@@ -21,6 +21,9 @@ lctrl + cmd - space : osascript "${HOME}"/.config/yabai/scripts/toggle_youtube_v
 lctrl + cmd - i : osascript "${HOME}"/.config/yabai/scripts/change_iterm2_transparency.scpt
 # Unminimize windows of the current application
 lctrl + cmd - m : osascript "${HOME}"/.config/yabai/scripts/unminimize.scpt
+# Resize current window to nice size
+lctrl + cmd - n : osascript "${HOME}"/.config/yabai/scripts/resize_window.scpt
+lctrl + cmd - u : osascript "${HOME}"/.config/yabai/scripts/increase_window_size.scpt
 
 # Navigation
 alt - h : yabai -m window --focus west
