@@ -1,4 +1,3 @@
--- Example: 70% of screen size
 set scale to 0.6
 
 tell application "Finder"
@@ -13,11 +12,9 @@ set posX to (screenWidth - winWidth) / 2
 set posY to (screenHeight - winHeight) / 2
 
 tell application "System Events"
-	set frontApp to name of first application process whose frontmost is true
-end tell
-
-tell application frontApp
+	set frontApp to first application process whose frontmost is true
 	try
-		set bounds of front window to {posX, posY, posX + winWidth, posY + winHeight}
+		set position of front window of frontApp to {posX, posY}
+		set size of front window of frontApp to {winWidth, winHeight}
 	end try
 end tell

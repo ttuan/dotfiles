@@ -7,23 +7,23 @@ tell application "Finder"
 	set screenHeight to item 4 of screenBounds
 end tell
 
--- Get frontmost app
+-- Use System Events to get frontmost app and window
 tell application "System Events"
-	set frontApp to name of first application process whose frontmost is true
-end tell
-
--- Get current window size and position
-tell application frontApp
+	set frontApp to first application process whose frontmost is true
 	try
-		set currentBounds to bounds of front window
-		set {x1, y1, x2, y2} to currentBounds
+		set currentBounds to position of front window of frontApp
+		set winSize to size of front window of frontApp
 
-		set winWidth to (x2 - x1) * scaleStep
-		set winHeight to (y2 - y1) * scaleStep
+		set {x1, y1} to currentBounds
+		set {w, h} to winSize
 
-		set posX to (screenWidth - winWidth) / 2
-		set posY to (screenHeight - winHeight) / 2
+		set newWidth to w * scaleStep
+		set newHeight to h * scaleStep
 
-		set bounds of front window to {posX, posY, posX + winWidth, posY + winHeight}
+		set posX to (screenWidth - newWidth) / 2
+		set posY to (screenHeight - newHeight) / 2
+
+		set position of front window of frontApp to {posX, posY}
+		set size of front window of frontApp to {newWidth, newHeight}
 	end try
 end tell
