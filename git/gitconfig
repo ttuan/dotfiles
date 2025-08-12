@@ -33,6 +33,7 @@
   d = diff
   st = status
   co = checkout
+  cr = cherry-pick
   br = branch
   pf = push --force-with-lease
   ps = "!git push upstream $(git rev-parse --abbrev-ref HEAD)"

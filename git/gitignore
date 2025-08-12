@@ -154,3 +154,9 @@ default_venv
 
 # asdf
 .tool-versions
+
+# AI
+.AI_PLAN.md
+.cusor/*
+.claude/*
+CLAUDE.md
