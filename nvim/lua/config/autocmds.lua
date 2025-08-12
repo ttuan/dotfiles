@@ -25,3 +25,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Don't auto comment new line
 vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+
+-- Highlight for gs files as javascript
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.gs",
+  callback = function()
+    vim.bo.filetype = "javascript"
+  end,
+})
