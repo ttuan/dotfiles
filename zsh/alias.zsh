@@ -16,6 +16,7 @@ alias serve="python -m SimpleHTTPServer 8000"
 alias pn="pnpm"
 alias cc="git add . && cz commit"
 alias cat=bat
+alias C=claude
 
 # ============ System ===============
 alias ss="source ~/.zshrc; echo 'Source zshrc complete';"
@@ -46,7 +47,7 @@ gm=38;5;203:ga=38;5;203:mp=3;38;5;111:im=38;2;180;150;250:vi=38;2;255;190;148:\
 mu=38;2;255;175;215:lo=38;2;255;215;183:cr=38;2;240;160;240:\
 do=38;2;200;200;246:co=38;2;255;119;153:tm=38;2;148;148;148:\
 cm=38;2;230;150;210:bu=38;2;95;215;175:sc=38;2;110;222;222"
-alias ll="eza -l -g --icons --sort=.name  --group-directories-first"
+alias ll="eza -l --icons --sort=.name  --group-directories-first --no-permissions"
 alias lla="ll -a"
 alias la="ls -A"
 alias l="ls"
