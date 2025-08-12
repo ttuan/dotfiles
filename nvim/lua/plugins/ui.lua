@@ -140,13 +140,13 @@ return {
     event = "VimEnter",
     opts = function(_, opts)
       local logo = [[
-                tttt               tttt                                                               
-              ttt:::t            ttt:::t                                                               
-              t:::::t            t:::::t                                                               
-              t:::::t            t:::::t                                                               
-        ttttttt:::::tttttttttttttt:::::ttttttt    uuuuuu    uuuuuu    aaaaaaaaaaaaa  nnnn  nnnnnnnn    
-        t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    a::::::::::::a n:::nn::::::::nn  
-        t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    aaaaaaaaa:::::an::::::::::::::nn 
+                tttt               tttt
+              ttt:::t            ttt:::t
+              t:::::t            t:::::t
+              t:::::t            t:::::t
+        ttttttt:::::tttttttttttttt:::::ttttttt    uuuuuu    uuuuuu    aaaaaaaaaaaaa  nnnn  nnnnnnnn
+        t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    a::::::::::::a n:::nn::::::::nn
+        t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    aaaaaaaaa:::::an::::::::::::::nn
         tttttt:::::::tttttttttttt:::::::tttttt    u::::u    u::::u             a::::ann:::::::::::::::n
               t:::::t            t:::::t          u::::u    u::::u      aaaaaaa:::::a  n:::::nnnn:::::n
               t:::::t            t:::::t          u::::u    u::::u    aa::::::::::::a  n::::n    n::::n
@@ -159,6 +159,7 @@ return {
       ]]
 
       logo = string.rep("\n", 8) .. logo .. "\n\n"
+      opts.config = opts.config or {}
       opts.config.header = vim.split(logo, "\n")
     end,
   },

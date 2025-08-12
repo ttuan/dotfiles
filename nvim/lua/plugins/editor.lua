@@ -5,6 +5,7 @@ return {
     {
       "vim-scripts/ReplaceWithRegister",
       event = "VeryLazy",
+      vscode = true,
       config = function()
         vim.api.nvim_set_keymap("n", "gr", "<Plug>ReplaceWithRegisterOperator", { noremap = false, silent = true })
       end,
@@ -104,6 +105,7 @@ return {
   {
     "phaazon/hop.nvim",
     branch = "v2",
+    vscode = true,
     config = function()
       require("hop").setup({ keys = "asdfghjklqwertyuiopzxcvbnm" })
     end,
@@ -139,6 +141,7 @@ return {
   {
     "dinhhuy258/git.nvim",
     event = "BufReadPre",
+    vscode = true,
     opts = {
       keymaps = {
         -- Open blame window
