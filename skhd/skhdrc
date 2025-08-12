@@ -6,7 +6,7 @@ lctrl + shift - i : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "i
 lctrl + shift - o : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Obsidian"
 lctrl + shift - m : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Messenger"
 lctrl + shift - n : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Cursor"
-lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Preview"
+lctrl + shift - l : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Code"
 lctrl + shift - b : osascript "${HOME}"/.config/yabai/scripts/toggle_app.scpt "Min"
 lctrl + shift - y : pgrep yabai && yabai --stop-service || yabai --start-service
 
