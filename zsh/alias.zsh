@@ -28,7 +28,6 @@ alias q="exit"
 alias c="clear"
 alias h="history | grep"
 alias ps="ps aux | grep"
-alias kill="sudo killall -9"
 alias kp="npx kill-port $1"
 alias ctags="`brew --prefix`/bin/ctags"
 
