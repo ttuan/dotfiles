@@ -157,6 +157,6 @@ default_venv
 
 # AI
 .AI_PLAN.md
-.cusor/*
+.cursor/*
 .claude/*
 CLAUDE.md
