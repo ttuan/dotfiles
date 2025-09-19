@@ -14,6 +14,10 @@ lctrl + shift - y : pgrep yabai && yabai --stop-service || yabai --start-service
 lctrl + shift - space : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "chatgpt.com/?temporary-chat=true"
 lctrl + shift - d : osascript "${HOME}"/.config/yabai/scripts/open_website.scpt "devdocs.io"
 
+lctrl + shift - 0x1B : ~/.config/yabai/scripts/control_volume.sh down
+lctrl + shift - 0x18 : ~/.config/yabai/scripts/control_volume.sh up
+lctrl + shift - 0x1D : ~/.config/yabai/scripts/control_volume.sh toggle
+
 # App Control
 # Toggle Youtube video play/pause on Chrome
 lctrl + cmd - space : osascript "${HOME}"/.config/yabai/scripts/toggle_youtube_video.scpt
@@ -91,6 +95,11 @@ shift + lctrl + alt - r : \
 # Make window native fullscreen
 alt - f         : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
+
+# Volume Control using m-cli
+lctrl + shift - 0x1B : m volume down
+lctrl + shift - 0x18 : m volume up
+lctrl + shift - 0x19 : m volume mute
 
 # # Show system statistics
 # # fn + lalt - 1 : "${HOME}"/.config/yabai/scripts/show_cpu.sh
