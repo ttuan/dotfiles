@@ -17,6 +17,7 @@ alias pn="pnpm"
 alias cc="git add . && cz commit"
 alias cat=bat
 alias C=claude
+alias yoloclaude="claude --dangerously-skip-permissions"
 
 # ============ System ===============
 alias ss="source ~/.zshrc; echo 'Source zshrc complete';"
