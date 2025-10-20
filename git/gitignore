@@ -159,4 +159,6 @@ default_venv
 .AI_PLAN.md
 .cursor/*
 .claude/*
+.copilot/*
 CLAUDE.md
+.serena/*
