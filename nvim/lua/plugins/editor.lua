@@ -170,6 +170,14 @@ return {
       { "-", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
       { "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     },
+    opts = {
+      window = {
+        -- position = "float",
+        mappings = {
+          ["/"] = "none",
+        },
+      },
+    },
   },
 
   {
