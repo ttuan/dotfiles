@@ -4,6 +4,12 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Disable Neovim's default gr* mappings to allow ReplaceWithRegister to work
+vim.keymap.del("n", "grr", { silent = true })
+vim.keymap.del("n", "gra", { silent = true })
+vim.keymap.del("n", "grn", { silent = true })
+vim.keymap.del("n", "gri", { silent = true })
+
 local discipline = require("ttuan.discipline")
 -- discipline.cowboy()
 

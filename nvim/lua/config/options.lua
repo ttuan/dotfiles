@@ -6,7 +6,8 @@ vim.scriptencoding = "utf-8"
 set.encoding = "utf-8"
 set.fileencoding = "utf-8"
 
-set.shell = "zsh"
+set.shell = "/bin/bash"
+-- set.shellcmdflag = "-ic" -- -i for interactive, -c for command
 set.mouse = "a"
 set.clipboard:append("unnamed", "unnamedplus")
 set.history = 10000
@@ -48,6 +49,10 @@ set.foldmethod = "manual"
 set.foldlevel = 99
 
 set.spelllang = "en_us"
+
+-- Reduce timeout for faster tmux navigation
+set.timeoutlen = 300
+set.ttimeoutlen = 10
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
