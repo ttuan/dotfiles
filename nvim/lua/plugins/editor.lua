@@ -1,4 +1,15 @@
 return {
+  -- {
+  --   "folke/snacks.nvim",
+  --   opts = {
+  --     terminal = {
+  --       win = {
+  --         position = "float",
+  --       },
+  --     },
+  --   },
+  -- },
+
   -- Custom motion
   { { "tpope/vim-surround", event = "VeryLazy" } },
   {
@@ -121,7 +132,7 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
-    lazy = false,  -- Load immediately, not on demand
+    lazy = false, -- Load immediately, not on demand
     keys = {
       { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
       { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
