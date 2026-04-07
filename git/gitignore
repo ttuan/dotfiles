@@ -159,6 +159,9 @@ default_venv
 .AI_PLAN.md
 .cursor/*
 .claude/*
+.mcp.json
+.claudedoc/*
 .copilot/*
 CLAUDE.md
 .serena/*
+excalidraw.log
