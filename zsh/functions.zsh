@@ -117,6 +117,29 @@ gfetch() {
 }
 
 # ============ Development ===============
+# Open project with tmux: 3 windows (vim, claude-code, console)
+topen() {
+  local project="${1:-.}"
+  local dir=$(realpath "$project")
+  local name=$(basename "$dir")
+
+  if tmux has-session -t "$name" 2>/dev/null; then
+    tmux attach -t "$name"
+    return
+  fi
+
+  tmux new-session -d -s "$name" -c "$dir" -n "$name"
+  tmux send-keys -t "${name}:${name}" "vim ." Enter
+
+  tmux new-window -t "${name}:" -n "claude-code" -c "$dir"
+  tmux send-keys -t "${name}:claude-code" "claude" Enter
+
+  tmux new-window -t "${name}:" -n "console" -c "$dir"
+
+  tmux select-window -t "${name}:${name}"
+  tmux attach -t "$name"
+}
+
 # Detect new migration files and run migrate
 run_migrate() {
   if rake db:migrate:status | grep down
@@ -156,6 +179,18 @@ goGithubLine() {
 # GRV - git project viewer
 gv() {
   ~/grv -repoFilePath ~/Dropbox/Projects/$1
+}
+
+# Docker
+dockeri() {
+  (
+    echo -e "REPOSITORY\tTAG\tIMAGE ID\tSIZE"
+    docker images -a --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Size}}"
+  ) | column -t | sort -h -r -k4
+}
+
+dockerc() {
+  docker ps -a --format "table {{.Names}}\t{{.ID}}\t{{.Image}}\t{{.Status}}\t{{.CreatedAt}}"
 }
 
 # ============ System ===============
