@@ -11,7 +11,7 @@ ZSH_THEME="af-magic"
 
 # Plugin
 zstyle ':omz:plugins:nvm' lazy yes
-plugins=(fzf zsh-autosuggestions vi-mode asdf nvm zsh-syntax-highlighting)
+plugins=(fzf zsh-autosuggestions vi-mode nvm zsh-syntax-highlighting)
 
 # User configuration
 export PATH="$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$HOME/Library/Python/3.9/bin:$HOME/.local/bin:$PATH"
@@ -21,7 +21,6 @@ export TERM="xterm-256color"
 export UPDATE_ZSH_DAYS=7
 
 zstyle ':omz:update' mode disabled
-zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
 # Load theme
