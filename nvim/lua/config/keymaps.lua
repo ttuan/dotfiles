@@ -126,7 +126,7 @@ keymap.set("n", "<Leader>q", ":wq<CR>", opts)
 -- Just relative path
 keymap.set("n", "<leader>cp", ':let @+ = expand("%:~:.")<CR>', opts)
 -- Full path
--- keymap.set("n", "<leader>cfp", ':let @+ = expand("%:p")<CR>', opts)
+keymap.set("n", "<leader>cfp", ':let @+ = expand("%:p")<CR>', opts)
 -- Just filename
 -- keymap.set("n", "<leader>cf", ':let @+ = expand("%:t")<CR>', opts)
 -- Quick directory change
