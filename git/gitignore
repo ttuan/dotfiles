@@ -166,3 +166,5 @@ default_venv
 CLAUDE.md
 .serena/*
 excalidraw.log
+.gitnexus
+AGENTS.md
