@@ -168,3 +168,8 @@ CLAUDE.md
 excalidraw.log
 .gitnexus
 AGENTS.md
+.repomixignore
+release-manifest.json
+plans/
+
+**/.claude/settings.local.json
