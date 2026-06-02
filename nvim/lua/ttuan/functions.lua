@@ -21,7 +21,9 @@ function M.go_github_line()
   local current_line = vim.api.nvim_win_get_cursor(0)[1]
   local cmd = string.format("goGithubLine %s %d", current_file, current_line)
 
-  vim.fn.jobstart(cmd, {
+  -- Run under zsh explicitly: goGithubLine is a zsh function in ~/.zshenv and
+  -- uses zsh-only syntax, but nvim's &shell is bash (for vim-tmux-navigator).
+  vim.fn.jobstart({ "zsh", "-c", cmd }, {
     on_exit = function(_, exit_code)
       if exit_code ~= 0 then
         vim.notify("Failed to execute goGithubLine", vim.log.levels.ERROR)
@@ -49,7 +51,8 @@ function M.go_github_commit()
   local commit_hash = vim.fn.expand("<cword>")
   local cmd = string.format("goGithubCommit %s", commit_hash)
 
-  vim.fn.jobstart(cmd, {
+  -- Run under zsh explicitly (see go_github_line above).
+  vim.fn.jobstart({ "zsh", "-c", cmd }, {
     on_exit = function(_, exit_code)
       if exit_code ~= 0 then
         vim.notify("Failed to execute goGithubCommit", vim.log.levels.ERROR)
