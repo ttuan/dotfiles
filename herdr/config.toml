@@ -10,8 +10,18 @@ prefix = "`"
 rename_tab = "prefix+,"             # default: prefix+shift+t
 rename_workspace = "prefix+<"       # i.e. shift+, — terminals send the shifted char; default: prefix+shift+w
 
+# tmux muscle-memory mappings (see ~/.tmux.conf)
+split_vertical = "prefix+|"      # side-by-side split, like tmux `prefix |` (default: prefix+v)
+previous_workspace = "prefix+("  # like tmux `prefix (` switch-client -p (default: unbound)
+next_workspace = "prefix+)"      # like tmux `prefix )` switch-client -n (default: unbound)
+close_pane = "prefix+="          # like tmux `prefix =` kill-pane (default: prefix+x)
+toggle_sidebar = "ctrl+shift+left" # prefix-free sidebar toggle (default: prefix+b)
+
 [ui]
 # Mouse UI: click/drag panes, tabs, workspaces. Set false to let the
 # terminal handle clicks natively (e.g. Cmd-click URLs).
 mouse_capture = true
 mouse_scroll_lines = 3
+
+[theme]
+name = "gruvbox"
