@@ -79,3 +79,8 @@
       create: true
       force: true
       path: lazygit
+    # Herdr (only config.toml — ~/.config/herdr also holds sockets/logs/session state)
+    ~/.config/herdr/config.toml:
+      create: true
+      force: true
+      path: herdr/config.toml

@@ -1,0 +1,17 @@
+# herdr configuration — https://herdr.dev/docs/configuration/
+# Symlinked to ~/.config/herdr/config.toml (see install.conf.yaml)
+
+onboarding = false
+
+[keys]
+# Backtick as prefix (trial). If typing literal ` gets painful
+# (code blocks, shell substitution), switch to "ctrl+space".
+prefix = "`"
+rename_tab = "prefix+,"             # default: prefix+shift+t
+rename_workspace = "prefix+<"       # i.e. shift+, — terminals send the shifted char; default: prefix+shift+w
+
+[ui]
+# Mouse UI: click/drag panes, tabs, workspaces. Set false to let the
+# terminal handle clicks natively (e.g. Cmd-click URLs).
+mouse_capture = true
+mouse_scroll_lines = 3
