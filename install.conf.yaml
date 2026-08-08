@@ -66,6 +66,11 @@
     ~/.config/nvim:
       force: true
       path: nvim
+    # iTerm2 - dynamic profile "Deep Harbor" (iTerm tu nap, khong can import tay)
+    ~/Library/Application Support/iTerm2/DynamicProfiles/deep-harbor.json:
+      create: true
+      force: true
+      path: iterm2/DynamicProfiles/deep-harbor.json
     # Skhd
     ~/.skhdrc: skhd/skhdrc
     # Yabai
