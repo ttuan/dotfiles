@@ -23,6 +23,26 @@ previous_agent = "prefix+["
 next_agent = "prefix+]"
 focus_agent = "prefix+alt+1..9"  # nhay thang toi agent thu N
 
+# Bo 3 tab code / agents / console tai cwd cua pane dang focus.
+# herdr khong co option "startup tabs" trong config, nen dung script goi
+# socket API (herdr workspace/tab create). `type = "shell"` chay detached,
+# khong chiem pane. Script idempotent: tab da dung ten thi dung lai.
+#
+# Bien workspace DANG mo thanh 3 tab do, roi dong tab hien tai.
+# Luu y: tab dang chay agent se bi kill (tru khi no la 1 trong 3 tab).
+[[keys.command]]
+key = "prefix+t"   # t = tabs. Tranh p/n (previous/next tab) va alt (meta key kho bam).
+type = "shell"
+description = "Replace this tab with code/agents/console"
+command = "~/.local/bin/herdr-workspace-3tabs --here"
+
+# Workspace MOI kem 3 tab do.
+[[keys.command]]
+key = "prefix+shift+t"  # rename_tab da doi sang prefix+, nen shift+t con trong
+type = "shell"
+description = "New workspace: code/agents/console"
+command = "~/.local/bin/herdr-workspace-3tabs"
+
 [ui]
 # Mouse UI: click/drag panes, tabs, workspaces. Set false to let the
 # terminal handle clicks natively (e.g. Cmd-click URLs).

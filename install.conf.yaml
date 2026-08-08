@@ -89,3 +89,7 @@
       create: true
       force: true
       path: herdr/config.toml
+    ~/.local/bin/herdr-workspace-3tabs:
+      create: true
+      force: true
+      path: herdr/herdr-workspace-3tabs.sh
