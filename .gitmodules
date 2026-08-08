@@ -1,3 +1,6 @@
 [submodule "cheat/cheatsheets/community"]
 	path = cheat/cheatsheets/community
 	url = https://github.com/cheat/cheatsheets.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
