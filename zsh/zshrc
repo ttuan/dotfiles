@@ -2,7 +2,7 @@
 export ZSH=~/.oh-my-zsh
 
 # Dotfiles folder
-export DOTFILES=~/Dropbox/Projects/dotfiles
+export DOTFILES=~/code/dotfiles
 
 # Ack like vim
 bindkey -v

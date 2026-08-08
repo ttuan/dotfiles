@@ -3,7 +3,7 @@
 # This script will sync newest config file in dotfiles folder with local config file
 
 #\\ Variables
-DOTFILES=/home/$USER/Dropbox/Projects/dotfiles
+DOTFILES=$HOME/code/dotfiles
 OLDDIR=/home/$USER/.old_dotfiles
 
 #\\ Create folder to store all old dotfiles
