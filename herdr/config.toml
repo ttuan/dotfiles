@@ -17,6 +17,12 @@ next_workspace = "prefix+)"      # like tmux `prefix )` switch-client -n (defaul
 close_pane = "prefix+="          # like tmux `prefix =` kill-pane (default: prefix+x)
 toggle_sidebar = "ctrl+shift+left" # prefix-free sidebar toggle (default: prefix+b)
 
+# Nhay giua cac agent (mac dinh herdr de trong ca 3). Tranh p/n (da la
+# previous/next tab) va (/) (da la workspace).
+previous_agent = "prefix+["
+next_agent = "prefix+]"
+focus_agent = "prefix+alt+1..9"  # nhay thang toi agent thu N
+
 [ui]
 # Mouse UI: click/drag panes, tabs, workspaces. Set false to let the
 # terminal handle clicks natively (e.g. Cmd-click URLs).
@@ -24,4 +30,20 @@ mouse_capture = true
 mouse_scroll_lines = 3
 
 [theme]
-name = "gruvbox"
+# tokyo-night: nen navy dam, gan bg cua iTerm2 profile "Deep Harbor"
+# (#182635). Truoc dung name = "terminal" (bam bang ANSI cua iTerm2) nhung
+# Deep Harbor de ANSI 8 = #8795a0 (xam sang bat thuong) -> hang workspace
+# active thanh mang xam bet, chu chim.
+name = "tokyo-night"
+
+[theme.custom]
+# 1. Hang active khong con mang mau: keo nen SIDEBAR ve dung mau nen hang
+#    active cua tokyo-night (#1a1b26) -> hai ben trung nhau. Lam chieu nay
+#    vi panel_bg da xac nhan an chac, con token ve nen hang active thi chua
+#    dinh danh duoc (khong phai surface0/1 - da thu).
+panel_bg = "#1a1b26"
+
+# 2. Chu tone nong, lay tu palette Deep Harbor.
+accent = "#FFAD36"   # amber - highlight / hang dang chon
+yellow = "#F49D00"   # cam dam
+peach  = "#FA8155"   # cam san ho
