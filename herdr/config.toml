@@ -49,6 +49,16 @@ command = "~/.local/bin/herdr-workspace-3tabs"
 mouse_capture = true
 mouse_scroll_lines = 3
 
+# 0.8.0 doi default rows cua panel agent, bo state_text -> mat chu
+# working/idle trong sidebar. Detection khong he hong: `herdr agent explain
+# <pane>` van bao dung state. Set tuong minh de update sau khong doi ngam.
+#
+# Bo cuc nay dung lai dung layout 0.7.x (state_icon la spinner dong khi working):
+#   my-project    agents
+#   ⠐ working       claude
+[ui.sidebar.agents]
+rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
+
 [theme]
 # tokyo-night: nen navy dam, gan bg cua iTerm2 profile "Deep Harbor"
 # (#182635). Truoc dung name = "terminal" (bam bang ANSI cua iTerm2) nhung
