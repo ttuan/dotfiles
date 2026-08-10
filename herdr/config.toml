@@ -59,6 +59,36 @@ mouse_scroll_lines = 3
 [ui.sidebar.agents]
 rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 
+# Rieng pane Claude: them hang account + hang quota 5h, de biet pane nao dang
+# chay account nao (~/.claude, ~/.claude-work, ~/.claude-alt) va account do
+# da tieu bao nhieu quota, khong phai nhay vao tung pane doc statusline.
+#
+#   my-project    agents
+#   ⠐ working       claude
+#   👤 tuantv.nhnd
+#   📊 5h 42% (3h12m)
+#
+# Gia tri do ~/.local/bin/herdr-claude-meta day vao qua pane.report_metadata,
+# goi tu cuoi moi ~/.claude*/statusline-command.sh. Dat o rows_by_agent chu
+# khong sua rows chung, de pane cua agent khac (copilot, cursor) khong linh hai
+# hang trong.
+#
+# Quota phai tach lam 3 token vi style token la TINH - khong doi mau theo gia
+# tri duoc nhu state_icon/state_text (hai token dung san do herdr gan cung mau
+# theo state). Moi lan script chi dien dung mot token, hai token con lai gui
+# null de xoa, nen nhin ra y het mau dong.
+[ui.sidebar.agents.rows_by_agent]
+claude = [
+  ["workspace", "tab"],
+  ["state_icon", "state_text", "agent"],
+  [{ token = "$acct", dim = true }],
+  [
+    { token = "$quota_ok", fg = "#9ece6a" },    # < 70%
+    { token = "$quota_warn", fg = "#F49D00" },  # 70-89%
+    { token = "$quota_crit", fg = "#f7768e" },  # >= 90%
+  ],
+]
+
 [theme]
 # tokyo-night: nen navy dam, gan bg cua iTerm2 profile "Deep Harbor"
 # (#182635). Truoc dung name = "terminal" (bam bang ANSI cua iTerm2) nhung
