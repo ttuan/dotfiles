@@ -68,6 +68,11 @@ rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 #   👤 tuantv.nhnd
 #   📊 5h 42% (3h12m)
 #
+# Hang 1 dung $convo thay cho token `tab`: hien ten phien khi da dat bang
+# /rename, khong thi lui ve dung ten tab. Config khong co menh de dieu kien nen
+# script phai tu chon roi day sang mot token duy nhat - keo theo viec doi ten
+# tab chi hien ra o lan render statusline ke tiep chu khong tuc thi.
+#
 # Gia tri do ~/.local/bin/herdr-claude-meta day vao qua pane.report_metadata,
 # goi tu cuoi moi ~/.claude*/statusline-command.sh. Dat o rows_by_agent chu
 # khong sua rows chung, de pane cua agent khac (copilot, cursor) khong linh hai
@@ -79,7 +84,7 @@ rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 # null de xoa, nen nhin ra y het mau dong.
 [ui.sidebar.agents.rows_by_agent]
 claude = [
-  ["workspace", "tab"],
+  ["workspace", "$convo"],
   ["state_icon", "state_text", "agent"],
   [{ token = "$acct", dim = true }],
   [

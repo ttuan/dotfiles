@@ -1,12 +1,12 @@
 #!/bin/sh
-# Day dinh danh account Claude + quota 5h sang sidebar herdr.
+# Day ten phien + dinh danh account Claude + quota 5h sang sidebar herdr.
 #
 # Duoc goi tu cuoi moi ~/.claude*/statusline-command.sh, chay nen. Cac gia tri
 # deu da duoc statusline tinh san, script nay chi format lai va gui di - no
 # khong tu goi API nao ca.
 #
-# Sidebar doc chung qua token $acct / $quota_ok / $quota_warn / $quota_crit,
-# khai bao trong [ui.sidebar.agents.rows_by_agent] cua config.toml.
+# Sidebar doc chung qua token $convo / $acct / $quota_ok / $quota_warn /
+# $quota_crit, khai bao trong [ui.sidebar.agents.rows_by_agent] cua config.toml.
 #
 # Quota phai tach lam 3 token vi style token trong config la tinh: moi lan chi
 # mot token co gia tri, hai token con lai gui null de xoa. Do la cach duy nhat
@@ -26,6 +26,7 @@ CLAUDE_META_EMAIL=""
 CLAUDE_META_ORG=""
 CLAUDE_META_FIVE_PCT=""
 CLAUDE_META_FIVE_RESET=""
+CLAUDE_META_TRANSCRIPT=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -33,11 +34,13 @@ while [ $# -gt 0 ]; do
     --org)        [ $# -ge 2 ] || break; CLAUDE_META_ORG="$2";        shift 2 ;;
     --five-pct)   [ $# -ge 2 ] || break; CLAUDE_META_FIVE_PCT="$2";   shift 2 ;;
     --five-reset) [ $# -ge 2 ] || break; CLAUDE_META_FIVE_RESET="$2"; shift 2 ;;
+    --transcript) [ $# -ge 2 ] || break; CLAUDE_META_TRANSCRIPT="$2"; shift 2 ;;
     *) shift ;;
   esac
 done
 
-export CLAUDE_META_EMAIL CLAUDE_META_ORG CLAUDE_META_FIVE_PCT CLAUDE_META_FIVE_RESET
+export CLAUDE_META_EMAIL CLAUDE_META_ORG CLAUDE_META_FIVE_PCT
+export CLAUDE_META_FIVE_RESET CLAUDE_META_TRANSCRIPT
 
 python3 - <<'PY' || exit 0
 import json
@@ -52,6 +55,9 @@ from datetime import datetime, timezone
 SOURCE = "claude-meta"
 # Sidebar mac dinh rong 26 cot (ui.sidebar_width). Chuoi dai hon se bi cat.
 WIDTH = 26
+# Hang 1 con phai chua ten workspace, nen ten phien duoc cat ngan hon. herdr tu
+# cat tiep bang "…" neu van khong du cho.
+CONVO_WIDTH = 22
 # Dai hon cua so 5h, nen pane con song khong bao gio cham nguong; pane da chet
 # thi hang cua no tu bien mat thay vi treo so cu mai mai.
 TTL_MS = 6 * 60 * 60 * 1000
@@ -144,6 +150,94 @@ def humanize(reset_raw):
     return "%dm" % minutes
 
 
+def rpc(method, params):
+    """Mot vong JSON-RPC qua unix socket cua herdr. None neu that bai."""
+    request = {
+        "id": "%s:%d:%06d"
+        % (SOURCE, int(time.time() * 1000), random.randrange(1_000_000)),
+        "method": method,
+        "params": params,
+    }
+    try:
+        client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        client.settimeout(0.5)
+        client.connect(socket_path)
+        client.sendall((json.dumps(request) + "\n").encode())
+        buf = b""
+        while b"\n" not in buf:
+            chunk = client.recv(4096)
+            if not chunk:
+                break
+            buf += chunk
+        client.close()
+    except OSError:
+        return None
+    if not buf:
+        return None
+    try:
+        return json.loads(buf.split(b"\n", 1)[0].decode())
+    except ValueError:
+        return None
+
+
+def custom_title(transcript_path):
+    """Ten phien do NGUOI dat qua /rename, hoac None.
+
+    Claude Code ghi hai loai ban ghi ten vao transcript: `ai-title` (tu sinh,
+    doi lien tuc theo noi dung dang lam) va `custom-title` (chi sinh ra khi
+    chay /rename). Truong `session_name` trong payload statusline KHONG dung
+    duoc de phan biet vi no luon co gia tri - khi chua /rename thi no chinh la
+    ai-title. Nen phai doc transcript.
+
+    Loc bang chuoi con truoc khi parse JSON: quet het file 950KB het ~2ms.
+    """
+    if not transcript_path or not os.path.isfile(transcript_path):
+        return None
+    found = None
+    try:
+        with open(transcript_path, encoding="utf-8", errors="replace") as handle:
+            for line in handle:
+                if '"custom-title"' not in line:
+                    continue
+                try:
+                    record = json.loads(line)
+                except ValueError:
+                    continue
+                if record.get("type") == "custom-title":
+                    title = (record.get("customTitle") or "").strip()
+                    if title:
+                        found = title
+    except OSError:
+        return None
+    return found
+
+
+def tab_label():
+    """Ten tab dang chua pane nay - duong lui khi phien chua duoc /rename.
+
+    Lay tab_id tu pane.get chu khong tu $HERDR_TAB_ID, vi env do dat luc tao
+    pane va se cu neu pane bi chuyen sang tab khac.
+    """
+    tab_id = ""
+    pane = rpc("pane.get", {"pane_id": pane_id})
+    if pane:
+        tab_id = (pane.get("result") or {}).get("pane", {}).get("tab_id") or ""
+    tab_id = tab_id or os.environ.get("HERDR_TAB_ID") or ""
+    if not tab_id:
+        return None
+    tab = rpc("tab.get", {"tab_id": tab_id})
+    if not tab:
+        return None
+    return (tab.get("result") or {}).get("tab", {}).get("label") or None
+
+
+def build_convo(transcript_path):
+    name = custom_title(transcript_path) or tab_label()
+    if not name:
+        return None
+    return clip(name.strip(), CONVO_WIDTH)
+
+
 def build_quota(pct_raw, reset_raw):
     """Tra ve (ten_token, chuoi). Ten token quyet dinh mau trong config.toml."""
     pct_raw = (pct_raw or "").strip()
@@ -167,6 +261,7 @@ def build_quota(pct_raw, reset_raw):
 
 
 tokens = {
+    "convo": build_convo(os.environ.get("CLAUDE_META_TRANSCRIPT", "")),
     "acct": build_acct(
         os.environ.get("CLAUDE_META_EMAIL", ""),
         os.environ.get("CLAUDE_META_ORG", ""),
@@ -182,10 +277,9 @@ name, text = build_quota(
 if name:
     tokens[name] = text
 
-request = {
-    "id": "%s:%d:%06d" % (SOURCE, int(time.time() * 1000), random.randrange(1_000_000)),
-    "method": "pane.report_metadata",
-    "params": {
+rpc(
+    "pane.report_metadata",
+    {
         "pane_id": pane_id,
         "source": SOURCE,
         # Dong ho nano de bao cao den muon khong ghi de bao cao moi hon.
@@ -193,18 +287,5 @@ request = {
         "ttl_ms": TTL_MS,
         "tokens": tokens,
     },
-}
-
-try:
-    client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    client.settimeout(0.5)
-    client.connect(socket_path)
-    client.sendall((json.dumps(request) + "\n").encode())
-    try:
-        client.recv(4096)
-    except OSError:
-        pass
-    client.close()
-except OSError:
-    pass
+)
 PY
