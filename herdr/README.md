@@ -10,7 +10,7 @@ https://herdr.dev
 |---|---|
 | `config.toml` | Cau hinh chinh. Symlink toi `~/.config/herdr/config.toml`. Gom keybinding kieu tmux, theme tokyo-night chinh mau, va bo cuc sidebar. |
 | `herdr-workspace-3tabs.sh` | Dung bo 3 tab `code` / `agents` / `console` tai cwd dang focus. Symlink toi `~/.local/bin/herdr-workspace-3tabs`. Gan vao `prefix+t` (thay tab hien tai) va `prefix+shift+t` (workspace moi). |
-| `herdr-claude-meta.sh` | Day email account Claude + quota 5h len sidebar. Symlink toi `~/.local/bin/herdr-claude-meta`. Xem muc rieng ben duoi. |
+| `herdr-claude-meta.sh` | Day ten phien + email account Claude + quota 5h len sidebar. Symlink toi `~/.local/bin/herdr-claude-meta`. Xem muc rieng ben duoi. |
 
 Chi `config.toml` duoc symlink vao `~/.config/herdr/`; thu muc do con chua
 socket, log va session state nen khong symlink ca thu muc.
@@ -30,21 +30,44 @@ Sau khi doi `config.toml` thi khong can khoi dong lai session:
 herdr server reload-config          # phai tra ve status: "applied"
 ```
 
-## Sidebar: hang account Claude + quota 5h
+## Sidebar cho pane Claude
 
 Khi chay nhieu account Claude song song (`~/.claude`, `~/.claude-work`,
 `~/.claude-alt`) thi khong nhin ra pane nao dang dung account nao, cung
-khong biet account do da tieu bao nhieu quota. Hai hang nay giai quyet viec do:
+khong biet account do da tieu bao nhieu quota. Khoi agent cua pane Claude vi
+the co 4 hang thay vi 2:
 
 ```
 |<--------- 26 cot -------->|
-my-project        agents
+my-project        agents     <- workspace + ten phien (hoac ten tab)
 ⠐ working           claude
 👤 tuantv.nhnd
 📊 5h 23% (43m)
 ```
 
 Mau cua hang quota doi theo nguong: xanh `< 70%`, cam `70-89%`, do `>= 90%`.
+
+### Hang 1: ten phien thay cho ten tab
+
+Hang 1 dung token `$convo` chu khong dung token dung san `tab`:
+
+1. Neu phien da duoc dat ten bang **`/rename`** thi hien ten do.
+2. Neu chua thi lui ve **ten tab**, tuc giong het hanh vi cu.
+
+**Khong** dung `session_name` trong payload statusline de phan biet hai truong
+hop: truong do luon co gia tri, va khi chua `/rename` thi no chinh la ten AI tu
+sinh (`ai-title`, doi lien tuc theo noi dung dang lam). Chi co `/rename` moi ghi
+ban ghi `{"type":"custom-title","customTitle":...}` vao transcript, nen script
+doc `transcript_path` de tim. Loc bang chuoi con truoc khi parse JSON: quet het
+file 950KB het khoang 2ms.
+
+Config khong co menh de dieu kien, nen script phai tu chon roi day sang mot
+token duy nhat. Keo theo hai he qua:
+
+- Doi ten tab bang `prefix+,` chi hien ra o lan render statusline ke tiep chu
+  khong tuc thi.
+- Neu script hong thi hang 1 mat ten tab. Token co `ttl_ms` 6 tieng nen gia tri
+  cuoi cung van con do trong luc do.
 
 ### Hoat dong the nao
 
@@ -54,14 +77,16 @@ Claude Code (pane, CLAUDE_CONFIG_DIR=~/.claude-work)
    v
 ~/.claude-work/statusline-command.sh
    |  da co san $account_email, $account_org, $FIVE_H, $FIVE_H_RESET
+   |  + .transcript_path lay tu payload stdin
    |  khoi goi o cuoi file, chay nen (&)
    v
 ~/.local/bin/herdr-claude-meta
    |  doc $HERDR_PANE_ID + $HERDR_SOCKET_PATH tu env cua pane
+   |  doc transcript tim custom-title; khong co thi hoi herdr ten tab
    v
 unix socket -> herdr server: pane.report_metadata
    v
-sidebar hang 3 + 4
+sidebar hang 1 (ten phien) + hang 3, 4
 ```
 
 Moi pane tu khai bao metadata cua chinh no, nen khong can map thu cong "config
@@ -87,7 +112,9 @@ if [ -x "$HOME/.local/bin/herdr-claude-meta" ]; then
     --email "$account_email" \
     --org "$account_org" \
     --five-pct "$FIVE_H" \
-    --five-reset "$FIVE_H_RESET" >/dev/null 2>&1 &
+    --five-reset "$FIVE_H_RESET" \
+    --transcript "$(echo "$input" | jq -r '.transcript_path // empty')" \
+    >/dev/null 2>&1 &
 fi
 ```
 
@@ -102,8 +129,9 @@ done
 ```
 
 Khoi nay giong het nhau o ca ba file vi ca ba statusline deu dat cung ten bien
-(`account_email`, `account_org`, `FIVE_H`, `FIVE_H_RESET`), du phan than cua
-chung khac nhau. **Neu viet lai statusline ma doi ten bien thi phai sua theo.**
+(`account_email`, `account_org`, `FIVE_H`, `FIVE_H_RESET`) va deu giu nguyen
+payload stdin trong `$input`, du phan than cua chung khac nhau. **Neu viet lai
+statusline ma doi ten bien thi phai sua theo.**
 
 ### Kiem tra
 
@@ -146,6 +174,8 @@ da 36): script tu cat bot local-part cua email, chen `…` o giua.
 | Hien o pane nay, khong o pane kia | Pane kia chua render statusline lan nao. Go gi do vao no. |
 | `herdr config check` bao `unknown sidebar token` | Sai ten token trong `rows_by_agent`, phai co tien to `$`. |
 | Hien so cu ke ca khi da thoat Claude | Token co `ttl_ms` 6 tieng roi tu het han. Muon xoa ngay thi day lai voi gia tri rong. |
+| Hang 1 mat ten tab | Script khong day duoc `$convo`. Kiem tra `--transcript` co duoc truyen khong, va `herdr tab get "$HERDR_TAB_ID"` co tra ve `label` khong. |
+| Da `/rename` ma van hien ten tab | Phien do chua render statusline lai. Hoac transcript chua kip ghi `custom-title` - kiem tra bang `grep -c custom-title <transcript>`. |
 | Chay `herdr-claude-meta` khong thay gi | Dung - no no-op khi thieu `HERDR_ENV=1` / `HERDR_PANE_ID` / `HERDR_SOCKET_PATH`, tuc khi khong o trong herdr. |
 
 Khong dung CLI `herdr pane report-metadata` de thay the script: parser cua ban

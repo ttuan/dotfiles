@@ -291,6 +291,46 @@ cd ~/code/dotfiles && git checkout herdr/config.toml && herdr server reload-conf
 Ba file statusline khong o trong git, go tay khoi goi da them. Token da day
 van con toi da 6 tieng roi tu het han.
 
+## Bo sung: hang 1 hien ten phien thay ten tab
+
+Cung dot, hang 1 doi tu token `tab` sang `$convo`: hien ten phien khi da dat
+bang `/rename`, khong thi lui ve ten tab (hanh vi cu).
+
+Cai bay: `session_name` trong payload statusline KHONG dung de phan biet duoc,
+vi no luon co gia tri - khi chua `/rename` thi no chinh la `ai-title` tu sinh.
+Chi `/rename` moi ghi ban ghi `{"type":"custom-title","customTitle":...}` vao
+transcript. Quet 82 transcript tren may nay: 1171 ban ghi `ai-title` nhung chi
+17 ban ghi `custom-title`, tap trung o dung mot phien - nen nhanh lui ve ten tab
+moi la duong chay thuong xuyen.
+
+Script doc `transcript_path` (co san trong payload statusline), loc bang chuoi
+con truoc khi parse JSON - quet het file 950KB het ~2ms. Khong tim thay thi goi
+`pane.get` -> `tab.get` de lay `label`. Lay `tab_id` tu `pane.get` chu khong tu
+`$HERDR_TAB_ID` vi env do dat luc tao pane, se cu neu pane bi chuyen tab.
+
+Danh doi da chap nhan: config khong co menh de dieu kien nen script phai tu
+chon roi day mot token duy nhat, keo theo doi ten tab bang `prefix+,` chi hien
+ra o lan render statusline ke tiep.
+
+Da test 3 nhanh: transcript co `custom-title` -> hien ten do; transcript khong
+co -> hien ten tab; transcript khong ton tai -> hien ten tab.
+
+## Phat hien phu: quota co san trong payload statusline
+
+Payload stdin ma Claude Code dua cho statusline da chua san:
+
+```
+rate_limits.five_hour.used_percentage = 44
+rate_limits.five_hour.resets_at       = 1786356000   (epoch)
+rate_limits.seven_day.used_percentage = 54
+```
+
+Nghia la ca doan `security find-generic-password` + `curl
+api.anthropic.com/api/oauth/usage` trong ba statusline la thua - bo di se khong
+con dung keychain lan goi mang. CHUA lam, vi con mot cau hoi chua tra loi: cung
+mot thoi diem payload bao `44%` con API tra `23%` (`utilization`). Hai con so do
+khong cung mot phep do, phai xac dinh cai nao dung y muon truoc khi thay.
+
 ## Viec de lai sau
 
 Ba file `~/.claude*/statusline-command.sh` dang trung lap va da lech nhau:
