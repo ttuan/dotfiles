@@ -93,3 +93,7 @@
       create: true
       force: true
       path: herdr/herdr-workspace-3tabs.sh
+    ~/.local/bin/herdr-claude-meta:
+      create: true
+      force: true
+      path: herdr/herdr-claude-meta.sh
