@@ -84,9 +84,17 @@ rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 # null de xoa, nen nhin ra y het mau dong.
 [ui.sidebar.agents.rows_by_agent]
 claude = [
-  ["workspace", "$convo"],
+  # Mac dinh herdr to token phu cua hang bang mau comment cua tokyo-night
+  # (#565f89) - tren nen panel #1a1b26 thi chim han, khong doc noi. Dat fg
+  # tuong minh cho ca hai token do minh tu them ($convo, $acct).
+  #
+  # #a9b1d6 la fg thuong cua tokyo-night: doc ro nhung van nhat hon ten
+  # workspace in dam ben canh, nen thu tu quan trong cua hang 1 khong bi dao.
+  ["workspace", { token = "$convo", fg = "#a9b1d6" }],
   ["state_icon", "state_text", "agent"],
-  [{ token = "$acct", dim = true }],
+  # Xanh duong hop voi icon 👤 va tach bach voi dai xanh-cam-do cua hang quota
+  # ngay ben duoi. Bo `dim` - chinh no la thu phu mau fg di.
+  [{ token = "$acct", fg = "#7aa2f7" }],
   [
     { token = "$quota_ok", fg = "#9ece6a" },    # < 70%
     { token = "$quota_warn", fg = "#F49D00" },  # 70-89%
