@@ -57,6 +57,9 @@ mouse_scroll_lines = 3
 #   my-project    agents
 #   ⠐ working       claude
 [ui.sidebar.agents]
+# Khoi agent cua Claude cao 4 hang nen cac agent dinh sat nhau, kho tach mat.
+# Chen 1 hang trong giua cac khoi (mac dinh 0).
+row_gap = 1
 rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 
 # Rieng pane Claude: them hang account + hang quota 5h, de biet pane nao dang
