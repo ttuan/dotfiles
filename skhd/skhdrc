@@ -28,6 +28,8 @@ lctrl + cmd - m : osascript "${HOME}"/.config/yabai/scripts/unminimize.scpt
 # Resize current window to nice size
 lctrl + cmd - n : osascript "${HOME}"/.config/yabai/scripts/resize_window.scpt
 lctrl + cmd - u : osascript "${HOME}"/.config/yabai/scripts/increase_window_size.scpt
+# Resize current window to Messenger chat-frame size, dock bottom-right
+lctrl + cmd - c : osascript "${HOME}"/.config/yabai/scripts/resize_messenger_frame.scpt
 
 # Navigation
 alt - h : yabai -m window --focus west
