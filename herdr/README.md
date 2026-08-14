@@ -33,7 +33,7 @@ herdr server reload-config          # phai tra ve status: "applied"
 ## Sidebar cho pane Claude
 
 Khi chay nhieu account Claude song song (`~/.claude`, `~/.claude-work`,
-`~/.claude-alt`) thi khong nhin ra pane nao dang dung account nao, cung
+`~/.claude-personal`, `~/.claude-alt`) thi khong nhin ra pane nao dang dung account nao, cung
 khong biet account do da tieu bao nhieu quota. Khoi agent cua pane Claude vi
 the co 4 hang thay vi 2:
 
@@ -97,20 +97,20 @@ tinh san. Ngoai herdr thi no no-op im lang (thoat 0, khong in gi).
 
 ### Buoc BAT BUOC lam tay tren may moi
 
-Cac file `~/.claude*/statusline-command.sh` **khong nam trong repo nay** (chung
-chua keychain entry rieng cua tung account), nen dotbot khong dung duoc chung.
-Phai them tay khoi sau vao **cuoi moi file** statusline cua tung config dir:
+File `~/.claude/statusline-command.sh` **khong nam trong repo nay** (no doc
+keychain entry rieng cua tung account), nen dotbot khong dung duoc. Phai them
+tay khoi sau vao **cuoi file**:
 
 ```sh
 # ─────────────────────────────────────────────────────────────
-# Day dinh danh account + quota 5h sang sidebar herdr (hang 3 + 4 cua khoi
-# agent). Chay nen de khong lam cham statusline; no-op khi khong o trong herdr.
-# Script: ~/code/dotfiles/herdr/herdr-claude-meta.sh
+# Day ten phien + dinh danh account + quota 5h sang sidebar herdr (hang 1, 3,
+# 4 cua khoi agent). Chay nen de khong lam cham statusline; no-op khi khong o
+# trong herdr. Script: ~/code/dotfiles/herdr/herdr-claude-meta.sh
 # ─────────────────────────────────────────────────────────────
 if [ -x "$HOME/.local/bin/herdr-claude-meta" ]; then
   "$HOME/.local/bin/herdr-claude-meta" \
-    --email "$account_email" \
-    --org "$account_org" \
+    --email "$ACTIVE_EMAIL" \
+    --org "$(echo "$AUTH_STATUS" | jq -r '.orgName // empty')" \
     --five-pct "$FIVE_H" \
     --five-reset "$FIVE_H_RESET" \
     --transcript "$(echo "$input" | jq -r '.transcript_path // empty')" \
@@ -118,20 +118,30 @@ if [ -x "$HOME/.local/bin/herdr-claude-meta" ]; then
 fi
 ```
 
-Lam mot lan cho moi config dir:
+**Chi phai lam MOT lan, khong lam cho tung config dir.** Ca bon config dir
+(`~/.claude`, `~/.claude-work`, `~/.claude-personal`, `~/.claude-alt`) deu chay
+chung dung file nay: ba dir sau symlink `settings.json` ve
+`~/.claude/settings.json`, ma `statusLine.command` trong do la duong dan tuyet
+doi `~/.claude/statusline-command.sh` (dau `~` no ra `$HOME`, khong no ra config
+dir). Them khoi tren vao tung dir se thanh day trung hai lan.
+
+Van tach duoc account theo pane vi ban than statusline da da-account: no lay
+`CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"` roi tra keychain entry rieng
+cua dir do, nen `$ACTIVE_EMAIL` luon dung account cua pane dang chay.
+
+Kiem tra lai khi nghi ngo:
 
 ```bash
-for d in .claude .claude-work .claude-alt; do
-  cat >> "$HOME/$d/statusline-command.sh" <<'EOF'
-<dan khoi tren vao day>
-EOF
+for d in .claude .claude-work .claude-personal .claude-alt; do
+  printf '%-16s %s\n' "$d" "$(jq -r '.statusLine.command' "$HOME/$d/settings.json")"
 done
+grep -c herdr-claude-meta "$HOME/.claude/statusline-command.sh"   # phai > 0
 ```
 
-Khoi nay giong het nhau o ca ba file vi ca ba statusline deu dat cung ten bien
-(`account_email`, `account_org`, `FIVE_H`, `FIVE_H_RESET`) va deu giu nguyen
-payload stdin trong `$input`, du phan than cua chung khac nhau. **Neu viet lai
-statusline ma doi ten bien thi phai sua theo.**
+**Ten bien khac README goc.** Statusline hien tai dat ten `ACTIVE_EMAIL` (khong
+phai `account_email`) va khong tach san org - phai moc `orgName` tu
+`$AUTH_STATUS`. `FIVE_H`, `FIVE_H_RESET` va payload stdin trong `$input` thi
+dung nhu cu. **Neu viet lai statusline ma doi ten bien thi phai sua theo.**
 
 ### Kiem tra
 
