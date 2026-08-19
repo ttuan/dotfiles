@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
-# Tao workspace herdr voi 3 tab co san: code / agents / console.
+# Create a herdr workspace with 3 ready-made tabs: code / agents / console.
 #
-# Dung:
-#   herdr-workspace-3tabs.sh                 # cwd = folder cua pane dang focus
-#   herdr-workspace-3tabs.sh ~/code/my-project # cwd chi dinh
-#   herdr-workspace-3tabs.sh . my-label      # label workspace tuy chon
+# Usage:
+#   herdr-workspace-3tabs.sh                 # cwd = folder of the focused pane
+#   herdr-workspace-3tabs.sh ~/code/my-project # explicit cwd
+#   herdr-workspace-3tabs.sh . my-label      # custom workspace label
 #
-# Voi --here: dung workspace DANG mo, tao 3 tab roi DONG tab hien tai
-# (tao truoc / dong sau, de workspace khong bao gio con 0 tab).
-# Canh bao: dong tab se kill process dang chay trong tab do.
+# With --here: reuse the CURRENT workspace, create the 3 tabs, then CLOSE the
+# current tab (create first / close after, so the workspace is never left with
+# 0 tabs).
+# Warning: closing a tab kills the process running in it.
 
 set -euo pipefail
 
 TABS=(code agents console)
 
 die() { printf '%s\n' "$*" >&2; exit 1; }
-command -v herdr >/dev/null || die "khong tim thay herdr trong PATH"
+command -v herdr >/dev/null || die "herdr not found in PATH"
 
 HERE=0
 if [[ ${1:-} == "--here" ]]; then HERE=1; shift; fi
 
-# --- cwd: tham so > pane dang focus > $PWD ------------------------------------
+# --- cwd: argument > focused pane > $PWD -------------------------------------
 focused_pane_cwd() {
   local snapshot
   snapshot=$(herdr pane list 2>/dev/null) || return 1
@@ -42,32 +43,34 @@ if [[ -n $CWD ]]; then
 else
   CWD=$(focused_pane_cwd || focused_workspace_cwd || printf '%s' "$PWD")
 fi
-[[ -d $CWD ]] || die "cwd khong ton tai: $CWD"
+[[ -d $CWD ]] || die "cwd does not exist: $CWD"
 
 LABEL=${2:-$(basename "$CWD")}
 
-# --- tao (hoac chon) workspace ------------------------------------------------
+# --- create (or pick) the workspace ------------------------------------------
 OLD_TAB=""
 if (( HERE )); then
   focused=$(herdr workspace list | jq -er 'first(.result.workspaces[] | select(.focused))') \
-    || die "--here can mot workspace dang focus"
+    || die "--here needs a focused workspace"
   WS_ID=$(jq -er '.workspace_id' <<<"$focused")
   OLD_TAB=$(jq -er '.active_tab_id' <<<"$focused")
   FIRST_TAB=""
 else
   created=$(herdr workspace create --cwd "$CWD" --label "$LABEL" --focus)
   WS_ID=$(jq -er '.result.workspace.workspace_id' <<<"$created")
-  # workspace create da sinh san 1 tab -> doi ten thanh tab dau tien
+  # workspace create already spawns 1 tab -> rename it into the first tab
   FIRST_TAB=$(jq -er '.result.tab.tab_id' <<<"$created")
 fi
 
-# Workspace moi luon kem 1 tab -> doi ten no thanh tab dau tien thay vi tao them.
+# A new workspace always comes with 1 tab -> rename it into the first tab
+# instead of creating another one.
 if [[ -n $FIRST_TAB ]]; then
   herdr tab rename "$FIRST_TAB" "${TABS[0]}" >/dev/null
 fi
 
-# --- 3 tab (idempotent) -------------------------------------------------------
-# Snapshot SAU rename: tab nao da co dung ten thi dung lai, khong tao trung.
+# --- the 3 tabs (idempotent) -------------------------------------------------
+# Snapshot AFTER the rename: any tab that already has the right name is reused,
+# so no duplicates are created.
 snapshot=$(herdr tab list --workspace "$WS_ID")
 
 tab_by_label() {
@@ -99,17 +102,17 @@ done
 
 herdr tab focus "$focus_target" >/dev/null
 
-# Dong tab cu SAU khi 3 tab da ton tai — tru khi chinh no la mot trong 3 tab
-# (bam nham lan 2 khi dang dung trong tab code/agents/console).
+# Close the old tab AFTER the 3 tabs exist — unless it is itself one of the 3
+# (pressing the key a second time while sitting in the code/agents/console tab).
 if [[ -n $OLD_TAB ]]; then
   old_label=$(jq -r --arg t "$OLD_TAB" \
     'first(.result.tabs[] | select(.tab_id == $t)) | .label // ""' <<<"$snapshot")
   if in_tabs "$old_label"; then
-    printf 'giu tab hien tai (%s): da nam trong bo 3 tab\n' "$old_label"
+    printf 'keeping current tab (%s): already part of the 3-tab set\n' "$old_label"
   else
     herdr tab close "$OLD_TAB" >/dev/null
   fi
 fi
 
-printf 'workspace %s @ %s | tao: %s | dung lai: %s\n' \
-  "$WS_ID" "$CWD" "${made[*]:-(khong)}" "${kept[*]:-(khong)}"
+printf 'workspace %s @ %s | created: %s | reused: %s\n' \
+  "$WS_ID" "$CWD" "${made[*]:-(none)}" "${kept[*]:-(none)}"

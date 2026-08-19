@@ -1,111 +1,117 @@
-# herdr - terminal workspace manager cho AI agent
+# herdr - terminal workspace manager for AI agents
 
-Quan ly workspace/tab/pane cho cac phien AI agent chay song song, co sidebar
-hien trang thai tung agent (working / done / blocked / idle). Trang chu:
-https://herdr.dev
+Manages workspaces/tabs/panes for AI agent sessions running in parallel, with a
+sidebar showing the state of each agent (working / done / blocked / idle).
+Home page: https://herdr.dev
 
-## File
+## Files
 
-| File | La gi |
+| File | What it is |
 |---|---|
-| `config.toml` | Cau hinh chinh. Symlink toi `~/.config/herdr/config.toml`. Gom keybinding kieu tmux, theme tokyo-night chinh mau, va bo cuc sidebar. |
-| `herdr-workspace-3tabs.sh` | Dung bo 3 tab `code` / `agents` / `console` tai cwd dang focus. Symlink toi `~/.local/bin/herdr-workspace-3tabs`. Gan vao `prefix+t` (thay tab hien tai) va `prefix+shift+t` (workspace moi). |
-| `herdr-claude-meta.sh` | Day ten phien + email account Claude + quota 5h len sidebar. Symlink toi `~/.local/bin/herdr-claude-meta`. Xem muc rieng ben duoi. |
+| `config.toml` | Main configuration. Symlinked to `~/.config/herdr/config.toml`. Contains tmux-style keybindings, tokyo-night theme with tweaked colors, and the sidebar layout. |
+| `herdr-workspace-3tabs.sh` | Creates the `code` / `agents` / `console` tab set at the currently focused cwd. Symlinked to `~/.local/bin/herdr-workspace-3tabs`. Bound to `prefix+t` (replace the current tab) and `prefix+shift+t` (new workspace). |
+| `herdr-claude-meta.sh` | Pushes the session name + Claude account email + 5h quota to the sidebar. Symlinked to `~/.local/bin/herdr-claude-meta`. See its own section below. |
 
-Chi `config.toml` duoc symlink vao `~/.config/herdr/`; thu muc do con chua
-socket, log va session state nen khong symlink ca thu muc.
+Only `config.toml` is symlinked into `~/.config/herdr/`; that directory also
+holds the socket, logs and session state, so the whole directory is not
+symlinked.
 
-## Cai tren may moi
-
-```bash
-cd ~/code/dotfiles && ./install     # dotbot tao ca 3 symlink
-herdr --version                     # xac nhan binary da co
-herdr config check                  # phai in "config: ok"
-```
-
-Binary `herdr` tu cai lay (`~/.local/bin/herdr`), khong nam trong repo nay.
-Sau khi doi `config.toml` thi khong can khoi dong lai session:
+## Installing on a new machine
 
 ```bash
-herdr server reload-config          # phai tra ve status: "applied"
+cd ~/code/dotfiles && ./install     # dotbot creates all 3 symlinks
+herdr --version                     # confirm the binary is present
+herdr config check                  # must print "config: ok"
 ```
 
-## Sidebar cho pane Claude
+The `herdr` binary is installed separately (`~/.local/bin/herdr`); it does not
+live in this repo. After changing `config.toml` there is no need to restart the
+session:
 
-Khi chay nhieu account Claude song song (`~/.claude`, `~/.claude-work`,
-`~/.claude-personal`, `~/.claude-alt`) thi khong nhin ra pane nao dang dung account nao, cung
-khong biet account do da tieu bao nhieu quota. Khoi agent cua pane Claude vi
-the co 4 hang thay vi 2:
+```bash
+herdr server reload-config          # must return status: "applied"
+```
+
+## Sidebar for Claude panes
+
+When several Claude accounts run in parallel — one config dir each, `~/.claude`
+plus a `~/.claude-<name>` dir per extra account — there is no way to tell which
+pane is using which account, nor how much quota that account has burned. The
+agent block for a Claude pane therefore has 4 rows instead of 2:
 
 ```
-|<--------- 26 cot -------->|
-my-project        agents     <- workspace + ten phien (hoac ten tab)
+|<--------- 26 columns ----->|
+my-project          agents   <- workspace + session name (or tab name)
 ⠐ working           claude
-👤 tuantv.nhnd
+👤 alice
 📊 5h 23% (43m)
 ```
 
-Mau cua hang quota doi theo nguong: xanh `< 70%`, cam `70-89%`, do `>= 90%`.
+The color of the quota row follows thresholds: green `< 70%`, orange `70-89%`,
+red `>= 90%`.
 
-### Hang 1: ten phien thay cho ten tab
+### Row 1: session name instead of tab name
 
-Hang 1 dung token `$convo` chu khong dung token dung san `tab`:
+Row 1 uses the `$convo` token rather than the built-in `tab` token:
 
-1. Neu phien da duoc dat ten bang **`/rename`** thi hien ten do.
-2. Neu chua thi lui ve **ten tab**, tuc giong het hanh vi cu.
+1. If the session has been named with **`/rename`**, show that name.
+2. Otherwise fall back to the **tab name**, i.e. exactly the old behavior.
 
-**Khong** dung `session_name` trong payload statusline de phan biet hai truong
-hop: truong do luon co gia tri, va khi chua `/rename` thi no chinh la ten AI tu
-sinh (`ai-title`, doi lien tuc theo noi dung dang lam). Chi co `/rename` moi ghi
-ban ghi `{"type":"custom-title","customTitle":...}` vao transcript, nen script
-doc `transcript_path` de tim. Loc bang chuoi con truoc khi parse JSON: quet het
-file 950KB het khoang 2ms.
+`session_name` from the statusline payload can **not** be used to distinguish
+the two cases: that field always has a value, and before `/rename` it is the
+AI-generated name (`ai-title`, which keeps changing with whatever is being
+worked on). Only `/rename` writes a `{"type":"custom-title","customTitle":...}`
+record into the transcript, so the script reads `transcript_path` to find it.
+Filtering by substring before parsing JSON keeps it cheap: scanning an entire
+950KB file takes about 2ms.
 
-Config khong co menh de dieu kien, nen script phai tu chon roi day sang mot
-token duy nhat. Keo theo hai he qua:
+The config has no conditional clauses, so the script has to make the choice
+itself and push a single token. Two consequences follow:
 
-- Doi ten tab bang `prefix+,` chi hien ra o lan render statusline ke tiep chu
-  khong tuc thi.
-- Neu script hong thi hang 1 mat ten tab. Token co `ttl_ms` 6 tieng nen gia tri
-  cuoi cung van con do trong luc do.
+- Renaming a tab with `prefix+,` only shows up on the next statusline render,
+  not immediately.
+- If the script breaks, row 1 loses the tab name. The token has a `ttl_ms` of
+  6 hours, so the last value stays there in the meantime.
 
-### Hoat dong the nao
+### How it works
 
 ```
-Claude Code (pane, CLAUDE_CONFIG_DIR=~/.claude-work)
-   |  moi lan render statusline
+Claude Code (pane, CLAUDE_CONFIG_DIR=~/.claude-<name>)
+   |  on every statusline render
    v
-~/.claude-work/statusline-command.sh
-   |  da co san $account_email, $account_org, $FIVE_H, $FIVE_H_RESET
-   |  + .transcript_path lay tu payload stdin
-   |  khoi goi o cuoi file, chay nen (&)
+~/.claude-<name>/statusline-command.sh
+   |  already has $account_email, $account_org, $FIVE_H, $FIVE_H_RESET
+   |  + .transcript_path taken from the stdin payload
+   |  the block is invoked at the end of the file, in the background (&)
    v
 ~/.local/bin/herdr-claude-meta
-   |  doc $HERDR_PANE_ID + $HERDR_SOCKET_PATH tu env cua pane
-   |  doc transcript tim custom-title; khong co thi hoi herdr ten tab
+   |  reads $HERDR_PANE_ID + $HERDR_SOCKET_PATH from the pane's env
+   |  reads the transcript for custom-title; if absent, asks herdr for the tab name
    v
 unix socket -> herdr server: pane.report_metadata
    v
-sidebar hang 1 (ten phien) + hang 3, 4
+sidebar row 1 (session name) + rows 3, 4
 ```
 
-Moi pane tu khai bao metadata cua chinh no, nen khong can map thu cong "config
-dir nao ung voi pane nao" - account nao chay o pane nao la tu dong dung.
+Each pane reports its own metadata, so there is no need to manually map "which
+config dir corresponds to which pane" - whichever account runs in whichever pane
+is automatically correct.
 
-Script khong tu goi API nao ca; no chi format lai cac gia tri ma statusline da
-tinh san. Ngoai herdr thi no no-op im lang (thoat 0, khong in gi).
+The script calls no API of its own; it only reformats values the statusline has
+already computed. Outside herdr it is a silent no-op (exits 0, prints nothing).
 
-### Buoc BAT BUOC lam tay tren may moi
+### MANDATORY manual step on a new machine
 
-File `~/.claude/statusline-command.sh` **khong nam trong repo nay** (no doc
-keychain entry rieng cua tung account), nen dotbot khong dung duoc. Phai them
-tay khoi sau vao **cuoi file**:
+The file `~/.claude/statusline-command.sh` is **not in this repo** (it reads a
+separate keychain entry per account), so dotbot cannot be used for it. The
+following block must be added by hand at the **end of the file**:
 
 ```sh
 # ─────────────────────────────────────────────────────────────
-# Day ten phien + dinh danh account + quota 5h sang sidebar herdr (hang 1, 3,
-# 4 cua khoi agent). Chay nen de khong lam cham statusline; no-op khi khong o
-# trong herdr. Script: ~/code/dotfiles/herdr/herdr-claude-meta.sh
+# Push the session name + account identity + 5h quota to the herdr sidebar
+# (rows 1, 3, 4 of the agent block). Runs in the background so it does not slow
+# down the statusline; no-op when not inside herdr.
+# Script: ~/code/dotfiles/herdr/herdr-claude-meta.sh
 # ─────────────────────────────────────────────────────────────
 if [ -x "$HOME/.local/bin/herdr-claude-meta" ]; then
   "$HOME/.local/bin/herdr-claude-meta" \
@@ -118,80 +124,86 @@ if [ -x "$HOME/.local/bin/herdr-claude-meta" ]; then
 fi
 ```
 
-**Chi phai lam MOT lan, khong lam cho tung config dir.** Ca bon config dir
-(`~/.claude`, `~/.claude-work`, `~/.claude-personal`, `~/.claude-alt`) deu chay
-chung dung file nay: ba dir sau symlink `settings.json` ve
-`~/.claude/settings.json`, ma `statusLine.command` trong do la duong dan tuyet
-doi `~/.claude/statusline-command.sh` (dau `~` no ra `$HOME`, khong no ra config
-dir). Them khoi tren vao tung dir se thanh day trung hai lan.
+**Do this ONCE, not for each config dir.** Every `~/.claude*` config dir runs
+this same file: the extra ones symlink `settings.json` to
+`~/.claude/settings.json`, and the
+`statusLine.command` in it is the absolute path
+`~/.claude/statusline-command.sh` (the leading `~` expands to `$HOME`, not to the
+config dir). Adding the block above to each dir would push twice.
 
-Van tach duoc account theo pane vi ban than statusline da da-account: no lay
-`CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"` roi tra keychain entry rieng
-cua dir do, nen `$ACTIVE_EMAIL` luon dung account cua pane dang chay.
+Accounts can still be told apart per pane because the statusline is itself
+multi-account: it takes `CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"` and
+looks up the keychain entry for that dir, so `$ACTIVE_EMAIL` is always the
+account of the running pane.
 
-Kiem tra lai khi nghi ngo:
+To re-check when in doubt:
 
 ```bash
-for d in .claude .claude-work .claude-personal .claude-alt; do
-  printf '%-16s %s\n' "$d" "$(jq -r '.statusLine.command' "$HOME/$d/settings.json")"
+for d in "$HOME"/.claude "$HOME"/.claude-*; do
+  [ -f "$d/settings.json" ] || continue
+  printf '%-20s %s\n' "$(basename "$d")" "$(jq -r '.statusLine.command' "$d/settings.json")"
 done
-grep -c herdr-claude-meta "$HOME/.claude/statusline-command.sh"   # phai > 0
+grep -c herdr-claude-meta "$HOME/.claude/statusline-command.sh"   # must be > 0
 ```
 
-**Ten bien khac README goc.** Statusline hien tai dat ten `ACTIVE_EMAIL` (khong
-phai `account_email`) va khong tach san org - phai moc `orgName` tu
-`$AUTH_STATUS`. `FIVE_H`, `FIVE_H_RESET` va payload stdin trong `$input` thi
-dung nhu cu. **Neu viet lai statusline ma doi ten bien thi phai sua theo.**
+**Variable names differ from the original README.** The current statusline names
+it `ACTIVE_EMAIL` (not `account_email`) and does not expose the org separately -
+`orgName` has to be dug out of `$AUTH_STATUS`. `FIVE_H`, `FIVE_H_RESET` and the
+stdin payload in `$input` are unchanged. **If the statusline is rewritten and
+the variable names change, this block must be updated to match.**
 
-### Kiem tra
+### Verifying
 
 ```bash
 herdr config check                        # config: ok
 herdr server reload-config                # status: "applied"
 
-# Day thu vao pane dang ngoi (phai chay TRONG herdr)
+# Push a test value into the current pane (must be run INSIDE herdr)
 herdr-claude-meta --email a@b.com --five-pct 95 --five-reset ""
 
-# Doc lai token da nam tren pane
+# Read back the tokens now sitting on the pane
 herdr pane get "$HERDR_PANE_ID" | python3 -m json.tool | grep -A5 tokens
 ```
 
-Ket qua mong doi la `{"acct": "👤 a", "quota_crit": "📊 5h 95%"}`. Doi
-`--five-pct` sang `42` / `78` de thu ba muc mau.
+The expected result is `{"acct": "👤 a", "quota_crit": "📊 5h 95%"}`. Change
+`--five-pct` to `42` / `78` to try all three color levels.
 
-Voi Claude Code that thi token chi xuat hien sau lan **render statusline** dau
-tien cua pane do, tuc ngay khi phien co hoat dong. Pane dang nam im tu truoc
-luc cai dat se chua co gi cho toi luot tuong tac ke tiep - day la binh thuong,
-chi xay ra mot lan cho moi pane mo san.
+With real Claude Code, the tokens only appear after that pane's first
+**statusline render**, i.e. as soon as the session does anything. A pane that has
+been sitting idle since before the install will show nothing until the next
+interaction - this is normal and happens only once per already-open pane.
 
-### Vi sao quota phai co 3 token
+### Why the quota needs 3 tokens
 
-Style token trong `config.toml` la **tinh** (`RawStyledSidebarToken` chi co
-`token`, `fg`, `bold`, `dim`), khong doi mau theo gia tri duoc nhu
-`state_icon`/`state_text` - hai token dung san do herdr gan cung mau theo state.
-Cach lach: khai ba ten token cho ba muc (`$quota_ok`, `$quota_warn`,
-`$quota_crit`), moi ten mot mau co dinh; moi lan script chi dien dung mot cai,
-hai cai con lai gui `null` de xoa. Nhin ra y het mau dong.
+Style tokens in `config.toml` are **static** (`RawStyledSidebarToken` only has
+`token`, `fg`, `bold`, `dim`); they cannot change color by value the way
+`state_icon`/`state_text` do - those two are built-in tokens that herdr colors
+by state. The workaround: declare three token names for the three levels
+(`$quota_ok`, `$quota_warn`, `$quota_crit`), each with a fixed color; on every
+run the script fills exactly one of them and sends `null` for the other two to
+clear them. The result looks exactly like a dynamic color.
 
-Cung ly do do ma be ngang phai giu <= 26 o (`ui.sidebar_width` mac dinh 26, toi
-da 36): script tu cat bot local-part cua email, chen `…` o giua.
+For the same reason the width must stay <= 26 columns (`ui.sidebar_width`
+defaults to 26, max 36): the script shortens the local part of the email itself,
+inserting `…` in the middle.
 
-### Xu ly su co
+### Troubleshooting
 
-| Trieu chung | Nguyen nhan thuong gap |
+| Symptom | Common cause |
 |---|---|
-| Khong hang nao hien | Chua chay `herdr server reload-config` sau khi doi `config.toml`. |
-| Hien o pane nay, khong o pane kia | Pane kia chua render statusline lan nao. Go gi do vao no. |
-| `herdr config check` bao `unknown sidebar token` | Sai ten token trong `rows_by_agent`, phai co tien to `$`. |
-| Hien so cu ke ca khi da thoat Claude | Token co `ttl_ms` 6 tieng roi tu het han. Muon xoa ngay thi day lai voi gia tri rong. |
-| Hang 1 mat ten tab | Script khong day duoc `$convo`. Kiem tra `--transcript` co duoc truyen khong, va `herdr tab get "$HERDR_TAB_ID"` co tra ve `label` khong. |
-| Da `/rename` ma van hien ten tab | Phien do chua render statusline lai. Hoac transcript chua kip ghi `custom-title` - kiem tra bang `grep -c custom-title <transcript>`. |
-| Chay `herdr-claude-meta` khong thay gi | Dung - no no-op khi thieu `HERDR_ENV=1` / `HERDR_PANE_ID` / `HERDR_SOCKET_PATH`, tuc khi khong o trong herdr. |
+| No rows show up at all | `herdr server reload-config` was not run after changing `config.toml`. |
+| Shows in one pane but not another | The other pane has never rendered its statusline. Type something into it. |
+| `herdr config check` reports `unknown sidebar token` | Wrong token name in `rows_by_agent`; it must have the `$` prefix. |
+| Stale numbers still shown after quitting Claude | The token has a `ttl_ms` of 6 hours and then expires by itself. To clear it now, push again with empty values. |
+| Row 1 loses the tab name | The script could not push `$convo`. Check whether `--transcript` is being passed, and whether `herdr tab get "$HERDR_TAB_ID"` returns a `label`. |
+| Already ran `/rename` but the tab name still shows | That session has not re-rendered its statusline. Or the transcript has not written `custom-title` yet - check with `grep -c custom-title <transcript>`. |
+| Running `herdr-claude-meta` shows nothing | Correct - it is a no-op when `HERDR_ENV=1` / `HERDR_PANE_ID` / `HERDR_SOCKET_PATH` are missing, i.e. when not inside herdr. |
 
-Khong dung CLI `herdr pane report-metadata` de thay the script: parser cua ban
-0.8.0 khong nhat quan (`--source` bat buoc dang `--source=X`, `--token` thi
-nguoc lai, pane_id positional bi tu choi). Di thang socket JSON-RPC on dinh hon.
+Do not use the `herdr pane report-metadata` CLI in place of the script: the
+parser in 0.8.0 is inconsistent (`--source` must be written as `--source=X`,
+`--token` is the opposite, and a positional pane_id is rejected). Going straight
+to the JSON-RPC socket is more reliable.
 
-## Thiet ke chi tiet
+## Detailed design
 
 `../claude/docs/superpowers/specs/2026-08-10-herdr-sidebar-account-quota-design.md`

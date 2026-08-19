@@ -1,19 +1,20 @@
 #!/bin/sh
-# Day ten phien + dinh danh account Claude + quota 5h sang sidebar herdr.
+# Push the session name + Claude account identity + 5h quota to the herdr sidebar.
 #
-# Duoc goi tu cuoi moi ~/.claude*/statusline-command.sh, chay nen. Cac gia tri
-# deu da duoc statusline tinh san, script nay chi format lai va gui di - no
-# khong tu goi API nao ca.
+# Invoked from the end of every ~/.claude*/statusline-command.sh, in the
+# background. All the values have already been computed by the statusline; this
+# script only reformats and sends them - it calls no API of its own.
 #
-# Sidebar doc chung qua token $convo / $acct / $quota_ok / $quota_warn /
-# $quota_crit, khai bao trong [ui.sidebar.agents.rows_by_agent] cua config.toml.
+# The sidebar reads them through the $convo / $acct / $quota_ok / $quota_warn /
+# $quota_crit tokens, declared in [ui.sidebar.agents.rows_by_agent] of
+# config.toml.
 #
-# Quota phai tach lam 3 token vi style token trong config la tinh: moi lan chi
-# mot token co gia tri, hai token con lai gui null de xoa. Do la cach duy nhat
-# de doi mau theo nguong.
+# The quota has to be split into 3 tokens because style tokens in the config are
+# static: on each run only one token gets a value and the other two are sent as
+# null to clear them. That is the only way to change color by threshold.
 #
-# No-op im lang khi khong chay trong herdr. Khong bao gio in ra gi, khong bao
-# gio thoat khac 0 - day la phan phu cua statusline.
+# Silent no-op when not running inside herdr. Never prints anything, never exits
+# non-zero - this is a side job of the statusline.
 
 set -eu
 
@@ -53,13 +54,14 @@ import unicodedata
 from datetime import datetime, timezone
 
 SOURCE = "claude-meta"
-# Sidebar mac dinh rong 26 cot (ui.sidebar_width). Chuoi dai hon se bi cat.
+# The sidebar is 26 columns wide by default (ui.sidebar_width). Longer strings
+# get truncated.
 WIDTH = 26
-# Hang 1 con phai chua ten workspace, nen ten phien duoc cat ngan hon. herdr tu
-# cat tiep bang "…" neu van khong du cho.
+# Row 1 also has to hold the workspace name, so the session name is clipped
+# shorter. herdr clips further with "…" if it still does not fit.
 CONVO_WIDTH = 22
-# Dai hon cua so 5h, nen pane con song khong bao gio cham nguong; pane da chet
-# thi hang cua no tu bien mat thay vi treo so cu mai mai.
+# Longer than the 5h window, so a live pane never hits the limit; a dead pane
+# has its row disappear instead of hanging on to stale numbers forever.
 TTL_MS = 6 * 60 * 60 * 1000
 
 pane_id = os.environ.get("HERDR_PANE_ID") or ""
@@ -69,12 +71,12 @@ if not pane_id or not socket_path:
 
 
 def cells(text):
-    """Do be ngang thuc te tren terminal, emoji chiem 2 o."""
+    """Measure real terminal width; emoji take 2 cells."""
     return sum(2 if unicodedata.east_asian_width(c) in "WF" else 1 for c in text)
 
 
 def clip(text, budget):
-    """Cat duoi cho vua budget o, chen dau ellipsis."""
+    """Truncate the tail to fit the budget, appending an ellipsis."""
     if cells(text) <= budget:
         return text
     out = ""
@@ -86,7 +88,7 @@ def clip(text, budget):
 
 
 def shrink_middle(text, budget):
-    """Cat giua chuoi de giu ca dau va duoi - dung cho local-part cua email."""
+    """Cut the middle out to keep both head and tail - used for email local parts."""
     if cells(text) <= budget or budget < 3:
         return text
     keep = budget - 1
@@ -100,8 +102,8 @@ def build_acct(email, org):
         return None
     local = email.split("@", 1)[0]
 
-    # Tai khoan ca nhan duoc cap mot org tu sinh ten "<email>'s Organization",
-    # khong mang thong tin gi. Bo di, chi giu org that.
+    # Personal accounts get an auto-generated org named "<email>'s Organization",
+    # which carries no information. Drop it, keep only a real org.
     org = (org or "").strip()
     for suffix in ("'s Organization", "’s Organization"):
         if org.endswith(suffix):
@@ -115,14 +117,14 @@ def build_acct(email, org):
         tail = " · " + org
         room = WIDTH - cells(prefix) - cells(tail)
         if room < 6:
-            # Org qua dai, khong con cho cho local-part: cat ca cum.
+            # Org too long, no room left for the local part: clip the whole thing.
             return clip(prefix + local + tail, WIDTH)
         return prefix + shrink_middle(local, room) + tail
     return clip(prefix + local, WIDTH)
 
 
 def humanize(reset_raw):
-    """ISO8601 (hoac epoch) -> '1d2h' / '3h12m' / '47m'. Rong neu da qua han."""
+    """ISO8601 (or epoch) -> '1d2h' / '3h12m' / '47m'. Empty if already past."""
     reset_raw = (reset_raw or "").strip()
     if not reset_raw:
         return ""
@@ -151,7 +153,7 @@ def humanize(reset_raw):
 
 
 def rpc(method, params):
-    """Mot vong JSON-RPC qua unix socket cua herdr. None neu that bai."""
+    """One JSON-RPC round trip over herdr's unix socket. None on failure."""
     request = {
         "id": "%s:%d:%06d"
         % (SOURCE, int(time.time() * 1000), random.randrange(1_000_000)),
@@ -181,15 +183,17 @@ def rpc(method, params):
 
 
 def custom_title(transcript_path):
-    """Ten phien do NGUOI dat qua /rename, hoac None.
+    """The session name a HUMAN set via /rename, or None.
 
-    Claude Code ghi hai loai ban ghi ten vao transcript: `ai-title` (tu sinh,
-    doi lien tuc theo noi dung dang lam) va `custom-title` (chi sinh ra khi
-    chay /rename). Truong `session_name` trong payload statusline KHONG dung
-    duoc de phan biet vi no luon co gia tri - khi chua /rename thi no chinh la
-    ai-title. Nen phai doc transcript.
+    Claude Code writes two kinds of name records into the transcript:
+    `ai-title` (auto-generated, constantly changing with whatever is being
+    worked on) and `custom-title` (only produced by running /rename). The
+    `session_name` field in the statusline payload can NOT be used to tell them
+    apart, because it always has a value - before /rename it is simply the
+    ai-title. So the transcript has to be read.
 
-    Loc bang chuoi con truoc khi parse JSON: quet het file 950KB het ~2ms.
+    Filter by substring before parsing JSON: scanning an entire 950KB file takes
+    ~2ms.
     """
     if not transcript_path or not os.path.isfile(transcript_path):
         return None
@@ -213,10 +217,11 @@ def custom_title(transcript_path):
 
 
 def tab_label():
-    """Ten tab dang chua pane nay - duong lui khi phien chua duoc /rename.
+    """Name of the tab holding this pane - the fallback when the session has no /rename.
 
-    Lay tab_id tu pane.get chu khong tu $HERDR_TAB_ID, vi env do dat luc tao
-    pane va se cu neu pane bi chuyen sang tab khac.
+    Take tab_id from pane.get rather than from $HERDR_TAB_ID, because that env
+    var is set when the pane is created and goes stale if the pane is moved to
+    another tab.
     """
     tab_id = ""
     pane = rpc("pane.get", {"pane_id": pane_id})
@@ -239,7 +244,7 @@ def build_convo(transcript_path):
 
 
 def build_quota(pct_raw, reset_raw):
-    """Tra ve (ten_token, chuoi). Ten token quyet dinh mau trong config.toml."""
+    """Return (token_name, string). The token name decides the color in config.toml."""
     pct_raw = (pct_raw or "").strip()
     if not pct_raw:
         return None, None
@@ -282,7 +287,7 @@ rpc(
     {
         "pane_id": pane_id,
         "source": SOURCE,
-        # Dong ho nano de bao cao den muon khong ghi de bao cao moi hon.
+        # Nanosecond clock so a late report does not overwrite a newer one.
         "seq": time.time_ns(),
         "ttl_ms": TTL_MS,
         "tokens": tokens,

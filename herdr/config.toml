@@ -17,28 +17,29 @@ next_workspace = "prefix+)"      # like tmux `prefix )` switch-client -n (defaul
 close_pane = "prefix+="          # like tmux `prefix =` kill-pane (default: prefix+x)
 toggle_sidebar = "ctrl+shift+left" # prefix-free sidebar toggle (default: prefix+b)
 
-# Nhay giua cac agent (mac dinh herdr de trong ca 3). Tranh p/n (da la
-# previous/next tab) va (/) (da la workspace).
+# Jump between agents (herdr leaves all 3 unbound by default). Avoid p/n
+# (already previous/next tab) and (/) (already workspace).
 previous_agent = "prefix+["
 next_agent = "prefix+]"
-focus_agent = "prefix+alt+1..9"  # nhay thang toi agent thu N
+focus_agent = "prefix+alt+1..9"  # jump straight to the Nth agent
 
-# Bo 3 tab code / agents / console tai cwd cua pane dang focus.
-# herdr khong co option "startup tabs" trong config, nen dung script goi
-# socket API (herdr workspace/tab create). `type = "shell"` chay detached,
-# khong chiem pane. Script idempotent: tab da dung ten thi dung lai.
+# The code / agents / console tab set at the cwd of the focused pane.
+# herdr has no "startup tabs" option in the config, so a script drives the
+# socket API instead (herdr workspace/tab create). `type = "shell"` runs
+# detached and does not take over a pane. The script is idempotent: a tab that
+# already has the right name is reused.
 #
-# Bien workspace DANG mo thanh 3 tab do, roi dong tab hien tai.
-# Luu y: tab dang chay agent se bi kill (tru khi no la 1 trong 3 tab).
+# Turns the CURRENT workspace into those 3 tabs, then closes the current tab.
+# Note: a tab running an agent gets killed (unless it is one of the 3 tabs).
 [[keys.command]]
-key = "prefix+t"   # t = tabs. Tranh p/n (previous/next tab) va alt (meta key kho bam).
+key = "prefix+t"   # t = tabs. Avoid p/n (previous/next tab) and alt (awkward meta key).
 type = "shell"
 description = "Replace this tab with code/agents/console"
 command = "~/.local/bin/herdr-workspace-3tabs --here"
 
-# Workspace MOI kem 3 tab do.
+# A NEW workspace with those 3 tabs.
 [[keys.command]]
-key = "prefix+shift+t"  # rename_tab da doi sang prefix+, nen shift+t con trong
+key = "prefix+shift+t"  # rename_tab moved to prefix+, so shift+t is free
 type = "shell"
 description = "New workspace: code/agents/console"
 command = "~/.local/bin/herdr-workspace-3tabs"
@@ -49,54 +50,63 @@ command = "~/.local/bin/herdr-workspace-3tabs"
 mouse_capture = true
 mouse_scroll_lines = 3
 
-# 0.8.0 doi default rows cua panel agent, bo state_text -> mat chu
-# working/idle trong sidebar. Detection khong he hong: `herdr agent explain
-# <pane>` van bao dung state. Set tuong minh de update sau khong doi ngam.
+# 0.8.0 changed the default rows of the agent panel, dropping state_text ->
+# the working/idle text disappeared from the sidebar. Detection is not broken
+# at all: `herdr agent explain <pane>` still reports the right state. Set it
+# explicitly so future updates do not change it silently.
 #
-# Bo cuc nay dung lai dung layout 0.7.x (state_icon la spinner dong khi working):
-#   my-project    agents
+# This layout restores the 0.7.x one exactly (state_icon is an animated spinner
+# while working):
+#   my-project      agents
 #   ⠐ working       claude
 [ui.sidebar.agents]
-# Khoi agent cua Claude cao 4 hang nen cac agent dinh sat nhau, kho tach mat.
-# Chen 1 hang trong giua cac khoi (mac dinh 0).
+# The Claude agent block is 4 rows tall, so agents end up glued together and
+# hard to tell apart. Insert 1 blank row between blocks (default 0).
 row_gap = 1
 rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 
-# Rieng pane Claude: them hang account + hang quota 5h, de biet pane nao dang
-# chay account nao (~/.claude, ~/.claude-work, ~/.claude-alt) va account do
-# da tieu bao nhieu quota, khong phai nhay vao tung pane doc statusline.
+# For Claude panes only: add an account row and a 5h quota row, so it is clear
+# which pane runs which account (one ~/.claude* config dir each) and how much
+# quota that account has burned, without hopping into each pane to read its
+# statusline.
 #
-#   my-project    agents
+#   my-project      agents
 #   ⠐ working       claude
-#   👤 tuantv.nhnd
+#   👤 alice
 #   📊 5h 42% (3h12m)
 #
-# Hang 1 dung $convo thay cho token `tab`: hien ten phien khi da dat bang
-# /rename, khong thi lui ve dung ten tab. Config khong co menh de dieu kien nen
-# script phai tu chon roi day sang mot token duy nhat - keo theo viec doi ten
-# tab chi hien ra o lan render statusline ke tiep chu khong tuc thi.
+# Row 1 uses $convo instead of the `tab` token: it shows the session name once
+# set with /rename, otherwise it falls back to the tab name. The config has no
+# conditional clauses, so the script has to make the choice itself and push a
+# single token - which means renaming a tab only shows up on the next
+# statusline render, not immediately.
 #
-# Gia tri do ~/.local/bin/herdr-claude-meta day vao qua pane.report_metadata,
-# goi tu cuoi moi ~/.claude*/statusline-command.sh. Dat o rows_by_agent chu
-# khong sua rows chung, de pane cua agent khac (copilot, cursor) khong linh hai
-# hang trong.
+# The value is pushed in by ~/.local/bin/herdr-claude-meta via
+# pane.report_metadata, called from the end of every
+# ~/.claude*/statusline-command.sh. It lives in rows_by_agent rather than in the
+# shared rows, so panes of other agents (copilot, cursor) do not get two blank
+# rows.
 #
-# Quota phai tach lam 3 token vi style token la TINH - khong doi mau theo gia
-# tri duoc nhu state_icon/state_text (hai token dung san do herdr gan cung mau
-# theo state). Moi lan script chi dien dung mot token, hai token con lai gui
-# null de xoa, nen nhin ra y het mau dong.
+# The quota has to be split into 3 tokens because style tokens are STATIC -
+# they cannot change color by value the way state_icon/state_text do (those two
+# are built-in tokens that herdr colors by state). On each run the script fills
+# exactly one token and sends null for the other two to clear them, so it looks
+# just like a dynamic color.
 [ui.sidebar.agents.rows_by_agent]
 claude = [
-  # Mac dinh herdr to token phu cua hang bang mau comment cua tokyo-night
-  # (#565f89) - tren nen panel #1a1b26 thi chim han, khong doc noi. Dat fg
-  # tuong minh cho ca hai token do minh tu them ($convo, $acct).
+  # By default herdr paints a row's secondary token in tokyo-night's comment
+  # color (#565f89) - on the panel background #1a1b26 it sinks in completely
+  # and is unreadable. Set fg explicitly for both tokens added here ($convo,
+  # $acct).
   #
-  # #a9b1d6 la fg thuong cua tokyo-night: doc ro nhung van nhat hon ten
-  # workspace in dam ben canh, nen thu tu quan trong cua hang 1 khong bi dao.
+  # #a9b1d6 is tokyo-night's normal fg: readable but still lighter than the
+  # bold workspace name next to it, so the importance order of row 1 is not
+  # inverted.
   ["workspace", { token = "$convo", fg = "#a9b1d6" }],
   ["state_icon", "state_text", "agent"],
-  # Xanh duong hop voi icon 👤 va tach bach voi dai xanh-cam-do cua hang quota
-  # ngay ben duoi. Bo `dim` - chinh no la thu phu mau fg di.
+  # Blue goes with the 👤 icon and stays distinct from the green-orange-red
+  # range of the quota row right below. Drop `dim` - that is exactly what was
+  # washing the fg color out.
   [{ token = "$acct", fg = "#7aa2f7" }],
   [
     { token = "$quota_ok", fg = "#9ece6a" },    # < 70%
@@ -106,20 +116,22 @@ claude = [
 ]
 
 [theme]
-# tokyo-night: nen navy dam, gan bg cua iTerm2 profile "Deep Harbor"
-# (#182635). Truoc dung name = "terminal" (bam bang ANSI cua iTerm2) nhung
-# Deep Harbor de ANSI 8 = #8795a0 (xam sang bat thuong) -> hang workspace
-# active thanh mang xam bet, chu chim.
+# tokyo-night: deep navy background, close to the bg of the iTerm2 "Deep
+# Harbor" profile (#182635). Previously name = "terminal" (following iTerm2's
+# ANSI palette) but Deep Harbor sets ANSI 8 = #8795a0 (unusually light grey)
+# -> the active workspace row turned into a flat grey slab with the text
+# drowning in it.
 name = "tokyo-night"
 
 [theme.custom]
-# 1. Hang active khong con mang mau: keo nen SIDEBAR ve dung mau nen hang
-#    active cua tokyo-night (#1a1b26) -> hai ben trung nhau. Lam chieu nay
-#    vi panel_bg da xac nhan an chac, con token ve nen hang active thi chua
-#    dinh danh duoc (khong phai surface0/1 - da thu).
+# 1. The active row is no longer a colored slab: pull the SIDEBAR background to
+#    exactly tokyo-night's active-row background (#1a1b26) -> the two sides
+#    match. Done this way because panel_bg is confirmed to work, while the
+#    token for the active-row background could not be identified (not
+#    surface0/1 - already tried).
 panel_bg = "#1a1b26"
 
-# 2. Chu tone nong, lay tu palette Deep Harbor.
-accent = "#FFAD36"   # amber - highlight / hang dang chon
-yellow = "#F49D00"   # cam dam
-peach  = "#FA8155"   # cam san ho
+# 2. Warm-toned accents, taken from the Deep Harbor palette.
+accent = "#FFAD36"   # amber - highlight / selected row
+yellow = "#F49D00"   # deep orange
+peach  = "#FA8155"   # coral orange
