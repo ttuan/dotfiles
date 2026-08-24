@@ -50,6 +50,12 @@ command = "~/.local/bin/herdr-workspace-3tabs"
 mouse_capture = true
 mouse_scroll_lines = 3
 
+# Same problem on the workspace list: without a gap, multi-row space entries run
+# together. 1 blank row between spaces, matching the agents panel below
+# (default 0).
+[ui.sidebar.spaces]
+row_gap = 1
+
 # 0.8.0 changed the default rows of the agent panel, dropping state_text ->
 # the working/idle text disappeared from the sidebar. Detection is not broken
 # at all: `herdr agent explain <pane>` still reports the right state. Set it
