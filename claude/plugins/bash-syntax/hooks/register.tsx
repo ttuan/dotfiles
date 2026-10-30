@@ -21,7 +21,12 @@ const C = {
   operator: '#f92672',
   flag: '#66d9ef',
   path: '#66d9ef', // file basename, glob pattern
+  env: '#8792a2', // NAME=value env prefixes, kept faint so the real command pops
+  summary: '#21a691', // the tool's one-line summary / description (stands out)
 } as const
+
+// A leading `NAME=value` env-var assignment, e.g. `S=/tmp/x` before a command.
+const ENV_ASSIGN = /^[A-Za-z_][A-Za-z0-9_]*=/
 
 type Span = { text: string; color?: string; dim?: boolean }
 
@@ -31,6 +36,20 @@ const KEYWORDS = new Set([
 ])
 const RESETS_TO_COMMAND = new Set(['do', 'then', 'else'])
 const PATH_TOOLS = new Set(['Read', 'Edit', 'MultiEdit', 'Write', 'NotebookEdit'])
+
+// Per-tool Nerd Font glyph shown in place of the generic bullet, coloured by
+// call state. Unknown tools fall back to a filled circle (like the native ⏺).
+const ICON: Record<string, string> = {
+  Bash: '', // terminal
+  Read: '', // file
+  Edit: '', // pencil
+  MultiEdit: '',
+  NotebookEdit: '',
+  Write: '', // save
+  Glob: '', // folder
+  Grep: '', // search
+}
+const DEFAULT_ICON = '' // filled circle
 
 const RULES: { type: string; re: RegExp }[] = [
   { type: 'space', re: /\s+/y },
@@ -80,6 +99,10 @@ function tokenizeLine(line: string): Span[] {
         if (KEYWORDS.has(text)) {
           spans.push({ text, color: C.keyword })
           expectCommand = RESETS_TO_COMMAND.has(text)
+        } else if (expectCommand && ENV_ASSIGN.test(text)) {
+          // `NAME=value` prefix: faint, and still at command position so the
+          // actual command after it keeps its own colour.
+          spans.push({ text, color: C.env })
         } else if (expectCommand) {
           spans.push({ text, color: C.command })
           expectCommand = false
@@ -150,10 +173,11 @@ export const register: Register = (on, options) => {
         : e.props.isRunning
           ? 'claude'
           : 'success'
+    const icon = ICON[tool] ?? DEFAULT_ICON
 
-    const drawSpans = (spans: Span[], keyPrefix: string) =>
+    const drawSpans = (spans: Span[], keyPrefix: string, italic = false) =>
       spans.map((s, si) => (
-        <Text key={`${keyPrefix}${si}`} color={s.color} dimColor={s.dim}>
+        <Text key={`${keyPrefix}${si}`} color={s.color} dimColor={s.dim} italic={italic}>
           {s.text}
         </Text>
       ))
@@ -161,11 +185,11 @@ export const register: Register = (on, options) => {
     // One-line header: ⏺ Name(<coloured arg>)
     const inlineRow = (extra: Span[]) => (
       <Box>
-        <Text color={bullet}>⏺ </Text>
-        <Text bold>{tool}</Text>
-        <Text>(</Text>
-        {drawSpans(extra, 'a')}
-        <Text>)</Text>
+        <Text color={bullet}>{icon} </Text>
+        <Text bold italic>{tool}</Text>
+        <Text italic>(</Text>
+        {drawSpans(extra, 'a', true)}
+        <Text italic>)</Text>
       </Box>
     )
 
@@ -185,10 +209,10 @@ export const register: Register = (on, options) => {
       return (
         <Box flexDirection="column">
           <Box>
-            <Text color={bullet}>⏺ </Text>
-            <Text bold>Bash</Text>
+            <Text color={bullet}>{icon} </Text>
+            <Text bold italic>Bash</Text>
             {input.description ? (
-              <Text dimColor>{'  '}{input.description}</Text>
+              <Text color={C.summary} italic>{' - '}{input.description}</Text>
             ) : null}
           </Box>
           <Box marginLeft={2} flexDirection="column">
