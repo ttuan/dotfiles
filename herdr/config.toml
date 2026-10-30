@@ -121,6 +121,19 @@ claude = [
   ],
 ]
 
+
+# Codex metadata from herdr-codex-meta (native state detection is preserved).
+codex = [
+  ["workspace", "tab"],
+  ["state_icon", "state_text", "agent"],
+  [{ token = "$acct", fg = "#7aa2f7" }],
+  [
+    { token = "$quota_ok", fg = "#9ece6a" },
+    { token = "$quota_warn", fg = "#F49D00" },
+    { token = "$quota_crit", fg = "#f7768e" },
+  ],
+]
+
 [theme]
 # tokyo-night: deep navy background, close to the bg of the iTerm2 "Deep
 # Harbor" profile (#182635). Previously name = "terminal" (following iTerm2's

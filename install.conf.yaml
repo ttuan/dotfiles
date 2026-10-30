@@ -97,3 +97,7 @@
       create: true
       force: true
       path: herdr/herdr-claude-meta.sh
+    ~/.local/bin/herdr-codex-meta:
+      create: true
+      force: true
+      path: herdr/herdr-codex-meta.py

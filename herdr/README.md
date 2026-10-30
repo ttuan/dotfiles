@@ -11,6 +11,7 @@ Home page: https://herdr.dev
 | `config.toml` | Main configuration. Symlinked to `~/.config/herdr/config.toml`. Contains tmux-style keybindings, tokyo-night theme with tweaked colors, and the sidebar layout. |
 | `herdr-workspace-3tabs.sh` | Creates the `code` / `agents` / `console` tab set at the currently focused cwd. Symlinked to `~/.local/bin/herdr-workspace-3tabs`. Bound to `prefix+t` (replace the current tab) and `prefix+shift+t` (new workspace). |
 | `herdr-claude-meta.sh` | Pushes the session name + Claude account email + 5h quota to the sidebar. Symlinked to `~/.local/bin/herdr-claude-meta`. See its own section below. |
+| `herdr-codex-meta.py` | Pushes the Codex account identity + 5h quota to the sidebar. Symlinked to `~/.local/bin/herdr-codex-meta`. |
 
 Only `config.toml` is symlinked into `~/.config/herdr/`; that directory also
 holds the socket, logs and session state, so the whole directory is not
@@ -99,6 +100,22 @@ is automatically correct.
 
 The script calls no API of its own; it only reformats values the statusline has
 already computed. Outside herdr it is a silent no-op (exits 0, prints nothing).
+
+### Sidebar for Codex panes
+
+Codex reports rate-limit windows in its local JSONL transcript. The
+`herdr-codex-meta.py` hook reads only the active transcript and local
+`~/.codex/auth.json`, then sends the account and 5h quota rows through
+`pane.report_metadata`. It does not call an API or write credentials to logs.
+Metadata remains visible for six hours between Codex hook events; the next
+Codex event refreshes the account and quota values.
+
+Codex lifecycle state comes from Herdr's native Codex integration. Install it
+once with `herdr integration install codex`; the dotfiles installer also keeps
+the metadata script available at `~/.local/bin/herdr-codex-meta`.
+
+The Codex hooks are user-level configuration in `~/.codex/hooks.json`. After
+adding or changing them, open `/hooks` in Codex and trust the metadata hook.
 
 ### MANDATORY manual step on a new machine
 
