@@ -1,0 +1,20 @@
+{
+  "name": "dotfiles",
+  "owner": {
+    "name": "ttuan",
+    "email": "tuantv.nhnd@gmail.com"
+  },
+  "metadata": {
+    "description": "Local plugins tracked in ttuan's dotfiles",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "bash-syntax",
+      "source": "./bash-syntax",
+      "description": "Syntax-highlight the command and arguments in tool-call rows (Bash, Read, Edit, Write, Glob, Grep).",
+      "version": "0.2.0",
+      "category": "ui"
+    }
+  ]
+}

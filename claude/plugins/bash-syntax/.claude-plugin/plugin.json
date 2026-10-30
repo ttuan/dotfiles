@@ -1,0 +1,19 @@
+{
+  "name": "bash-syntax",
+  "version": "0.2.0",
+  "description": "Syntax-highlight the command and arguments in tool-call rows",
+  "userConfig": {
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "title": "Highlight tool rows",
+      "description": "Colour the command and arguments in Bash, Read, Edit, Write, Glob and Grep tool-call rows."
+    },
+    "maxChars": {
+      "type": "number",
+      "default": 2000,
+      "title": "Max length to highlight",
+      "description": "Skip highlighting for a command or path longer than this many characters, to stay cheap on huge inputs."
+    }
+  }
+}
