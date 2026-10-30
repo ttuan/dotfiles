@@ -49,11 +49,20 @@ os.makedirs(os.path.join(DOTFILES, "DynamicProfiles"), exist_ok=True)
 with open(os.path.join(DOTFILES, "Deep Harbor.itermcolors"), "wb") as fh:
     plistlib.dump(colors, fh)
 
-# 2) Profile day du - self-contained, khong ke thua profile nao tren may dich
+# 2) Profile day du - khai bao moi key quan trong, chi ke thua "Default" cho nhung key trung gia tri
 profile = dict(colors)
 profile.update({
     "Name": "Deep Harbor",
     "Guid": "DEEPHARBOR-2026-FIN-01",
+
+    # --- Dong bo 2 chieu voi Settings UI ---
+    # Rewritable: iTerm2 ghi nguoc thay doi tu Settings vao file nay.
+    # Parent Name: BAT BUOC khi Rewritable. Khi ghi nguoc, iTerm2 bo moi key
+    # trung voi profile cha; neu khong khai bao cha, cha = profile mac dinh =
+    # chinh Deep Harbor -> no tu so voi chinh no va xoa sach file (da xay ra
+    # o commit 884230c). "Default" la profile iTerm2 luon co san tren moi may.
+    "Rewritable": True,
+    "Dynamic Profile Parent Name": "Default",
 
     # --- QUAN TRONG: mot bo mau duy nhat cho ca light lan dark appearance ---
     "Use Separate Colors for Light and Dark Mode": False,

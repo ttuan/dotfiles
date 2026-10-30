@@ -1,10 +1,218 @@
 {
   "Profiles" : [
     {
-      "Use Separate Colors for Light and Dark Mode" : false,
+      "Cursor Color" : {
+        "Red Component" : 1,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.21176470588235294,
+        "Green Component" : 0.67843137254901964
+      },
+      "Selected Text Color" : {
+        "Red Component" : 0.93333333333333335,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.85098039215686272,
+        "Green Component" : 0.90196078431372551
+      },
+      "Unlimited Scrollback" : true,
+      "Bold Color" : {
+        "Red Component" : 1,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.21176470588235294,
+        "Green Component" : 0.67843137254901964
+      },
       "Name" : "Deep Harbor",
+      "Non Ascii Font" : "JetBrainsMonoNFM-Regular 14",
+      "Columns" : 120,
+      "Cursor Guide Color" : {
+        "Red Component" : 0.15294117647058825,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 0.25,
+        "Blue Component" : 0.24313725490196078,
+        "Green Component" : 0.25098039215686274
+      },
+      "Ansi 5 Color" : {
+        "Red Component" : 0.98039215686274506,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.33333333333333331,
+        "Green Component" : 0.50588235294117645
+      },
+      "Cursor Type" : 1,
+      "Rows" : 32,
+      "Foreground Color" : {
+        "Red Component" : 0.93333333333333335,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.85098039215686272,
+        "Green Component" : 0.90196078431372551
+      },
+      "Ansi 4 Color" : {
+        "Red Component" : 0,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.72549019607843135,
+        "Green Component" : 0.59607843137254901
+      },
+      "Vertical Spacing" : 1.1499999999999999,
+      "Dynamic Profile Parent Name" : "Default",
+      "Ansi 10 Color" : {
+        "Red Component" : 0.43529411764705883,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.64313725490196083,
+        "Green Component" : 0.81176470588235294
+      },
+      "Silence Bell" : false,
+      "Ansi 3 Color" : {
+        "Red Component" : 0.95686274509803926,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0,
+        "Green Component" : 0.61568627450980395
+      },
+      "Ansi 12 Color" : {
+        "Red Component" : 0.3411764705882353,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.8666666666666667,
+        "Green Component" : 0.74509803921568629
+      },
+      "Ansi 14 Color" : {
+        "Red Component" : 0.29411764705882354,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.70980392156862748,
+        "Green Component" : 0.81960784313725488
+      },
+      "Thin Strokes" : 0,
+      "Tab Color" : {
+        "Red Component" : 0.094117647058823528,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.20784313725490197,
+        "Green Component" : 0.14901960784313725
+      },
+      "Use Separate Colors for Light and Dark Mode" : false,
+      "Ansi 2 Color" : {
+        "Red Component" : 0.30196078431372547,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.51372549019607838,
+        "Green Component" : 0.66666666666666663
+      },
+      "Ansi 9 Color" : {
+        "Red Component" : 0.90196078431372551,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.45098039215686275,
+        "Green Component" : 0.48627450980392156
+      },
+      "Guid" : "DEEPHARBOR-2026-FIN-01",
+      "Badge Color" : {
+        "Red Component" : 0.80392156862745101,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 0.5,
+        "Blue Component" : 0.3411764705882353,
+        "Green Component" : 0.56470588235294117
+      },
+      "Selection Color" : {
+        "Red Component" : 0,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.41960784313725491,
+        "Green Component" : 0.32156862745098042
+      },
+      "Ansi 1 Color" : {
+        "Red Component" : 0.88235294117647056,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.25490196078431371,
+        "Green Component" : 0.22745098039215686
+      },
+      "Ansi 8 Color" : {
+        "Red Component" : 0.52941176470588236,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.62745098039215685,
+        "Green Component" : 0.58431372549019611
+      },
       "Rewritable" : true,
-      "Guid" : "DEEPHARBOR-2026-FIN-01"
+      "Background Color" : {
+        "Red Component" : 0.094117647058823528,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.20784313725490197,
+        "Green Component" : 0.14901960784313725
+      },
+      "Ansi 0 Color" : {
+        "Red Component" : 0.16862745098039217,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.23137254901960785,
+        "Green Component" : 0.20000000000000001
+      },
+      "Ansi 7 Color" : {
+        "Red Component" : 0.76078431372549016,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.76078431372549016,
+        "Green Component" : 0.76078431372549016
+      },
+      "Ansi 11 Color" : {
+        "Red Component" : 0.98431372549019602,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.45490196078431372,
+        "Green Component" : 0.84705882352941175
+      },
+      "Cursor Text Color" : {
+        "Red Component" : 0.094117647058823528,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.20784313725490197,
+        "Green Component" : 0.14901960784313725
+      },
+      "Normal Font" : "JetBrainsMonoNFM-Regular 14.1",
+      "Ansi 13 Color" : {
+        "Red Component" : 1,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.54117647058823526,
+        "Green Component" : 0.66274509803921566
+      },
+      "Link Color" : {
+        "Red Component" : 0.3411764705882353,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.8666666666666667,
+        "Green Component" : 0.74509803921568629
+      },
+      "Scrollback Lines" : 0,
+      "Ansi 15 Color" : {
+        "Red Component" : 1,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 1,
+        "Green Component" : 1
+      },
+      "Draw Powerline Glyphs" : true,
+      "Underline Color" : {
+        "Red Component" : 0.3411764705882353,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.8666666666666667,
+        "Green Component" : 0.74509803921568629
+      },
+      "Ansi 6 Color" : {
+        "Red Component" : 0.12941176470588237,
+        "Color Space" : "sRGB",
+        "Alpha Component" : 1,
+        "Blue Component" : 0.56862745098039214,
+        "Green Component" : 0.65098039215686276
+      }
     }
   ]
 }

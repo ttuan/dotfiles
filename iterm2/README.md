@@ -8,7 +8,7 @@ ca nhan; moi mau chu deu dat >= 4.5:1 tuong phan voi nen (tru do thuong
 
 | File | La gi |
 |---|---|
-| `DynamicProfiles/deep-harbor.json` | Profile day du: mau + font + gian dong + terminal. Self-contained, khong ke thua profile nao tren may dich. |
+| `DynamicProfiles/deep-harbor.json` | Profile day du: mau + font + gian dong + terminal. `Rewritable`: doi gi trong Settings UI thi iTerm2 ghi nguoc vao file nay. Ke thua profile "Default" chi cho key trung gia tri. |
 | `Deep Harbor.itermcolors` | Chi rieng bang mau. Dung khi muon giu profile san co, chi doi mau. |
 | `apply.sh` | Cai font, dat lam profile mac dinh. |
 | `gen_theme.py` | Sinh lai 2 file tren. Sua mau o day roi chay `python3 gen_theme.py`. |
@@ -56,6 +56,16 @@ Nen `#182635` - chu `#eee6d9` (12.4:1)
 Bold `#ffad36` - cursor `#ffad36` - selection `#00526b` - badge `#cd9057`
 
 ## Cac quyet dinh dang nho
+
+- `Rewritable = true` + `Dynamic Profile Parent Name = "Default"`: **phai di cung
+  nhau**. Khi ghi nguoc tu Settings, iTerm2 bo moi key trung gia tri voi profile
+  cha. Khong khai bao cha thi cha = profile mac dinh = chinh Deep Harbor, no tu so
+  voi chinh no va xoa sach file (da xay ra o commit 884230c, file con 4 key).
+  Muon doi font/mau: doi trong Settings UI roi `git diff` kiem tra, hoac sua
+  `gen_theme.py` roi chay lai.
+- Doi font trong Settings ma cua so dang mo khong doi: cua so do da bi "divorce"
+  khoi profile (tung bam Cmd+/Cmd- trong no). Bam Cmd+0 hoac mo cua so moi
+  (Cmd+N). Khong phai loi cua profile.
 
 - `Normal Font = JetBrainsMonoNFM-Regular` chu **khong** `-Bold`. Neu chu nen
   da dam san thi `**bold**` cua Claude Code khong con nac nao de dam hon, toan
