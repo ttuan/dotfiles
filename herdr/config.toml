@@ -87,11 +87,11 @@ rows = [["workspace", "tab"], ["state_icon", "state_text", "agent"]]
 # single token - which means renaming a tab only shows up on the next
 # statusline render, not immediately.
 #
-# The value is pushed in by ~/.local/bin/herdr-claude-meta via
-# pane.report_metadata, called from the end of every
-# ~/.claude*/statusline-command.sh. It lives in rows_by_agent rather than in the
-# shared rows, so panes of other agents (copilot, cursor) do not get two blank
-# rows.
+# The values are pushed in by herdr-claude-meta / herdr-codex-meta via
+# pane.report_metadata. Those scripts, and the canonical copy of this sidebar
+# section, live in ~/code/claude-toolbox/integrations/herdr (see its README).
+# It lives in rows_by_agent rather than in the shared rows, so panes of other
+# agents (copilot, cursor) do not get two blank rows.
 #
 # The quota has to be split into 3 tokens because style tokens are STATIC -
 # they cannot change color by value the way state_icon/state_text do (those two

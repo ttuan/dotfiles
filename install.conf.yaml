@@ -84,7 +84,8 @@
       create: true
       force: true
       path: lazygit
-    # Herdr (only config.toml — ~/.config/herdr also holds sockets/logs/session state)
+    # Herdr (only config.toml — ~/.config/herdr also holds sockets/logs/session state).
+    # The sidebar metadata scripts live in ~/code/claude-toolbox (clone it first).
     ~/.config/herdr/config.toml:
       create: true
       force: true
@@ -96,8 +97,8 @@
     ~/.local/bin/herdr-claude-meta:
       create: true
       force: true
-      path: herdr/herdr-claude-meta.sh
+      path: ~/code/claude-toolbox/integrations/herdr/herdr-claude-meta.sh
     ~/.local/bin/herdr-codex-meta:
       create: true
       force: true
-      path: herdr/herdr-codex-meta.py
+      path: ~/code/claude-toolbox/integrations/herdr/herdr-codex-meta.py
