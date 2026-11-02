@@ -1,7 +1,8 @@
 {
   "name": "bash-syntax",
-  "version": "0.2.0",
-  "description": "Syntax-highlight the command and arguments in tool-call rows",
+  "version": "0.4.0",
+  "description": "Syntax-highlight tool-call rows, with an optional compact mode that hides tool details",
+  "types": "./types/index.d.ts",
   "userConfig": {
     "enabled": {
       "type": "boolean",

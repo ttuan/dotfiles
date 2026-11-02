@@ -1,4 +1,7 @@
+import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
+
+import type { OutputLines } from '../types'
 
 // Tool inputs are `unknown` at ui.render; read fields defensively.
 type AnyInput = {
@@ -23,6 +26,8 @@ const C = {
   path: '#66d9ef', // file basename, glob pattern
   env: '#8792a2', // NAME=value env prefixes, kept faint so the real command pops
   summary: '#21a691', // the tool's one-line summary / description (stands out)
+  added: '#a6e22e', // compact mode: lines a tool added
+  removed: '#f92672', // compact mode: lines a tool removed
 } as const
 
 // A leading `NAME=value` env-var assignment, e.g. `S=/tmp/x` before a command.
@@ -50,6 +55,22 @@ const ICON: Record<string, string> = {
   Grep: '', // search
 }
 const DEFAULT_ICON = '' // filled circle
+
+// Compact mode leaves these to the engine: their content is the point of the
+// row (a question, a plan, a task list) or already a one-line summary (Agent).
+const KEEP_IN_COMPACT = new Set([
+  'Agent',
+  'AskUserQuestion',
+  'EnterPlanMode',
+  'ExitPlanMode',
+  'TaskCreate',
+  'TaskList',
+  'TaskUpdate',
+  'TodoWrite',
+])
+
+// Bash calls without a description fall back to the start of the command.
+const FALLBACK_SUMMARY_CHARS = 60
 
 const RULES: { type: string; re: RegExp }[] = [
   { type: 'space', re: /\s+/y },
@@ -134,6 +155,94 @@ function pathSpans(p: string): Span[] {
   return [{ text: p.slice(0, i + 1), dim: true }, { text: p.slice(i + 1), color: C.path }]
 }
 
+// A file or a stream ending in a newline has no empty line after it.
+const toLines = (text: string) => text.replace(/\n+$/, '').split('\n')
+
+// Bash output can carry colour codes, which a Text would print as they are.
+const ANSI = /\x1b\[[0-9;]*[A-Za-z]/g
+
+type AnyOutput = {
+  stdout?: string
+  stderr?: string
+  interrupted?: boolean
+  type?: string
+  content?: string
+  structuredPatch?: { lines?: string[] }[]
+}
+
+// What a tool's result reads as, line by line; undefined leaves it to the
+// engine: the tools whose output this mod does not know, and an empty result.
+function resultSpans(tool: string, output: unknown): Span[] | undefined {
+  const o = output as AnyOutput | undefined
+  if (tool === 'Bash') {
+    if (typeof o?.stdout !== 'string' || o.interrupted) return undefined
+    const text = [o.stdout, o.stderr ?? ''].filter(part => part.length > 0).join('\n')
+    if (text.trim().length === 0) return undefined
+    return toLines(text.replace(ANSI, '')).map(text => ({ text }))
+  }
+  if (tool === 'Write' && o?.type === 'create' && typeof o.content === 'string') {
+    return toLines(o.content).map(text => ({ text }))
+  }
+  if ((tool === 'Edit' || tool === 'Write') && Array.isArray(o?.structuredPatch)) {
+    const lines = o.structuredPatch.flatMap(hunk => hunk.lines ?? [])
+    if (lines.length === 0) return undefined
+    return lines.map(text => ({
+      text,
+      color: text.startsWith('+') ? C.added : text.startsWith('-') ? C.removed : undefined,
+    }))
+  }
+  return undefined
+}
+
+function parseOutputLines(arg: string | undefined): OutputLines | undefined {
+  if (arg === 'max') return 'max'
+  if (arg === 'default') return null
+  return arg !== undefined && /^\d+$/.test(arg) ? Number(arg) : undefined
+}
+
+const isOutputLines = (value: unknown): value is OutputLines =>
+  value === null || value === 'max' || (typeof value === 'number' && value >= 0)
+
+function firstLine(text: string): string {
+  const line = text.trimStart().split('\n')[0] ?? ''
+  return line.length > FALLBACK_SUMMARY_CHARS
+    ? `${line.slice(0, FALLBACK_SUMMARY_CHARS)}…`
+    : line
+}
+
+// `+12 -3` for an Edit, from the patch the tool stored; `+N` for a new file.
+// Output is `unknown` at ui.render, and absent while the call runs.
+function changeSpans(output: unknown): Span[] {
+  const o = output as
+    | { type?: string; content?: string; structuredPatch?: { lines?: string[] }[] }
+    | undefined
+  let added = 0
+  let removed = 0
+  if (o?.type === 'create' && typeof o.content === 'string') {
+    added = toLines(o.content).length
+  } else if (Array.isArray(o?.structuredPatch)) {
+    for (const line of o.structuredPatch.flatMap(hunk => hunk.lines ?? [])) {
+      if (line.startsWith('+')) added += 1
+      else if (line.startsWith('-')) removed += 1
+    }
+  }
+  const spans: Span[] = []
+  if (added > 0) spans.push({ text: ` +${added}`, color: C.added })
+  if (removed > 0) spans.push({ text: ` -${removed}`, color: C.removed })
+  return spans
+}
+
+// Compact mode lives in $.state so a row that read it redraws when it flips,
+// and in $.store so it carries over to the next session.
+const compact = atom({ plugin: 'bash-syntax', key: 'compact' } as const, false)
+
+// How many lines of a tool's output to draw: a count, 'max', or null for the
+// engine's own rows. Compact mode wins: it draws none.
+const outputLines = atom(
+  { plugin: 'bash-syntax', key: 'outputLines' } as const,
+  null as OutputLines,
+)
+
 // Read the toggle and length cap from settings; refreshed on each reload.
 let enabled = true
 let maxChars = 2000
@@ -147,20 +256,48 @@ export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: 'bash-syntax',
-      description: 'Toggle tool-row syntax colouring (on | off)',
+      description:
+        'Toggle tool-row colouring (on | off), hide tool details (compact [on | off]), or limit tool output (lines <n> | max | default)',
     })
+    const stored = await $.store.get('compact')
+    if (typeof stored === 'boolean') await update($, compact, () => stored)
+    const storedLines = await $.store.get('outputLines')
+    if (isOutputLines(storedLines)) await update($, outputLines, () => storedLines)
     return next(e)
   })
 
-  on('command.run', { command: 'bash-syntax' }, ($, e) => {
-    const arg = e.args.trim().toLowerCase()
+  on('command.run', { command: 'bash-syntax' }, async ($, e) => {
+    const [arg, compactArg] = e.args.trim().toLowerCase().split(/\s+/)
+    if (arg === 'compact') {
+      const value =
+        compactArg === 'on' ? true : compactArg === 'off' ? false : !(await read($, compact))
+      await update($, compact, () => value)
+      await $.store.set('compact', value)
+      return { text: `compact tool rows are now ${value ? 'ON' : 'OFF'}` }
+    }
+    if (arg === 'lines') {
+      const value = parseOutputLines(compactArg)
+      if (value === undefined) {
+        const current = await read($, outputLines)
+        return {
+          text: `tool output lines: ${current ?? 'default'}. Set it with /bash-syntax lines <n> | max | default`,
+        }
+      }
+      await update($, outputLines, () => value)
+      await $.store.set('outputLines', value)
+      return { text: `tool output lines are now ${value ?? 'default'}` }
+    }
     enabled = arg === 'on' ? true : arg === 'off' ? false : !enabled
+    $.ui.invalidate('ui.render')
     return { text: `tool-row syntax colouring is now ${enabled ? 'ON' : 'OFF'}` }
   })
 
-  on('ui.render', { component: 'ToolUse' }, ($, e, next) => {
-    if (!enabled) return next(e)
+  on('ui.render', { component: 'ToolUse' }, async ($, e, next) => {
     const tool = e.props.tool
+    // ctrl+o (isExpanded) always shows everything.
+    const isCompact =
+      !e.props.isExpanded && !KEEP_IN_COMPACT.has(tool) && (await read($, compact))
+    if (!enabled && !isCompact) return next(e)
     const input = e.props.input as AnyInput | undefined
     if (!input) return next(e)
 
@@ -182,15 +319,28 @@ export const register: Register = (on, options) => {
         </Text>
       ))
 
-    // One-line header: ⏺ Name(<coloured arg>)
-    const inlineRow = (extra: Span[]) => (
-      <Box>
+    // One-line header: ⏺ Name - summary
+    const summaryRow = (summary?: string) => (
+      <Text wrap={isCompact ? 'truncate-end' : 'wrap'}>
+        <Text color={bullet}>{icon} </Text>
+        <Text bold italic>{tool}</Text>
+        {summary ? (
+          <Text color={C.summary} italic>{' - '}{summary}</Text>
+        ) : null}
+      </Text>
+    )
+
+    // One-line header: ⏺ Name(<coloured arg>)<after>
+    // One Text, so a long path wraps as a line and not column by column.
+    const inlineRow = (extra: Span[], after: Span[] = []) => (
+      <Text wrap={isCompact ? 'truncate-middle' : 'wrap'}>
         <Text color={bullet}>{icon} </Text>
         <Text bold italic>{tool}</Text>
         <Text italic>(</Text>
         {drawSpans(extra, 'a', true)}
         <Text italic>)</Text>
-      </Box>
+        {drawSpans(after, 'c')}
+      </Text>
     )
 
     // --- Bash: full shell tokenising, multi-line aware ---
@@ -199,6 +349,7 @@ export const register: Register = (on, options) => {
       if (typeof command !== 'string' || command.trim().length === 0) {
         return next(e)
       }
+      if (isCompact) return summaryRow(input.description?.trim() || firstLine(command))
       if (command.length > maxChars) return next(e) // safety cap
 
       const lines = command.split('\n')
@@ -208,13 +359,7 @@ export const register: Register = (on, options) => {
 
       return (
         <Box flexDirection="column">
-          <Box>
-            <Text color={bullet}>{icon} </Text>
-            <Text bold italic>Bash</Text>
-            {input.description ? (
-              <Text color={C.summary} italic>{' - '}{input.description}</Text>
-            ) : null}
-          </Box>
+          {summaryRow(input.description)}
           <Box marginLeft={2} flexDirection="column">
             {visible.map((line, li) => (
               <Text key={`l${li}`} wrap={expanded ? 'wrap' : 'truncate-end'}>
@@ -235,7 +380,7 @@ export const register: Register = (on, options) => {
       if (typeof fp !== 'string' || fp.length === 0 || fp.length > maxChars) {
         return next(e)
       }
-      return inlineRow(pathSpans(fp))
+      return inlineRow(pathSpans(fp), isCompact ? changeSpans(e.props.output) : [])
     }
 
     // --- Glob: colour the glob pattern, dim the search path ---
@@ -257,6 +402,38 @@ export const register: Register = (on, options) => {
       return inlineRow(extra)
     }
 
+    if (isCompact) return summaryRow(input.description?.trim())
     return next(e)
+  }).catch(($, e, next) => next(e))
+
+  // The body under a tool row: Edit's diff, Write's content, Bash's stdout.
+  // A failed call keeps its error, or it would look like a success.
+  on('ui.render', { component: 'ToolResult' }, async ($, e, next) => {
+    const { tool, isErrored, isExpanded } = e.props
+    if (isExpanded || isErrored || KEEP_IN_COMPACT.has(tool)) return next(e)
+    const { Box, Text } = $.ui.resolve(e)
+    if (await read($, compact)) return <Box display="none" />
+
+    const limit = await read($, outputLines)
+    if (limit === null) return next(e)
+    const spans = resultSpans(tool, e.props.output)
+    if (!spans) return next(e)
+
+    const shown = limit === 'max' ? spans : spans.slice(0, limit)
+    const hidden = spans.length - shown.length
+    const rows: Span[] =
+      hidden > 0
+        ? [...shown, { text: `… +${hidden} lines (ctrl+o to expand)`, dim: true }]
+        : shown
+    return (
+      <Box flexDirection="column">
+        {rows.map((row, ri) => (
+          <Box>
+            <Text dimColor>{ri === 0 ? '  ⎿  ' : '     '}</Text>
+            <Text color={row.color} dimColor={row.dim}>{row.text || ' '}</Text>
+          </Box>
+        ))}
+      </Box>
+    )
   }).catch(($, e, next) => next(e))
 }
