@@ -11,6 +11,10 @@ type AnyInput = {
   path?: string
   pattern?: string
   glob?: string
+  url?: string
+  query?: string
+  prompt?: string
+  name?: string
 }
 
 // Monokai-ish palette, tuned for a dark background. Raw hex so the look is
@@ -53,6 +57,11 @@ const ICON: Record<string, string> = {
   Write: '', // save
   Glob: '', // folder
   Grep: '', // search
+  WebFetch: '', // globe
+  WebSearch: '', // search
+  ToolSearch: '', // wrench (tools)
+  Task: '', // bolt
+  Skill: '', // lightbulb
 }
 const DEFAULT_ICON = '' // filled circle
 
@@ -153,6 +162,18 @@ function pathSpans(p: string): Span[] {
   const i = p.lastIndexOf('/')
   if (i < 0) return [{ text: p, color: C.path }]
   return [{ text: p.slice(0, i + 1), dim: true }, { text: p.slice(i + 1), color: C.path }]
+}
+
+// Best-effort single argument for a tool this mod has no bespoke row for
+// (WebFetch's url, a search's query, ...). Undefined when nothing identifying.
+const GENERIC_ARG_CHARS = 80
+function genericArg(input: AnyInput): string | undefined {
+  const v =
+    input.url ?? input.query ?? input.pattern ?? input.file_path ??
+    input.path ?? input.prompt ?? input.name
+  if (typeof v !== 'string' || v.trim().length === 0) return undefined
+  const one = v.trim().split('\n')[0] ?? ''
+  return one.length > GENERIC_ARG_CHARS ? `${one.slice(0, GENERIC_ARG_CHARS)}…` : one
 }
 
 // A file or a stream ending in a newline has no empty line after it.
@@ -402,8 +423,12 @@ export const register: Register = (on, options) => {
       return inlineRow(extra)
     }
 
-    if (isCompact) return summaryRow(input.description?.trim())
-    return next(e)
+    // --- Any other tool: leave the content-rich ones (plan, question, tasks,
+    //     Agent) to the engine; give the rest an icon + name + best-effort arg.
+    if (KEEP_IN_COMPACT.has(tool)) return next(e)
+    const arg = genericArg(input)
+    if (arg) return inlineRow([{ text: arg, color: C.path }])
+    return summaryRow(input.description?.trim())
   }).catch(($, e, next) => next(e))
 
   // The body under a tool row: Edit's diff, Write's content, Bash's stdout.

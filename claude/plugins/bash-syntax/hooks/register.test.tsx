@@ -134,11 +134,20 @@ test('compact: a new file counts its lines', async ($, on) => {
   await row.unmount()
 })
 
-test('compact: a tool with no colouring of its own draws name and description', async ($, on) => {
-  compactOn(on)
+test('a tool with no bespoke row shows its name and a key argument', async ($, on) => {
   const row = await $.ui.mount({
     ...TOOL_USE,
     props: useProps('WebFetch', { url: 'https://x.test', description: 'Read docs' }),
+  })
+  expect(await row.find({ type: 'Text', text: /WebFetch/ })).toBeTruthy()
+  expect(await row.find({ type: 'Text', text: /x\.test/ })).toBeTruthy()
+  await row.unmount()
+})
+
+test('a tool with no argument falls back to its description', async ($, on) => {
+  const row = await $.ui.mount({
+    ...TOOL_USE,
+    props: useProps('WebFetch', { description: 'Read docs' }),
   })
   expect(await row.find({ type: 'Text', text: /WebFetch/ })).toBeTruthy()
   expect(await row.find({ type: 'Text', text: /Read docs/ })).toBeTruthy()

@@ -13,7 +13,7 @@
       "name": "bash-syntax",
       "source": "./bash-syntax",
       "description": "Syntax-highlight the command and arguments in tool-call rows (Bash, Read, Edit, Write, Glob, Grep).",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "category": "ui"
     }
   ]
