@@ -66,13 +66,6 @@ return {
     end,
   },
   {
-    "rcarriga/nvim-notify",
-    opts = {
-      timeout = 5000,
-    },
-  },
-
-  {
     "Pocco81/true-zen.nvim",
     keys = function()
       return {
@@ -135,9 +128,41 @@ return {
     end,
   },
 
+  -- Replaced by snacks.dashboard (LazyVim default) below
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   event = "VimEnter",
+  --   opts = function(_, opts)
+  --     local logo = [[
+  --               tttt               tttt
+  --             ttt:::t            ttt:::t
+  --             t:::::t            t:::::t
+  --             t:::::t            t:::::t
+  --       ttttttt:::::tttttttttttttt:::::ttttttt    uuuuuu    uuuuuu    aaaaaaaaaaaaa  nnnn  nnnnnnnn
+  --       t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    a::::::::::::a n:::nn::::::::nn
+  --       t:::::::::::::::::tt:::::::::::::::::t    u::::u    u::::u    aaaaaaaaa:::::an::::::::::::::nn
+  --       tttttt:::::::tttttttttttt:::::::tttttt    u::::u    u::::u             a::::ann:::::::::::::::n
+  --             t:::::t            t:::::t          u::::u    u::::u      aaaaaaa:::::a  n:::::nnnn:::::n
+  --             t:::::t            t:::::t          u::::u    u::::u    aa::::::::::::a  n::::n    n::::n
+  --             t:::::t            t:::::t          u::::u    u::::u   a::::aaaa::::::a  n::::n    n::::n
+  --             t:::::t    tttttt  t:::::t    ttttttu:::::uuuu:::::u  a::::a    a:::::a  n::::n    n::::n
+  --             t::::::tttt:::::t  t::::::tttt:::::tu:::::::::::::::uua::::a    a:::::a  n::::n    n::::n
+  --             tt::::::::::::::t  tt::::::::::::::t u:::::::::::::::ua:::::aaaa::::::a  n::::n    n::::n
+  --               tt:::::::::::tt    tt:::::::::::tt  uu::::::::uu:::u a::::::::::aa:::a n::::n    n::::n
+  --                 ttttttttttt        ttttttttttt      uuuuuuuu  uuuu  aaaaaaaaaa  aaaa nnnnnn    nnnnnn
+  --     ]]
+  --
+  --     logo = string.rep("\n", 8) .. logo .. "\n\n"
+  --     opts.config = opts.config or {}
+  --     opts.config.header = vim.split(logo, "\n")
+  --   end,
+  -- },
+
+  -- Start screen: LazyVim already enables snacks.dashboard; only swap in the logo.
+  -- snacks centers every header line on its own, so strip the shared indent and
+  -- pad all lines to one width, otherwise the ASCII art gets skewed.
   {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
+    "folke/snacks.nvim",
     opts = function(_, opts)
       local logo = [[
                 tttt               tttt
@@ -157,10 +182,23 @@ return {
                 tt:::::::::::tt    tt:::::::::::tt  uu::::::::uu:::u a::::::::::aa:::a n::::n    n::::n
                   ttttttttttt        ttttttttttt      uuuuuuuu  uuuu  aaaaaaaaaa  aaaa nnnnnn    nnnnnn
       ]]
-
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
-      opts.config = opts.config or {}
-      opts.config.header = vim.split(logo, "\n")
+      local lines = vim.tbl_filter(function(l)
+        return vim.trim(l) ~= ""
+      end, vim.split(logo, "\n"))
+      local indent, width = math.huge, 0
+      for _, l in ipairs(lines) do
+        indent = math.min(indent, #l:match("^ *"))
+      end
+      for i, l in ipairs(lines) do
+        lines[i] = l:sub(indent + 1)
+        width = math.max(width, vim.fn.strdisplaywidth(lines[i]))
+      end
+      for i, l in ipairs(lines) do
+        lines[i] = l .. string.rep(" ", width - vim.fn.strdisplaywidth(l))
+      end
+      opts.dashboard = opts.dashboard or {}
+      opts.dashboard.preset = opts.dashboard.preset or {}
+      opts.dashboard.preset.header = table.concat(lines, "\n")
     end,
   },
 }
