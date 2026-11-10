@@ -78,3 +78,12 @@ prompt_git() {
 
 export PS1="${FG[237]}\${(l.\$(afmagic_dashes)..-.)}%{$reset_color%}
 ${FG[032]}\$(prompt_dir)\$(prompt_git)\$(hg_prompt_info) ${FG[105]}%(!.#.»)%{$reset_color%} "
+
+# Resize-friendly prompt (herdr/iTerm2): prompts already printed keep the width
+# they were drawn at, so shrinking the window wraps the old separator lines and
+# shifts the old right prompts.
+# 1. Cap the dashed separator at 40 columns (af-magic draws it full width).
+#    Overrides afmagic_dashes from oh-my-zsh, since this file is sourced after it.
+function afmagic_dashes { echo $(( COLUMNS < 40 ? COLUMNS : 40 )) }
+# 2. Drop the right prompt (exit code, user@host) from lines already submitted.
+setopt TRANSIENT_RPROMPT
