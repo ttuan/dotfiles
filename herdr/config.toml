@@ -3,6 +3,9 @@
 
 onboarding = false
 
+[terminal]
+new_cwd = "follow"  # new panes/tabs inherit the focused pane's cwd (this is the default)
+
 [keys]
 # Backtick as prefix (trial). If typing literal ` gets painful
 # (code blocks, shell substitution), switch to "ctrl+space".
@@ -12,15 +15,52 @@ rename_workspace = "prefix+<"       # i.e. shift+, — terminals send the shifte
 
 # tmux muscle-memory mappings (see ~/.tmux.conf)
 split_vertical = "prefix+|"      # side-by-side split, like tmux `prefix |` (default: prefix+v)
-previous_workspace = "prefix+("  # like tmux `prefix (` switch-client -p (default: unbound)
-next_workspace = "prefix+)"      # like tmux `prefix )` switch-client -n (default: unbound)
 close_pane = "prefix+="          # like tmux `prefix =` kill-pane (default: prefix+x)
-toggle_sidebar = "ctrl+shift+left" # prefix-free sidebar toggle (default: prefix+b)
+copy_mode = "prefix+["           # like tmux (this is also the default; stated so it wins over agents)
+last_pane = "prefix+;"           # like tmux `prefix ;` (default: unbound)
+detach = "prefix+d"              # like tmux (default: prefix+q)
+# Sidebar: default prefix+b, plus prefix-free ctrl+alt+left (ctrl+alt is free in
+# skhd and iTerm2; ctrl+shift+left moves tabs now)
+toggle_sidebar = ["prefix+b", "ctrl+alt+left"]
+
+# Workspaces: tmux `prefix ( )` plus prefix-free ctrl+shift+[ ]. Two spellings
+# each, because terminals send shift+[ either as shift+[ or as {.
+previous_workspace = ["prefix+(", "ctrl+shift+[", "ctrl+{"]
+next_workspace = ["prefix+)", "ctrl+shift+]", "ctrl+}"]
+
+# Reorder tabs without the prefix (default: unbound)
+move_tab_previous = "ctrl+shift+left"
+move_tab_next = "ctrl+shift+right"
+
+# Swap reload/resize compared to the defaults (reload prefix+shift+r, resize prefix+r)
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# Pane resize in one keystroke, like tmux-pain-control `prefix H/J/K/L`.
+# Native actions (default: unbound) instead of shelling out to `herdr pane resize`.
+resize_pane_left = "prefix+shift+h"
+resize_pane_down = "prefix+shift+j"
+resize_pane_up = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+# ...which displaces swap_pane_* (default: prefix+shift+h/j/k/l)
+swap_pane_left = "prefix+alt+h"
+swap_pane_down = "prefix+alt+j"
+swap_pane_up = "prefix+alt+k"
+swap_pane_right = "prefix+alt+l"
+
+# prefix+e is "close other panes" (custom command below), which displaces
+# edit_scrollback (default: prefix+e)
+edit_scrollback = "prefix+shift+e"
+
+# prefix+g runs lazygit and prefix+o opens Finder (custom commands below), so
+# goto and open_notification_target move (defaults: prefix+g, prefix+o)
+goto = "prefix+u"
+open_notification_target = "prefix+shift+o"
 
 # Jump between agents (herdr leaves all 3 unbound by default). Avoid p/n
-# (already previous/next tab) and (/) (already workspace).
-previous_agent = "prefix+["
-next_agent = "prefix+]"
+# (already previous/next tab), (/) (already workspace) and [ (copy mode).
+previous_agent = "prefix+{"
+next_agent = "prefix+}"
 focus_agent = "prefix+alt+1..9"  # jump straight to the Nth agent
 
 # The code / agents / console tab set at the cwd of the focused pane.
@@ -44,7 +84,45 @@ type = "shell"
 description = "New workspace: code/agents/console"
 command = "~/.local/bin/herdr-workspace-3tabs"
 
+# Open the focused pane's directory in Finder.
+[[keys.command]]
+key = "prefix+o"
+type = "shell"
+description = "Open cwd in Finder"
+command = 'open "$HERDR_ACTIVE_PANE_CWD"'
+
+# Close every other pane in this tab, like tmux `kill-pane -a`.
+[[keys.command]]
+key = "prefix+e"
+type = "shell"
+description = "Close other panes in this tab"
+command = '''herdr pane list | jq -r --arg t "$HERDR_ACTIVE_TAB_ID" --arg p "$HERDR_ACTIVE_PANE_ID" '.result.panes[] | select(.tab_id == $t and .pane_id != $p) | .pane_id' | xargs -n1 herdr pane close'''
+
+# lazygit in a new pane at the focused pane's cwd.
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+description = "lazygit"
+command = 'cd "$HERDR_ACTIVE_PANE_CWD" && lazygit'
+
+# Move the current workspace up/down in the sidebar list. herdr has no CLI for
+# this, so the script calls workspace.move on the socket API
+[[keys.command]]
+key = "ctrl+shift+up"
+type = "shell"
+description = "Move workspace up"
+command = "~/.local/bin/herdr-move-workspace up"
+
+[[keys.command]]
+key = "ctrl+shift+down"
+type = "shell"
+description = "Move workspace down"
+command = "~/.local/bin/herdr-move-workspace down"
+
 [ui]
+pane_gaps = false                    # panes edge to edge, like tmux (default: true)
+hide_tab_bar_when_single_tab = true  # default: false
+
 # Mouse UI: click/drag panes, tabs, workspaces. Set false to let the
 # terminal handle clicks natively (e.g. Cmd-click URLs).
 mouse_capture = true
