@@ -129,11 +129,9 @@ return {
 
   -- Frontend
   {
-    "norcalli/nvim-colorizer.lua",
-    lazy = false,
-    config = function()
-      require("colorizer").setup()
-    end,
+    "catgoose/nvim-colorizer.lua", -- maintained fork of norcalli/nvim-colorizer.lua
+    event = "BufReadPre",
+    opts = {},
   },
 
   --   {

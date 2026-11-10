@@ -29,43 +29,27 @@ return {
     "folke/flash.nvim",
   },
   {
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup({
-        execution_message = {
-          message = function()
-            return ""
-          end,
-        },
-        -- https://github.com/ThePrimeagen/harpoon/issues/434
-        condition = function(buf)
-          local fn = vim.fn
-          local utils = require("auto-save.utils.data")
-
-          if fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), { "harpoon" }) then
-            return true
-          end
-          return false
-        end,
-      })
-    end,
+    -- Maintained fork of the archived Pocco81/auto-save.nvim. It already skips
+    -- nomodifiable buffers and prints no "saved" message, so only the
+    -- claudecode exclusions are needed. (The old spec set both `config` and
+    -- `opts`, and `config` ignored `opts`, so these exclusions never applied.)
+    "okuuva/auto-save.nvim",
+    version = "^1.0.0",
+    event = { "InsertLeave", "TextChanged" },
     opts = {
       condition = function(buf)
-        local fn = vim.fn
-        local utils = require("auto-save.utils.data")
-
-        -- First check the default conditions
-        if not (fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {})) then
+        -- Special buffers (claudecode diff buffers use "acwrite")
+        if vim.bo[buf].buftype ~= "" then
           return false
         end
 
-        -- Exclude claudecode diff buffers by buffer name patterns
+        -- claudecode diff buffers, by name
         local bufname = vim.api.nvim_buf_get_name(buf)
         if bufname:match("%(proposed%)") or bufname:match("%(NEW FILE %- proposed%)") or bufname:match("%(New%)") then
           return false
         end
 
-        -- Exclude by buffer variables (claudecode sets these)
+        -- claudecode diff buffers, by the buffer variables it sets
         if
           vim.b[buf].claudecode_diff_tab_name
           or vim.b[buf].claudecode_diff_new_win
@@ -74,13 +58,7 @@ return {
           return false
         end
 
-        -- Exclude by buffer type (claudecode diff buffers use "acwrite")
-        local buftype = fn.getbufvar(buf, "&buftype")
-        if buftype == "acwrite" then
-          return false
-        end
-
-        return true -- Safe to auto-save
+        return true
       end,
     },
   },
@@ -142,8 +120,8 @@ return {
     },
   },
   {
-    "phaazon/hop.nvim",
-    branch = "v2",
+    "smoka7/hop.nvim", -- maintained fork of the archived phaazon/hop.nvim
+    version = "*",
     vscode = true,
     config = function()
       require("hop").setup({ keys = "asdfghjklqwertyuiopzxcvbnm" })
