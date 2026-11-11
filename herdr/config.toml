@@ -52,7 +52,7 @@ swap_pane_right = "prefix+alt+l"
 # edit_scrollback (default: prefix+e)
 edit_scrollback = "prefix+shift+e"
 
-# prefix+g runs lazygit and prefix+o opens Finder (custom commands below), so
+# prefix+g runs lazygit and prefix+o jumps to the next waiting agent (custom commands below), so
 # goto and open_notification_target move (defaults: prefix+g, prefix+o)
 goto = "prefix+u"
 open_notification_target = "prefix+shift+o"
@@ -84,12 +84,50 @@ type = "shell"
 description = "New workspace: code/agents/console"
 command = "~/.local/bin/herdr-workspace-3tabs"
 
-# Open the focused pane's directory in Finder.
+# # Open the focused pane's directory in Finder.
+# [[keys.command]]
+# key = "prefix+o"
+# type = "shell"
+# description = "Open cwd in Finder"
+# command = 'open "$HERDR_ACTIVE_PANE_CWD"'
+
+# prefix+0 focuses the LAST agent in the sidebar (prefix+alt+1..9 covers 1-9;
+# 0 = last, like browsers). prefix+9 goes back to the agent you jumped from,
+# and pressing it again toggles between the two. Overrides switch_tab's tab 9.
+[[keys.command]]
+key = "prefix+0"
+type = "shell"
+description = "Focus the last agent in the sidebar"
+command = "~/.local/bin/herdr-agent-jump last"
+
+[[keys.command]]
+key = "prefix+9"
+type = "shell"
+description = "Toggle back to the previous agent"
+command = "~/.local/bin/herdr-agent-jump back"
+
+# prefix+o focuses the next agent waiting for you (blocked first, then done,
+# longest-waiting first). Works without toast popups, unlike the built-in
+# open_notification_target (moved to prefix+shift+o).
 [[keys.command]]
 key = "prefix+o"
 type = "shell"
-description = "Open cwd in Finder"
-command = 'open "$HERDR_ACTIVE_PANE_CWD"'
+description = "Focus the next blocked/done agent"
+command = "~/.local/bin/herdr-agent-jump next"
+
+# prefix+up / prefix+down step through agents in sidebar order and wrap around
+# at both ends (the built-in previous_agent/next_agent on prefix+{ } stay).
+[[keys.command]]
+key = "prefix+up"
+type = "shell"
+description = "Focus the agent above in the sidebar"
+command = "~/.local/bin/herdr-agent-jump up"
+
+[[keys.command]]
+key = "prefix+down"
+type = "shell"
+description = "Focus the agent below in the sidebar"
+command = "~/.local/bin/herdr-agent-jump down"
 
 # Close every other pane in this tab, like tmux `kill-pane -a`.
 [[keys.command]]
@@ -227,6 +265,11 @@ name = "tokyo-night"
 #    token for the active-row background could not be identified (not
 #    surface0/1 - already tried).
 panel_bg = "#1a1b26"
+
+# Focused agent / active space row: Deep Harbor navy (#182635) lifted ~2 steps,
+# so the row stands out without becoming a grey slab. (herdr 0.9.5 exposes
+# active_row_bg directly.) Also tried: #3A3122 warm brown, #3B2F4A purple.
+active_row_bg = "#2B4058"
 
 # 2. Warm-toned accents, taken from the Deep Harbor palette.
 accent = "#FFAD36"   # amber - highlight / selected row

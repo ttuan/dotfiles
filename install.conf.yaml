@@ -98,6 +98,10 @@
       create: true
       force: true
       path: herdr/herdr-move-workspace.sh
+    ~/.local/bin/herdr-agent-jump:
+      create: true
+      force: true
+      path: herdr/herdr-agent-jump.sh
     ~/.local/bin/herdr-claude-meta:
       create: true
       force: true
