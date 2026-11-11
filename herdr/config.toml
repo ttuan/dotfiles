@@ -92,8 +92,8 @@ command = "~/.local/bin/herdr-workspace-3tabs"
 # command = 'open "$HERDR_ACTIVE_PANE_CWD"'
 
 # prefix+0 focuses the LAST agent in the sidebar (prefix+alt+1..9 covers 1-9;
-# 0 = last, like browsers). prefix+9 goes back to the agent you jumped from,
-# and pressing it again toggles between the two. Overrides switch_tab's tab 9.
+# 0 = last, like browsers). prefix+space goes back to the agent you jumped
+# from, and pressing it again toggles between the two.
 [[keys.command]]
 key = "prefix+0"
 type = "shell"
@@ -101,7 +101,7 @@ description = "Focus the last agent in the sidebar"
 command = "~/.local/bin/herdr-agent-jump last"
 
 [[keys.command]]
-key = "prefix+9"
+key = "prefix+space"
 type = "shell"
 description = "Toggle back to the previous agent"
 command = "~/.local/bin/herdr-agent-jump back"
